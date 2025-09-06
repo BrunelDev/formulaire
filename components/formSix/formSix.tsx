@@ -1,0 +1,26 @@
+import { ClientReviewsSection } from "./sections/ClientReviewsSection/ClientReviewsSection";
+import { ContentWrapperSection } from "./sections/ContentWrapperSection/ContentWrapperSection";
+import { MainContentSection } from "./sections/MainContentSection/MainContentSection";
+
+export const FormSix = () => {
+  return (
+    <main
+      className="bg-[#f7f7f8] w-full flex flex-col"
+      data-model-id="224:1183"
+    >
+      <div className="bg-[#f7f7f8] w-full max-w-[1280px] mx-auto flex flex-col relative">
+       
+
+        <div className="flex w-full">
+          <aside className="w-[35%] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
+            <ClientReviewsSection />
+          </aside>
+
+          <section className="w-[56%] ml-[1%] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]">
+            <ContentWrapperSection />
+          </section>
+        </div>
+      </div>
+    </main>
+  );
+};
