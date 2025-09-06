@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFormState } from "@/context/useContext";
+import Image from "next/image";
 
 const formFields = [
   {
@@ -188,7 +189,9 @@ export const StatisticsSection = () => {
                 </p>
               </div>
 
-              <img
+              <Image
+                width={120}
+                height={100}
                 className="w-[120px] h-[100px] object-cover"
                 alt="Urban building hero"
                 src="https://c.animaapp.com/mf2gfnauygUKoU/img/urban-building-hero-image-1024x854-1.png"
@@ -215,7 +218,9 @@ export const StatisticsSection = () => {
         </Card>
       </div>
 
-      <img
+      <Image
+        width={534}
+        height={640}
         className="w-[534px] h-[640px] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms]"
         alt="Frame"
         src="https://c.animaapp.com/mf2gfnauygUKoU/img/frame-51.svg"

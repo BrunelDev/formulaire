@@ -13,7 +13,7 @@ export function Question({
 }: {
   question: string;
   description?: string;
-  handleChange: (value: string) => void;
+  handleChange: (value: boolean) => void;
   value?: string;
 }) {
   const { setSummary, summary } = useSummarySate();
@@ -35,7 +35,8 @@ export function Question({
           value={selectedValue}
           onValueChange={(value: string) => {
             setSelectedValue(value);
-            handleChange(value);
+
+            handleChange(value === "oui" ? true : false);
             console.log(value);
             if (value === "oui" && !summary.includes(question)) {
               setSummary([...summary, question]);

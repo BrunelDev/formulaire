@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 export const MainContentSection = () => {
   const steps = [
@@ -46,7 +47,9 @@ export const MainContentSection = () => {
       {steps.map((step, index) => (
         <React.Fragment key={step.id}>
           <div className="flex flex-col w-8 h-8 items-center justify-center gap-2.5 relative bg-[#db4200] rounded-[1000px]">
-            <img
+            <Image
+              width={20}
+              height={20}
               className="relative w-5 h-5"
               alt="Icon step"
               src={step.iconSrc}
@@ -80,7 +83,9 @@ export const MainContentSection = () => {
           </div>
 
           {!step.isLast && (
-            <img
+            <Image
+              width={32}
+              height={1}
               className="relative w-8 h-px object-cover"
               alt="Line"
               src="https://c.animaapp.com/mf625dugC1mSjI/img/line-4.svg"

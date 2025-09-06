@@ -16,7 +16,7 @@ export const InformationSummarySection = () => {
       question: "Votre permis nécessite un architecte ?",
       description:
         "Un permis de construire nécessite un architecte si la superficie de plancher (somme des surfaces de tous les niveaux à l'intérieur des murs) dépasse 150 m².",
-      handleChange: (value: string) => {
+      handleChange: (value: boolean) => {
         updateFormData({ ...formData, isArchitectNeeded: value });
       },
       value: false,

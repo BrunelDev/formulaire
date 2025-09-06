@@ -1,4 +1,5 @@
 import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 import React from "react";
 
 export const ServiceDetailsSection = () => {
@@ -60,7 +61,9 @@ export const ServiceDetailsSection = () => {
                   : "bg-[#f7f7f8] border border-solid border-[#b8b9c1]"
               }`}
             >
-              <img
+              <Image
+                width={20}
+                height={20}
                 className="relative w-5 h-5"
                 alt="Icon step"
                 src={step.icon}
