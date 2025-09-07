@@ -66,7 +66,8 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        figtree: ["Figtree", "Helvetica", "sans-serif"],
+        sans: ["var(--font-figtree)", "Figtree", "Helvetica", "sans-serif"],
+        figtree: ["var(--font-figtree)", "Figtree", "Helvetica", "sans-serif"],
       },
       fontSize: {
         "heading-h5": ["16px", "24px"],

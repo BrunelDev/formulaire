@@ -6,7 +6,7 @@ export const FormFive = () => {
       className="bg-[#f7f7f8] flex flex-col items-center min-h-screen w-full translate-y-[-1rem] animate-fade-in opacity-0"
       data-model-id="88:417"
     >
-      <div className="bg-[#f7f7f8] w-full max-w-[1280px] flex flex-col">
+      <div className="bg-[#f7f7f8] w-full max-w-[1280px] flex flex-col px-4 sm:px-6 lg:px-8">
         <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
           <StatisticsSection />
         </div>

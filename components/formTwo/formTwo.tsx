@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { useFormState } from "@/context/useContext";
-import { MapPin } from "lucide-react";
 import Image from "next/image";
 import Mapbox from "../mapbox";
 import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
@@ -16,7 +15,7 @@ export function FormTwo() {
           {/* Left Column */}
           <div className="space-y-6">
             {/* User Profile */}
-            <div className="flex items-start gap-3.5 relative self-stretch w-full flex-[0_0_auto]">
+            <div className="flex items-start gap-3.5 relative self-stretch w-full flex-[0_0_auto] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
               <Image
                 className="relative w-[60px] h-[60px]"
                 width={60}
@@ -36,16 +35,23 @@ export function FormTwo() {
                     <p className="text-[#021327] leading-relaxed">
                       Votre adresse se situe dans une zone{" "}
                       <span className="text-[#094d9a] font-medium">
-                        1UL (secteur d&apos; habitat en lotissement courants)
+                        {formData.addressDetails?.urbanZone || "Non disponible"}
+                        {formData.addressDetails?.urbanZone &&
+                          " (zone d'urbanisme)"}
                       </span>{" "}
                       du Plan Local d&apos;Urbanisme (PLU) de la commune de{" "}
-                      <span className="text-[#094d9a] font-medium">CESTAS</span>
+                      <span className="text-[#094d9a] font-medium">
+                        {formData.addressDetails?.city?.toUpperCase() ||
+                          "NON DISPONIBLE"}
+                      </span>
                       .
                     </p>
 
                     <p className="text-[#021327] leading-relaxed">
                       Nous estimons la difficulté à{" "}
-                      <span className="text-[#094d9a] font-medium">3/5</span>{" "}
+                      <span className="text-[#094d9a] font-medium">
+                        {formData.addressDetails?.difficultyEstimation || 3}/5
+                      </span>{" "}
                       pour obtenir une autorisation d&apos;urbanisme à cet
                       endroit.
                     </p>
@@ -60,7 +66,7 @@ export function FormTwo() {
             </div>
 
             {/* Information Summary */}
-            <div className="flex items-center gap-5 bg-background p-4">
+            <div className="flex items-center gap-5 bg-background p-4 translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
               <div className="space-y-6 pt-6">
                 <h3 className="text-lg font-semibold text-[#021327]">
                   Récapitulatif des informations
@@ -70,7 +76,9 @@ export function FormTwo() {
                   <div>
                     <span className="text-[#021327]">Localisation : </span>
                     <span className="text-[#094d9a] font-medium">
-                      69 Chemin de l&apos;Aoudougue 33610 Cestas
+                      {formData.addressDetails?.formattedAddress ||
+                        formData.address ||
+                        "Adresse non sélectionnée"}
                     </span>
                   </div>
 
@@ -78,19 +86,26 @@ export function FormTwo() {
                     <span className="text-[#021327]">
                       Numéro de parcelle :{" "}
                     </span>
-                    <span className="text-[#094d9a] font-medium">Num</span>
+                    <span className="text-[#094d9a] font-medium">
+                      {formData.addressDetails?.parcelNumber ||
+                        "Non disponible"}
+                    </span>
                   </div>
 
                   <div>
                     <span className="text-[#021327]">Mairie : </span>
-                    <span className="text-[#021327]">-</span>
+                    <span className="text-[#094d9a] font-medium">
+                      {formData.addressDetails?.city || "Non disponible"}
+                    </span>
                   </div>
 
                   <div>
                     <span className="text-[#021327]">
                       Zone d&apos;urbanisme de la parcelle :{" "}
                     </span>
-                    <span className="text-[#094d9a] font-medium">1UL</span>
+                    <span className="text-[#094d9a] font-medium">
+                      {formData.addressDetails?.urbanZone || "Non disponible"}
+                    </span>
                   </div>
                 </div>
 
@@ -100,7 +115,7 @@ export function FormTwo() {
                     Estimation de la difficulté
                   </span>
                   <div className="bg-[#094d9a] text-white px-4 py-2 rounded-full font-semibold">
-                    3/5
+                    {formData.addressDetails?.difficultyEstimation || 3}/5
                   </div>
                 </div>
               </div>
@@ -108,7 +123,7 @@ export function FormTwo() {
 
             {/* Navigation Buttons */}
 
-            <div className="flex items-center justify-between pt-8">
+            <div className="flex items-center justify-between pt-8 translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]">
               <Button
                 onClick={() => {
                   updateFormData({
@@ -143,15 +158,12 @@ export function FormTwo() {
           </div>
 
           {/* Right Column - Map */}
-          <div className="relative">
+          <div className="relative translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms]">
             <div className="w-full h-[600px] rounded-lg overflow-hidden">
-              <Mapbox />
-              {/* Location Marker */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div className="w-8 h-8 bg-[#db4200] rounded-full flex items-center justify-center shadow-lg">
-                  <MapPin className="w-5 h-5 text-white" />
-                </div>
-              </div>
+              <Mapbox
+                coordinates={formData.addressDetails?.coordinates}
+                zoom={16}
+              />
             </div>
           </div>
         </div>

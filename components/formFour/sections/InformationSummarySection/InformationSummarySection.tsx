@@ -5,9 +5,22 @@ import {
 import { PrimaryButton } from "@/components/PrimaryButton/PrimaryButton";
 import { Button } from "@/components/ui/button";
 import { Option, useFormState } from "@/context/useContext";
+import { useEffect } from "react";
 
 export const InformationSummarySection = () => {
   const { formData, updateFormData } = useFormState();
+
+  useEffect(() => {
+    if (
+      formData.option === Option.ETUDE_RE2020 ||
+      formData.option === Option.AIDE_CONCEPTION
+    ) {
+      updateFormData({
+        ...formData,
+        isStepThreeChecked: false,
+      });
+    }
+  }, [formData, updateFormData]);
 
   const PermisForm = [
     {
@@ -292,8 +305,8 @@ export const InformationSummarySection = () => {
       : [];
 
   return (
-    <div className="flex flex-col w-full items-start gap-8 pt-0 pb-8 px-0 translate-y-[-1rem] animate-fade-in opacity-0">
-      <div className="flex flex-col items-start gap-5 relative self-stretch w-full flex-[0_0_auto] overflow-y-auto">
+    <div className="flex flex-col w-full items-start gap-6 sm:gap-8 pt-0 pb-6 sm:pb-8 px-0 translate-y-[-1rem] animate-fade-in opacity-0">
+      <div className="flex flex-col items-start gap-4 sm:gap-5 relative self-stretch w-full flex-[0_0_auto] overflow-y-auto">
         {formToUse.map((item, index) =>
           item.type === "default" ? (
             <Question
@@ -317,7 +330,7 @@ export const InformationSummarySection = () => {
         )}
       </div>
 
-      <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0 relative self-stretch w-full flex-[0_0_auto] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]">
         <Button
           onClick={() => {
             updateFormData({
@@ -327,21 +340,21 @@ export const InformationSummarySection = () => {
             });
           }}
           variant="outline"
-          className="inline-flex items-center justify-center gap-3 px-4 py-3 relative flex-[0_0_auto] bg-[#f7f7f8] rounded-lg border border-solid border-[#b8b9c1] h-auto hover:bg-[#f0f0f1] transition-colors"
+          className="inline-flex items-center justify-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 relative flex-[0_0_auto] bg-[#f7f7f8] rounded-lg border border-solid border-[#b8b9c1] h-auto hover:bg-[#f0f0f1] transition-colors w-full sm:w-auto"
         >
           <div className="inline-flex flex-col h-6 items-center justify-end gap-3 relative flex-[0_0_auto]">
-            <div className="relative w-fit mt-[-37.00px] opacity-0 font-label-medium font-[number:var(--label-medium-font-weight)] text-subtitle-color text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
+            <div className="relative w-fit mt-[-37.00px] opacity-0 font-label-medium font-[number:var(--label-medium-font-weight)] text-subtitle-color text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
               Étape précédente
             </div>
 
-            <div className="mt-[-1.00px] text-subtitle-color relative w-fit font-label-medium font-[number:var(--label-medium-font-weight)] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
+            <div className="mt-[-1.00px] text-subtitle-color relative w-fit font-label-medium font-[number:var(--label-medium-font-weight)] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
               Étape précédente
             </div>
           </div>
         </Button>
 
         <PrimaryButton
-          className={undefined}
+          className="w-full sm:w-auto"
           handleClick={() => {
             updateFormData({
               ...formData,

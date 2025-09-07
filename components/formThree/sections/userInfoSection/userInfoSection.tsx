@@ -152,22 +152,22 @@ export const UserInfoSection = () => {
   };
 
   return (
-    <div className="flex items-center justify-center gap-2 w-full translate-y-[-1rem] animate-fade-in opacity-0">
+    <div className="flex items-center justify-center gap-1 sm:gap-2 w-full translate-y-[-1rem] animate-fade-in opacity-0 px-4 sm:px-0 ">
       {steps.map((step, index) => (
         <React.Fragment key={index}>
           <div
-            className="flex flex-col w-8 h-8 items-center justify-center gap-2.5 relative cursor-pointer"
+            className="flex flex-col w-6 h-6 sm:w-8 sm:h-8 items-center justify-center gap-2.5 relative cursor-pointer flex-shrink-0"
             onClick={() => handleNavigation(index)}
           >
             <div
-              className={`flex items-center justify-center w-8 h-8 rounded-full ${
+              className={`flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded-full ${
                 step.isCompleted || step.isCurrent
                   ? "bg-[#db4200]"
                   : "bg-[#f7f7f8] border border-solid border-[#b8b9c1]"
               }`}
             >
               <Image
-                className="w-5 h-5"
+                className="w-3 h-3 sm:w-5 sm:h-5"
                 width={20}
                 height={20}
                 alt="Icon step"
@@ -180,12 +180,12 @@ export const UserInfoSection = () => {
             </div>
 
             <div
-              className={`absolute top-[35px] ${step.labelPosition} ${
+              className={`absolute top-[28px] sm:top-[35px] left-1/2 transform -translate-x-1/2 ${
                 step.isCurrent
-                  ? "font-[number:var(--label-smaller-font-weight)] font-label-smaller text-[#021327] text-[length:var(--label-smaller-font-size)] text-center tracking-[var(--label-smaller-letter-spacing)] leading-[var(--label-smaller-line-height)] [font-style:var(--label-smaller-font-style)]"
+                  ? "font-[number:var(--label-smaller-font-weight)] font-label-smaller text-[#021327] text-xs sm:text-[length:var(--label-smaller-font-size)] text-center tracking-[var(--label-smaller-letter-spacing)] leading-[var(--label-smaller-line-height)] [font-style:var(--label-smaller-font-style)]"
                   : step.isCompleted
-                  ? "opacity-80 font-[number:var(--text-smaller-font-weight)] font-text-smaller text-[#021327] text-[length:var(--text-smaller-font-size)] text-center tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)]"
-                  : "opacity-60 font-[number:var(--text-smaller-font-weight)] font-text-smaller text-[#021327] text-[length:var(--text-smaller-font-size)] text-center tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)]"
+                  ? "opacity-80 font-[number:var(--text-smaller-font-weight)] font-text-smaller text-[#021327] text-xs sm:text-[length:var(--text-smaller-font-size)] text-center tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)]"
+                  : "opacity-60 font-[number:var(--text-smaller-font-weight)] font-text-smaller text-[#021327] text-xs sm:text-[length:var(--text-smaller-font-size)] text-center tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)]"
               } whitespace-nowrap`}
             >
               {step.label}
@@ -194,11 +194,11 @@ export const UserInfoSection = () => {
 
           {index < steps.length - 1 && (
             <div
-              className={`w-[32] h-[1px] border ${
+              className={`w-4 sm:w-8 h-[1px] border ${
                 step.isCompleted
                   ? "border-syracuse_red_orange"
                   : "border-gray-300"
-              } object-cover`}
+              } object-cover flex-shrink-0`}
             ></div>
           )}
         </React.Fragment>

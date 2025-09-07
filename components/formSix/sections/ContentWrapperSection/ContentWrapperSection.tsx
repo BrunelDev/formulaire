@@ -1,16 +1,15 @@
-import { MailIcon, PhoneIcon } from "lucide-react";
-import React from "react";
+import Image from "next/image";
 import { Card, CardContent } from "../../../../components/ui/card";
 
 const contactInfo = [
   {
-    icon: PhoneIcon,
+    icon: "/icons/call.svg",
     label: "Nous appeler",
     value: "(+33) 6 56 74 54 70",
     href: "tel:+33656745470",
   },
   {
-    icon: MailIcon,
+    icon: "/icons/mail.svg",
     label: "Nous écrire",
     value: "contact@mesplansdepermis.fr",
     href: "mailto:contact@mesplansdepermis.fr",
@@ -36,55 +35,60 @@ const statistics = [
   },
 ];
 
-export const ContentWrapperSection = ()=> {
+export const ContentWrapperSection = () => {
   return (
-    <section className="flex flex-col w-full max-w-[719px] items-start gap-5 pt-0 pb-8 px-0 relative">
+    <section className="flex flex-col w-full max-w-[719px] items-start gap-4 sm:gap-5 pt-0 pb-6 sm:pb-8 px-0 relative">
       {/* Header Section */}
       <header className="flex flex-col items-start gap-2 w-full translate-y-[-1rem] animate-fade-in opacity-0">
-        <h1 className="w-full mt-[-1.00px] font-heading-h2 font-[number:var(--heading-h2-font-weight)] text-[#094d9a] text-[length:var(--heading-h2-font-size)] tracking-[var(--heading-h2-letter-spacing)] leading-[var(--heading-h2-line-height)] [font-style:var(--heading-h2-font-style)]">
+        <h1 className="w-full mt-[-1.00px] font-heading-h2 text-[#094d9a] tracking-[var(--heading-h2-letter-spacing)] leading-[var(--heading-h2-line-height)]  font-medium text-2xl">
           Félicitations !
         </h1>
 
-        <p className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+        <p className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
           Votre devis vient tout juste d&#39;être envoyé dans votre boîte mail,
           consultez-le dès maintenant !
         </p>
       </header>
 
       {/* Main Content */}
-      <div className="flex flex-col items-start gap-8 w-full translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
+      <div className="flex flex-col items-start gap-6 sm:gap-8 w-full translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
         <div className="flex flex-col items-start gap-2 w-full">
           {/* Contact Card */}
           <Card className="w-full bg-white border-0 shadow-none">
-            <CardContent className="flex flex-col items-start gap-4 p-5">
+            <CardContent className="flex flex-col items-start gap-4 p-4 sm:p-5">
               <div className="flex flex-col items-start gap-1 w-full">
-                <h2 className="w-full mt-[-1.00px] font-heading-h3 font-[number:var(--heading-h3-font-weight)] text-[#021327] text-[length:var(--heading-h3-font-size)] tracking-[var(--heading-h3-letter-spacing)] leading-[var(--heading-h3-line-height)] [font-style:var(--heading-h3-font-style)]">
+                <h2 className="w-full mt-[-1.00px] font-heading-h3 text-[#021327] text-lg sm:text-xl tracking-[var(--heading-h3-letter-spacing)] leading-[var(--heading-h3-line-height)] font-medium">
                   Des questions ? Envie de valider votre devis ?
                 </h2>
 
-                <p className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-secondary-color text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+                <p className="w-full font-medium   tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] text-[#042347]">
                   Contactez l&apos;équipe dès maintenant par téléphone ou par
                   mail.
                 </p>
               </div>
 
-              <div className="flex flex-col items-start gap-5 w-full">
+              <div className="flex flex-col items-start gap-4 sm:gap-5 w-full">
                 {contactInfo.map((contact, index) => (
                   <div key={index} className="inline-flex items-center gap-3">
-                    <div className="relative w-11 h-11 flex items-center justify-center">
-                      <contact.icon className="w-6 h-6 text-[#094d9a]" />
+                    <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center">
+                      <Image
+                        src={contact.icon}
+                        alt="Ellipse"
+                        width={40}
+                        height={40}
+                      />
                     </div>
 
                     <div className="inline-flex flex-col items-start">
-                      <div className="font-[number:var(--label-small-font-weight)] mt-[-1.00px] font-label-small text-text-color text-[length:var(--label-small-font-size)] tracking-[var(--label-small-letter-spacing)] leading-[var(--label-small-line-height)] [font-style:var(--label-small-font-style)]">
+                      <div className="mt-[-1.00px]  tracking-[var(--label-small-letter-spacing)] leading-[var(--label-small-line-height)] font-medium text-sm text-oxford_blue">
                         {contact.label}
                       </div>
 
                       <a
                         href={contact.href}
-                        className="w-fit [font-family:'Figtree',Helvetica] font-normal text-base tracking-[0] leading-4 transition-colors hover:opacity-80"
+                        className="w-fit [font-family:'Figtree',Helvetica] font-normal text-sm sm:text-base tracking-[0] leading-4 transition-colors hover:opacity-80"
                       >
-                        <span className="leading-[var(--text-medium-line-height)] underline font-text-medium [font-style:var(--text-medium-font-style)] font-[number:var(--text-medium-font-weight)] tracking-[var(--text-medium-letter-spacing)] text-[length:var(--text-medium-font-size)] text-[#db4200]">
+                        <span className="leading-[var(--text-medium-line-height)] underline font-text-medium [font-style:var(--text-medium-font-style)] font-[number:var(--text-medium-font-weight)] tracking-[var(--text-medium-letter-spacing)] text-sm sm:text-[length:var(--text-medium-font-size)] text-[#db4200]">
                           {contact.value}
                         </span>
                       </a>
@@ -96,7 +100,7 @@ export const ContentWrapperSection = ()=> {
           </Card>
 
           {/* Disclaimer Text */}
-          <p className="w-full font-text-smallest font-[number:var(--text-smallest-font-weight)] text-[#6d7074] text-[length:var(--text-smallest-font-size)] tracking-[var(--text-smallest-letter-spacing)] leading-[var(--text-smallest-line-height)] [font-style:var(--text-smallest-font-style)]">
+          <p className="w-full  text-[#6d7074] text-sm  tracking-[var(--text-smallest-letter-spacing)]  ">
             Les résultats des simulations sont indicatifs et ne constituent pas
             une offre définitive. Le devis final sera validé après examen
             attentif de votre dossier (et promis, on ne fait pas de lancer de
@@ -110,19 +114,19 @@ export const ContentWrapperSection = ()=> {
         </div>
 
         {/* Statistics Section */}
-        <Card className="w-full bg-[#042347] border-0 shadow-none translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
-          <CardContent className="flex flex-col items-center justify-center gap-2.5 p-5">
-            <div className="flex h-16 items-center justify-center gap-8 w-full">
+        <Card className="w-full bg-[#042347] border-0 shadow-none translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] rounded-none mt-8">
+          <CardContent className="flex flex-col items-center justify-center gap-2.5 p-4 sm:p-5">
+            <div className="grid grid-cols-2 sm:flex sm:h-16 items-center justify-center gap-4 sm:gap-6 lg:gap-8 w-full">
               {statistics.map((stat, index) => (
                 <div
                   key={index}
-                  className="flex flex-col w-[98px] items-start gap-1"
+                  className="flex flex-col w-full sm:w-[98px] items-center sm:items-start gap-1"
                 >
-                  <div className="w-full mt-[-1.00px] font-heading-h1 font-[number:var(--heading-h1-font-weight)] text-white text-[length:var(--heading-h1-font-size)] text-center tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)] [font-style:var(--heading-h1-font-style)]">
+                  <div className="w-full mt-[-1.00px]  text-white text-2xl sm:text-3xl text-center tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)]">
                     {stat.number}
                   </div>
 
-                  <div className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-white text-[length:var(--text-medium-font-size)] text-center tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+                  <div className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-white text-xs sm:text-sm lg:text-[length:var(--text-medium-font-size)] text-center tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)] sm:text-nowrap">
                     {stat.label}
                   </div>
                 </div>

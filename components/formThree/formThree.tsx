@@ -1,5 +1,5 @@
 import { Option, useFormState } from "@/context/useContext";
-import React, { useState } from "react";
+import React from "react";
 import {
   Avatar,
   AvatarFallback,
@@ -8,10 +8,9 @@ import {
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
+import Mapbox from "../mapbox";
 
 export const FormThree = () => {
-  const [selectedProject, setSelectedProject] =
-    useState<string>("permis-construire");
   const { formData, updateFormData } = useFormState();
 
   const projectOptions = [
@@ -63,8 +62,8 @@ export const FormThree = () => {
       data-model-id="55:360"
     >
       <div className="bg-[#f7f7f8] w-full max-w-[1280px] relative">
-        <main className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] flex w-full gap-8 absolute px-24">
-          <div className="flex flex-col w-[536px] items-start gap-8">
+        <main className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] flex flex-col lg:flex-row w-full gap-6 lg:gap-8 absolute px-4 sm:px-8 lg:px-24">
+          <div className="flex flex-col w-full lg:w-[536px] items-start gap-6 lg:gap-8">
             <div className="flex items-start gap-3.5 w-full">
               <Avatar className="w-[60px] h-[60px]">
                 <AvatarImage src="https://c.animaapp.com/mf2fxk6fBvYbpA/img/ellipse-1.png" />
@@ -85,7 +84,7 @@ export const FormThree = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-4 gap-3 w-full">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 w-full">
               {projectOptions.map((option, index) => (
                 <Card
                   key={option.id}
@@ -94,7 +93,7 @@ export const FormThree = () => {
                   }ms] w-[125px] cursor-pointer transition-all hover:scale-105 ${
                     formData.option === option.id
                       ? "bg-[#042347] text-white"
-                      : "bg-app-background hover:bg-gray-50"
+                      : "bg-app-background hover:bg-gray-100"
                   }`}
                   onClick={() => {
                     updateFormData({
@@ -110,11 +109,7 @@ export const FormThree = () => {
                     />
                     <div className="flex h-[52px] items-center justify-center w-full">
                       <div
-                        className={`text-center font-label-smaller font-[number:var(--label-smaller-font-weight)] text-[length:var(--label-smaller-font-size)] tracking-[var(--label-smaller-letter-spacing)] leading-[var(--label-smaller-line-height)] [font-style:var(--label-smaller-font-style)] ${
-                          selectedProject === option.id
-                            ? "text-white"
-                            : "text-text-color"
-                        }`}
+                        className={`text-center font-label-smaller font-[number:var(--label-smaller-font-weight)] text-[length:var(--label-smaller-font-size)] tracking-[var(--label-smaller-letter-spacing)] leading-[var(--label-smaller-line-height)] [font-style:var(--label-smaller-font-style)] `}
                       >
                         {option.title.split(" ").map((word, i, arr) => (
                           <React.Fragment key={i}>
@@ -154,23 +149,37 @@ export const FormThree = () => {
 
               <PrimaryButton
                 className={undefined}
+                disabled={!formData.option}
                 handleClick={() => {
-                  updateFormData({
-                    ...formData,
-                    isStepThreeChecked: true,
-                  });
+                  if (
+                    formData.option === Option.ETUDE_RE2020 ||
+                    formData.option === Option.AIDE_CONCEPTION
+                  ) {
+                    updateFormData({
+                      ...formData,
+                      isStepFourChecked: true,
+                      isStepThreeChecked: true,
+                    });
+                  } else {
+                    updateFormData({
+                      ...formData,
+                      isStepThreeChecked: true,
+                    });
+                  }
                 }}
               />
             </div>
           </div>
 
-          <div
-            className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms] w-[534px] h-[640px] bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden"
-            style={{
-              backgroundImage:
-                "url(https://c.animaapp.com/mf2fxk6fBvYbpA/img/frame-23.png)",
-            }}
-          />
+          {/* Right Column - Map */}
+          <div className="relative">
+            <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms] w-[534px] h-[640px] bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden">
+              <Mapbox
+                coordinates={formData.addressDetails?.coordinates}
+                zoom={16}
+              />
+            </div>
+          </div>
         </main>
       </div>
     </div>

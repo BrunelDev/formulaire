@@ -1,8 +1,9 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
-import { GooglePlacesAutocomplete } from "./GooglePlacesAutocomplete";
 import { Input } from "../ui/input";
+import { GooglePlacesAutocomplete } from "./GooglePlacesAutocomplete";
 
 interface AddressDetails {
   coordinates?: {
@@ -66,7 +67,7 @@ export const GooglePlacesWrapper: React.FC<GooglePlacesWrapperProps> = ({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className={className}
+          className={cn("w-full", className)}
           autoComplete="off"
         />
         {loadError && (
