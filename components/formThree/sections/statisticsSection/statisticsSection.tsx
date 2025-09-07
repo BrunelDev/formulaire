@@ -86,7 +86,7 @@ export const StatisticsSection = ()=> {
           <div className="flex flex-col items-start gap-8 w-full translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
             <form className="flex flex-col items-start gap-4 w-full">
               <div className="flex items-start gap-5 w-full">
-                {formFields.slice(0, 2).map((field, index) => (
+                {formFields.slice(0, 2).map((field) => (
                   <div
                     key={field.id}
                     className="flex flex-col items-start gap-2 flex-1"
@@ -113,7 +113,7 @@ export const StatisticsSection = ()=> {
               </div>
 
               <div className="flex items-start gap-5 w-full">
-                {formFields.slice(2, 4).map((field, index) => (
+                {formFields.slice(2, 4).map((field) => (
                   <div
                     key={field.id}
                     className="flex flex-col items-start gap-2 flex-1"

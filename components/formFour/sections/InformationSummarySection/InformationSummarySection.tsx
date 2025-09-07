@@ -308,7 +308,7 @@ export const InformationSummarySection = () => {
     <div className="flex flex-col w-full items-start gap-6 sm:gap-8 pt-0 pb-6 sm:pb-8 px-0 translate-y-[-1rem] animate-fade-in opacity-0">
       <div className="flex flex-col items-start gap-4 sm:gap-5 relative self-stretch w-full flex-[0_0_auto] overflow-y-auto">
         {formToUse.map((item, index) =>
-          item.type === "default" ? (
+          "type" in item && item.type === "default" ? (
             <Question
               key={index}
               question={item.question}

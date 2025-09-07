@@ -8,7 +8,6 @@ export enum IconProp {
 }
 
 export const IconStep = ({
-  property1 = IconProp.Location,
   className,
 }: {
   property1: IconProp;

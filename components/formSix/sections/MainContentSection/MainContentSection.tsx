@@ -44,7 +44,7 @@ export const MainContentSection = () => {
 
   return (
     <div className="flex items-center justify-center gap-2 w-full translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
-      {steps.map((step, index) => (
+      {steps.map((step) => (
         <React.Fragment key={step.id}>
           <div className="flex flex-col w-8 h-8 items-center justify-center gap-2.5 relative bg-[#db4200] rounded-[1000px]">
             <Image

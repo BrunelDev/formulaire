@@ -15,7 +15,7 @@ export const ClientReviewsSection = () => {
             </blockquote>
 
             <div className="flex items-center gap-1 w-full">
-              <cite className="flex-1 font-text-medium font-[number:var(--text-medium-font-weight)] text-white text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)] not-italic">
+              <cite className="flex-1 font-text-medium font-[number:var(--text-medium-font-weight)] text-white text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)]">
                 Emmanuelle , Avis client
               </cite>
             </div>

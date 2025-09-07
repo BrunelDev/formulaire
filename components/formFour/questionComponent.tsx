@@ -96,6 +96,7 @@ export function QuestionWithInput({
 }) {
   const [checked, setChecked] = useState(value || false);
   const { setSummary, summary } = useSummarySate();
+  console.log(placeholder)
   return (
     <Card className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] w-full">
       <CardContent className="flex flex-col items-start gap-3 p-4 sm:p-5">

@@ -77,7 +77,7 @@ export const GooglePlacesTestComponent: React.FC = () => {
             </div>
 
             <div>
-              <h4 className="font-medium text-gray-700">Zone d'urbanisme :</h4>
+              <h4 className="font-medium text-gray-700">Zone d&apos;urbanisme :</h4>
               <p className="text-blue-600">
                 {selectedDetails.urbanZone || "Non disponible"}
               </p>
@@ -116,10 +116,10 @@ export const GooglePlacesTestComponent: React.FC = () => {
           Instructions de test :
         </h3>
         <ul className="text-sm text-blue-700 space-y-1">
-          <li>• Tapez une adresse française (ex: "16 rue latapie la brède")</li>
+          <li>• Tapez une adresse française (ex: &quot;16 rue latapie la brède&quot;)</li>
           <li>• Sélectionnez une suggestion dans la liste déroulante</li>
           <li>• Vérifiez que toutes les informations sont récupérées</li>
-          <li>• Testez avec différents types d'adresses (rue, avenue, place, etc.)</li>
+          <li>• Testez avec différents types d&apos;adresses (rue, avenue, place, etc.)</li>
         </ul>
       </div>
 

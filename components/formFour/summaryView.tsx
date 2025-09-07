@@ -3,15 +3,7 @@ import Image from "next/image";
 
 export function SummaryView() {
   const { summary } = useSummarySate();
-  const items = [
-    "Vérification du P.L.U",
-    "Réalisation d'un plan de niveau RDC (plan intérieur)",
-    "Étude BBIO RE2020",
-    "Certificat d'urbanisme",
-    "Étude sismique",
-    "Service livraison express",
-    "Panneau d'affichage",
-  ];
+ 
 
   return (
     <div className="bg-[#ffffff] p-4 sm:p-6 lg:p-8 rounded-lg lg:rounded-none">
