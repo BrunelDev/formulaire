@@ -1,6 +1,6 @@
 import { ClientReviewsSection } from "./sections/ClientReviewsSection/ClientReviewsSection";
 import { ContentWrapperSection } from "./sections/ContentWrapperSection/ContentWrapperSection";
-import { MainContentSection } from "./sections/MainContentSection/MainContentSection";
+
 
 export const FormSix = () => {
   return (

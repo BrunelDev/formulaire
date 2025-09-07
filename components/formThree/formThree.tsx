@@ -1,4 +1,4 @@
-import { useFormState } from "@/context/useContext";
+import { Option, useFormState } from "@/context/useContext";
 import React, { useState } from "react";
 import {
   Avatar,
@@ -16,42 +16,42 @@ export const FormThree = () => {
 
   const projectOptions = [
     {
-      id: "permis-construire",
+      id: Option.PERMIS_CONSTRUIRE,
       title: "Permis de construire",
       image: "https://c.animaapp.com/mf2fxk6fBvYbpA/img/frame-36.png",
     },
     {
-      id: "declaration-prealable",
+      id: Option.DECLARATION_PREALABLE,
       title: "Déclaration préalable de travaux",
       image: "https://c.animaapp.com/mf2fxk6fBvYbpA/img/frame-36-1.png",
     },
     {
-      id: "dossier-erp",
+      id: Option.DOSSIER_ERP,
       title: "Dossier E.R.P",
       image: "https://c.animaapp.com/mf2fxk6fBvYbpA/img/frame-36-2.png",
     },
     {
-      id: "certificat-urbanisme",
+      id: Option.CERTIFICAT_URBANISME,
       title: "Certificat d'urbanisme",
       image: "https://c.animaapp.com/mf2fxk6fBvYbpA/img/frame-36-3.png",
     },
     {
-      id: "plan-unite",
+      id: Option.PLAN_UNITE,
       title: "Réalisation plan à l'unité",
       image: "https://c.animaapp.com/mf2fxk6fBvYbpA/img/frame-36-4.png",
     },
     {
-      id: "etude-re2020",
+      id: Option.ETUDE_RE2020,
       title: "Étude RE2020",
       image: "https://c.animaapp.com/mf2fxk6fBvYbpA/img/frame-36-5.png",
     },
     {
-      id: "etude-sismique",
+      id: Option.ETUDE_SISMIQUE,
       title: "Étude sismique",
       image: "https://c.animaapp.com/mf2fxk6fBvYbpA/img/frame-36-6.png",
     },
     {
-      id: "aide-conception",
+      id: Option.AIDE_CONCEPTION,
       title: "Aide à la conception",
       image: "https://c.animaapp.com/mf2fxk6fBvYbpA/img/frame-36-7.png",
     },
@@ -59,11 +59,11 @@ export const FormThree = () => {
 
   return (
     <div
-      className="bg-[#f7f7f8] min-h-screen w-full flex justify-center"
+      className="bg-[#f7f7f8] w-full flex justify-center"
       data-model-id="55:360"
     >
-      <div className="bg-[#f7f7f8] w-full max-w-[1280px] min-h-[832px] relative">
-        <main className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] flex w-full gap-8 absolute top-40 px-24">
+      <div className="bg-[#f7f7f8] w-full max-w-[1280px] relative">
+        <main className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] flex w-full gap-8 absolute px-24">
           <div className="flex flex-col w-[536px] items-start gap-8">
             <div className="flex items-start gap-3.5 w-full">
               <Avatar className="w-[60px] h-[60px]">
@@ -92,11 +92,16 @@ export const FormThree = () => {
                   className={`translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:${
                     600 + index * 100
                   }ms] w-[125px] cursor-pointer transition-all hover:scale-105 ${
-                    selectedProject === option.id
+                    formData.option === option.id
                       ? "bg-[#042347] text-white"
                       : "bg-app-background hover:bg-gray-50"
                   }`}
-                  onClick={() => setSelectedProject(option.id)}
+                  onClick={() => {
+                    updateFormData({
+                      ...formData,
+                      option: option.id,
+                    });
+                  }}
                 >
                   <CardContent className="flex flex-col items-center gap-2 p-1 pt-1 pb-2">
                     <div

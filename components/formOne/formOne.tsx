@@ -1,12 +1,32 @@
 import { useFormState } from "@/context/useContext";
 import Image from "next/image";
 import { useState } from "react";
+import { GooglePlacesWrapper } from "../GooglePlacesAutocomplete/GooglePlacesWrapper";
 import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
-import { Input } from "../ui/input";
+
+interface AddressDetails {
+  coordinates?: {
+    lat: number;
+    lng: number;
+  };
+  formattedAddress?: string;
+  parcelNumber?: string;
+  urbanZone?: string;
+  city?: string;
+  placeId?: string;
+}
 
 export const FormOne = () => {
   const { formData, updateFormData } = useFormState();
   const [address, setAddress] = useState(formData.address || "");
+
+  const handlePlaceSelect = (addressDetails: AddressDetails) => {
+    setAddress(addressDetails.formattedAddress || "");
+    updateFormData({
+      address: addressDetails.formattedAddress || "",
+      addressDetails: addressDetails,
+    });
+  };
   return (
     <div className="bg-[#f7f7f8] grid justify-items-center align-items:start] ">
       <div className="bg-[#f7f7f8] relative flex flex-col justify-center px-40 gap-y-10">
@@ -39,17 +59,19 @@ export const FormOne = () => {
           <div className="flex flex-col items-end gap-3 relative self-stretch w-full flex-[0_0_auto]">
             <div className="flex flex-col items-start gap-1.5 relative self-stretch w-full flex-[0_0_auto]">
               <div className="flex items-end justify-center gap-4 relative self-stretch w-full flex-[0_0_auto]">
-                <Input
+                <GooglePlacesWrapper
                   placeholder="16 rue latapie 33650 La Brède"
                   value={address}
-                  onChange={(e) => setAddress(e.target.value)}
+                  onChange={setAddress}
+                  onPlaceSelect={handlePlaceSelect}
+                  apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                 />
                 <PrimaryButton
                   className={undefined}
                   handleClick={() => {
                     updateFormData({
                       ...formData,
-                      address: "16 rue latapie 33650 La Brède",
+                      address: address,
                       isStepOneChecked: true,
                     });
                   }}
@@ -76,7 +98,9 @@ export const FormOne = () => {
                 </div>
 
                 <p className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
-                  16 rue latapie 33650 La Brède
+                  {formData.addressDetails?.formattedAddress ||
+                    formData.address ||
+                    "Adresse non sélectionnée"}
                 </p>
               </div>
 
@@ -86,7 +110,7 @@ export const FormOne = () => {
                 </div>
 
                 <div className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
-                  AK 0084
+                  {formData.addressDetails?.parcelNumber || "Non disponible"}
                 </div>
               </div>
 
@@ -96,7 +120,7 @@ export const FormOne = () => {
                 </div>
 
                 <div className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
-                  La Brède
+                  {formData.addressDetails?.city || "Non disponible"}
                 </div>
               </div>
 
@@ -106,7 +130,7 @@ export const FormOne = () => {
                 </p>
 
                 <div className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
-                  UA
+                  {formData.addressDetails?.urbanZone || "Non disponible"}
                 </div>
               </div>
             </div>

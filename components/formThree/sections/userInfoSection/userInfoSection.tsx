@@ -3,46 +3,94 @@ import Image from "next/image";
 import React from "react";
 
 export const UserInfoSection = () => {
+  const { formData, updateFormData } = useFormState();
+
   const steps = [
     {
-      icon: "https://c.animaapp.com/mf2gfnauygUKoU/img/icon-step-3.svg",
+      icon: "/icons/localisation.svg",
+      inactiveIcon: "/icons/localisation-inactive.svg",
       label: "Localisation",
       isCompleted: true,
       labelPosition: "-left-4",
+      isCurrent: !formData.isStepOneChecked,
     },
     {
-      icon: "https://c.animaapp.com/mf2gfnauygUKoU/img/icon-step.svg",
+      icon: "/icons/estimation.svg",
+      inactiveIcon: "/icons/estimation-inactive.svg",
       label: "Estimation",
-      isCompleted: true,
+      isCompleted: formData.isStepOneChecked && formData.isStepTwoChecked,
       labelPosition: "left-[-13px]",
+      isCurrent: formData.isStepOneChecked && !formData.isStepTwoChecked,
     },
     {
-      icon: "https://c.animaapp.com/mf2gfnauygUKoU/img/icon-step-4.svg",
+      icon: "/icons/projets.svg",
+      inactiveIcon: "/icons/projets-inactive.svg",
       label: "Projet",
-      isCompleted: true,
+      isCompleted:
+        formData.isStepOneChecked &&
+        formData.isStepTwoChecked &&
+        formData.isStepThreeChecked,
       labelPosition: "left-0",
+      isCurrent:
+        formData.isStepOneChecked &&
+        formData.isStepTwoChecked &&
+        !formData.isStepThreeChecked,
     },
     {
-      icon: "https://c.animaapp.com/mf2gfnauygUKoU/img/icon-step-2.svg",
+      icon: "/icons/details.svg",
+      inactiveIcon: "/icons/details-inactive.svg",
       label: "Détails",
-      isCompleted: true,
+      isCompleted:
+        formData.isStepOneChecked &&
+        formData.isStepTwoChecked &&
+        formData.isStepThreeChecked &&
+        formData.isStepFourChecked,
       labelPosition: "-left-0.5",
+      isCurrent:
+        formData.isStepOneChecked &&
+        formData.isStepTwoChecked &&
+        formData.isStepThreeChecked &&
+        !formData.isStepFourChecked,
     },
     {
-      icon: "https://c.animaapp.com/mf2gfnauygUKoU/img/icon-step-5.svg",
+      icon: "/icons/coordonnees.svg",
+      inactiveIcon: "/icons/coordonnees-inactive.svg",
       label: "Coordonnées",
-      isCompleted: true,
+      isCompleted:
+        formData.isStepOneChecked &&
+        formData.isStepTwoChecked &&
+        formData.isStepThreeChecked &&
+        formData.isStepFourChecked &&
+        formData.isStepFiveChecked,
       labelPosition: "-left-5",
-      isCurrentStep: true,
+      isCurrent:
+        formData.isStepOneChecked &&
+        formData.isStepTwoChecked &&
+        formData.isStepThreeChecked &&
+        formData.isStepFourChecked &&
+        !formData.isStepFiveChecked,
     },
     {
-      icon: "https://c.animaapp.com/mf2gfnauygUKoU/img/icon-step-1.svg",
+      icon: "/icons/finalisation.svg",
+      inactiveIcon: "/icons/finalisation-inactive.svg",
       label: "Finalisation",
-      isCompleted: false,
+      isCompleted:
+        formData.isStepOneChecked &&
+        formData.isStepTwoChecked &&
+        formData.isStepThreeChecked &&
+        formData.isStepFourChecked &&
+        formData.isStepFiveChecked &&
+        formData.isStepSixChecked,
       labelPosition: "-left-3.5",
+      isCurrent:
+        formData.isStepOneChecked &&
+        formData.isStepTwoChecked &&
+        formData.isStepThreeChecked &&
+        formData.isStepFourChecked &&
+        formData.isStepFiveChecked &&
+        !formData.isStepSixChecked,
     },
   ];
-  const { formData, updateFormData, updateStepOne } = useFormState();
   const handleNavigation = (stepIndex: number) => {
     if (stepIndex === 0 && formData.isStepOneChecked) {
       updateFormData({
@@ -106,11 +154,14 @@ export const UserInfoSection = () => {
   return (
     <div className="flex items-center justify-center gap-2 w-full translate-y-[-1rem] animate-fade-in opacity-0">
       {steps.map((step, index) => (
-        <React.Fragment key={index} >
-          <div className="flex flex-col w-8 h-8 items-center justify-center gap-2.5 relative" onClick={() => handleNavigation(index)}>
+        <React.Fragment key={index}>
+          <div
+            className="flex flex-col w-8 h-8 items-center justify-center gap-2.5 relative cursor-pointer"
+            onClick={() => handleNavigation(index)}
+          >
             <div
               className={`flex items-center justify-center w-8 h-8 rounded-full ${
-                step.isCompleted
+                step.isCompleted || step.isCurrent
                   ? "bg-[#db4200]"
                   : "bg-[#f7f7f8] border border-solid border-[#b8b9c1]"
               }`}
@@ -120,13 +171,17 @@ export const UserInfoSection = () => {
                 width={20}
                 height={20}
                 alt="Icon step"
-                src={step.icon}
+                src={
+                  step.isCurrent || step.isCompleted
+                    ? step.icon
+                    : step.inactiveIcon
+                }
               />
             </div>
 
             <div
               className={`absolute top-[35px] ${step.labelPosition} ${
-                step.isCurrentStep
+                step.isCurrent
                   ? "font-[number:var(--label-smaller-font-weight)] font-label-smaller text-[#021327] text-[length:var(--label-smaller-font-size)] text-center tracking-[var(--label-smaller-letter-spacing)] leading-[var(--label-smaller-line-height)] [font-style:var(--label-smaller-font-style)]"
                   : step.isCompleted
                   ? "opacity-80 font-[number:var(--text-smaller-font-weight)] font-text-smaller text-[#021327] text-[length:var(--text-smaller-font-size)] text-center tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)]"
@@ -138,13 +193,13 @@ export const UserInfoSection = () => {
           </div>
 
           {index < steps.length - 1 && (
-            <Image
-              width={32}
-              height={4}
-              className="w-8 h-px object-cover"
-              alt="Line"
-              src="https://c.animaapp.com/mf2gfnauygUKoU/img/line-1.svg"
-            />
+            <div
+              className={`w-[32] h-[1px] border ${
+                step.isCompleted
+                  ? "border-syracuse_red_orange"
+                  : "border-gray-300"
+              } object-cover`}
+            ></div>
           )}
         </React.Fragment>
       ))}

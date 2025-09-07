@@ -4,7 +4,7 @@ export const ClientFeedbackSection = ()=> {
   const stars = Array(5).fill(null);
 
   return (
-    <section className="relative w-full h-[672px] bg-[linear-gradient(180deg,rgba(2,19,39,0)_0%,rgba(2,19,39,1)_100%),url(https://c.animaapp.com/mf61j077gweeKq/img/frame-61.png)] bg-cover bg-center bg-no-repeat translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
+    <section className="relative w-full h-[calc(100vh-122px)] bg-[linear-gradient(180deg,rgba(2,19,39,0)_0%,rgba(2,19,39,1)_100%),url(https://c.animaapp.com/mf61j077gweeKq/img/frame-61.png)] bg-cover bg-center bg-no-repeat translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
       <div className="flex flex-col w-full max-w-[353px] items-start gap-3 pt-5 pb-8 px-8 absolute bottom-0 left-0">
         <div className="flex flex-col items-start gap-2 w-full">
           <blockquote className="font-heading-h3 font-[number:var(--heading-h3-font-weight)] text-white text-[length:var(--heading-h3-font-size)] tracking-[var(--heading-h3-letter-spacing)] leading-[var(--heading-h3-line-height)] [font-style:var(--heading-h3-font-style)]">

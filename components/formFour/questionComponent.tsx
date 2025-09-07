@@ -115,14 +115,14 @@ export function QuestionWithInput({
                 htmlFor="express-delivery"
                 className="relative self-stretch  w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)] cursor-pointer text-wrap break-words break-all "
               >
-                <h6 className="text-wrap">
+                <div className="text-wrap">
                   {question}{" "}
                   {price && (
                     <h6 className="w-fit font-text-small font-[number:var(--text-small-font-weight)] text-[#db4200] text-[length:var(--text-small-font-size)] tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] whitespace-nowrap [font-style:var(--text-small-font-style)]">
                       {price}
                     </h6>
                   )}
-                </h6>
+                </div>
               </Label>
             </div>
           </div>

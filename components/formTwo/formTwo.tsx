@@ -16,83 +16,92 @@ export function FormTwo() {
           {/* Left Column */}
           <div className="space-y-6">
             {/* User Profile */}
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full overflow-hidden bg-[#b8b9c1]">
-                <Image
-                  src="/professional-man-avatar.png"
-                  alt="Jérémy"
-                  className="w-full h-full object-cover"
-                  width={64}
-                  height={64}
-                />
+            <div className="flex items-start gap-3.5 relative self-stretch w-full flex-[0_0_auto]">
+              <Image
+                className="relative w-[60px] h-[60px]"
+                width={60}
+                height={60}
+                alt="Ellipse"
+                src={"/images/jeremy.png"}
+              />
+
+              <div className="flex flex-col items-start gap-2 relative flex-1 grow">
+                <div className="relative self-stretch mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)]">
+                  Jérémy
+                </div>
+
+                <div className="relative self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+                  {/* Main Content */}
+                  <div className="space-y-4">
+                    <p className="text-[#021327] leading-relaxed">
+                      Votre adresse se situe dans une zone{" "}
+                      <span className="text-[#094d9a] font-medium">
+                        1UL (secteur d&apos; habitat en lotissement courants)
+                      </span>{" "}
+                      du Plan Local d&apos;Urbanisme (PLU) de la commune de{" "}
+                      <span className="text-[#094d9a] font-medium">CESTAS</span>
+                      .
+                    </p>
+
+                    <p className="text-[#021327] leading-relaxed">
+                      Nous estimons la difficulté à{" "}
+                      <span className="text-[#094d9a] font-medium">3/5</span>{" "}
+                      pour obtenir une autorisation d&apos;urbanisme à cet
+                      endroit.
+                    </p>
+
+                    <p className="text-[#021327] leading-relaxed">
+                      Nous vous conseillons de vous faire aider. Passez à
+                      l&apos;étape suivante !
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h2 className="text-xl font-semibold text-[#094d9a]">Jérémy</h2>
-              </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="space-y-4">
-              <p className="text-[#021327] leading-relaxed">
-                Votre adresse se situe dans une zone{" "}
-                <span className="text-[#094d9a] font-medium">
-                  1UL (secteur d&apos; habitat en lotissement courants)
-                </span>{" "}
-                du Plan Local d&apos;Urbanisme (PLU) de la commune de{" "}
-                <span className="text-[#094d9a] font-medium">CESTAS</span>.
-              </p>
-
-              <p className="text-[#021327] leading-relaxed">
-                Nous estimons la difficulté à{" "}
-                <span className="text-[#094d9a] font-medium">3/5</span> pour
-                obtenir une autorisation d&apos;urbanisme à cet endroit.
-              </p>
-
-              <p className="text-[#021327] leading-relaxed">
-                Nous vous conseillons de vous faire aider. Passez à l&apos;étape
-                suivante !
-              </p>
             </div>
 
             {/* Information Summary */}
-            <div className="space-y-6 pt-6">
-              <h3 className="text-lg font-semibold text-[#021327]">
-                Récapitulatif des informations
-              </h3>
+            <div className="flex items-center gap-5 bg-background p-4">
+              <div className="space-y-6 pt-6">
+                <h3 className="text-lg font-semibold text-[#021327]">
+                  Récapitulatif des informations
+                </h3>
 
-              <div className="space-y-4">
-                <div>
-                  <span className="text-[#021327]">Localisation : </span>
-                  <span className="text-[#094d9a] font-medium">
-                    69 Chemin de l&apos;Aoudougue 33610 Cestas
+                <div className="space-y-4">
+                  <div>
+                    <span className="text-[#021327]">Localisation : </span>
+                    <span className="text-[#094d9a] font-medium">
+                      69 Chemin de l&apos;Aoudougue 33610 Cestas
+                    </span>
+                  </div>
+
+                  <div>
+                    <span className="text-[#021327]">
+                      Numéro de parcelle :{" "}
+                    </span>
+                    <span className="text-[#094d9a] font-medium">Num</span>
+                  </div>
+
+                  <div>
+                    <span className="text-[#021327]">Mairie : </span>
+                    <span className="text-[#021327]">-</span>
+                  </div>
+
+                  <div>
+                    <span className="text-[#021327]">
+                      Zone d&apos;urbanisme de la parcelle :{" "}
+                    </span>
+                    <span className="text-[#094d9a] font-medium">1UL</span>
+                  </div>
+                </div>
+
+                {/* Difficulty Badge */}
+                <div className="flex items-center justify-between pt-4">
+                  <span className="text-[#021327] font-medium">
+                    Estimation de la difficulté
                   </span>
-                </div>
-
-                <div>
-                  <span className="text-[#021327]">Numéro de parcelle : </span>
-                  <span className="text-[#094d9a] font-medium">Num</span>
-                </div>
-
-                <div>
-                  <span className="text-[#021327]">Mairie : </span>
-                  <span className="text-[#021327]">-</span>
-                </div>
-
-                <div>
-                  <span className="text-[#021327]">
-                    Zone d&apos;urbanisme de la parcelle :{" "}
-                  </span>
-                  <span className="text-[#094d9a] font-medium">1UL</span>
-                </div>
-              </div>
-
-              {/* Difficulty Badge */}
-              <div className="flex items-center justify-between pt-4">
-                <span className="text-[#021327] font-medium">
-                  Estimation de la difficulté
-                </span>
-                <div className="bg-[#094d9a] text-white px-4 py-2 rounded-full font-semibold">
-                  3/5
+                  <div className="bg-[#094d9a] text-white px-4 py-2 rounded-full font-semibold">
+                    3/5
+                  </div>
                 </div>
               </div>
             </div>

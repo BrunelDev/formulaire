@@ -194,7 +194,7 @@ export const StatisticsSection = () => {
                 height={100}
                 className="w-[120px] h-[100px] object-cover"
                 alt="Urban building hero"
-                src="https://c.animaapp.com/mf2gfnauygUKoU/img/urban-building-hero-image-1024x854-1.png"
+                src="/images/Urban-building.png"
               />
             </div>
 

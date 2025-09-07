@@ -4,13 +4,11 @@ import {
 } from "@/components/formFour/questionComponent";
 import { PrimaryButton } from "@/components/PrimaryButton/PrimaryButton";
 import { Button } from "@/components/ui/button";
-import { useFormState } from "@/context/useContext";
-import { useState } from "react";
+import { Option, useFormState } from "@/context/useContext";
 
 export const InformationSummarySection = () => {
   const { formData, updateFormData } = useFormState();
-  const [architectRequired, setArchitectRequired] = useState<string>("");
-  const [expressDelivery, setExpressDelivery] = useState<boolean>(false);
+
   const PermisForm = [
     {
       question: "Votre permis nécessite un architecte ?",
@@ -280,11 +278,23 @@ export const InformationSummarySection = () => {
       price: "90€ TTC",
     },
   ];
+  const formToUse =
+    formData.option === Option.PERMIS_CONSTRUIRE
+      ? PermisForm
+      : formData.option === Option.DECLARATION_PREALABLE
+      ? DpForm
+      : formData.option === Option.DOSSIER_ERP
+      ? erpForm
+      : formData.option === Option.CERTIFICAT_URBANISME
+      ? urbanismForm
+      : formData.option === Option.PLAN_UNITE
+      ? uniteForm
+      : [];
 
   return (
-    <div className="flex flex-col w-full max-w-[534px] items-start gap-8 pt-0 pb-8 px-0 translate-y-[-1rem] animate-fade-in opacity-0">
+    <div className="flex flex-col w-full items-start gap-8 pt-0 pb-8 px-0 translate-y-[-1rem] animate-fade-in opacity-0">
       <div className="flex flex-col items-start gap-5 relative self-stretch w-full flex-[0_0_auto] overflow-y-auto">
-        {PermisForm.map((item, index) =>
+        {formToUse.map((item, index) =>
           item.type === "default" ? (
             <Question
               key={index}
