@@ -186,7 +186,7 @@ export const UserInfoSection = () => {
                   : step.isCompleted
                   ? "opacity-80 font-[number:var(--text-smaller-font-weight)] font-text-smaller text-[#021327] text-xs sm:text-[length:var(--text-smaller-font-size)] text-center tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)]"
                   : "opacity-60 font-[number:var(--text-smaller-font-weight)] font-text-smaller text-[#021327] text-xs sm:text-[length:var(--text-smaller-font-size)] text-center tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)]"
-              } whitespace-nowrap`}
+              } whitespace-nowrap hidden md:block`}
             >
               {step.label}
             </div>
