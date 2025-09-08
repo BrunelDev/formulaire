@@ -61,9 +61,9 @@ export const FormThree = () => {
       className="bg-[#f7f7f8] w-full flex justify-center"
       data-model-id="55:360"
     >
-      <div className="bg-[#f7f7f8] w-full max-w-[1280px] relative">
+      <div className="bg-[#f7f7f8] w-full relative">
         <main className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] flex flex-col lg:flex-row w-full gap-6 lg:gap-8 absolute px-4 sm:px-8 lg:px-24">
-          <div className="flex flex-col w-full lg:w-[536px] items-start gap-6 lg:gap-8">
+          <div className="flex flex-col w-screen lg:px-4 items-start gap-6 lg:gap-8 flex-1">
             <div className="flex items-start gap-3.5 w-full">
               <Avatar className="w-[60px] h-[60px]">
                 <AvatarImage src="https://c.animaapp.com/mf2fxk6fBvYbpA/img/ellipse-1.png" />
@@ -84,7 +84,7 @@ export const FormThree = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 w-full">
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-6 mx-auto">
               {projectOptions.map((option, index) => (
                 <Card
                   key={option.id}
@@ -124,7 +124,7 @@ export const FormThree = () => {
               ))}
             </div>
 
-            <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:1400ms] flex items-center justify-between w-full">
+            <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:1400ms] flex items-center justify-between w-full px-4">
               <Button
                 onClick={() => {
                   updateFormData({
@@ -173,7 +173,7 @@ export const FormThree = () => {
 
           {/* Right Column - Map */}
           <div className="relative">
-            <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms] w-[534px] h-[640px] bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden">
+            <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms] w-full h-[640px] rounded-lg overflow-hidden mx-auto">
               <Mapbox
                 coordinates={formData.addressDetails?.coordinates}
                 zoom={16}

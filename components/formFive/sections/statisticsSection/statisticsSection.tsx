@@ -88,7 +88,7 @@ export const StatisticsSection = () => {
                 {formFields.slice(0, 2).map((field) => (
                   <div
                     key={field.id}
-                    className="flex flex-col items-start gap-2 flex-1"
+                    className="flex flex-col items-stretch gap-2 flex-1 w-full"
                   >
                     <Label
                       htmlFor={field.id}
@@ -101,7 +101,7 @@ export const StatisticsSection = () => {
                       <Input
                         id={field.id}
                         placeholder={field.placeholder}
-                        className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
+                        className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
                       />
                       <div className="absolute w-[116px] top-[20px] sm:top-[23px] left-3 sm:left-4 opacity-0 font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
                         {field.defaultValue}
@@ -115,7 +115,7 @@ export const StatisticsSection = () => {
                 {formFields.slice(2, 4).map((field) => (
                   <div
                     key={field.id}
-                    className="flex flex-col items-start gap-2 flex-1"
+                    className="flex flex-col items-stretch gap-2 flex-1 w-full"
                   >
                     <Label
                       htmlFor={field.id}
@@ -128,7 +128,7 @@ export const StatisticsSection = () => {
                       <Input
                         id={field.id}
                         placeholder={field.placeholder}
-                        className="px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
+                        className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
                       />
                       <div className="absolute w-[116px] top-[20px] sm:top-[23px] left-3 sm:left-4 opacity-0 font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
                         {field.defaultValue}

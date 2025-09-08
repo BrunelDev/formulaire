@@ -43,7 +43,7 @@ const Mapbox = ({ coordinates, zoom = 16 }) => {
     };
   }, [coordinates, zoom]);
 
-  return <div ref={mapContainerRef} style={{ height: "100%" }} />;
+  return <div ref={mapContainerRef} style={{ height: "100%", width : "100%" }} />;
 };
 
 export default Mapbox;
