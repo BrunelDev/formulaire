@@ -102,6 +102,10 @@ export const FormOne = () => {
 
           <div className="flex flex-col items-end gap-3 relative self-stretch w-full flex-[0_0_auto] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
             <div className="flex flex-col items-start gap-1.5 relative self-stretch w-full flex-[0_0_auto]">
+              <h6 className="font-medium text-oxford_blue_2">
+                À quelle adresse souhaitez-vous obtenir une autorisation
+                d&apos;urbanisme ?
+              </h6>
               <div className="flex flex-col sm:flex-row items-stretch sm:items-end justify-center gap-3 sm:gap-4 relative self-stretch w-full flex-[0_0_auto]">
                 <div className="flex-1 sm:flex-auto w-full sm:w-auto">
                   <GooglePlacesWrapper
@@ -133,7 +137,7 @@ export const FormOne = () => {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-start lg:items-center lg:justify-between gap-5 lg:gap-5 p-4 lg:p-0 rounded-lg lg:rounded-none translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms] bg-white">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center lg:justify-between gap-5 lg:gap-5 p-4 lg:p-0 rounded-lg lg:rounded-none translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms] z-0 bg-white">
           <div className="flex flex-col w-full lg:w-[442px] items-start gap-4 lg:gap-5 lg:pl-5 lg:pr-0 lg:py-0 relative">
             <div className="relative self-stretch mt-[-1.00px] font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-black text-lg sm:text-xl lg:text-[length:var(--heading-h5-font-size)] tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] [font-style:var(--heading-h5-font-style)]">
               Récapitulatif des informations
