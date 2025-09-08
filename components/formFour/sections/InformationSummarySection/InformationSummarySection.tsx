@@ -314,7 +314,7 @@ export const InformationSummarySection = () => {
               question={item.question}
               description={item.description}
               handleChange={item.handleChange}
-              value={item.value.toString()}
+              value={item.value ? "oui" : "non"}
             />
           ) : (
             <QuestionWithInput

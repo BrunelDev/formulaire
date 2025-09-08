@@ -37,7 +37,7 @@ bun add react-google-places-autocomplete @types/google.maps
 4. **Ajouter la clé dans votre projet** :
    ```bash
    # Créez un fichier .env.local
-   echo "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_api_key_here" > .env.local
+   echo "NEXT_PUBLIC_NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_api_key_here" > .env.local
    ```
 
 ### 3. Démarrer le serveur de développement
@@ -103,7 +103,7 @@ function MyComponent() {
       onChange={setAddress}
       onPlaceSelect={handlePlaceSelect}
       placeholder="Entrez une adresse..."
-      apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+      apiKey={process.env.NEXT_PUBLIC_NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
     />
   );
 }
@@ -144,7 +144,7 @@ Si l'API Google Maps n'est pas disponible :
 
 1. **Vérifier la clé API** :
    ```javascript
-   console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
+   console.log(process.env.NEXT_PUBLIC_NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
    ```
 
 2. **Tester l'autocomplétion** :
