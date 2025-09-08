@@ -10,8 +10,8 @@ export const FormFour = () => {
     
   }, []);
   return (
-    <div className="bg-[#f7f7f8] w-full translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:0ms]">
-      <div className="bg-[#f7f7f8] px-4 sm:px-6 lg:px-8">
+    <div className="w-full animate-fade-in opacity-0 [--animation-delay:0ms]">
+      <div className="bg-[#f7f7f8]">
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
           <div className="w-full lg:w-[28%] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]">
             <ClientFeedbackSection />
