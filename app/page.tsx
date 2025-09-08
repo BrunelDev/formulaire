@@ -23,7 +23,7 @@ export default function Home() {
       <div className="fixed top-0 z-50 left-0 right-0">
         <NavBar />
       </div>
-      <div className="sm:mt-[100px] mt-[120px] h-fit">
+      <div className="mt-[120px] h-fit">
         <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms] mb-[20px]">
           <UserInfoSection />
         </div>
