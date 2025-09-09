@@ -37,9 +37,9 @@ const statistics = [
 
 export const ContentWrapperSection = () => {
   return (
-    <section className="flex flex-col w-full max-w-[719px] items-start gap-4 sm:gap-5 pt-0 pb-6 sm:pb-8 px-0 relative">
+    <section className="flex flex-col w-full max-w-[719px] items-start gap-4 sm:gap-5 pt-0 px-0 relative">
       {/* Header Section */}
-      <header className="flex flex-col items-start gap-2 w-full translate-y-[-1rem] animate-fade-in opacity-0">
+      <header className="flex flex-col items-start gap-2 w-full animate-fade-in opacity-0">
         <h1 className="w-full mt-[-1.00px] font-heading-h2 text-[#094d9a] tracking-[var(--heading-h2-letter-spacing)] leading-[var(--heading-h2-line-height)]  font-medium text-2xl">
           Félicitations !
         </h1>
@@ -51,7 +51,7 @@ export const ContentWrapperSection = () => {
       </header>
 
       {/* Main Content */}
-      <div className="flex flex-col items-start gap-6 sm:gap-8 w-full translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
+      <div className="flex flex-col items-start gap-6 sm:gap-8 w-full animate-fade-in opacity-0 [--animation-delay:200ms]">
         <div className="flex flex-col items-start gap-2 w-full">
           {/* Contact Card */}
           <Card className="w-full bg-white border-0 shadow-none">
@@ -100,7 +100,7 @@ export const ContentWrapperSection = () => {
           </Card>
 
           {/* Disclaimer Text */}
-          <p className="w-full  text-[#6d7074] text-sm  tracking-[var(--text-smallest-letter-spacing)]  ">
+          <p className="w-full  text-[#6d7074] text-xs  tracking-[var(--text-smallest-letter-spacing)]  ">
             Les résultats des simulations sont indicatifs et ne constituent pas
             une offre définitive. Le devis final sera validé après examen
             attentif de votre dossier (et promis, on ne fait pas de lancer de
@@ -114,7 +114,7 @@ export const ContentWrapperSection = () => {
         </div>
 
         {/* Statistics Section */}
-        <Card className="w-full bg-[#042347] border-0 shadow-none translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] rounded-none mt-8">
+        <Card className="w-full bg-[#042347] border-0 shadow-none animate-fade-in opacity-0 [--animation-delay:400ms] rounded-none ">
           <CardContent className="flex flex-col items-center justify-center gap-2.5 p-4 sm:p-5">
             <div className="grid grid-cols-2 sm:flex sm:h-16 items-center justify-center gap-4 sm:gap-6 lg:gap-8 w-full">
               {statistics.map((stat, index) => (

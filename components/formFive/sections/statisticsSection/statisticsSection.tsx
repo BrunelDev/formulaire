@@ -56,8 +56,8 @@ const statistics = [
 export const StatisticsSection = () => {
   const { formData, updateFormData } = useFormState();
   return (
-    <section className="flex flex-col lg:flex-row items-center gap-6 lg:gap-5 w-full">
-      <div className="flex flex-col w-full lg:w-[534px] items-start gap-6 lg:gap-7 translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:0ms]">
+    <section className="flex flex-col lg:flex-row items-center gap-6 lg:gap-5 w-full justify-center">
+      <div className="flex flex-col w-full lg:w-[40%] items-start gap-6 lg:gap-7 animate-fade-in opacity-0 [--animation-delay:0ms]">
         <div className="flex flex-col items-end gap-4 sm:gap-5 w-full">
           <header className="flex items-start gap-3 sm:gap-3.5 w-full translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
             <Avatar className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex-shrink-0">
@@ -208,7 +208,7 @@ export const StatisticsSection = () => {
                     {stat.value}
                   </div>
 
-                  <div className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-white text-xs sm:text-sm lg:text-[length:var(--text-medium-font-size)] text-center tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+                  <div className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-white text-xs sm:text-sm lg:text-[length:var(--text-medium-font-size)] text-center tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)] text-nowrap">
                     {stat.label}
                   </div>
                 </div>
@@ -221,7 +221,7 @@ export const StatisticsSection = () => {
       <Image
         width={534}
         height={640}
-        className="w-full max-w-[400px] lg:w-[534px] h-auto lg:h-[640px] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms] object-contain"
+        className="w-full lg:w-[40%] h-auto lg:h-[640px] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms] object-contain"
         alt="Frame"
         src="https://c.animaapp.com/mf2gfnauygUKoU/img/frame-51.svg"
       />
