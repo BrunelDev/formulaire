@@ -31,12 +31,11 @@ export const InformationSummarySection = () => {
         updateFormData({ ...formData, isArchitectNeeded: value });
       },
       value: false,
-      placeholder: "Oui / Non",
       type: "default",
     },
     {
       question:
-        "Votre projet comprend plusieurs réalisations sur un même permis de construire ?",
+        "Votre projet comprend plusieurs réalisations sur une même permis de construire ?",
       description:
         "Exemple: Création d'une extension et d'une clôture. Si c'est le cas, précisez le nombre de sous-projets à déclarer.",
       handleChange: (value: boolean) => {
@@ -46,141 +45,134 @@ export const InformationSummarySection = () => {
         });
       },
       value: false,
-      placeholder: "Oui / Non",
+      placeholder:"Nombre de sous projets à déclarer",
+            
     },
     {
-      question: "Vérification du PLU (180€ TTC)",
+      question: "Vérification du PLU ",
       description:
         "Nos services vérifient que votre projet respecte les règles du Plan Local d'Urbanisme (PLU) de votre commune pour éviter tout refus de votre permis.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, pluVerification: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "180€ TTC",
+      price: "(180€ TTC)",
     },
     {
       question:
-        "Réalisation d'un plan de niveau RDC (plan intérieur) (125€ TTC / niveau)",
+        "Réalisation d'un plan de niveau RDC (plan intérieur) ",
       description:
         "Les plans de niveaux ne sont pas obligatoires pour un permis de construire. Si nécessaire, indiquez le nombre de niveaux à dessiner.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, rdcPlanVerification: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "125€ TTC / niveau",
+      placeholder: "Nombre de niveau à déssiner",
+      price: "(125€ TTC / niveau)",
     },
     {
-      question: "Étude BBIO RE2020 (300€ TTC)",
+      question: "Étude BBIO RE2020",
       description:
         "L'étude BBIO RE2020 évalue la performance énergétique d'un projet de construction neuve ou d'extension et est obligatoire pour tout bâtiment résidentiel neuf ou étendu soumis à la réglementation thermique RE2020.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, bbioStudy: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "300€ TTC",
+      price: "(300€ TTC)",
     },
     {
-      question: "Étude sismique (400€ TTC)",
+      question: "Étude sismique",
       description:
         "L'étude sismique analyse la résistance du terrain et de la construction aux séismes. Nécessaire uniquement dans les zones à risque sismique.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, seismicStudy: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "400€ TTC",
+      price: "(400€ TTC)",
     },
     {
-      question: "Service livraison express (90€ TTC)",
+      question: "Service livraison express",
       description:
         "Envoi de votre A.P. sous 48 h pour un traitement rapide de votre projet.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, expressDelivery: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "90€ TTC",
+      price: "(90€ TTC)",
     },
     {
-      question: "Panneau d'affichage (25€ TTC)",
+      question: "Panneau d'affichage ",
       description: "Livraison incluse.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "25€ TTC",
+      price: "(25€ TTC)",
     },
   ];
   const DpForm = [
     {
       question:
-        "Votre projet comprend plusieurs réalisations sur un même déclaration préalable de travaux ?",
+        "Votre projet comprend plusieurs réalisations sur une même déclaration préalable de travaux ?",
       description:
         "Exemple: changement de façade et clôture. précisez le nombre de sous-projets à déclarer.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
+      placeholder: "Nombre de sous-projets à déclarer",
     },
     {
-      question: "Vérification du PLU (180€ TTC)",
+      question: "Vérification du P.L.U",
       description:
         "Nos services vérifient que votre projet respecte les règles du Plan Local d'Urbanisme (PLU) de votre commune pour éviter tout refus de votre déclaration préalable de travaux.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "180€ TTC",
+      price: "(180€ TTC)",
     },
     {
       question:
-        "Réalisation d'un plan de niveau RDC (plan intérieur) (125€ TTC / niveau)",
+        "Réalisation d'un plan de niveau RDC (plan intérieur) ",
       description:
         "Les plans de niveaux ne sont pas obligatoires pour une déclaration préalable de travaux. Si nécessaire, indiquez le nombre de niveaux à dessiner.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "125€ TTC / niveau",
+      placeholder: "Nombre de niveaux à déssiner",
+      price: "(125€ TTC / niveau)",
     },
     {
-      question: "Service livraison express (90€ TTC)",
+      question: "Service livraison express ",
       description:
         "Envoi de votre A.P.S sous 48h pour un traitement rapide de votre projet.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "90€ TTC",
+      price: "(90€ TTC)",
     },
     {
-      question: "Étude sismique (400€ TTC)",
+      question: "Étude sismique ",
       description:
         "L'étude sismique analyse de la résistance du terrain et de la construction aux séismes. Nécessaire uniquement dans les zones à risque sismique.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "400€ TTC",
+      price: "(400€ TTC)",
     },
     {
-      question: "Panneau d'affichage (25€ TTC)",
+      question: "Panneau d'affichage ",
       description: "Livraison incluse.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "25€ TTC",
+      
+      price: "(25€ TTC)",
     },
   ];
   const uniteForm = [
@@ -193,7 +185,8 @@ export const InformationSummarySection = () => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
+      placeholder: "Nombre de sous-projets à déclarer",
+      
     },
     {
       question: "Sélectionnez les plans dont vous avez besoin:",
@@ -203,7 +196,8 @@ export const InformationSummarySection = () => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
+      placeholder: "Nombre de sous-projets à déclarer",
+     
     },
     {
       question: "Réalisation d'un plan de niveau RDC (plan intérieur)",
@@ -212,8 +206,12 @@ export const InformationSummarySection = () => {
       },
       value: false,
       placeholder: "Oui / Non",
-      price: "125€ TTC /niveau",
+      price: "(125€ TTC /niveau)",
+       type : "option",
+      option : ["option1","option2","option3"]
+      
     },
+
     {
       question: "Réalisation d'un rendu 3D de votre aménagement intérieur",
       handleChange: (value: boolean) => {
@@ -222,6 +220,8 @@ export const InformationSummarySection = () => {
       value: false,
       placeholder: "Oui / Non",
       price: "125€ TTC /niveau",
+       type : "option",
+      option : ["option1","option2","option3"]
     },
     {
       question: "Service livraison express",
@@ -229,7 +229,7 @@ export const InformationSummarySection = () => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
+
       price: "(90€ TTC)",
     },
   ];
@@ -242,10 +242,11 @@ export const InformationSummarySection = () => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
+      type:"default",
+      
     },
     {
-      question: "Service livraison express (90€ TTC)",
+      question: "Service livraison express ",
       description:
         "Envoi de votre A.P.S sous 48h pour un traitement rapide de votre projet.",
       handleChange: (value: boolean) => {
@@ -253,7 +254,8 @@ export const InformationSummarySection = () => {
       },
       value: false,
       placeholder: "Oui / Non",
-      price: "90€ TTC",
+      price: "(90€ TTC)",
+
     },
   ];
 
@@ -266,18 +268,17 @@ export const InformationSummarySection = () => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
+      placeholder: "Nombre de sous-projets à déclarer",
     },
     {
-      question: "Vérification du PLU (180€ TTC)",
+      question: "Vérification du PLU ",
       description:
         "Nos services vérifient que votre projet respecte les règles du Plan Local d'Urbanisme (PLU) de votre commune pour éviter tout refus de votre certificat d'urbanisme.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "180€ TTC",
+      price: "(180€ TTC)",
     },
     {
       question: "Service livraison express (90€ TTC)",
@@ -287,8 +288,7 @@ export const InformationSummarySection = () => {
         updateFormData({ ...formData, displayPanel: value });
       },
       value: false,
-      placeholder: "Oui / Non",
-      price: "90€ TTC",
+      price: "(90€ TTC)",
     },
   ];
   const formToUse =
