@@ -109,14 +109,9 @@ export const FormThree = () => {
                     />
                     <div className="flex h-[52px] items-center justify-center w-full">
                       <div
-                        className={`text-center font-label-smaller font-[number:var(--label-smaller-font-weight)] text-[length:var(--label-smaller-font-size)] tracking-[var(--label-smaller-letter-spacing)] leading-[var(--label-smaller-line-height)] [font-style:var(--label-smaller-font-style)] `}
+                        className={`text-center font-label-smaller font-[number:var(--label-smaller-font-weight)] text-[length:var(--label-smaller-font-size)] tracking-[var(--label-smaller-letter-spacing)] leading-[var(--label-smaller-line-height)] [font-style:var(--label-smaller-font-style)] px-2`}
                       >
-                        {option.title.split(" ").map((word, i, arr) => (
-                          <React.Fragment key={i}>
-                            {word}
-                            {i < arr.length - 1 && <br />}
-                          </React.Fragment>
-                        ))}
+                        {option.title}
                       </div>
                     </div>
                   </CardContent>
@@ -153,7 +148,8 @@ export const FormThree = () => {
                 handleClick={() => {
                   if (
                     formData.option === Option.ETUDE_RE2020 ||
-                    formData.option === Option.AIDE_CONCEPTION
+                    formData.option === Option.AIDE_CONCEPTION ||
+                    formData.option === Option.ETUDE_SISMIQUE
                   ) {
                     updateFormData({
                       ...formData,
