@@ -1,8 +1,12 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { createPortal } from "react-dom";
 import React, { useEffect, useRef, useState } from "react";
 import { Input } from "../ui/input";
+
+
+
 
 interface AddressDetails {
   coordinates?: {
@@ -187,51 +191,53 @@ export const GooglePlacesAutocomplete: React.FC<
       );
     }
   };
+return (
+  <div ref={containerRef} className="relative w-full">
+    {/* Carte invisible pour le PlacesService */}
+    <div ref={mapRef} style={{ display: "none" }} />
 
-  return (
-    <div ref={containerRef} className="relative w-full z-[9999]">
-      {/* Carte invisible pour le PlacesService */}
-      <div ref={mapRef} style={{ display: "none" }} />
-
-      <Input
-        value={value}
-        onChange={(e) => handleInputChange(e.target.value)}
-        placeholder={placeholder}
-        className={cn("w-full", className)}
-        autoComplete="off"
-      />
-
-      {isOpen && (
-        <div className="absolute z-[9999] w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg max-h-48 sm:max-h-60 overflow-auto">
-          {isLoading ? (
-            <div className="px-3 sm:px-4 py-2 text-gray-500 text-sm">
-              Recherche en cours...
-            </div>
-          ) : predictions.length > 0 ? (
-            predictions.map((prediction) => (
-              <div
-                key={prediction.place_id}
-                className="px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-100 border-b border-gray-100 last:border-b-0"
-                onClick={() => handlePlaceSelect(prediction)}
-              >
-                <div className="font-medium text-gray-900 text-sm sm:text-base">
-                  {prediction.structured_formatting.main_text}
-                </div>
-                <div className="text-xs sm:text-sm text-gray-500">
-                  {prediction.structured_formatting.secondary_text}
-                </div>
+    <Input
+      value={value}
+      onChange={(e) => handleInputChange(e.target.value)}
+      placeholder={placeholder}
+      className={cn("w-full", className)}
+      autoComplete="off"
+    />
+    {isOpen && (
+      <div
+        className="absolute bottom-full left-0 w-full mb-2 bg-white border border-gray-200 rounded-md shadow-lg max-h-48 sm:max-h-60 overflow-auto z-[9999]"
+      >
+        {isLoading ? (
+          <div className="px-3 sm:px-4 py-2 text-gray-500 text-sm">
+            Recherche en cours...
+          </div>
+        ) : predictions.length > 0 ? (
+          predictions.map((prediction) => (
+            <div
+              key={prediction.place_id}
+              className="px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-100 border-b border-gray-100 last:border-b-0"
+              onClick={() => handlePlaceSelect(prediction)}
+            >
+              <div className="font-medium text-gray-900 text-sm sm:text-base">
+                {prediction.structured_formatting.main_text}
               </div>
-            ))
-          ) : (
-            <div className="px-3 sm:px-4 py-2 text-gray-500 text-sm">
-              Aucun résultat trouvé
+              <div className="text-xs sm:text-sm text-gray-500">
+                {prediction.structured_formatting.secondary_text}
+              </div>
             </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
+          ))
+        ) : (
+          <div className="px-3 sm:px-4 py-2 text-gray-500 text-sm">
+            Aucun résultat trouvé
+          </div>
+        )}
+      </div>
+    )}
+  </div>
+);
 };
+
+
 
 // Fonction pour récupérer les informations cadastrales
 async function getCadastralInfo(coordinates: { lat: number; lng: number }) {
