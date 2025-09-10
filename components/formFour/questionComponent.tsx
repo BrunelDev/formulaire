@@ -1,9 +1,18 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useSummarySate } from "@/context/useSummary";
 import { useState } from "react";
 import { Checkbox } from "../ui/checkbox";
+import { Input } from "../ui/input";
 
 export function Question({
   question,
@@ -86,6 +95,8 @@ export function QuestionWithInput({
   value,
   placeholder,
   price,
+  type,
+  options,
 }: {
   question: string;
   description?: string;
@@ -93,10 +104,12 @@ export function QuestionWithInput({
   value?: boolean;
   placeholder?: string;
   price?: string;
+  type?: string;
+  options?: string[];
 }) {
   const [checked, setChecked] = useState(value || false);
   const { setSummary, summary } = useSummarySate();
-  console.log(placeholder)
+  console.log(placeholder);
   return (
     <Card className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] w-full">
       <CardContent className="flex flex-col items-start gap-3 p-4 sm:p-5">
@@ -122,7 +135,7 @@ export function QuestionWithInput({
             <div className="flex items-center gap-[4px_8px] ">
               <Label
                 htmlFor="express-delivery"
-                className="relative self-stretch  w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)] cursor-pointer text-wrap break-words break-all "
+                className="relative self-stretch  w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)] cursor-pointer text-wrap"
               >
                 <div className="text-wrap">
                   {question}{" "}
@@ -140,6 +153,28 @@ export function QuestionWithInput({
             <h6 className="text-wrap">{description}</h6>
           </div>
         </div>
+        {placeholder && checked && (
+          <Input
+            placeholder={placeholder}
+            className="w-full border border-gray-300 p-2 rounded-lg"
+          />
+        )}
+        {type === "option" && checked && (
+          <Select>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Sélectionnez" />
+            </SelectTrigger>
+            <SelectContent className="w-f">
+              <SelectGroup>
+                {options?.map((option) => (
+                  <SelectItem key={option} value={option}>
+                    {option}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        )}
       </CardContent>
     </Card>
   );
