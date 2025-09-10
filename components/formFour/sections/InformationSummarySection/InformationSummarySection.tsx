@@ -186,7 +186,7 @@ export const InformationSummarySection = () => {
       },
       value: false,
       type: "option",
-      options: ["option1", "option2", "option3"],
+      options: ["Option 1", "Option 2", "Option 3"],
     },
     {
       question: "Sélectionnez les plans dont vous avez besoin:",
