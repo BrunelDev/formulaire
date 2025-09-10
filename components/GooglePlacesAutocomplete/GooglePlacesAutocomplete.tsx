@@ -191,51 +191,74 @@ export const GooglePlacesAutocomplete: React.FC<
       );
     }
   };
-return (
-  <div ref={containerRef} className="relative w-full">
-    {/* Carte invisible pour le PlacesService */}
-    <div ref={mapRef} style={{ display: "none" }} />
+// ...existing code...
+  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
 
-    <Input
-      value={value}
-      onChange={(e) => handleInputChange(e.target.value)}
-      placeholder={placeholder}
-      className={cn("w-full", className)}
-      autoComplete="off"
-    />
-    {isOpen && (
-      <div
-        className="absolute bottom-full left-0 w-full mb-2 bg-white border border-gray-200 rounded-md shadow-lg max-h-48 sm:max-h-60 overflow-auto z-[9999]"
-      >
-        {isLoading ? (
-          <div className="px-3 sm:px-4 py-2 text-gray-500 text-sm">
-            Recherche en cours...
-          </div>
-        ) : predictions.length > 0 ? (
-          predictions.map((prediction) => (
-            <div
-              key={prediction.place_id}
-              className="px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-100 border-b border-gray-100 last:border-b-0"
-              onClick={() => handlePlaceSelect(prediction)}
-            >
-              <div className="font-medium text-gray-900 text-sm sm:text-base">
-                {prediction.structured_formatting.main_text}
+  // Met à jour la position du dropdown
+  useEffect(() => {
+    if (isOpen && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      setDropdownStyle({
+        position: "absolute",
+        top: rect.bottom + window.scrollY,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+        zIndex: 9999,
+      });
+    }
+  }, [isOpen, value]);
+
+  // ...existing code...
+
+  return (
+    <div ref={containerRef} className="relative w-full">
+      {/* Carte invisible pour le PlacesService */}
+      <div ref={mapRef} style={{ display: "none" }} />
+
+      <Input
+        value={value}
+        onChange={(e) => handleInputChange(e.target.value)}
+        placeholder={placeholder}
+        className={cn("w-full", className)}
+        autoComplete="off"
+      />
+      {isOpen &&
+        createPortal(
+          <div
+            style={dropdownStyle}
+            className="bg-white border border-gray-200 rounded-md shadow-lg max-h-48 sm:max-h-60 overflow-auto"
+          >
+            {isLoading ? (
+              <div className="px-3 sm:px-4 py-2 text-gray-500 text-sm">
+                Recherche en cours...
               </div>
-              <div className="text-xs sm:text-sm text-gray-500">
-                {prediction.structured_formatting.secondary_text}
+            ) : predictions.length > 0 ? (
+              predictions.map((prediction) => (
+                <div
+                  key={prediction.place_id}
+                  className="px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-100 border-b border-gray-100 last:border-b-0"
+                  onClick={() => handlePlaceSelect(prediction)}
+                >
+                  <div className="font-medium text-gray-900 text-sm sm:text-base">
+                    {prediction.structured_formatting.main_text}
+                  </div>
+                  <div className="text-xs sm:text-sm text-gray-500">
+                    {prediction.structured_formatting.secondary_text}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="px-3 sm:px-4 py-2 text-gray-500 text-sm">
+                Aucun résultat trouvé
               </div>
-            </div>
-          ))
-        ) : (
-          <div className="px-3 sm:px-4 py-2 text-gray-500 text-sm">
-            Aucun résultat trouvé
-          </div>
+            )}
+          </div>,
+          document.body
         )}
-      </div>
-    )}
-  </div>
-);
-};
+    </div>
+  );
+  }
+// ...existing code...
 
 
 
