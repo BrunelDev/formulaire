@@ -174,8 +174,8 @@ export const FormThree = () => {
               zoom={14}
             />
           </div>
-          <div className="lg:hidden relative translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms]">
-            <div className="w-full h-[600px] rounded-lg overflow-hidden">
+          <div className="lg:hidden relative  animate-fade-in opacity-0 [--animation-delay:800ms]">
+            <div className="w-full rounded-lg overflow-hidden">
               <Mapbox
                 coordinates={formData.addressDetails?.coordinates}
                 zoom={14}

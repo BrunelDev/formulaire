@@ -1,12 +1,9 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { createPortal } from "react-dom";
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Input } from "../ui/input";
-
-
-
 
 interface AddressDetails {
   coordinates?: {
@@ -49,6 +46,7 @@ export const GooglePlacesAutocomplete: React.FC<
   const [predictions, setPredictions] = useState<PlacePrediction[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingDetails, setIsLoadingDetails] = useState(false);
   const autocompleteService =
     useRef<google.maps.places.AutocompleteService | null>(null);
   const placesService = useRef<google.maps.places.PlacesService | null>(null);
@@ -130,6 +128,7 @@ export const GooglePlacesAutocomplete: React.FC<
     onChange(prediction.description);
     setIsOpen(false);
     setPredictions([]);
+    setIsLoadingDetails(true);
 
     if (placesService.current) {
       // Récupérer les détails de la place
@@ -185,13 +184,22 @@ export const GooglePlacesAutocomplete: React.FC<
               }
             }
 
+            console.log(
+              "🚀 GooglePlacesAutocomplete calling onPlaceSelect with:",
+              addressDetails
+            );
             onPlaceSelect(addressDetails);
+            setIsLoadingDetails(false);
+          } else {
+            setIsLoadingDetails(false);
           }
         }
       );
+    } else {
+      setIsLoadingDetails(false);
     }
   };
-// ...existing code...
+  // ...existing code...
   const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
 
   // Met à jour la position du dropdown
@@ -215,17 +223,26 @@ export const GooglePlacesAutocomplete: React.FC<
       {/* Carte invisible pour le PlacesService */}
       <div ref={mapRef} style={{ display: "none" }} />
 
-      <Input
-        value={value}
-        onChange={(e) => handleInputChange(e.target.value)}
-        placeholder={placeholder}
-        className={cn("w-full", className)}
-        autoComplete="off"
-      />
+      <div className="relative">
+        <Input
+          value={value}
+          onChange={(e) => handleInputChange(e.target.value)}
+          placeholder={placeholder}
+          className={cn("w-full", isLoadingDetails && "pr-10", className)}
+          autoComplete="on"
+          disabled={isLoadingDetails}
+        />
+        {isLoadingDetails && (
+          <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600"></div>
+          </div>
+        )}
+      </div>
       {isOpen &&
         createPortal(
           <div
             style={dropdownStyle}
+
             className="bg-white border border-gray-200 rounded-md shadow-lg max-h-48 sm:max-h-60 overflow-auto"
              onMouseDown={e => e.stopPropagation()} // <-- Ajoute ceci
           >
@@ -233,12 +250,28 @@ export const GooglePlacesAutocomplete: React.FC<
               <div className="px-3 sm:px-4 py-2 text-gray-500 text-sm">
                 Recherche en cours...
               </div>
+            ) : isLoadingDetails ? (
+              <div className="px-3 sm:px-4 py-2">
+                <div className="flex items-center space-x-3">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-600"></div>
+                  <div className="text-gray-500 text-sm">
+                    Récupération des détails (adresse, mairie, cadastre)...
+                  </div>
+                </div>
+                <div className="mt-2 space-y-2">
+                  <div className="h-3 bg-gray-200 rounded animate-pulse"></div>
+                  <div className="h-3 bg-gray-200 rounded animate-pulse w-3/4"></div>
+                </div>
+              </div>
             ) : predictions.length > 0 ? (
               predictions.map((prediction) => (
                 <div
                   key={prediction.place_id}
                   className="px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-100 border-b border-gray-100 last:border-b-0"
-                  onClick={() => handlePlaceSelect(prediction)}
+                  onClick={() => {
+                    console.log("Click !!!");
+                    handlePlaceSelect(prediction)
+                  }}
                 >
                   <div className="font-medium text-gray-900 text-sm sm:text-base">
                     {prediction.structured_formatting.main_text}
@@ -260,8 +293,6 @@ export const GooglePlacesAutocomplete: React.FC<
   );
   }
   
-// ...existing code...
-
 
 
 // Fonction pour récupérer les informations cadastrales

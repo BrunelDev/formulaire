@@ -180,10 +180,14 @@ export const useFormState = create<FormState>()(
     (set, get) => ({
       formData: initialFormData,
 
-      updateFormData: (data) =>
-        set((state) => ({
-          formData: { ...state.formData, ...data },
-        })),
+      updateFormData: (data) => {
+        console.log("🔄 updateFormData called with:", data);
+        set((state) => {
+          const newState = { ...state.formData, ...data };
+          console.log("📝 New context state:", newState);
+          return { formData: newState };
+        });
+      },
 
       updateStepOne: (data) =>
         set((state) => ({
