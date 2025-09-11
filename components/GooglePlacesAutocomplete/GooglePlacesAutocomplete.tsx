@@ -242,7 +242,9 @@ export const GooglePlacesAutocomplete: React.FC<
         createPortal(
           <div
             style={dropdownStyle}
-            className="bg-white border border-gray-200 rounded-md shadow-lg max-h-48 sm:max-h-60 overflow-auto z-50"
+
+            className="bg-white border border-gray-200 rounded-md shadow-lg max-h-48 sm:max-h-60 overflow-auto"
+             onMouseDown={e => e.stopPropagation()} // <-- Ajoute ceci
           >
             {isLoading ? (
               <div className="px-3 sm:px-4 py-2 text-gray-500 text-sm">
@@ -289,8 +291,9 @@ export const GooglePlacesAutocomplete: React.FC<
         )}
     </div>
   );
-};
-// ...existing code...
+  }
+  
+
 
 // Fonction pour récupérer les informations cadastrales
 async function getCadastralInfo(coordinates: { lat: number; lng: number }) {

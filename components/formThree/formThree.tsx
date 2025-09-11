@@ -1,5 +1,4 @@
 import { Option, useFormState } from "@/context/useContext";
-import React from "react";
 import {
   Avatar,
   AvatarFallback,
@@ -84,7 +83,7 @@ export const FormThree = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 w-full">
+            <div className="flex flex-wrap sm:grid  sm:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3 w-full ">
               {projectOptions.map((option, index) => (
                 <Card
                   key={option.id}
@@ -168,7 +167,8 @@ export const FormThree = () => {
           </div>
 
           {/* Right Column - Map */}
-          <div className="animate-fade-in opacity-0 [--animation-delay:600ms] lg:w-[40%] w-full h-[640px] bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden hidden lg:block">
+          <div className="animate-fade-in opacity-0 [--animation-delay:600ms] lg:w-[40%] min-h-[600px] bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden hidden lg:block">
+            
             <Mapbox
               coordinates={formData.addressDetails?.coordinates}
               zoom={14}
@@ -178,7 +178,7 @@ export const FormThree = () => {
             <div className="w-full rounded-lg overflow-hidden">
               <Mapbox
                 coordinates={formData.addressDetails?.coordinates}
-                zoom={16}
+                zoom={14}
               />
             </div>
           </div>
