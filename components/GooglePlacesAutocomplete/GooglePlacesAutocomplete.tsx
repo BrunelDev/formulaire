@@ -227,6 +227,7 @@ export const GooglePlacesAutocomplete: React.FC<
           <div
             style={dropdownStyle}
             className="bg-white border border-gray-200 rounded-md shadow-lg max-h-48 sm:max-h-60 overflow-auto"
+             onMouseDown={e => e.stopPropagation()} // <-- Ajoute ceci
           >
             {isLoading ? (
               <div className="px-3 sm:px-4 py-2 text-gray-500 text-sm">
@@ -258,6 +259,7 @@ export const GooglePlacesAutocomplete: React.FC<
     </div>
   );
   }
+  
 // ...existing code...
 
 
