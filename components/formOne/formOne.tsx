@@ -1,6 +1,6 @@
 import { useFormState } from "@/context/useContext";
 import Image from "next/image";
-import { useState } from "react";
+import React, { useState } from "react";
 import { GooglePlacesWrapper } from "../GooglePlacesAutocomplete/GooglePlacesWrapper";
 import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
 
@@ -20,6 +20,13 @@ interface AddressDetails {
 export const FormOne = () => {
   const { formData, updateFormData } = useFormState();
   const [address, setAddress] = useState(formData.address || "");
+
+  // Sync local address state with context
+  React.useEffect(() => {
+    console.log("🔄 Context address changed:", formData.address);
+    console.log("🗂️ Full context data:", formData);
+    setAddress(formData.address || "");
+  }, [formData]);
 
   // Function to calculate difficulty estimation based on address details
   const calculateDifficultyEstimation = (
@@ -58,15 +65,30 @@ export const FormOne = () => {
     return Math.max(3, Math.min(5, difficulty)); // Ensure it's between 1-5
   };
 
+  const handleAddressChange = (newAddress: string) => {
+    console.log("✏️ Manual address change:", newAddress);
+    setAddress(newAddress);
+    updateFormData({ address: newAddress });
+  };
+
   const handlePlaceSelect = (addressDetails: AddressDetails) => {
+    console.log("🏠 Place selected:", addressDetails);
+
     const difficultyEstimation = calculateDifficultyEstimation(addressDetails);
     const updatedAddressDetails = {
       ...addressDetails,
       difficultyEstimation,
     };
 
+    console.log("📍 Updated address details:", updatedAddressDetails);
+
     setAddress(addressDetails.formattedAddress || "");
     updateFormData({
+      address: addressDetails.formattedAddress || "",
+      addressDetails: updatedAddressDetails,
+    });
+
+    console.log("✅ Context updated with:", {
       address: addressDetails.formattedAddress || "",
       addressDetails: updatedAddressDetails,
     });
@@ -111,7 +133,7 @@ export const FormOne = () => {
                   <GooglePlacesWrapper
                     placeholder="16 rue latapie 33650 La Brède"
                     value={address}
-                    onChange={setAddress}
+                    onChange={handleAddressChange}
                     onPlaceSelect={handlePlaceSelect}
                     apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
                   />
