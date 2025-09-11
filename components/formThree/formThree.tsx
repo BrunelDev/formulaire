@@ -62,7 +62,7 @@ export const FormThree = () => {
       data-model-id="55:360"
     >
       <div className="bg-[#f7f7f8] w-full relative">
-        <main className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] flex flex-col lg:flex-row w-full gap-6 lg:gap-8  px-4 sm:px-8 lg:px-24">
+        <main className=" animate-fade-in opacity-0 [--animation-delay:400ms] flex flex-col lg:flex-row w-full gap-6 lg:gap-8  px-4 sm:px-8 lg:px-24">
           <div className="flex flex-col lg:px-4 items-start gap-6 lg:gap-8 flex-1">
             <div className="flex items-start gap-3.5 w-full">
               <Avatar className="w-[60px] h-[60px]">
@@ -88,7 +88,7 @@ export const FormThree = () => {
               {projectOptions.map((option, index) => (
                 <Card
                   key={option.id}
-                  className={`translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:${
+                  className={` animate-fade-in opacity-0 [--animation-delay:${
                     600 + index * 100
                   }ms] w-[125px] cursor-pointer transition-all hover:scale-105 ${
                     formData.option === option.id
@@ -119,7 +119,7 @@ export const FormThree = () => {
               ))}
             </div>
 
-            <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:1400ms] flex items-center justify-between w-full">
+            <div className=" animate-fade-in opacity-0 [--animation-delay:1400ms] flex items-center justify-between w-full">
               <Button
                 onClick={() => {
                   updateFormData({
@@ -129,7 +129,7 @@ export const FormThree = () => {
                   });
                 }}
                 variant="outline"
-                className="inline-flex items-center justify-center gap-3 px-4 py-3 relative flex-[0_0_auto] bg-[#f7f7f8] rounded-lg border border-solid border-[#b8b9c1] h-auto hover:bg-[#f0f0f1] transition-colors"
+                className="inline-flex items-center justify-center gap-3 px-4 relative flex-[0_0_auto] bg-[#f7f7f8] rounded-lg border border-solid border-[#b8b9c1] h-auto hover:bg-[#f0f0f1] transition-colors"
               >
                 <div className="inline-flex flex-col h-6 items-center justify-end gap-3 relative flex-[0_0_auto]">
                   <div className="relative w-fit mt-[-37.00px] opacity-0 font-label-medium font-[number:var(--label-medium-font-weight)] text-subtitle-color text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
@@ -168,14 +168,14 @@ export const FormThree = () => {
           </div>
 
           {/* Right Column - Map */}
-          <div className="animate-fade-in opacity-0 [--animation-delay:600ms] lg:w-[50%] w-full h-[640px] bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden hidden lg:block">
+          <div className="animate-fade-in opacity-0 [--animation-delay:600ms] lg:w-[40%] w-full h-[640px] bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden hidden lg:block">
             <Mapbox
               coordinates={formData.addressDetails?.coordinates}
               zoom={14}
             />
           </div>
-          <div className="lg:hidden relative translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms]">
-            <div className="w-full h-[600px] rounded-lg overflow-hidden">
+          <div className="lg:hidden relative  animate-fade-in opacity-0 [--animation-delay:800ms]">
+            <div className="w-full rounded-lg overflow-hidden">
               <Mapbox
                 coordinates={formData.addressDetails?.coordinates}
                 zoom={16}

@@ -8,14 +8,14 @@ export function FormTwo() {
   const { formData, updateFormData } = useFormState();
 
   return (
-    <div className="min-h-screen bg-[#f7f7f8]">
+    <div className="bg-[#f7f7f8]">
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column */}
           <div className="space-y-6">
             {/* User Profile */}
-            <div className="flex items-start gap-3.5 relative self-stretch w-full flex-[0_0_auto] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
+            <div className="flex items-start gap-3.5 relative self-stretch w-full flex-[0_0_auto]  animate-fade-in opacity-0 [--animation-delay:200ms]">
               <Image
                 className="relative w-[60px] h-[60px]"
                 width={60}
@@ -66,7 +66,7 @@ export function FormTwo() {
             </div>
 
             {/* Information Summary */}
-            <div className="flex items-center gap-5 bg-background p-4 translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
+            <div className="flex items-center gap-5 bg-background p-4  animate-fade-in opacity-0 [--animation-delay:400ms]">
               <div className="space-y-6 pt-6">
                 <h3 className="text-lg font-semibold text-[#021327]">
                   Récapitulatif des informations
@@ -123,7 +123,7 @@ export function FormTwo() {
 
             {/* Navigation Buttons */}
 
-            <div className="flex items-center justify-between pt-8 translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]">
+            <div className="flex items-center justify-between pt-8  animate-fade-in opacity-0 [--animation-delay:600ms]">
               <Button
                 onClick={() => {
                   updateFormData({
@@ -158,7 +158,7 @@ export function FormTwo() {
           </div>
 
           {/* Right Column - Map */}
-          <div className="relative translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms]">
+          <div className="relative  animate-fade-in opacity-0 [--animation-delay:800ms]">
             <div className="w-full h-[600px] rounded-lg overflow-hidden">
               <Mapbox
                 coordinates={formData.addressDetails?.coordinates}
