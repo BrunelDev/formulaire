@@ -53,6 +53,7 @@ async function getCadastralInfoFromAPIs(coordinates: {
 
     // 2. Essayer l'API d'urbanisme
     const urbanInfo = await getUrbanismInfoFromGeoportail(coordinates);
+    console.log(urbanInfo);
 
     return {
       parcelNumber: parcelInfo.parcelNumber,
