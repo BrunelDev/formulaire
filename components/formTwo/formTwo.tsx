@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { useFormState } from "@/context/useContext";
 import Image from "next/image";
 import Mapbox from "../mapbox";
+import BackButton from "../PrimaryButton/BackButton";
 import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
 
 export function FormTwo() {
@@ -124,27 +124,17 @@ export function FormTwo() {
             {/* Navigation Buttons */}
 
             <div className="flex items-center justify-between pt-8  animate-fade-in opacity-0 [--animation-delay:600ms]">
-              <Button
-                onClick={() => {
+              <BackButton
+                handleClick={() => {
                   updateFormData({
                     ...formData,
                     isStepTwoChecked: false,
                     isStepOneChecked: false,
                   });
                 }}
-                variant="outline"
-                className="inline-flex items-center justify-center gap-3 px-4 py-3 relative flex-[0_0_auto] bg-[#f7f7f8] rounded-lg border border-solid border-[#b8b9c1] h-auto hover:bg-[#f0f0f1] transition-colors"
-              >
-                <div className="inline-flex flex-col h-6 items-center justify-end gap-3 relative flex-[0_0_auto]">
-                  <div className="relative w-fit mt-[-37.00px] opacity-0 font-label-medium font-[number:var(--label-medium-font-weight)] text-subtitle-color text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
-                    Étape précédente
-                  </div>
+                disabled={!formData.isStepTwoChecked}
+              />
 
-                  <div className="mt-[-1.00px] text-subtitle-color relative w-fit font-label-medium font-[number:var(--label-medium-font-weight)] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
-                    Étape précédente
-                  </div>
-                </div>
-              </Button>
               <PrimaryButton
                 className={undefined}
                 handleClick={() => {

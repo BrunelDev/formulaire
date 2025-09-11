@@ -1,6 +1,6 @@
+import BackButton from "@/components/PrimaryButton/BackButton";
 import { PrimaryButton } from "@/components/PrimaryButton/PrimaryButton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -140,27 +140,16 @@ export const StatisticsSection = () => {
             </form>
 
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0 w-full">
-              <Button
-                onClick={() => {
+              <BackButton
+                handleClick={() => {
                   updateFormData({
                     ...formData,
                     isStepFourChecked: false,
                     isStepFiveChecked: false,
                   });
                 }}
-                variant="outline"
-                className="inline-flex items-center justify-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 relative flex-[0_0_auto] bg-[#f7f7f8] rounded-lg border border-solid border-[#b8b9c1] h-auto hover:bg-[#f0f0f1] transition-colors w-full sm:w-auto"
-              >
-                <div className="inline-flex flex-col h-6 items-center justify-end gap-3 relative flex-[0_0_auto]">
-                  <div className="relative w-fit mt-[-37.00px] opacity-0 font-label-medium font-[number:var(--label-medium-font-weight)] text-subtitle-color text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
-                    Étape précédente
-                  </div>
-
-                  <div className="mt-[-1.00px] text-subtitle-color relative w-fit font-label-medium font-[number:var(--label-medium-font-weight)] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
-                    Étape précédente
-                  </div>
-                </div>
-              </Button>
+                disabled={!formData.isStepFourChecked}
+              />
 
               <PrimaryButton
                 className="w-full sm:w-auto"

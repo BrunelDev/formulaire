@@ -8,6 +8,7 @@ import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
 import Mapbox from "../mapbox";
+import BackButton from "../PrimaryButton/BackButton";
 
 export const FormThree = () => {
   const { formData, updateFormData } = useFormState();
@@ -119,27 +120,17 @@ export const FormThree = () => {
             </div>
 
             <div className=" animate-fade-in opacity-0 [--animation-delay:1400ms] flex items-center justify-between w-full">
-              <Button
-                onClick={() => {
+              <BackButton
+                handleClick={() => {
                   updateFormData({
                     ...formData,
                     isStepTwoChecked: false,
                     isStepThreeChecked: false,
                   });
                 }}
-                variant="outline"
-                className="inline-flex items-center justify-center gap-3 px-4 relative flex-[0_0_auto] bg-[#f7f7f8] rounded-lg border border-solid border-[#b8b9c1] h-auto hover:bg-[#f0f0f1] transition-colors"
-              >
-                <div className="inline-flex flex-col h-6 items-center justify-end gap-3 relative flex-[0_0_auto]">
-                  <div className="relative w-fit mt-[-37.00px] opacity-0 font-label-medium font-[number:var(--label-medium-font-weight)] text-subtitle-color text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
-                    Étape précédente
-                  </div>
-
-                  <div className="mt-[-1.00px] text-subtitle-color relative w-fit font-label-medium font-[number:var(--label-medium-font-weight)] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
-                    Étape précédente
-                  </div>
-                </div>
-              </Button>
+                disabled={!formData.isStepThreeChecked}
+              />
+             
 
               <PrimaryButton
                 className={undefined}

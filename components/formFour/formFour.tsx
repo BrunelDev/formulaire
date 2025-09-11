@@ -13,7 +13,7 @@ export const FormFour = () => {
     <div className="w-full animate-fade-in opacity-0 [--animation-delay:0ms]">
       <div className="bg-[#f7f7f8]">
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
-          <div className="w-full lg:w-[28%]  animate-fade-in opacity-0 [--animation-delay:600ms]">
+          <div className="w-full lg:w-[28%] animate-fade-in opacity-0 [--animation-delay:600ms]">
             <ClientFeedbackSection />
           </div>
           <ScrollArea

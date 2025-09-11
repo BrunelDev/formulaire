@@ -24,7 +24,7 @@ export const PrimaryButton = ({
   return (
     <Button
       className={cn(
-        "h-auto px-3 sm:px-4 py-2 sm:py-3 bg-syracuse_red_orange text-white font-label-medium font-[number:var(--label-medium-font-weight)] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] whitespace-nowrap [--animation-delay:0ms]",
+        "h-auto px-3 sm:px-4 py-2 sm:py-3 bg-syracuse_red_orange text-white font-label-medium font-[number:var(--label-medium-font-weight)] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] whitespace-nowrap [--animation-delay:0ms] cursor-pointer",
         className
       )}
       onClick={handleClick}
