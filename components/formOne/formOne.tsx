@@ -150,9 +150,10 @@ export const FormOne = () => {
                 </div>
 
                 <p className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] break-words sm:whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
-                  {formData.addressDetails?.formattedAddress ||
+                  {/*formData.addressDetails?.formattedAddress ||
                     formData.address ||
-                    "Adresse non sélectionnée"}
+                    "Adresse non sélectionnée"*/}
+                  16 rue latapie 33650 La Brède
                 </p>
               </div>
 
@@ -162,7 +163,10 @@ export const FormOne = () => {
                 </div>
 
                 <div className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
-                  {formData.addressDetails?.parcelNumber || "Non disponible"}
+                  {
+                    //formData.addressDetails?.parcelNumber || "Non disponible"
+                  }
+                  AK 0084
                 </div>
               </div>
 
@@ -172,7 +176,10 @@ export const FormOne = () => {
                 </div>
 
                 <div className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
-                  {formData.addressDetails?.city || "Non disponible"}
+                  {
+                    //formData.addressDetails?.city || "Non disponible"
+                  }
+                  La Brède
                 </div>
               </div>
 
@@ -182,7 +189,10 @@ export const FormOne = () => {
                 </p>
 
                 <div className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
-                  {formData.addressDetails?.urbanZone || "Non disponible"}
+                  {
+                    //formData.addressDetails?.urbanZone || "Non disponible"
+                  }
+                  UA
                 </div>
               </div>
             </div>
@@ -194,7 +204,10 @@ export const FormOne = () => {
 
               <div className="inline-flex px-4 sm:px-5 py-2 sm:py-3 flex-[0_0_auto] bg-[#094d9a] flex-col items-center justify-center gap-2.5 relative rounded-[1000px]">
                 <div className="relative w-fit mt-[-1.00px] font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-white text-lg sm:text-xl lg:text-[length:var(--heading-h5-font-size)] tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] whitespace-nowrap [font-style:var(--heading-h5-font-style)]">
-                  {formData.addressDetails?.difficultyEstimation || 3}/5
+                  {
+                    //formData.addressDetails?.difficultyEstimation || 3
+                  }
+                  3/5
                 </div>
               </div>
             </div>
