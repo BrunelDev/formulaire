@@ -139,7 +139,7 @@ export const StatisticsSection = () => {
               </div>
             </form>
 
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0 w-full">
+            <div className="flex flex-row sm:flex-row items-center justify-between gap-4 sm:gap-0 w-full">
               <BackButton
                 //className="w-full sm:w-auto"
                 handleClick={() => {

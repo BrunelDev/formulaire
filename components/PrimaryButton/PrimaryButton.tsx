@@ -32,7 +32,7 @@ export const PrimaryButton = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={animationClass}>Etape suivante</div>
+      <div className={animationClass}>Étape suivante</div>
     </Button>
   );
 };

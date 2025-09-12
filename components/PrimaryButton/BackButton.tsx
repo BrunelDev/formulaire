@@ -32,7 +32,8 @@ export default function BackButton({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={animationClass + " text-[#6D7074]"}>Etape précédente</div>
+      <div className={animationClass + " text-[#6D7074]"}>
+        Étape précédente</div>
     </Button>
   );
 }
