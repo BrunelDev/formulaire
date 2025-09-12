@@ -4,7 +4,7 @@ import { ContentWrapperSection } from "./sections/ContentWrapperSection/ContentW
 export const FormSix = () => {
   return (
     <main
-      className="bg-[#f7f7f8] w-full flex flex-col"
+      className="bg-[#f7f7f8] w-full flex flex-col px-4 mx-px-0"
       data-model-id="224:1183"
     >
       <div className="bg-[#f7f7f8] w-full flex flex-col relative">
