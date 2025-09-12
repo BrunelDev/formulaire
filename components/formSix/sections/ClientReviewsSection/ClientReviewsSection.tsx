@@ -5,7 +5,7 @@ export const ClientReviewsSection = () => {
   const stars = Array(5).fill(null);
 
   return (
-    <section className="relative w-full min-h-[400px] sm:min-h-[500px] lg:min-h-[calc(100vh-172px)] h-full bg-[linear-gradient(180deg,rgba(2,19,39,0)_0%,rgba(2,19,39,1)_100%),url(/images/finalisation-hero.jpg)] bg-cover bg-center bg-no-repeat animate-fade-in opacity-0 [--animation-delay:200ms] rounded-none">
+    <section className="relative w-full min-h-[400px] sm:min-h-[500px] lg:min-h-[calc(100vh-172px)] h-full bg-[linear-gradient(180deg,rgba(2,19,39,0)_0%,rgba(2,19,39,1)_100%),url(/images/finalisation-hero.jpg)] bg-cover bg-center bg-no-repeat animate-fade-in opacity-0 [--animation-delay:200ms] rounded-lg lg:rounded-none">
       <Card className="absolute bottom-0 left-0 right-0 bg-transparent border-0 shadow-none">
         <CardContent className="flex flex-col items-start gap-3 pt-4 sm:pt-5 pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-start gap-2 w-full">
