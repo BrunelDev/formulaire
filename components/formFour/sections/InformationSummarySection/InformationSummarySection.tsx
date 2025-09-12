@@ -337,9 +337,9 @@ export const InformationSummarySection = () => {
         )}
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0 relative self-stretch w-full flex-[0_0_auto] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]">
+      <div className="flex flex-row sm:flex-row items-center justify-between gap-4 sm:gap-0 relative self-stretch w-full flex-[0_0_auto] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]">
         <BackButton
-          className="w-full sm:w-auto"
+          //className="w-full sm:w-auto"
           handleClick={() => {
             setSummary([]);
 
@@ -354,7 +354,7 @@ export const InformationSummarySection = () => {
       
 
         <PrimaryButton
-          className="w-full sm:w-auto"
+          //className="w-full sm:w-auto"
           handleClick={() => {
             setSummary([]);
             updateFormData({

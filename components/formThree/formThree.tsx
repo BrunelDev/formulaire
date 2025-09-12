@@ -4,7 +4,6 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "../../components/ui/avatar";
-import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
 import Mapbox from "../mapbox";
@@ -84,7 +83,7 @@ export const FormThree = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap sm:grid  sm:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3 w-full ">
+            <div className="flex flex-wrap items-center justify-center sm:grid  sm:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3 w-full ">
               {projectOptions.map((option, index) => (
                 <Card
                   key={option.id}
