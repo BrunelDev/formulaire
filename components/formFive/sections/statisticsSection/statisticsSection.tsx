@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFormState } from "@/context/useContext";
 import Image from "next/image";
+import { useState, useRef } from "react";
 
 const formFields = [
   {
@@ -13,24 +14,28 @@ const formFields = [
     label: "Nom",
     placeholder: "DOE",
     defaultValue: "DUPONT",
+    required: true,
   },
   {
     id: "prenom",
     label: "Prénom",
     placeholder: "John",
     defaultValue: "Nicolas",
+    required: true,
   },
   {
     id: "email",
     label: "Email",
     placeholder: "johndoe@gmail.com",
     defaultValue: "nicolasdupont@gmail.com",
+    required: true,
   },
   {
     id: "telephone",
     label: "Téléphone",
     placeholder: "0101010101",
     defaultValue: "0606060606",
+    required: true,
   },
 ];
 
@@ -55,6 +60,46 @@ const statistics = [
 
 export const StatisticsSection = () => {
   const { formData, updateFormData } = useFormState();
+  const [formErrors, setFormErrors] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const validateForm = () => {
+    if (formRef.current) {
+      return formRef.current.checkValidity();
+    }
+    return false;
+  };
+
+  const handleNextStep = () => {
+    const isValid = validateForm();
+    if (isValid) {
+      const nom = document.getElementById('nom') as HTMLInputElement;
+      const prenom = document.getElementById('prenom') as HTMLInputElement;
+      const email = document.getElementById('email') as HTMLInputElement;
+      const telephone = document.getElementById('telephone') as HTMLInputElement;
+      
+      updateFormData({
+        ...formData,
+        isStepFiveChecked: true,
+        clientLastName: nom.value,
+        clientFirstName: prenom.value,
+        clientEmail: email.value,
+        clientPhone: telephone.value
+      });
+    } else {
+      setFormErrors(true);
+      const form = formRef.current;
+      if (form) {
+        const inputs = form.querySelectorAll('input');
+        inputs.forEach((input: HTMLInputElement) => {
+          if (!input.validity.valid) {
+            input.reportValidity();
+          }
+        });
+      }
+    }
+  };
+
   return (
     <section className="flex flex-col lg:flex-row items-center gap-6 lg:gap-5 w-full justify-center">
       <div className="flex flex-col w-full lg:w-[40%] items-start gap-6 lg:gap-7 animate-fade-in opacity-0 [--animation-delay:0ms]">
@@ -83,7 +128,7 @@ export const StatisticsSection = () => {
           </header>
 
           <div className="flex flex-col items-start gap-6 sm:gap-8 w-full translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
-            <form className="flex flex-col items-start gap-4 w-full">
+            <form ref={formRef} className="flex flex-col items-start gap-4 w-full" noValidate onSubmit={(e) => e.preventDefault()}>
               <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5 w-full">
                 {formFields.slice(0, 2).map((field) => (
                   <div
@@ -92,9 +137,10 @@ export const StatisticsSection = () => {
                   >
                     <Label
                       htmlFor={field.id}
-                      className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)]"
+                      className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
                     >
                       {field.label}
+                      {field.required && <span className="text-red-500 ml-1">*</span>}
                     </Label>
 
                     <div className="relative w-full">
@@ -102,6 +148,7 @@ export const StatisticsSection = () => {
                         id={field.id}
                         placeholder={field.placeholder}
                         className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
+                        required={field.required}
                       />
                       <div className="absolute w-[116px] top-[20px] sm:top-[23px] left-3 sm:left-4 opacity-0 font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
                         {field.defaultValue}
@@ -119,9 +166,10 @@ export const StatisticsSection = () => {
                   >
                     <Label
                       htmlFor={field.id}
-                      className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)]"
+                      className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
                     >
                       {field.label}
+                      {field.required && <span className="text-red-500 ml-1">*</span>}
                     </Label>
 
                     <div className="relative w-full">
@@ -129,6 +177,7 @@ export const StatisticsSection = () => {
                         id={field.id}
                         placeholder={field.placeholder}
                         className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
+                        required={field.required}
                       />
                       <div className="absolute w-[116px] top-[20px] sm:top-[23px] left-3 sm:left-4 opacity-0 font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
                         {field.defaultValue}
@@ -138,6 +187,12 @@ export const StatisticsSection = () => {
                 ))}
               </div>
             </form>
+
+            {formErrors && (
+              <div className="text-red-500 text-sm w-full font-medium mt-2">
+                Veuillez remplir tous les champs obligatoires avant de continuer.
+              </div>
+            )}
 
             <div className="flex flex-row sm:flex-row items-center justify-between gap-4 sm:gap-0 w-full">
               <BackButton
@@ -154,12 +209,7 @@ export const StatisticsSection = () => {
 
               <PrimaryButton
                 //className="w-full sm:w-auto"
-                handleClick={() => {
-                  updateFormData({
-                    ...formData,
-                    isStepFiveChecked: true,
-                  });
-                }}
+                handleClick={handleNextStep}
               />
             </div>
           </div>
