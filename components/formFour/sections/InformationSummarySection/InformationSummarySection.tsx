@@ -103,13 +103,13 @@ export const InformationSummarySection = () => {
     {
       question: "Service livraison express",
       description:
-        "Envoi de votre A.P. sous 48 h pour un traitement rapide de votre projet.",
+        "Envoi de votre A.P.S sous 48 h pour un traitement rapide de votre projet.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, expressDelivery: value });
       },
       value: formData.expressDelivery,
       price: "(90€ TTC)",
-      required: true,
+      required: false,
     },
     {
       question: "Panneau d'affichage ",
@@ -173,7 +173,7 @@ export const InformationSummarySection = () => {
       },
       value: formData.expressDelivery,
       price: "(90€ TTC)",
-      required: true,
+      required: false,
     },
     {
       question: "Étude sismique ",
@@ -201,13 +201,14 @@ export const InformationSummarySection = () => {
   const uniteForm: FormItem[] = [
     {
       question:
-        "Votre plan comprend plusieurs projets sur un même plan demandant ?",
+        "Votre plan comprend plusieurs projets sur un même plan demandé ?",
       description:
         "Exemple: Création d'une extension et d'une clôture. Si c'est le cas, précisez le nombre de sous-projets à déclarer.",
       handleChange: (value: boolean) => {
         updateFormData({
           ...formData,
           hasMultipleRealizationsOnSamePlanRequest: value,
+          question_0_select: value ? "Option 1" : undefined
         });
       },
       value: formData.hasMultipleRealizationsOnSamePlanRequest,
@@ -221,11 +222,15 @@ export const InformationSummarySection = () => {
       description:
         "Au-delà de 4 plans à l'unité, le pack Permis de construire ou Déclaration préalable de travaux devient plus avantageux. Tarif à l'unité : 180 € TTC pour le premier plan, puis 50 € TTC par plan supplémentaire. ",
       handleChange: (value: boolean) => {
-        updateFormData({ ...formData, neededPlans: value ? ["option1"] : [] });
+        updateFormData({ 
+          ...formData, 
+          neededPlans: value ? ["option1"] : [],
+          question_1_select: value ? "option1" : undefined
+        });
       },
       value: formData.neededPlans?.length ? true : false,
       type: "option",
-      options: ["option1", "option2", "option3"],
+      options: ["Plans de situation et Vue aérienne", "Plans de masse", "Plans de coupe", "Plans de façades", "Plans de toiture", "Insertion Graphique (paysagère)"],
       required: true,
       inputRequired: true,
     },
@@ -258,7 +263,7 @@ export const InformationSummarySection = () => {
       },
       value: formData.expressDelivery,
       price: "(90€ TTC)",
-      required: true,
+      required: false,
     },
   ];
 
@@ -283,7 +288,7 @@ export const InformationSummarySection = () => {
       },
       value: formData.expressDelivery,
       price: "(90€ TTC)",
-      required: true,
+      required: false,
     },
   ];
 
@@ -343,6 +348,17 @@ export const InformationSummarySection = () => {
         ? uniteForm
         : [];
     
+    if (formData.option === Option.PLAN_UNITE) {
+      const hasNeededPlans = formData.neededPlans && formData.neededPlans.length > 0;
+      const hasRdcPlan = formData.rdcPlanVerification === true;
+      const has3DRender = formData.render3D === true;
+      
+      if (!hasNeededPlans && !hasRdcPlan && !has3DRender) {
+        errors['plan_selection'] = "Veuillez sélectionner au moins un type de plan";
+        isValid = false;
+      }
+    }
+    
     currentForm.forEach((item, index) => {
       if (item.required) {
         if (
@@ -364,7 +380,7 @@ export const InformationSummarySection = () => {
         
         if (item.type === "option" && Array.isArray(item.options) && item.value === true) {
           const selectValue = formData[`question_${index}_select`];
-          if (!selectValue && item.inputRequired) {
+          if (!selectValue) {
             errors[`question_${index}_input`] = "Veuillez sélectionner une option";
             isValid = false;
           }
@@ -422,6 +438,14 @@ export const InformationSummarySection = () => {
           <span className="block sm:inline">{formErrors['general']}</span>
         </div>
       )}
+      
+      {formErrors['plan_selection'] && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full" role="alert">
+          <strong className="font-bold">Attention! </strong>
+          <span className="block sm:inline">{formErrors['plan_selection']}</span>
+        </div>
+      )}
+      
       <div className="flex flex-col items-start gap-4 sm:gap-5 relative self-stretch w-full flex-[0_0_auto] overflow-y-auto">
         <div></div>
         {formToUse.map((item, index) =>
@@ -450,6 +474,9 @@ export const InformationSummarySection = () => {
               inputRequired={item.inputRequired}
               error={formErrors[`question_${index}`]}
               inputError={formErrors[`question_${index}_input`]}
+              index={index}
+              updateFormData={updateFormData}
+              formData={formData}
             />
           )
         )}

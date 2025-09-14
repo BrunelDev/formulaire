@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -109,6 +110,9 @@ export function QuestionWithInput({
   inputRequired = false,
   error,
   inputError,
+  index,
+  updateFormData,
+  formData
 }: {
   question: string;
   description?: string;
@@ -122,10 +126,15 @@ export function QuestionWithInput({
   inputRequired?: boolean;
   error?: string;
   inputError?: string;
+  index?: number;
+  updateFormData?: (data: any) => void;
+  formData?: any;
 }) {
   const [checked, setChecked] = useState(value || false);
+  const [selectedOption, setSelectedOption] = useState<string | undefined>(
+    formData && index !== undefined ? formData[`question_${index}_select`] : undefined
+  );
   const { setSummary, summary } = useSummarySate();
-  console.log(placeholder);
   return (
     <Card className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] w-full">
       <CardContent className="flex flex-col items-start gap-3 p-4 sm:p-5">
@@ -182,6 +191,14 @@ export function QuestionWithInput({
               required={inputRequired && checked}
               onChange={(e) => {
                 const inputValue = e.target.value;
+                
+                if (updateFormData && formData && index !== undefined) {
+                  updateFormData({
+                    ...formData,
+                    [`question_${index}_input`]: inputValue
+                  });
+                }
+                
                 if (inputValue && summary.includes(question)) {
                   const updatedSummary = summary.map(item => 
                     item === question ? `${question} - ${inputValue}` : item
@@ -202,7 +219,17 @@ export function QuestionWithInput({
           <div className="w-full">
             <Select 
               required={inputRequired && checked}
+              value={selectedOption}
               onValueChange={(value) => {
+                setSelectedOption(value);
+                
+                if (updateFormData && formData && index !== undefined) {
+                  updateFormData({
+                    ...formData,
+                    [`question_${index}_select`]: value
+                  });
+                }
+                
                 if (value && summary.includes(question)) {
                   const updatedSummary = summary.map(item => 
                     item === question ? `${question} - ${value}` : item
@@ -212,6 +239,7 @@ export function QuestionWithInput({
                   setSummary([...summary, `${question} - ${value}`]);
                 }
               }}
+              defaultValue={options && options.length > 0 ? options[0] : undefined}
             >
               <SelectTrigger className={`w-full ${inputError ? 'border-red-500' : ''}`}>
                 <SelectValue placeholder="Sélectionnez" />
