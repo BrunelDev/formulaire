@@ -29,6 +29,11 @@ const Mapbox = ({ coordinates, zoom = 16 }) => {
         center: center,
         zoom: zoom,
         projection: "mercator",
+        dragPan: false,     
+        touchZoomRotate: false,
+        scrollZoom: false,  
+        doubleClickZoom: false, 
+        interactive: false, 
       });
 
       // Set loading to false when map is loaded

@@ -20,6 +20,7 @@ interface AddressDetails {
 export const FormOne = () => {
   const { formData, updateFormData } = useFormState();
   const [address, setAddress] = useState(formData.address || "");
+  const [error, setError] = useState("");
 
   // Sync local address state with context
   React.useEffect(() => {
@@ -142,6 +143,11 @@ export const FormOne = () => {
                   <PrimaryButton
                     className="w-full sm:w-auto"
                     handleClick={() => {
+                      if (!address || address.trim() === "") {
+                        setError("L'adresse est obligatoire.");
+                        return;
+                      }
+                      setError("");
                       updateFormData({
                         ...formData,
                         address: address,
@@ -151,7 +157,10 @@ export const FormOne = () => {
                   />
                 </div>
               </div>
-
+              
+              {error && (
+                <p className="text-red-500 text-sm mt-2">{error}</p>
+              )}
               <p className="relative self-stretch font-text-smaller font-[number:var(--text-smaller-font-weight)] text-subtitle-color text-xs sm:text-[length:var(--text-smaller-font-size)] tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)] text-center sm:text-left">
                 Nous ne revendons jamais vos informations et les sécurisons.
               </p>
