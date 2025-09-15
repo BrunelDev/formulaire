@@ -7,6 +7,7 @@ import { PrimaryButton } from "@/components/PrimaryButton/PrimaryButton";
 import { Option, useFormState } from "@/context/useContext";
 import { useSummarySate } from "@/context/useSummary";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export const InformationSummarySection = () => {
   const { formData, updateFormData } = useFormState();
@@ -342,7 +343,7 @@ export const InformationSummarySection = () => {
         : formData.option === Option.PLAN_UNITE
         ? uniteForm
         : [];
-    
+
     currentForm.forEach((item, index) => {
       if (item.required) {
         if (
@@ -352,7 +353,7 @@ export const InformationSummarySection = () => {
           errors[`question_${index}`] = "Ce champ est obligatoire";
           isValid = false;
         }
-        
+
         if (
           item.inputRequired &&
           item.value === true &&
@@ -361,30 +362,41 @@ export const InformationSummarySection = () => {
           errors[`question_${index}_input`] = "Ce champ est obligatoire";
           isValid = false;
         }
-        
-        if (item.type === "option" && Array.isArray(item.options) && item.value === true) {
+
+        if (
+          item.type === "option" &&
+          Array.isArray(item.options) &&
+          item.value === true
+        ) {
           const selectValue = formData[`question_${index}_select`];
           if (!selectValue && item.inputRequired) {
-            errors[`question_${index}_input`] = "Veuillez sélectionner une option";
+            errors[`question_${index}_input`] =
+              "Veuillez sélectionner une option";
             isValid = false;
           }
         }
-        
-        if (item.question.includes("Sélectionnez les plans") && item.value === true) {
+
+        if (
+          item.question.includes("Sélectionnez les plans") &&
+          item.value === true
+        ) {
           if (!formData.neededPlans || formData.neededPlans.length === 0) {
-            errors[`question_${index}_input`] = "Veuillez sélectionner au moins un plan";
+            errors[`question_${index}_input`] =
+              "Veuillez sélectionner au moins un plan";
             isValid = false;
           }
         }
       }
     });
-    
+
     setFormErrors(errors);
-    
+
     if (!isValid) {
-      errors['general'] = "Veuillez compléter tous les champs obligatoires avant de continuer.";
+      toast.error(
+        "Veuillez compléter tous les champs obligatoires avant de continuer."
+      );
     }
-    
+
     return isValid;
   };
 
@@ -416,10 +428,13 @@ export const InformationSummarySection = () => {
 
   return (
     <div className="flex flex-col w-full items-start gap-6 sm:gap-8 pt-0 pb-6 sm:pb-8 px-0 animate-fade-in opacity-0">
-      {formErrors['general'] && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full" role="alert">
+      {formErrors["general"] && (
+        <div
+          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full"
+          role="alert"
+        >
           <strong className="font-bold">Attention! </strong>
-          <span className="block sm:inline">{formErrors['general']}</span>
+          <span className="block sm:inline">{formErrors["general"]}</span>
         </div>
       )}
       <div className="flex flex-col items-start gap-4 sm:gap-5 relative self-stretch w-full flex-[0_0_auto] overflow-y-auto">
@@ -475,7 +490,7 @@ export const InformationSummarySection = () => {
                 isStepFourChecked: true,
               });
             } else {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.scrollTo({ top: 0, behavior: "smooth" });
             }
           }}
         />
