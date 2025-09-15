@@ -56,6 +56,10 @@ interface FormData {
   rdcPlanCount?: number;
   shouldMake3dRender?: boolean;
   renderCount3d?: number;
+  render3D?: boolean;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any; 
 
   // Step 4
   isStepFourChecked?: boolean;
@@ -75,6 +79,7 @@ interface FormData {
 
 interface FormState {
   formData: FormData;
+  
 
   // Actions to update form data
   updateFormData: (data: Partial<FormData>) => void;
@@ -108,6 +113,7 @@ interface FormState {
         | "rdcPlanCount"
         | "shouldMake3dRender"
         | "renderCount3d"
+        | "render3D"
       >
     >
   ) => void;
@@ -159,6 +165,7 @@ const initialFormData: FormData = {
   rdcPlanCount: undefined,
   shouldMake3dRender: undefined,
   renderCount3d: undefined,
+  render3D: undefined,
 
   // Step 4
   isStepFourChecked: undefined,

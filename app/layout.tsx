@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const figtree = Figtree({
   variable: "--font-figtree",
@@ -29,6 +30,7 @@ export default function RootLayout({
         className={`${figtree.variable} antialiased bg-[#f7f7f8] font-figtree`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );
