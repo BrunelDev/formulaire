@@ -95,7 +95,7 @@ export const StatisticsSection = () => {
 
       // Envoyer toutes les données à Make (webhook)
       try {
-        console.log(payload)
+        console.log(payload);
         const response = await fetch(
           "https://hook.eu2.make.com/rxxc7eszpz77obxo33ev885mess8x5rm",
           {
