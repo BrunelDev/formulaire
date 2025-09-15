@@ -80,22 +80,16 @@ export const StatisticsSection = () => {
         "telephone"
       ) as HTMLInputElement;
 
-      // Construire la charge utile complète selon la doc en combinant l'état actuel et les champs saisis
       const payload = {
         ...formData,
-        isStepFiveChecked: true,
         clientLastName: nom?.value || formData.clientLastName,
         clientFirstName: prenom?.value || formData.clientFirstName,
         clientEmail: email?.value || formData.clientEmail,
         clientPhone: telephone?.value || formData.clientPhone,
       };
 
-      // Mettre à jour le store local pour avancer d'étape
-      updateFormData(payload);
-
-      // Envoyer toutes les données à Make (webhook)
       try {
-        console.log(payload)
+        console.log(payload);
         const response = await fetch(
           "https://hook.eu2.make.com/rxxc7eszpz77obxo33ev885mess8x5rm",
           {
@@ -110,6 +104,7 @@ export const StatisticsSection = () => {
         if (!response.ok) {
           console.error("Échec de l'envoi au webhook", await response.text());
         }
+        updateFormData({ ...payload, isStepFiveChecked: true });
       } catch (error) {
         console.error("Erreur réseau lors de l'envoi au webhook", error);
       }
