@@ -368,24 +368,24 @@ export const InformationSummarySection = () => {
           errors[`question_${index}`] = "Ce champ est obligatoire";
           isValid = false;
         }
-        
-        if (
-          item.inputRequired &&
-          item.value === true &&
-          !formData[`question_${index}_input`]
-        ) {
-          errors[`question_${index}_input`] = "Ce champ est obligatoire";
-          isValid = false;
-        }
-        
-        if (item.type === "option" && Array.isArray(item.options) && item.value === true) {
-          const selectValue = formData[`question_${index}_select`];
-          if (!selectValue) {
-            errors[`question_${index}_input`] = "Veuillez sélectionner une option";
+
+        if (item.inputRequired) {
+          if (item.value === true && !formData[`question_${index}_input`]) {
+            errors[`question_${index}_input`] = "Ce champ est obligatoire";
             isValid = false;
           }
         }
-        
+
+        if (item.type === "option" && Array.isArray(item.options)) {
+          if (item.value === true) {
+            const selectValue = formData[`question_${index}_select`];
+            if (!selectValue) {
+              errors[`question_${index}_input`] = "Veuillez sélectionner une option";
+              isValid = false;
+            }
+          }
+        }
+
         if (item.question.includes("Sélectionnez les plans") && item.value === true) {
           if (!formData.neededPlans || formData.neededPlans.length === 0) {
             errors[`question_${index}_input`] = "Veuillez sélectionner au moins un plan";
