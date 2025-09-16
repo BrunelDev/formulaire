@@ -90,17 +90,6 @@ export const InformationSummarySection = () => {
       required: true,
     },
     {
-      question: "Étude sismique",
-      description:
-        "L'étude sismique analyse la résistance du terrain et de la construction aux séismes. Nécessaire uniquement dans les zones à risque sismique.",
-      handleChange: (value: boolean) => {
-        updateFormData({ ...formData, seismicStudy: value });
-      },
-      value: formData.seismicStudy,
-      price: "(400€ TTC)",
-      required: true,
-    },
-    {
       question: "Service livraison express",
       description:
         "Envoi de votre A.P.S sous 48 h pour un traitement rapide de votre projet.",
@@ -174,17 +163,6 @@ export const InformationSummarySection = () => {
       value: formData.expressDelivery,
       price: "(90€ TTC)",
       required: false,
-    },
-    {
-      question: "Étude sismique ",
-      description:
-        "L'étude sismique analyse de la résistance du terrain et de la construction aux séismes. Nécessaire uniquement dans les zones à risque sismique.",
-      handleChange: (value: boolean) => {
-        updateFormData({ ...formData, seismicStudy: value });
-      },
-      value: formData.seismicStudy,
-      price: "(400€ TTC)",
-      required: true,
     },
     {
       question: "Panneau d'affichage ",
