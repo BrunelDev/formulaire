@@ -111,7 +111,7 @@ export const FormOne = () => {
 
               <p className="relative self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
                 Bienvenue chez Mes Plans de Permis !<br />
-                Vous pensez a un permis de construire ou à une déclaration
+                Vous pensez à un permis de construire ou à une déclaration
                 préalable ?<br />
                 Avant de sortir les crayons et les mètres, regardons d&#39;abord
                 ce que le règlement d&#39;urbanisme autorise sur votre terrain
