@@ -199,13 +199,15 @@ export function QuestionWithInput({
                   });
                 }
                 
-                if (inputValue && summary.includes(question)) {
-                  const updatedSummary = summary.map(item => 
-                    item === question ? `${question} - ${inputValue}` : item
-                  );
-                  setSummary(updatedSummary);
-                } else if (inputValue) {
-                  setSummary([...summary, `${question} - ${inputValue}`]);
+                if (inputValue) {
+                  const exists = summary.findIndex(item => item.startsWith(question));
+                  if (exists !== -1) {
+                    const updatedSummary = [...summary];
+                    updatedSummary[exists] = `${question} - ${inputValue}`;
+                    setSummary(updatedSummary);
+                  } else {
+                    setSummary([...summary, `${question} - ${inputValue}`]);
+                  }
                 }
               }}
             />
@@ -230,13 +232,15 @@ export function QuestionWithInput({
                   });
                 }
                 
-                if (value && summary.includes(question)) {
-                  const updatedSummary = summary.map(item => 
-                    item === question ? `${question} - ${value}` : item
-                  );
-                  setSummary(updatedSummary);
-                } else if (value) {
-                  setSummary([...summary, `${question} - ${value}`]);
+                if (value) {
+                  const exists = summary.findIndex(item => item.startsWith(question));
+                  if (exists !== -1) {
+                    const updatedSummary = [...summary];
+                    updatedSummary[exists] = `${question} - ${value}`;
+                    setSummary(updatedSummary);
+                  } else {
+                    setSummary([...summary, `${question} - ${value}`]);
+                  }
                 }
               }}
               defaultValue={options && options.length > 0 ? options[0] : undefined}
