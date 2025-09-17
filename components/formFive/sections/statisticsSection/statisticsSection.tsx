@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFormState } from "@/context/useContext";
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 
 const formFields = [
   {
@@ -70,27 +70,49 @@ export const StatisticsSection = () => {
     return false;
   };
 
-  const handleNextStep = () => {
+  const handleNextStep = async () => {
     const isValid = validateForm();
     if (isValid) {
-      const nom = document.getElementById('nom') as HTMLInputElement;
-      const prenom = document.getElementById('prenom') as HTMLInputElement;
-      const email = document.getElementById('email') as HTMLInputElement;
-      const telephone = document.getElementById('telephone') as HTMLInputElement;
-      
-      updateFormData({
+      const nom = document.getElementById("nom") as HTMLInputElement;
+      const prenom = document.getElementById("prenom") as HTMLInputElement;
+      const email = document.getElementById("email") as HTMLInputElement;
+      const telephone = document.getElementById(
+        "telephone"
+      ) as HTMLInputElement;
+
+      const payload = {
         ...formData,
-        isStepFiveChecked: true,
-        clientLastName: nom.value,
-        clientFirstName: prenom.value,
-        clientEmail: email.value,
-        clientPhone: telephone.value
-      });
+        clientLastName: nom?.value || formData.clientLastName,
+        clientFirstName: prenom?.value || formData.clientFirstName,
+        clientEmail: email?.value || formData.clientEmail,
+        clientPhone: telephone?.value || formData.clientPhone,
+      };
+
+      try {
+        console.log(payload);
+        const response = await fetch(
+          "https://hook.eu2.make.com/rxxc7eszpz77obxo33ev885mess8x5rm",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          }
+        );
+
+        if (!response.ok) {
+          console.error("Échec de l'envoi au webhook", await response.text());
+        }
+        updateFormData({ ...payload, isStepFiveChecked: true });
+      } catch (error) {
+        console.error("Erreur réseau lors de l'envoi au webhook", error);
+      }
     } else {
       setFormErrors(true);
       const form = formRef.current;
       if (form) {
-        const inputs = form.querySelectorAll('input');
+        const inputs = form.querySelectorAll("input");
         inputs.forEach((input: HTMLInputElement) => {
           if (!input.validity.valid) {
             input.reportValidity();
@@ -128,7 +150,12 @@ export const StatisticsSection = () => {
           </header>
 
           <div className="flex flex-col items-start gap-6 sm:gap-8 w-full translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
-            <form ref={formRef} className="flex flex-col items-start gap-4 w-full" noValidate onSubmit={(e) => e.preventDefault()}>
+            <form
+              ref={formRef}
+              className="flex flex-col items-start gap-4 w-full"
+              noValidate
+              onSubmit={(e) => e.preventDefault()}
+            >
               <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5 w-full">
                 {formFields.slice(0, 2).map((field) => (
                   <div
@@ -140,7 +167,9 @@ export const StatisticsSection = () => {
                       className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
                     >
                       {field.label}
-                      {field.required && <span className="text-red-500 ml-1">*</span>}
+                      {field.required && (
+                        <span className="text-red-500 ml-1">*</span>
+                      )}
                     </Label>
 
                     <div className="relative w-full">
@@ -169,7 +198,9 @@ export const StatisticsSection = () => {
                       className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
                     >
                       {field.label}
-                      {field.required && <span className="text-red-500 ml-1">*</span>}
+                      {field.required && (
+                        <span className="text-red-500 ml-1">*</span>
+                      )}
                     </Label>
 
                     <div className="relative w-full">
@@ -190,7 +221,8 @@ export const StatisticsSection = () => {
 
             {formErrors && (
               <div className="text-red-500 text-sm w-full font-medium mt-2">
-                Veuillez remplir tous les champs obligatoires avant de continuer.
+                Veuillez remplir tous les champs obligatoires avant de
+                continuer.
               </div>
             )}
 

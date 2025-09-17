@@ -7,6 +7,7 @@ import { PrimaryButton } from "@/components/PrimaryButton/PrimaryButton";
 import { Option, useFormState } from "@/context/useContext";
 import { useSummarySate } from "@/context/useSummary";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export const InformationSummarySection = () => {
   const { formData, updateFormData } = useFormState();
@@ -350,6 +351,7 @@ export const InformationSummarySection = () => {
         if (item.inputRequired) {
           if (item.value === true && !formData[`question_${index}_input`]) {
             errors[`question_${index}_input`] = "Ce champ est obligatoire";
+
             isValid = false;
           }
         }
@@ -365,20 +367,24 @@ export const InformationSummarySection = () => {
         }
 
         if (item.question.includes("Sélectionnez les plans") && item.value === true) {
+
           if (!formData.neededPlans || formData.neededPlans.length === 0) {
-            errors[`question_${index}_input`] = "Veuillez sélectionner au moins un plan";
+            errors[`question_${index}_input`] =
+              "Veuillez sélectionner au moins un plan";
             isValid = false;
           }
         }
       }
     });
-    
+
     setFormErrors(errors);
-    
+
     if (!isValid) {
-      errors['general'] = "Veuillez compléter tous les champs obligatoires avant de continuer.";
+      toast.error(
+        "Veuillez compléter tous les champs obligatoires avant de continuer."
+      );
     }
-    
+
     return isValid;
   };
 
@@ -410,10 +416,13 @@ export const InformationSummarySection = () => {
 
   return (
     <div className="flex flex-col w-full items-start gap-6 sm:gap-8 pt-0 pb-6 sm:pb-8 px-0 animate-fade-in opacity-0">
-      {formErrors['general'] && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full" role="alert">
+      {formErrors["general"] && (
+        <div
+          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full"
+          role="alert"
+        >
           <strong className="font-bold">Attention! </strong>
-          <span className="block sm:inline">{formErrors['general']}</span>
+          <span className="block sm:inline">{formErrors["general"]}</span>
         </div>
       )}
       
@@ -480,7 +489,7 @@ export const InformationSummarySection = () => {
                 isStepFourChecked: true,
               });
             } else {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.scrollTo({ top: 0, behavior: "smooth" });
             }
           }}
         />
