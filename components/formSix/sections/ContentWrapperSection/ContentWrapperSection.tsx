@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Card, CardContent } from "../../../../components/ui/card";
+import { Option, useFormState } from "../../../../context/useContext";
 
 const contactInfo = [
   {
@@ -36,6 +37,12 @@ const statistics = [
 ];
 
 export const ContentWrapperSection = () => {
+  const { formData } = useFormState();
+  const isPersonnalized =
+    formData.option === Option.AIDE_CONCEPTION ||
+    (formData.isArchitectNeeded &&
+      (formData.option === Option.PERMIS_CONSTRUIRE ||
+        formData.option === Option.DOSSIER_ERP));
   return (
     <section className="flex flex-col w-full max-w-[719px] items-start gap-4 sm:gap-3 pt-0 px-0 relative">
       {/* Header Section */}
@@ -44,9 +51,10 @@ export const ContentWrapperSection = () => {
           Félicitations !
         </h1>
 
-        <p className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
-          Votre devis vient tout juste d&#39;être envoyé dans votre boîte mail,
-          consultez-le dès maintenant !
+        <p className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)] text-xs sm:text-sm ">
+          {isPersonnalized
+            ? "Nous avons bien reçu votre demande de devis. Elle a été confiée à nos techniciens afin d'analyser plus en détail votre projet."
+            : "Votre devis vient tout juste d&apos;être envoyé dans votre boîte mail, consultez-le dès maintenant !"}
         </p>
       </header>
 
@@ -57,13 +65,16 @@ export const ContentWrapperSection = () => {
           <Card className="w-full bg-white border-0 shadow-none">
             <CardContent className="flex flex-col items-start gap-4 p-4 sm:p-5">
               <div className="flex flex-col items-start gap-1 w-full">
-                <h2 className="w-full mt-[-1.00px] font-heading-h3 text-[#021327] text-lg sm:text-xl tracking-[var(--heading-h3-letter-spacing)] leading-[var(--heading-h3-line-height)] font-medium">
-                  Des questions ? Envie de valider votre devis ?
+                <h2 className="w-full mt-[-1.00px] font-heading-h3 text-[#021327] text-sm sm:text-xl tracking-[var(--heading-h3-letter-spacing)] leading-[var(--heading-h3-line-height)] font-medium">
+                  {isPersonnalized
+                    ? "Un expert vous rappellera prochainement pour en savoir plus sur votre projet. "
+                    : "Des questions ? Envie de valider votre devis ?"}
                 </h2>
 
-                <p className="w-full font-medium   tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] text-[#042347]">
-                  Contactez l&apos;équipe dès maintenant par téléphone ou par
-                  mail.
+                <p className="w-full font-medium   tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] text-[#042347] text-xs sm:text-lg ">
+                  {isPersonnalized
+                    ? "En attendant, vous pouvez nous contacter si vous avez la moindre question."
+                    : "Contactez l&apos;équipe dès maintenant par téléphone ou par mail."}
                 </p>
               </div>
 

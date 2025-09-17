@@ -5,9 +5,9 @@ import {
   AvatarImage,
 } from "../../components/ui/avatar";
 import { Card, CardContent } from "../../components/ui/card";
-import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
 import Mapbox from "../mapbox";
 import BackButton from "../PrimaryButton/BackButton";
+import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
 
 export const FormThree = () => {
   const { formData, updateFormData } = useFormState();
@@ -60,7 +60,7 @@ export const FormThree = () => {
       className="bg-[#f7f7f8] w-full flex justify-center"
       data-model-id="55:360"
     >
-      <div className="bg-[#f7f7f8] w-full relative">
+      <div className="bg-[#f7f7f8] w-full relative sm:pb-0 pb-[150px]">
         <main className=" animate-fade-in opacity-0 [--animation-delay:400ms] flex flex-col lg:flex-row w-full gap-6 lg:gap-8  px-4 sm:px-8 lg:px-24">
           <div className="flex flex-col lg:px-4 items-start gap-6 lg:gap-8 flex-1">
             <div className="flex items-start gap-3.5 w-full">
@@ -118,7 +118,7 @@ export const FormThree = () => {
               ))}
             </div>
 
-            <div className=" animate-fade-in opacity-0 [--animation-delay:1400ms] flex items-center justify-between w-full">
+            <div className="hidden sm:flex animate-fade-in opacity-0 [--animation-delay:1400ms] items-center justify-between w-full">
               <BackButton
                 handleClick={() => {
                   updateFormData({
@@ -129,7 +129,6 @@ export const FormThree = () => {
                 }}
                 disabled={!formData.isStepThreeChecked}
               />
-             
 
               <PrimaryButton
                 className={undefined}
@@ -158,21 +157,55 @@ export const FormThree = () => {
 
           {/* Right Column - Map */}
           <div className="animate-fade-in opacity-0 [--animation-delay:600ms] lg:w-[40%] min-h-[600px] bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden hidden lg:block">
-            
             <Mapbox
               coordinates={formData.addressDetails?.coordinates}
-              zoom={14}
+              zoom={16}
             />
           </div>
           <div className="lg:hidden relative  animate-fade-in opacity-0 [--animation-delay:800ms]">
             <div className="w-full rounded-lg overflow-hidden">
               <Mapbox
                 coordinates={formData.addressDetails?.coordinates}
-                zoom={14}
+                zoom={16}
               />
             </div>
           </div>
         </main>
+      </div>
+      <div className="sm:hidden flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:600ms] fixed bottom-0 left-0 right-0 bg-white pt-10 pb-14 px-4 shadow-xl">
+        <BackButton
+          handleClick={() => {
+            updateFormData({
+              ...formData,
+              isStepTwoChecked: false,
+              isStepThreeChecked: false,
+            });
+          }}
+          disabled={!formData.isStepThreeChecked}
+        />
+
+        <PrimaryButton
+          className={undefined}
+          disabled={!formData.option}
+          handleClick={() => {
+            if (
+              formData.option === Option.ETUDE_RE2020 ||
+              formData.option === Option.AIDE_CONCEPTION ||
+              formData.option === Option.ETUDE_SISMIQUE
+            ) {
+              updateFormData({
+                ...formData,
+                isStepFourChecked: true,
+                isStepThreeChecked: true,
+              });
+            } else {
+              updateFormData({
+                ...formData,
+                isStepThreeChecked: true,
+              });
+            }
+          }}
+        />
       </div>
     </div>
   );
