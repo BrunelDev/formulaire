@@ -158,6 +158,30 @@ export function FormTwo() {
           </div>
         </div>
       </div>
+      <div className="sm:hidden">
+        <div className="flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:600ms] fixed bottom-0 left-0 right-0 bg-white pt-10 pb-14 px-4 shadow-xl">
+          <BackButton
+            handleClick={() => {
+              updateFormData({
+                ...formData,
+                isStepTwoChecked: false,
+                isStepOneChecked: false,
+              });
+            }}
+            disabled={!formData.isStepTwoChecked}
+          />
+
+          <PrimaryButton
+            className={undefined}
+            handleClick={() => {
+              updateFormData({
+                ...formData,
+                isStepTwoChecked: true,
+              });
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
