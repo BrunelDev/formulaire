@@ -152,7 +152,7 @@ export function FormTwo() {
             <div className="w-full h-[600px] rounded-lg overflow-hidden">
               <Mapbox
                 coordinates={formData.addressDetails?.coordinates}
-                zoom={18}
+                zoom={17}
               />
             </div>
           </div>
