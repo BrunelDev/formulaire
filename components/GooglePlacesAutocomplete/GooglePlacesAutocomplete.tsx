@@ -15,6 +15,7 @@ interface AddressDetails {
   urbanZone?: string;
   city?: string;
   placeId?: string;
+  zoneType?: string;
 }
 
 interface GooglePlacesAutocompleteProps {
@@ -176,6 +177,7 @@ export const GooglePlacesAutocomplete: React.FC<
                 const cadastralInfo = await getCadastralInfo(coordinates);
                 addressDetails.parcelNumber = cadastralInfo.parcelNumber;
                 addressDetails.urbanZone = cadastralInfo.urbanZone;
+                addressDetails.zoneType = cadastralInfo.zoneType;
               } catch (error) {
                 console.warn(
                   "Erreur lors de la récupération des informations cadastrales:",
@@ -307,11 +309,13 @@ async function getCadastralInfo(coordinates: { lat: number; lng: number }) {
     }
 
     const data = await response.json();
+    console.log("🔍 Data:", data);
 
     return {
       parcelNumber: data.parcelNumber,
       urbanZone: data.urbanZone,
       city: data.city,
+      zoneType: data.zoneType,
     };
   } catch (error) {
     console.error(

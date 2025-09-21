@@ -12,6 +12,7 @@ interface AddressDetails {
   city?: string; // Mairie/ville (ex: La Brède)
   placeId?: string; // Google Places ID
   difficultyEstimation?: number; // Estimation de difficulté (1-5)
+  zoneType?: string; // Type de zone d'urbanisme (ex: Zone agricole)
 }
 export enum Option {
   PERMIS_CONSTRUIRE = "permis-construire",

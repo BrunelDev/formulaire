@@ -36,8 +36,7 @@ export function FormTwo() {
                       Votre adresse se situe dans une zone{" "}
                       <span className="text-[#094d9a] font-medium">
                         {formData.addressDetails?.urbanZone || "Non disponible"}
-                        {formData.addressDetails?.urbanZone &&
-                          " (zone d'urbanisme)"}
+                        {formData.addressDetails?.urbanZone && " (" + formData.addressDetails?.zoneType + ")"}
                       </span>{" "}
                       du Plan Local d&apos;Urbanisme (PLU) de la commune de{" "}
                       <span className="text-[#094d9a] font-medium">

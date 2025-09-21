@@ -12,9 +12,11 @@ interface AddressDetails {
   formattedAddress?: string;
   parcelNumber?: string;
   urbanZone?: string;
+  zoneType?: string;
   city?: string;
   placeId?: string;
   difficultyEstimation?: number;
+
 }
 
 export const FormOne = () => {
