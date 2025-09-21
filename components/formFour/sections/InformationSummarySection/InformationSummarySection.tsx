@@ -16,6 +16,7 @@ export const InformationSummarySection = () => {
 
   type FormItem = {
     question: string;
+    isInputFilled?: boolean;
     description?: string;
     handleChange: (value: boolean) => void;
     value?: boolean;
@@ -23,7 +24,7 @@ export const InformationSummarySection = () => {
     price?: string;
     type?: string;
     options?: string[];
-    required: boolean;
+    required?: boolean;
     inputRequired?: boolean;
   };
 
@@ -36,8 +37,6 @@ export const InformationSummarySection = () => {
         updateFormData({ ...formData, isArchitectNeeded: value });
       },
       value: formData.isArchitectNeeded,
-      type: "default",
-      required: true,
     },
     {
       question:
@@ -53,7 +52,7 @@ export const InformationSummarySection = () => {
       value: formData.hasMultipleRealizationsOnSameConstructionPermit,
       placeholder: "Nombre de sous projets à déclarer",
       required: true,
-      inputRequired: true,
+      inputRequired: !!!formData.realizationsOnSameConstructionPermitNumber,
     },
     {
       question: "Vérification du PLU ",
@@ -77,7 +76,7 @@ export const InformationSummarySection = () => {
       placeholder: "Nombre de niveau à déssiner",
       price: "(125€ TTC / niveau)",
       required: true,
-      inputRequired: true,
+      inputRequired: !!!formData.rdcPlanNumber,
     },
     {
       question: "Étude BBIO RE2020",
@@ -88,17 +87,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.bbioStudy,
       price: "(300€ TTC)",
-      required: true,
-    },
-    {
-      question: "Étude sismique",
-      description:
-        "L'étude sismique analyse la résistance du terrain et de la construction aux séismes. Nécessaire uniquement dans les zones à risque sismique.",
-      handleChange: (value: boolean) => {
-        updateFormData({ ...formData, seismicStudy: value });
-      },
-      value: formData.seismicStudy,
-      price: "(400€ TTC)",
       required: true,
     },
     {
@@ -139,7 +127,7 @@ export const InformationSummarySection = () => {
       value: formData.hasMultipleRealizationsOnSameDeclaration,
       placeholder: "Nombre de sous-projets à déclarer",
       required: true,
-      inputRequired: true,
+      inputRequired: !!!formData.realizationsOnSameDeclarationNumber,
     },
     {
       question: "Vérification du P.L.U",
@@ -163,7 +151,7 @@ export const InformationSummarySection = () => {
       placeholder: "Nombre de niveaux à déssiner",
       price: "(125€ TTC / niveau)",
       required: true,
-      inputRequired: true,
+      inputRequired: !!!formData.rdcPlanNumber,
     },
     {
       question: "Service livraison express ",
@@ -175,17 +163,6 @@ export const InformationSummarySection = () => {
       value: formData.expressDelivery,
       price: "(90€ TTC)",
       required: false,
-    },
-    {
-      question: "Étude sismique ",
-      description:
-        "L'étude sismique analyse de la résistance du terrain et de la construction aux séismes. Nécessaire uniquement dans les zones à risque sismique.",
-      handleChange: (value: boolean) => {
-        updateFormData({ ...formData, seismicStudy: value });
-      },
-      value: formData.seismicStudy,
-      price: "(400€ TTC)",
-      required: true,
     },
     {
       question: "Panneau d'affichage ",
@@ -209,12 +186,23 @@ export const InformationSummarySection = () => {
         updateFormData({
           ...formData,
           hasMultipleRealizationsOnSamePlanRequest: value,
-          question_0_select: value ? "Option 1" : undefined
+          question_0_select: value ? "Option 1" : undefined,
         });
       },
       value: formData.hasMultipleRealizationsOnSamePlanRequest,
       type: "option",
-      options: ["Option 1", "Option 2", "Option 3"],
+      options: [
+        "1 sous-projet",
+        "2 sous-projets",
+        "3 sous-projets",
+        "4 sous-projets",
+        "5 sous-projets",
+        "6 sous-projets",
+        "7 sous-projets",
+        "8 sous-projets",
+        "9 sous-projets",
+        "10 sous-projets",
+      ],
       required: true,
       inputRequired: true,
     },
@@ -223,15 +211,22 @@ export const InformationSummarySection = () => {
       description:
         "Au-delà de 4 plans à l'unité, le pack Permis de construire ou Déclaration préalable de travaux devient plus avantageux. Tarif à l'unité : 180 € TTC pour le premier plan, puis 50 € TTC par plan supplémentaire. ",
       handleChange: (value: boolean) => {
-        updateFormData({ 
-          ...formData, 
+        updateFormData({
+          ...formData,
           neededPlans: value ? ["option1"] : [],
-          question_1_select: value ? "option1" : undefined
+          question_1_select: value ? "option1" : undefined,
         });
       },
       value: formData.neededPlans?.length ? true : false,
       type: "option",
-      options: ["Plans de situation et Vue aérienne", "Plans de masse", "Plans de coupe", "Plans de façades", "Plans de toiture", "Insertion Graphique (paysagère)"],
+      options: [
+        "Plans de situation et Vue aérienne",
+        "Plans de masse",
+        "Plans de coupe",
+        "Plans de façades",
+        "Plans de toiture",
+        "Insertion Graphique (paysagère)",
+      ],
       required: true,
       inputRequired: true,
     },
@@ -243,8 +238,21 @@ export const InformationSummarySection = () => {
       value: formData.rdcPlanVerification,
       price: "(125€ TTC /niveau)",
       type: "option",
-      options: ["option1", "option2", "option3"],
-      required: true,
+      options: [
+        "1 niveau",
+        "2 niveaux",
+        "3 niveaux",
+        "4 niveaux",
+        "5 niveaux",
+        "6 niveaux",
+        "7 niveaux",
+        "8 niveaux",
+        "9 niveaux",
+        "10 niveaux",
+      ],
+      required: !!!formData.render3D &&
+      !!!formData.expressDelivery &&
+      !!!formData.rdcPlanVerification,
     },
     {
       question: "Réalisation d'un rendu 3D de votre aménagement intérieur",
@@ -254,8 +262,22 @@ export const InformationSummarySection = () => {
       value: formData.render3D,
       price: "(125€ TTC /niveau)",
       type: "option",
-      options: ["option1", "option2", "option3"],
-      required: true,
+      options: [
+        "1 rendu",
+        "2 rendus",
+        "3 rendus",
+        "4 rendus",
+        "5 rendus",
+        "6 rendus",
+        "7 rendus",
+        "8 rendus",
+        "9 rendus",
+        "10 rendus",
+      ],
+      required:
+        !!!formData.render3D &&
+        !!!formData.expressDelivery &&
+        !!!formData.rdcPlanVerification,
     },
     {
       question: "Service livraison express",
@@ -264,7 +286,9 @@ export const InformationSummarySection = () => {
       },
       value: formData.expressDelivery,
       price: "(90€ TTC)",
-      required: false,
+      required: !!!formData.render3D &&
+      !!!formData.expressDelivery &&
+      !!!formData.rdcPlanVerification,
     },
   ];
 
@@ -307,7 +331,7 @@ export const InformationSummarySection = () => {
       value: formData.hasMultipleRealizationsOnSameUrbanismCertificate,
       placeholder: "Nombre de sous-projets à déclarer",
       required: true,
-      inputRequired: true,
+      inputRequired: !!!formData.realizationsOnSameUrbanismCertificateNumber,
     },
     {
       question: "Vérification du PLU ",
@@ -348,48 +372,48 @@ export const InformationSummarySection = () => {
         : formData.option === Option.PLAN_UNITE
         ? uniteForm
         : [];
-    
+
     if (formData.option === Option.PLAN_UNITE) {
-      const hasNeededPlans = formData.neededPlans && formData.neededPlans.length > 0;
+      const hasNeededPlans =
+        formData.neededPlans && formData.neededPlans.length > 0;
       const hasRdcPlan = formData.rdcPlanVerification === true;
       const has3DRender = formData.render3D === true;
-      
+
       if (!hasNeededPlans && !hasRdcPlan && !has3DRender) {
-        errors['plan_selection'] = "Veuillez sélectionner au moins un type de plan";
+        errors["plan_selection"] =
+          "Veuillez sélectionner au moins un type de plan";
         isValid = false;
       }
     }
-    
+
     currentForm.forEach((item, index) => {
       if (item.required) {
         if (
-          (typeof item.value === "boolean" && item.value === false) ||
+          (typeof item.value === "boolean" &&
+            item.value === true &&
+            item.inputRequired === true) ||
           (typeof item.value === "string" && item.value === "")
         ) {
           errors[`question_${index}`] = "Ce champ est obligatoire";
           isValid = false;
         }
 
-        if (
-          item.inputRequired &&
-          item.value === true &&
-          !formData[`question_${index}_input`]
-        ) {
-          errors[`question_${index}_input`] = "Ce champ est obligatoire";
-          isValid = false;
-        }
-
-        if (
-          item.type === "option" &&
-          Array.isArray(item.options) &&
-          item.value === true
-        ) {
-          const selectValue = formData[`question_${index}_select`];
-
-          if (!selectValue) {
-            errors[`question_${index}_input`] = "Veuillez sélectionner une option";
+        if (item.inputRequired && item.value === true) {
+          if (item.value === true && !formData[`question_${index}_input`]) {
+            errors[`question_${index}_input`] = "Ce champ est obligatoire";
 
             isValid = false;
+          }
+        }
+
+        if (item.type === "option" && Array.isArray(item.options)) {
+          if (item.value === true) {
+            const selectValue = formData[`question_${index}_select`];
+            if (!selectValue) {
+              errors[`question_${index}_input`] =
+                "Veuillez sélectionner une option";
+              isValid = false;
+            }
           }
         }
 
@@ -454,14 +478,19 @@ export const InformationSummarySection = () => {
           <span className="block sm:inline">{formErrors["general"]}</span>
         </div>
       )}
-      
-      {formErrors['plan_selection'] && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full" role="alert">
+
+      {formErrors["plan_selection"] && (
+        <div
+          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full"
+          role="alert"
+        >
           <strong className="font-bold">Attention! </strong>
-          <span className="block sm:inline">{formErrors['plan_selection']}</span>
+          <span className="block sm:inline">
+            {formErrors["plan_selection"]}
+          </span>
         </div>
       )}
-      
+
       <div className="flex flex-col items-start gap-4 sm:gap-5 relative self-stretch w-full flex-[0_0_auto] overflow-y-auto">
         <div></div>
         {formToUse.map((item, index) =>
