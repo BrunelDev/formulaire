@@ -191,7 +191,18 @@ export const InformationSummarySection = () => {
       },
       value: formData.hasMultipleRealizationsOnSamePlanRequest,
       type: "option",
-      options: ["Option 1", "Option 2", "Option 3"],
+      options: [
+        "1 sous-projet",
+        "2 sous-projets",
+        "3 sous-projets",
+        "4 sous-projets",
+        "5 sous-projets",
+        "6 sous-projets",
+        "7 sous-projets",
+        "8 sous-projets",
+        "9 sous-projets",
+        "10 sous-projets",
+      ],
       required: true,
       inputRequired: true,
     },
@@ -227,8 +238,21 @@ export const InformationSummarySection = () => {
       value: formData.rdcPlanVerification,
       price: "(125€ TTC /niveau)",
       type: "option",
-      options: ["option1", "option2", "option3"],
-      required: true,
+      options: [
+        "1 niveau",
+        "2 niveaux",
+        "3 niveaux",
+        "4 niveaux",
+        "5 niveaux",
+        "6 niveaux",
+        "7 niveaux",
+        "8 niveaux",
+        "9 niveaux",
+        "10 niveaux",
+      ],
+      required: !!!formData.render3D &&
+      !!!formData.expressDelivery &&
+      !!!formData.rdcPlanVerification,
     },
     {
       question: "Réalisation d'un rendu 3D de votre aménagement intérieur",
@@ -238,8 +262,22 @@ export const InformationSummarySection = () => {
       value: formData.render3D,
       price: "(125€ TTC /niveau)",
       type: "option",
-      options: ["option1", "option2", "option3"],
-      required: true,
+      options: [
+        "1 rendu",
+        "2 rendus",
+        "3 rendus",
+        "4 rendus",
+        "5 rendus",
+        "6 rendus",
+        "7 rendus",
+        "8 rendus",
+        "9 rendus",
+        "10 rendus",
+      ],
+      required:
+        !!!formData.render3D &&
+        !!!formData.expressDelivery &&
+        !!!formData.rdcPlanVerification,
     },
     {
       question: "Service livraison express",
@@ -248,7 +286,9 @@ export const InformationSummarySection = () => {
       },
       value: formData.expressDelivery,
       price: "(90€ TTC)",
-      required: false,
+      required: !!!formData.render3D &&
+      !!!formData.expressDelivery &&
+      !!!formData.rdcPlanVerification,
     },
   ];
 

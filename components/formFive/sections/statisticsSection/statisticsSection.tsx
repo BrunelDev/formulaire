@@ -140,7 +140,7 @@ export const StatisticsSection = () => {
                 Jérémy
               </h2>
 
-              <p className="font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+              <p className="font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
                 Merci de compléter vos informations afin de finaliser votre
                 demande.
                 <br />
@@ -164,7 +164,7 @@ export const StatisticsSection = () => {
                   >
                     <Label
                       htmlFor={field.id}
-                      className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
+                      className="font-label-medium  text-[#042347] text-xs sm:text-sm tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
                     >
                       {field.label}
                       {field.required && (
@@ -176,10 +176,10 @@ export const StatisticsSection = () => {
                       <Input
                         id={field.id}
                         placeholder={field.placeholder}
-                        className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
+                        className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
                         required={field.required}
                       />
-                      <div className="absolute w-[116px] top-[20px] sm:top-[23px] left-3 sm:left-4 opacity-0 font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
+                      <div className="absolute w-[116px] top-[20px] sm:top-[23px] left-3 sm:left-4 opacity-0 font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
                         {field.defaultValue}
                       </div>
                     </div>
@@ -195,7 +195,7 @@ export const StatisticsSection = () => {
                   >
                     <Label
                       htmlFor={field.id}
-                      className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
+                      className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-xs sm:text-sm tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
                     >
                       {field.label}
                       {field.required && (
@@ -207,10 +207,10 @@ export const StatisticsSection = () => {
                       <Input
                         id={field.id}
                         placeholder={field.placeholder}
-                        className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
+                        className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
                         required={field.required}
                       />
-                      <div className="absolute w-[116px] top-[20px] sm:top-[23px] left-3 sm:left-4 opacity-0 font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
+                      <div className="absolute w-[116px] top-[20px] sm:top-[23px] left-3 sm:left-4 opacity-0 font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
                         {field.defaultValue}
                       </div>
                     </div>
@@ -220,7 +220,7 @@ export const StatisticsSection = () => {
             </form>
 
             {formErrors && (
-              <div className="text-red-500 text-sm w-full font-medium mt-2">
+              <div className="text-red-500 text-xs w-full font-medium mt-2">
                 Veuillez remplir tous les champs obligatoires avant de
                 continuer.
               </div>
@@ -255,7 +255,7 @@ export const StatisticsSection = () => {
                   Faites comme des milliers de français
                 </h3>
 
-                <p className="font-text-small font-[number:var(--text-small-font-weight)] text-white text-sm sm:text-[length:var(--text-small-font-size)] tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] [font-style:var(--text-small-font-style)]">
+                <p className="font-text-small font-[number:var(--text-small-font-weight)] text-white text-xs sm:text-sm tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] [font-style:var(--text-small-font-style)]">
                   Optez pour notre service rapide et facile, et faites réaliser
                   vos plans sur mesure par des professionnels compétents
                 </p>
@@ -280,7 +280,7 @@ export const StatisticsSection = () => {
                     {stat.value}
                   </div>
 
-                  <div className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-white text-xs sm:text-sm lg:text-[length:var(--text-medium-font-size)] text-center tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)] text-nowrap">
+                  <div className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-white text-xs sm:text-xs lg:text-sm text-center tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)] text-nowrap">
                     {stat.label}
                   </div>
                 </div>

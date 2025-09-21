@@ -163,14 +163,15 @@ export function QuestionWithInput({
                 htmlFor="express-delivery"
                 className="relative self-stretch w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)] cursor-pointer text-wrap flex items-center"
               >
-                <div className="text-wrap flex items-center">
-                  {question} {required && <span className="text-red-500 ml-1">*</span>}
+                <h6 className="">
+                  <span>{question}</span>
+                 
                   {price && (
-                    <h6 className="w-fit font-text-small font-[number:var(--text-small-font-weight)] text-[#db4200] text-xs sm:text-[length:var(--text-small-font-size)] tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] whitespace-nowrap [font-style:var(--text-small-font-style)] ml-1">
+                    <span className="w-fit font-text-small font-[number:var(--text-small-font-weight)] text-[#db4200] text-xs sm:text-[length:var(--text-small-font-size)] tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] whitespace-nowrap [font-style:var(--text-small-font-style)] ml-1">
                       {price}
-                    </h6>
+                    </span>
                   )}
-                </div>
+                </h6>
               </Label>
             </div>
           </div>
