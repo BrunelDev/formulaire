@@ -47,7 +47,7 @@ export const ContentWrapperSection = () => {
     <section className="flex flex-col w-full max-w-[719px] items-start gap-4 sm:gap-3 pt-0 px-0 relative">
       {/* Header Section */}
       <header className="flex flex-col items-start w-full animate-fade-in opacity-0">
-        <h1 className="w-full font-heading-h2 text-[#094d9a] tracking-[var(--heading-h2-letter-spacing)] leading-[var(--heading-h2-line-height)] font-medium text-2xl">
+        <h1 className="w-full font-heading-h2 text-[#094d9a] tracking-[var(--heading-h2-letter-spacing)] leading-[var(--heading-h2-line-height)] font-medium text-lg sm:text-2xl">
           Félicitations !
         </h1>
 
@@ -65,13 +65,13 @@ export const ContentWrapperSection = () => {
           <Card className="w-full bg-white border-0 shadow-none rounded-none">
             <CardContent className="flex flex-col items-start gap-4 p-4 sm:p-5">
               <div className="flex flex-col items-start gap-1 w-full">
-                <h2 className="w-full mt-[-1.00px] font-heading-h3 text-[#021327] text-sm sm:text-xl tracking-[var(--heading-h3-letter-spacing)] leading-[var(--heading-h3-line-height)] font-medium">
+                <h2 className="w-full mt-[-1.00px] font-heading-h3 text-[#021327] text-xs sm:text-xl tracking-[var(--heading-h3-letter-spacing)] leading-[var(--heading-h3-line-height)] font-medium">
                   {isPersonnalized
                     ? "Un expert vous rappellera prochainement pour en savoir plus sur votre projet. "
                     : "Des questions ? Envie de valider votre devis ?"}
                 </h2>
 
-                <p className="w-full font-medium   tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] text-[#042347] text-xs sm:text-lg ">
+                <p className="w-full font-medium   tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] text-[#042347] text-xs sm:text-base ">
                   {isPersonnalized
                     ? "En attendant, vous pouvez nous contacter si vous avez la moindre question."
                     : "Contactez l'équipe dès maintenant par téléphone ou par mail."}
@@ -91,7 +91,7 @@ export const ContentWrapperSection = () => {
                     </div>
 
                     <div className="inline-flex flex-col items-start">
-                      <div className="mt-[-1.00px]  tracking-[var(--label-small-letter-spacing)] leading-[var(--label-small-line-height)] font-medium text-sm text-oxford_blue">
+                      <div className="mt-[-1.00px]  tracking-[var(--label-small-letter-spacing)] leading-[var(--label-small-line-height)] font-medium text-xs sm:text-sm text-oxford_blue">
                         {contact.label}
                       </div>
 
@@ -99,7 +99,7 @@ export const ContentWrapperSection = () => {
                         href={contact.href}
                         className="w-fit [font-family:'Figtree',Helvetica] font-normal text-sm sm:text-base tracking-[0] leading-4 transition-colors hover:opacity-80"
                       >
-                        <span className="leading-[var(--text-medium-line-height)] underline font-text-medium [font-style:var(--text-medium-font-style)] font-[number:var(--text-medium-font-weight)] tracking-[var(--text-medium-letter-spacing)] text-sm sm:text-[length:var(--text-medium-font-size)] text-[#db4200]">
+                        <span className="leading-[var(--text-medium-line-height)] underline font-text-medium [font-style:var(--text-medium-font-style)] font-[number:var(--text-medium-font-weight)] tracking-[var(--text-medium-letter-spacing)] text-xs sm:text-sm text-[#db4200]">
                           {contact.value}
                         </span>
                       </a>
@@ -133,7 +133,7 @@ export const ContentWrapperSection = () => {
                   key={index}
                   className="flex flex-col w-full sm:w-[98px] items-center sm:items-start gap-1"
                 >
-                  <div className="w-full mt-[-1.00px]  text-white text-2xl sm:text-3xl text-center tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)]">
+                  <div className="w-full mt-[-1.00px]  text-white text-xl sm:text-3xl text-center tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)]">
                     {stat.number}
                   </div>
 

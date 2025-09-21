@@ -33,39 +33,36 @@ export const FormOne = () => {
   ): number => {
     let difficulty = 3; // Base difficulty
     console.log("🔍 Address details:", addressDetails);
-
-    // Adjust based on urban zone
+  
+    // Ajustement selon la zone urbaine
     if (addressDetails.urbanZone) {
       const zone = addressDetails.urbanZone.toUpperCase();
-      if (zone.includes("UA") || zone.includes("UB")) {
-        difficulty =
-          Math.floor(Math.max(Math.random() * 5, Math.random() * 3)) + 1; // random between 3 and 5
-      } else if (zone.includes("UC") || zone.includes("UD")) {
-        difficulty = 4; // Medium difficulty
-      } else if (
-        zone.includes("AU") ||
-        zone.includes("A") ||
-        zone.includes("N") ||
-        zone.includes("AK")
-      ) {
-        difficulty = 5; // Agricultural or natural zones are harder
+  
+      if (["UA", "UB"].some(z => zone.includes(z))) {
+        // aléatoire entre 3 et 5 inclus
+        difficulty = Math.floor(Math.random() * 3) + 3;
+      } else if (["UC", "UD"].some(z => zone.includes(z))) {
+        difficulty = 4;
+      } else if (["AU", "A", "N", "AK"].some(z => zone.includes(z))) {
+        difficulty = 5;
       }
     }
-
-    // Adjust based on city (some cities have more complex regulations)
+  
+    // Ajustement selon la ville
     if (addressDetails.city) {
       const city = addressDetails.city.toLowerCase();
-      if (
-        city.includes("paris") ||
-        city.includes("lyon") ||
-        city.includes("marseille")
-      ) {
-        difficulty = Math.min(5, difficulty + 2); // Major cities are more complex
+      if (["paris", "lyon", "marseille"].some(c => city.includes(c))) {
+        difficulty = Math.min(5, difficulty + 1); // +1 mais borné à 5
       }
     }
-    console.log("difficulty", difficulty);
-    return difficulty; // Ensure it's between 1-5
+  
+    // Toujours borné entre 3 et 5
+    difficulty = Math.min(5, Math.max(3, difficulty));
+  
+    console.log("🎯 Final difficulty:", difficulty);
+    return difficulty;
   };
+  
 
   const handleAddressChange = (newAddress: string) => {
     setAddress(newAddress);
@@ -105,11 +102,11 @@ export const FormOne = () => {
             />
 
             <div className="flex flex-col items-start gap-2 relative flex-1 grow">
-              <div className="relative self-stretch mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)]">
+              <div className="relative self-stretch mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-xs sm:text-sm tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)]">
                 Jérémy
               </div>
 
-              <p className="relative self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+              <p className="relative self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
                 Bienvenue chez Mes Plans de Permis !<br />
                 Vous pensez à un permis de construire ou à une déclaration
                 préalable ?<br />
@@ -156,7 +153,7 @@ export const FormOne = () => {
               </div>
 
               {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-              <p className="relative self-stretch font-text-smaller font-[number:var(--text-smaller-font-weight)] text-subtitle-color text-xs sm:text-[length:var(--text-smaller-font-size)] tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)] text-center sm:text-left">
+              <p className="relative self-stretch font-text-smaller font-[number:var(--text-smaller-font-weight)] text-subtitle-color text-xs sm:text-sm tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)] text-center sm:text-left">
                 Nous ne revendons jamais vos informations et les sécurisons.
               </p>
             </div>
@@ -165,17 +162,17 @@ export const FormOne = () => {
 
         <div className="flex flex-col lg:flex-row items-start lg:items-center lg:justify-between gap-5 lg:gap-5 p-4 lg:p-0 rounded-lg lg:rounded-none translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms] z-0 bg-white">
           <div className="flex flex-col w-full lg:w-[442px] items-start gap-4 lg:gap-5 lg:pl-5 lg:pr-0 lg:py-0 relative">
-            <div className="relative self-stretch mt-[-1.00px] font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-black text-lg sm:text-xl lg:text-[length:var(--heading-h5-font-size)] tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] [font-style:var(--heading-h5-font-style)]">
+            <div className="relative self-stretch mt-[-1.00px] font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-black text-sm sm:text-lg lg:text-xl tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] [font-style:var(--heading-h5-font-style)]">
               Récapitulatif des informations
             </div>
 
             <div className="flex flex-col items-start gap-3 sm:gap-4 relative self-stretch w-full flex-[0_0_auto]">
               <div className="flex flex-col sm:flex-row sm:items-center gap-1 relative self-stretch w-full flex-[0_0_auto]">
-                <div className="relative w-fit mt-[-1.00px] font-text-medium font-[number:var(--text-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
+                <div className="relative w-fit mt-[-1.00px] font-text-medium font-[number:var(--text-medium-font-weight)] text-[#042347] text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
                   Localisation :
                 </div>
 
-                <p className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] break-words sm:whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
+                <p className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-xs sm:text-sm tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] break-words sm:whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
                   {/*formData.addressDetails?.formattedAddress ||
                     formData.address ||
                     "Adresse non sélectionnée"*/}
@@ -184,11 +181,11 @@ export const FormOne = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row sm:items-center gap-1 relative self-stretch w-full flex-[0_0_auto]">
-                <div className="relative w-fit mt-[-1.00px] font-text-medium font-[number:var(--text-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
+                <div className="relative w-fit mt-[-1.00px] font-text-medium font-[number:var(--text-medium-font-weight)] text-[#042347] text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
                   Numéro de parcelle :
                 </div>
 
-                <div className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
+                <div className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-xs sm:text-sm tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
                   {
                     //formData.addressDetails?.parcelNumber || "Non disponible"
                   }
@@ -197,11 +194,11 @@ export const FormOne = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row sm:items-center gap-1 relative flex-[0_0_auto]">
-                <div className="relative w-fit mt-[-1.00px] font-text-medium font-[number:var(--text-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
+                <div className="relative w-fit mt-[-1.00px] font-text-medium font-[number:var(--text-medium-font-weight)] text-[#042347] text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
                   Mairie :
                 </div>
 
-                <div className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
+                <div className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-xs sm:text-sm tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
                   {
                     //formData.addressDetails?.city || "Non disponible"
                   }
@@ -210,11 +207,11 @@ export const FormOne = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row sm:items-center gap-1 relative flex-[0_0_auto]">
-                <p className="relative w-fit mt-[-1.00px] font-text-medium font-[number:var(--text-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
+                <p className="relative w-fit mt-[-1.00px] font-text-medium font-[number:var(--text-medium-font-weight)] text-[#042347] text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
                   Zone d&#39;urbanisme de la parcelle :
                 </p>
 
-                <div className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
+                <div className="relative w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-[#094d9a] text-xs sm:text-sm tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] whitespace-nowrap [font-style:var(--text-bold-medium-font-style)]">
                   {
                     //formData.addressDetails?.urbanZone || "Non disponible"
                   }
@@ -224,12 +221,12 @@ export const FormOne = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 relative self-stretch w-full flex-[0_0_auto]">
-              <div className="relative w-fit font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-black text-lg sm:text-xl lg:text-[length:var(--heading-h5-font-size)] tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] whitespace-nowrap [font-style:var(--heading-h5-font-style)]">
+              <div className="relative w-fit font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-black text-sm sm:text-lg lg:text-xl tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] whitespace-nowrap [font-style:var(--heading-h5-font-style)]">
                 Estimation de la difficulté
               </div>
 
               <div className="inline-flex px-4 sm:px-5 py-2 sm:py-3 flex-[0_0_auto] bg-[#094d9a] flex-col items-center justify-center gap-2.5 relative rounded-[1000px]">
-                <div className="relative w-fit mt-[-1.00px] font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-white text-lg sm:text-xl lg:text-[length:var(--heading-h5-font-size)] tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] whitespace-nowrap [font-style:var(--heading-h5-font-style)]">
+                <div className="relative w-fit mt-[-1.00px] font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-white text-sm sm:text-lg lg:text-xl tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] whitespace-nowrap [font-style:var(--heading-h5-font-style)]">
                   {
                     //formData.addressDetails?.difficultyEstimation || 3
                   }

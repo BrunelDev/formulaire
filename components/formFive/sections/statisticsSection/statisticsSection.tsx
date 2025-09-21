@@ -123,7 +123,7 @@ export const StatisticsSection = () => {
   };
 
   return (
-    <section className="w-full relative">
+    <section className="w-full">
       <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-5 w-full justify-center px-4">
         <div className="flex flex-col w-full lg:w-[40%] items-start gap-6 lg:gap-7 animate-fade-in opacity-0 [--animation-delay:0ms]">
           <div className="flex flex-col items-end gap-4 sm:gap-5 w-full">
@@ -300,7 +300,7 @@ export const StatisticsSection = () => {
           src="https://c.animaapp.com/mf2gfnauygUKoU/img/frame-51.svg"
         />
       </div>
-      <div className="sm:hidden flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:600ms] fixed bottom-0 left-0 right-0 bg-white pt-10 pb-14 px-4 shadow-xl z-50">
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:400ms]  bg-white pt-10 pb-14 px-4 shadow-xl">
         <BackButton
           //className="w-full sm:w-auto"
           handleClick={() => {

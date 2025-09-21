@@ -25,14 +25,14 @@ export function FormTwo() {
               />
 
               <div className="flex flex-col items-start gap-2 relative flex-1 grow">
-                <div className="relative self-stretch mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)]">
+                <div className="relative self-stretch mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-xs sm:text-sm tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)]">
                   Jérémy
                 </div>
 
-                <div className="relative self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+                <div className="relative self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
                   {/* Main Content */}
-                  <div className="space-y-4">
-                    <p className="text-[#021327] leading-relaxed">
+                  <div className="space-y-2">
+                    <p className="text-[#021327] leading-relaxed text-xs sm:text-sm">
                       Votre adresse se situe dans une zone{" "}
                       <span className="text-[#094d9a] font-medium">
                         {formData.addressDetails?.urbanZone || "Non disponible"}
@@ -47,7 +47,7 @@ export function FormTwo() {
                       .
                     </p>
 
-                    <p className="text-[#021327] leading-relaxed">
+                    <p className="text-[#021327] leading-relaxed text-xs sm:text-sm">
                       Nous estimons la difficulté à{" "}
                       <span className="text-[#094d9a] font-medium">
                         {formData.addressDetails?.difficultyEstimation || 3}/5
@@ -56,7 +56,7 @@ export function FormTwo() {
                       endroit.
                     </p>
 
-                    <p className="text-[#021327] leading-relaxed">
+                    <p className="text-[#021327] leading-relaxed text-xs sm:text-sm">
                       Nous vous conseillons de vous faire aider. Passez à
                       l&apos;étape suivante !
                     </p>
@@ -68,13 +68,15 @@ export function FormTwo() {
             {/* Information Summary */}
             <div className="flex items-center gap-5 bg-background p-4  animate-fade-in opacity-0 [--animation-delay:400ms]">
               <div className="space-y-6 pt-6">
-                <h3 className="text-lg font-semibold text-[#021327]">
+                <h3 className="text-sm sm:text-lg font-semibold text-[#021327]">
                   Récapitulatif des informations
                 </h3>
 
                 <div className="space-y-4">
                   <div>
-                    <span className="text-[#021327]">Localisation : </span>
+                    <span className="text-[#021327] text-xs sm:text-sm">
+                      Localisation :{" "}
+                    </span>
                     <span className="text-[#094d9a] font-medium">
                       {formData.addressDetails?.formattedAddress ||
                         formData.address ||
@@ -83,7 +85,7 @@ export function FormTwo() {
                   </div>
 
                   <div>
-                    <span className="text-[#021327]">
+                    <span className="text-[#021327] text-xs sm:text-sm">
                       Numéro de parcelle :{" "}
                     </span>
                     <span className="text-[#094d9a] font-medium">
@@ -93,14 +95,16 @@ export function FormTwo() {
                   </div>
 
                   <div>
-                    <span className="text-[#021327]">Mairie : </span>
+                    <span className="text-[#021327] text-xs sm:text-sm">
+                      Mairie :{" "}
+                    </span>
                     <span className="text-[#094d9a] font-medium">
                       {formData.addressDetails?.city || "Non disponible"}
                     </span>
                   </div>
 
                   <div>
-                    <span className="text-[#021327]">
+                    <span className="text-[#021327] text-xs sm:text-sm">
                       Zone d&apos;urbanisme de la parcelle :{" "}
                     </span>
                     <span className="text-[#094d9a] font-medium">
@@ -111,7 +115,7 @@ export function FormTwo() {
 
                 {/* Difficulty Badge */}
                 <div className="flex items-center justify-between pt-4">
-                  <span className="text-[#021327] font-medium">
+                  <span className="text-[#021327] font-medium text-xs sm:text-sm">
                     Estimation de la difficulté
                   </span>
                   <div className="bg-[#094d9a] text-white px-4 py-2 rounded-full font-semibold">
@@ -123,7 +127,7 @@ export function FormTwo() {
 
             {/* Navigation Buttons */}
 
-            <div className="flex items-center justify-between pt-8  animate-fade-in opacity-0 [--animation-delay:600ms]">
+            <div className="hidden sm:flex items-center justify-between pt-8  animate-fade-in opacity-0 [--animation-delay:600ms]">
               <BackButton
                 handleClick={() => {
                   updateFormData({

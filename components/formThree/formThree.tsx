@@ -70,11 +70,11 @@ export const FormThree = () => {
               </Avatar>
 
               <div className="flex flex-col items-start gap-2 flex-1">
-                <h2 className="font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)]">
+                <h2 className="font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-xs sm:text-sm tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)]">
                   Jérémy
                 </h2>
 
-                <p className="font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+                <p className="font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
                   Adresse localisée, et le secteur est validé !<br />
                   Dites-nous maintenant ce que vous souhaitez réaliser parmi les
                   options ci-dessous pour obtenir votre autorisation
@@ -108,7 +108,7 @@ export const FormThree = () => {
                     />
                     <div className="flex h-[52px] items-center justify-center w-full">
                       <div
-                        className={`text-center font-label-smaller font-[number:var(--label-smaller-font-weight)] text-[length:var(--label-smaller-font-size)] tracking-[var(--label-smaller-letter-spacing)] leading-[var(--label-smaller-line-height)] [font-style:var(--label-smaller-font-style)] px-2`}
+                        className={`text-center font-label-smaller font-[number:var(--label-smaller-font-weight)] text-xs sm:text-sm tracking-[var(--label-smaller-letter-spacing)] leading-[var(--label-smaller-line-height)] [font-style:var(--label-smaller-font-style)] px-2`}
                       >
                         {option.title}
                       </div>
