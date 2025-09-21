@@ -54,7 +54,7 @@ export const ContentWrapperSection = () => {
         <p className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)] text-xs sm:text-sm ">
           {isPersonnalized
             ? "Nous avons bien reçu votre demande de devis. Elle a été confiée à nos techniciens afin d'analyser plus en détail votre projet."
-            : "Votre devis vient tout juste d&apos;être envoyé dans votre boîte mail, consultez-le dès maintenant !"}
+            : "Votre devis vient tout juste d'être envoyé dans votre boîte mail, consultez-le dès maintenant !"}
         </p>
       </header>
 
@@ -62,7 +62,7 @@ export const ContentWrapperSection = () => {
       <div className="flex flex-col items-start gap-6 sm:gap-8 w-full animate-fade-in opacity-0 [--animation-delay:200ms]">
         <div className="flex flex-col items-start gap-2 w-full">
           {/* Contact Card */}
-          <Card className="w-full bg-white border-0 shadow-none">
+          <Card className="w-full bg-white border-0 shadow-none rounded-none">
             <CardContent className="flex flex-col items-start gap-4 p-4 sm:p-5">
               <div className="flex flex-col items-start gap-1 w-full">
                 <h2 className="w-full mt-[-1.00px] font-heading-h3 text-[#021327] text-sm sm:text-xl tracking-[var(--heading-h3-letter-spacing)] leading-[var(--heading-h3-line-height)] font-medium">
@@ -74,7 +74,7 @@ export const ContentWrapperSection = () => {
                 <p className="w-full font-medium   tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] text-[#042347] text-xs sm:text-lg ">
                   {isPersonnalized
                     ? "En attendant, vous pouvez nous contacter si vous avez la moindre question."
-                    : "Contactez l&apos;équipe dès maintenant par téléphone ou par mail."}
+                    : "Contactez l'équipe dès maintenant par téléphone ou par mail."}
                 </p>
               </div>
 
@@ -119,7 +119,7 @@ export const ContentWrapperSection = () => {
             <br />
             <br />
             Si notre proposition vous plaît, envoyez-nous simplement un e-mail.
-            Nous l&#39;étudierons sérieusement et vous confirmerons rapidement
+            Nous l&apos;étudierons sérieusement et vous confirmerons rapidement
             votre devis, pour avancer sereinement dans votre projet.
           </p>
         </div>
