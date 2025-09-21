@@ -24,8 +24,6 @@ export const FormOne = () => {
 
   // Sync local address state with context
   React.useEffect(() => {
-    console.log("🔄 Context address changed:", formData.address);
-    console.log("🗂️ Full context data:", formData);
     setAddress(formData.address || "");
   }, [formData]);
 
@@ -34,20 +32,23 @@ export const FormOne = () => {
     addressDetails: AddressDetails
   ): number => {
     let difficulty = 3; // Base difficulty
+    console.log("🔍 Address details:", addressDetails);
 
     // Adjust based on urban zone
     if (addressDetails.urbanZone) {
       const zone = addressDetails.urbanZone.toUpperCase();
       if (zone.includes("UA") || zone.includes("UB")) {
-        difficulty = 2; // Urban zones are typically easier
+        difficulty =
+          Math.floor(Math.max(Math.random() * 5, Math.random() * 3)) + 1; // random between 3 and 5
       } else if (zone.includes("UC") || zone.includes("UD")) {
-        difficulty = 3; // Medium difficulty
+        difficulty = 4; // Medium difficulty
       } else if (
         zone.includes("AU") ||
         zone.includes("A") ||
-        zone.includes("N")
+        zone.includes("N") ||
+        zone.includes("AK")
       ) {
-        difficulty = 4; // Agricultural or natural zones are harder
+        difficulty = 5; // Agricultural or natural zones are harder
       }
     }
 
@@ -62,26 +63,22 @@ export const FormOne = () => {
         difficulty = Math.min(5, difficulty + 2); // Major cities are more complex
       }
     }
-
-    return Math.max(3, Math.min(5, difficulty)); // Ensure it's between 1-5
+    console.log("difficulty", difficulty);
+    return difficulty; // Ensure it's between 1-5
   };
 
   const handleAddressChange = (newAddress: string) => {
-    console.log("✏️ Manual address change:", newAddress);
     setAddress(newAddress);
     updateFormData({ address: newAddress });
   };
 
   const handlePlaceSelect = (addressDetails: AddressDetails) => {
-    console.log("🏠 Place selected:", addressDetails);
-
     const difficultyEstimation = calculateDifficultyEstimation(addressDetails);
+    console.log("🔍 Difficulty estimation:", difficultyEstimation);
     const updatedAddressDetails = {
       ...addressDetails,
       difficultyEstimation,
     };
-
-    console.log("📍 Updated address details:", updatedAddressDetails);
 
     setAddress(addressDetails.formattedAddress || "");
     updateFormData({
@@ -89,7 +86,7 @@ export const FormOne = () => {
       addressDetails: updatedAddressDetails,
     });
 
-    console.log("✅ Context updated with:", {
+    console.log("---✅ Context updated with:", {
       address: addressDetails.formattedAddress || "",
       addressDetails: updatedAddressDetails,
     });
@@ -114,7 +111,7 @@ export const FormOne = () => {
 
               <p className="relative self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
                 Bienvenue chez Mes Plans de Permis !<br />
-                Vous pensez a un permis de construire ou à une déclaration
+                Vous pensez à un permis de construire ou à une déclaration
                 préalable ?<br />
                 Avant de sortir les crayons et les mètres, regardons d&#39;abord
                 ce que le règlement d&#39;urbanisme autorise sur votre terrain
@@ -157,10 +154,8 @@ export const FormOne = () => {
                   />
                 </div>
               </div>
-              
-              {error && (
-                <p className="text-red-500 text-sm mt-2">{error}</p>
-              )}
+
+              {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
               <p className="relative self-stretch font-text-smaller font-[number:var(--text-smaller-font-weight)] text-subtitle-color text-xs sm:text-[length:var(--text-smaller-font-size)] tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)] text-center sm:text-left">
                 Nous ne revendons jamais vos informations et les sécurisons.
               </p>
