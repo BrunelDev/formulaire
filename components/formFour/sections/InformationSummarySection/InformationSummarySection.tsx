@@ -23,9 +23,11 @@ export const InformationSummarySection = () => {
     placeholder?: string;
     price?: string;
     type?: string;
-    options?: string[];
+    options?: { label: string; value: string }[];
     required?: boolean;
     inputRequired?: boolean;
+    handleInputChange?: (value: string) => void;
+    inputValue?: string | number;
   };
 
   const PermisForm: FormItem[] = [
@@ -51,8 +53,14 @@ export const InformationSummarySection = () => {
       },
       value: formData.hasMultipleRealizationsOnSameConstructionPermit,
       placeholder: "Nombre de sous projets à déclarer",
-      required: true,
       inputRequired: !!!formData.realizationsOnSameConstructionPermitNumber,
+      handleInputChange: (value: string) => {
+        updateFormData({
+          ...formData,
+          realizationsOnSameConstructionPermitNumber: parseInt(value) || 0,
+        });
+      },
+      inputValue: formData.realizationsOnSameConstructionPermitNumber || "",
     },
     {
       question: "Vérification du PLU ",
@@ -63,7 +71,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.pluVerification,
       price: "(180€ TTC)",
-      required: true,
     },
     {
       question: "Réalisation d'un plan de niveau RDC (plan intérieur) ",
@@ -75,8 +82,14 @@ export const InformationSummarySection = () => {
       value: formData.rdcPlanVerification,
       placeholder: "Nombre de niveau à déssiner",
       price: "(125€ TTC / niveau)",
-      required: true,
       inputRequired: !!!formData.rdcPlanNumber,
+      handleInputChange: (value: string) => {
+        updateFormData({
+          ...formData,
+          rdcPlanNumber: parseInt(value) || 0,
+        });
+      },
+      inputValue: formData.rdcPlanNumber || "",
     },
     {
       question: "Étude BBIO RE2020",
@@ -87,7 +100,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.bbioStudy,
       price: "(300€ TTC)",
-      required: true,
     },
     {
       question: "Service livraison express",
@@ -98,7 +110,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.expressDelivery,
       price: "(90€ TTC)",
-      required: false,
     },
     {
       question: "Panneau d'affichage ",
@@ -108,7 +119,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.displayPanel,
       price: "(25€ TTC)",
-      required: true,
     },
   ];
 
@@ -126,8 +136,14 @@ export const InformationSummarySection = () => {
       },
       value: formData.hasMultipleRealizationsOnSameDeclaration,
       placeholder: "Nombre de sous-projets à déclarer",
-      required: true,
       inputRequired: !!!formData.realizationsOnSameDeclarationNumber,
+      handleInputChange: (value: string) => {
+        updateFormData({
+          ...formData,
+          realizationsOnSameDeclarationNumber: parseInt(value) || 0,
+        });
+      },
+      inputValue: formData.realizationsOnSameDeclarationNumber || "",
     },
     {
       question: "Vérification du P.L.U",
@@ -138,7 +154,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.pluVerification,
       price: "(180€ TTC)",
-      required: true,
     },
     {
       question: "Réalisation d'un plan de niveau RDC (plan intérieur) ",
@@ -150,8 +165,14 @@ export const InformationSummarySection = () => {
       value: formData.rdcPlanVerification,
       placeholder: "Nombre de niveaux à déssiner",
       price: "(125€ TTC / niveau)",
-      required: true,
       inputRequired: !!!formData.rdcPlanNumber,
+      handleInputChange: (value: string) => {
+        updateFormData({
+          ...formData,
+          rdcPlanNumber: parseInt(value) || 0,
+        });
+      },
+      inputValue: formData.rdcPlanNumber || "",
     },
     {
       question: "Service livraison express ",
@@ -162,7 +183,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.expressDelivery,
       price: "(90€ TTC)",
-      required: false,
     },
     {
       question: "Panneau d'affichage ",
@@ -172,7 +192,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.displayPanel,
       price: "(25€ TTC)",
-      required: true,
     },
   ];
 
@@ -192,19 +211,25 @@ export const InformationSummarySection = () => {
       value: formData.hasMultipleRealizationsOnSamePlanRequest,
       type: "option",
       options: [
-        "1 sous-projet",
-        "2 sous-projets",
-        "3 sous-projets",
-        "4 sous-projets",
-        "5 sous-projets",
-        "6 sous-projets",
-        "7 sous-projets",
-        "8 sous-projets",
-        "9 sous-projets",
-        "10 sous-projets",
+        { label: "1 sous-projet", value: "1" },
+        { label: "2 sous-projets", value: "2" },
+        { label: "3 sous-projets", value: "3" },
+        { label: "4 sous-projets", value: "4" },
+        { label: "5 sous-projets", value: "5" },
+        { label: "6 sous-projets", value: "6" },
+        { label: "7 sous-projets", value: "7" },
+        { label: "8 sous-projets", value: "8" },
+        { label: "9 sous-projets", value: "9" },
+        { label: "10 sous-projets", value: "10" },
       ],
-      required: true,
-      inputRequired: true,
+      inputRequired: !!!formData.realizationsOnSamePlanRequestNumber,
+      handleInputChange: (value: string) => {
+        updateFormData({
+          ...formData,
+          realizationsOnSamePlanRequestNumber: parseInt(value) || 0,
+        });
+      },
+      inputValue: formData.realizationsOnSamePlanRequestNumber || "",
     },
     {
       question: "Sélectionnez les plans dont vous avez besoin:",
@@ -213,22 +238,36 @@ export const InformationSummarySection = () => {
       handleChange: (value: boolean) => {
         updateFormData({
           ...formData,
-          neededPlans: value ? ["option1"] : [],
-          question_1_select: value ? "option1" : undefined,
+          doesNeedPlan: value,
         });
       },
-      value: formData.neededPlans?.length ? true : false,
+      value: formData.doesNeedPlan ? true : false,
       type: "option",
       options: [
-        "Plans de situation et Vue aérienne",
-        "Plans de masse",
-        "Plans de coupe",
-        "Plans de façades",
-        "Plans de toiture",
-        "Insertion Graphique (paysagère)",
+        {
+          label: "Plans de situation et Vue aérienne",
+          value: "Plans de situation et Vue aérienne",
+        },
+        { label: "Plans de masse", value: "Plans de masse" },
+        { label: "Plans de coupe", value: "Plans de coupe" },
+        { label: "Plans de façades", value: "Plans de façades" },
+        { label: "Plans de toiture", value: "Plans de toiture" },
+        {
+          label: "Insertion Graphique (paysagère)",
+          value: "Insertion Graphique (paysagère)",
+        },
       ],
-      required: true,
-      inputRequired: true,
+      inputRequired:
+        !!!formData.render3D &&
+        !!!formData.doesNeedPlan &&
+        !!!formData.rdcPlanVerification,
+      handleInputChange: (value: string) => {
+        updateFormData({
+          ...formData,
+          neededPlans: value,
+        });
+      },
+      inputValue: formData.neededPlans || "",
     },
     {
       question: "Réalisation d'un plan de niveau RDC (plan intérieur)",
@@ -239,20 +278,28 @@ export const InformationSummarySection = () => {
       price: "(125€ TTC /niveau)",
       type: "option",
       options: [
-        "1 niveau",
-        "2 niveaux",
-        "3 niveaux",
-        "4 niveaux",
-        "5 niveaux",
-        "6 niveaux",
-        "7 niveaux",
-        "8 niveaux",
-        "9 niveaux",
-        "10 niveaux",
+        { label: "1 niveau", value: "1" },
+        { label: "2 niveaux", value: "2" },
+        { label: "3 niveaux", value: "3" },
+        { label: "4 niveaux", value: "4" },
+        { label: "5 niveaux", value: "5" },
+        { label: "6 niveaux", value: "6" },
+        { label: "7 niveaux", value: "7" },
+        { label: "8 niveaux", value: "8" },
+        { label: "9 niveaux", value: "9" },
+        { label: "10 niveaux", value: "10" },
       ],
-      required: !!!formData.render3D &&
-      !!!formData.expressDelivery &&
-      !!!formData.rdcPlanVerification,
+      inputRequired:
+        !!!formData.render3D &&
+        !!!formData.doesNeedPlan &&
+        !!!formData.rdcPlanVerification,
+      handleInputChange: (value: string) => {
+        updateFormData({
+          ...formData,
+          rdcPlanCount: parseInt(value) || 0,
+        });
+      },
+      inputValue: formData.rdcPlanCount || "",
     },
     {
       question: "Réalisation d'un rendu 3D de votre aménagement intérieur",
@@ -263,21 +310,28 @@ export const InformationSummarySection = () => {
       price: "(125€ TTC /niveau)",
       type: "option",
       options: [
-        "1 rendu",
-        "2 rendus",
-        "3 rendus",
-        "4 rendus",
-        "5 rendus",
-        "6 rendus",
-        "7 rendus",
-        "8 rendus",
-        "9 rendus",
-        "10 rendus",
+        { label: "1 rendu", value: "1" },
+        { label: "2 rendus", value: "2" },
+        { label: "3 rendus", value: "3" },
+        { label: "4 rendus", value: "4" },
+        { label: "5 rendus", value: "5" },
+        { label: "6 rendus", value: "6" },
+        { label: "7 rendus", value: "7" },
+        { label: "8 rendus", value: "8" },
+        { label: "9 rendus", value: "9" },
+        { label: "10 rendus", value: "10" },
       ],
-      required:
+      inputRequired:
         !!!formData.render3D &&
-        !!!formData.expressDelivery &&
+        !!!formData.doesNeedPlan &&
         !!!formData.rdcPlanVerification,
+      handleInputChange: (value: string) => {
+        updateFormData({
+          ...formData,
+          renderCount3d: parseInt(value) || 0,
+        });
+      },
+      inputValue: formData.renderCount3d || "",
     },
     {
       question: "Service livraison express",
@@ -286,9 +340,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.expressDelivery,
       price: "(90€ TTC)",
-      required: !!!formData.render3D &&
-      !!!formData.expressDelivery &&
-      !!!formData.rdcPlanVerification,
     },
   ];
 
@@ -302,7 +353,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.isArchitectNeeded,
       type: "default",
-      required: true,
     },
     {
       question: "Service livraison express ",
@@ -313,7 +363,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.expressDelivery,
       price: "(90€ TTC)",
-      required: false,
     },
   ];
 
@@ -330,8 +379,15 @@ export const InformationSummarySection = () => {
       },
       value: formData.hasMultipleRealizationsOnSameUrbanismCertificate,
       placeholder: "Nombre de sous-projets à déclarer",
-      required: true,
+
       inputRequired: !!!formData.realizationsOnSameUrbanismCertificateNumber,
+      handleInputChange: (value: string) => {
+        updateFormData({
+          ...formData,
+          realizationsOnSameUrbanismCertificateNumber: parseInt(value) || 0,
+        });
+      },
+      inputValue: formData.realizationsOnSameUrbanismCertificateNumber || "",
     },
     {
       question: "Vérification du PLU ",
@@ -342,7 +398,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.pluVerification,
       price: "(180€ TTC)",
-      required: true,
     },
     {
       question: "Service livraison express (90€ TTC)",
@@ -353,7 +408,6 @@ export const InformationSummarySection = () => {
       },
       value: formData.expressDelivery,
       price: "(90€ TTC)",
-      required: true,
     },
   ];
 
@@ -374,8 +428,7 @@ export const InformationSummarySection = () => {
         : [];
 
     if (formData.option === Option.PLAN_UNITE) {
-      const hasNeededPlans =
-        formData.neededPlans && formData.neededPlans.length > 0;
+      const hasNeededPlans = formData.doesNeedPlan === true;
       const hasRdcPlan = formData.rdcPlanVerification === true;
       const has3DRender = formData.render3D === true;
 
@@ -387,23 +440,21 @@ export const InformationSummarySection = () => {
     }
 
     currentForm.forEach((item, index) => {
-      if (item.required) {
-        if (
-          (typeof item.value === "boolean" &&
-            item.value === true &&
-            item.inputRequired === true) ||
-          (typeof item.value === "string" && item.value === "")
-        ) {
-          errors[`question_${index}`] = "Ce champ est obligatoire";
+      if (
+        (typeof item.value === "boolean" &&
+          item.value === true &&
+          item.inputRequired === true) ||
+        (typeof item.value === "string" && item.value === "")
+      ) {
+        errors[`question_${index}`] = "Ce champ est obligatoire";
+        isValid = false;
+      }
+
+      if (item.inputRequired && item.value === true) {
+        if (item.value === true && !formData[`question_${index}_input`]) {
+          errors[`question_${index}_input`] = "Ce champ est obligatoire";
+
           isValid = false;
-        }
-
-        if (item.inputRequired && item.value === true) {
-          if (item.value === true && !formData[`question_${index}_input`]) {
-            errors[`question_${index}_input`] = "Ce champ est obligatoire";
-
-            isValid = false;
-          }
         }
 
         if (item.type === "option" && Array.isArray(item.options)) {
@@ -515,13 +566,14 @@ export const InformationSummarySection = () => {
               price={item.price}
               type={item.type}
               options={item.options}
-              required={item.required}
               inputRequired={item.inputRequired}
               error={formErrors[`question_${index}`]}
               inputError={formErrors[`question_${index}_input`]}
               index={index}
               updateFormData={updateFormData}
               formData={formData}
+              handleInputChange={item.handleInputChange || (() => {})}
+              inputValue={item.inputValue?.toString() || ""}
             />
           )
         )}

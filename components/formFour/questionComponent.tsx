@@ -37,7 +37,8 @@ export function Question({
       <CardContent className="flex flex-col items-start gap-3 p-4 sm:p-5">
         <div className="flex flex-col items-start gap-2 relative self-stretch w-full flex-[0_0_auto]">
           <div className="relative self-stretch mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)] flex items-center">
-            {question} {required && <span className="text-red-500 ml-1">*</span>}
+            {question}{" "}
+            {required && <span className="text-red-500 ml-1">*</span>}
           </div>
 
           <div className="relative self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
@@ -88,10 +89,8 @@ export function Question({
             </Label>
           </div>
         </RadioGroup>
-        
-        {error && (
-          <div className="text-red-500 text-sm mt-1">{error}</div>
-        )}
+
+        {error && <div className="text-red-500 text-sm mt-1">{error}</div>}
       </CardContent>
     </Card>
   );
@@ -101,28 +100,30 @@ export function QuestionWithInput({
   question,
   description,
   handleChange,
+  handleInputChange,
+  inputValue,
   value,
   placeholder,
   price,
   type,
   options,
-  required = false,
   inputRequired = false,
   error,
   inputError,
   index,
   updateFormData,
-  formData
+  formData,
 }: {
   question: string;
   description?: string;
   handleChange: (value: boolean) => void;
+  handleInputChange: (value: string) => void;
+  inputValue?: string;
   value?: boolean;
   placeholder?: string;
   price?: string;
   type?: string;
-  options?: string[];
-  required?: boolean;
+  options?: { label: string; value: string }[];
   inputRequired?: boolean;
   error?: string;
   inputError?: string;
@@ -132,10 +133,10 @@ export function QuestionWithInput({
 }) {
   const [checked, setChecked] = useState(value || false);
   const [selectedOption, setSelectedOption] = useState<string | undefined>(
-    formData && index !== undefined ? formData[`question_${index}_select`] : undefined
+    inputValue || undefined
   );
   const { setSummary, summary } = useSummarySate();
-  console.log(inputRequired)
+  console.log(inputRequired);
   return (
     <Card className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] w-full">
       <CardContent className="flex flex-col items-start gap-3 p-4 sm:p-5">
@@ -165,7 +166,7 @@ export function QuestionWithInput({
               >
                 <h6 className="">
                   <span>{question}</span>
-                 
+
                   {price && (
                     <span className="w-fit font-text-small font-[number:var(--text-small-font-weight)] text-[#db4200] text-xs sm:text-[length:var(--text-small-font-size)] tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] whitespace-nowrap [font-style:var(--text-small-font-style)] ml-1">
                       {price}
@@ -180,29 +181,27 @@ export function QuestionWithInput({
             <h6 className="text-wrap">{description}</h6>
           </div>
         </div>
-        
-        {error && (
-          <div className="text-red-500 text-sm">{error}</div>
-        )}
-        
+
+        {error && <div className="text-red-500 text-sm">{error}</div>}
+
         {placeholder && checked && (
           <div className="w-full">
             <Input
+              value={inputValue}
               placeholder={placeholder}
-              className={`w-full border ${inputError ? 'border-red-500' : 'border-gray-300'} p-2 rounded-lg`}
+              className={`w-full border ${
+                inputError ? "border-red-500" : "border-gray-300"
+              } p-2 rounded-lg`}
               required={inputRequired && checked}
               onChange={(e) => {
                 const inputValue = e.target.value;
-                
-                if (updateFormData && formData && index !== undefined) {
-                  updateFormData({
-                    ...formData,
-                    [`question_${index}_input`]: inputValue
-                  });
-                }
-                
+
+                handleInputChange(inputValue);
+
                 if (inputValue) {
-                  const exists = summary.findIndex(item => item.startsWith(question));
+                  const exists = summary.findIndex((item) =>
+                    item.startsWith(question)
+                  );
                   if (exists !== -1) {
                     const updatedSummary = [...summary];
                     updatedSummary[exists] = `${question} - ${inputValue}`;
@@ -218,24 +217,19 @@ export function QuestionWithInput({
             )}
           </div>
         )}
-        
+
         {type === "option" && checked && (
           <div className="w-full">
-            <Select 
+            <Select
               required={inputRequired && checked}
               value={selectedOption}
               onValueChange={(value) => {
                 setSelectedOption(value);
-                
-                if (updateFormData && formData && index !== undefined) {
-                  updateFormData({
-                    ...formData,
-                    [`question_${index}_select`]: value
-                  });
-                }
-                
+                handleInputChange(value);
                 if (value) {
-                  const exists = summary.findIndex(item => item.startsWith(question));
+                  const exists = summary.findIndex((item) =>
+                    item.startsWith(question)
+                  );
                   if (exists !== -1) {
                     const updatedSummary = [...summary];
                     updatedSummary[exists] = `${question} - ${value}`;
@@ -245,16 +239,20 @@ export function QuestionWithInput({
                   }
                 }
               }}
-              defaultValue={options && options.length > 0 ? options[0] : undefined}
+              defaultValue={
+                options && options.length > 0 ? options[0].value : undefined
+              }
             >
-              <SelectTrigger className={`w-full ${inputError ? 'border-red-500' : ''}`}>
+              <SelectTrigger
+                className={`w-full ${inputError ? "border-red-500" : ""}`}
+              >
                 <SelectValue placeholder="Sélectionnez" />
               </SelectTrigger>
               <SelectContent className="w-full">
                 <SelectGroup>
                   {options?.map((option) => (
-                    <SelectItem key={option} value={option}>
-                      {option}
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
                     </SelectItem>
                   ))}
                 </SelectGroup>

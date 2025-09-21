@@ -50,8 +50,10 @@ interface FormData {
   hasMultipleRealizationsOnSameUrbanismCertificate?: boolean;
   realizationsOnSameUrbanismCertificateNumber?: number;
   hasMultipleRealizationsOnSamePlanRequest?: boolean;
+
   realizationsOnSamePlanRequestNumber?: number;
-  neededPlans?: string[];
+  doesNeedPlan?: boolean;
+  neededPlans?: string;
   shouldMakeRDCPlan?: boolean;
   rdcPlanCount?: number;
   shouldMake3dRender?: boolean;

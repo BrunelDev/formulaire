@@ -48,6 +48,11 @@ export const FormThree = () => {
       title: "Aide à la conception",
       image: "https://c.animaapp.com/mf2fxk6fBvYbpA/img/frame-36-7.png",
     },
+    {
+      id: Option.ETUDE_SISMIQUE,
+      title: "Étude sismique",
+      image: "https://c.animaapp.com/mf2fxk6fBvYbpA/img/frame-36-6.png",
+    },
   ];
 
   return (
