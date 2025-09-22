@@ -89,6 +89,7 @@ export const StatisticsSection = () => {
       };
 
       try {
+        console.log("payload", payload);
         console.log(payload);
         const response = await fetch(
           "https://hook.eu2.make.com/rxxc7eszpz77obxo33ev885mess8x5rm",
@@ -100,6 +101,7 @@ export const StatisticsSection = () => {
             body: JSON.stringify(payload),
           }
         );
+        console.log(response);
         const response2 = await fetch(
           "https://hook.eu2.make.com/vaf1vj89y84tzjjmx2w3e9itqus80a8u",
           {
@@ -110,6 +112,7 @@ export const StatisticsSection = () => {
             body: JSON.stringify(payload),
           }
         );
+        console.log(response2);
 
         if (!response.ok) {
           console.error("Échec de l'envoi au webhook", await response.text());
