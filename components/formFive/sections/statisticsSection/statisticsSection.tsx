@@ -100,9 +100,22 @@ export const StatisticsSection = () => {
             body: JSON.stringify(payload),
           }
         );
+        const response2 = await fetch(
+          "https://hook.eu2.make.com/vaf1vj89y84tzjjmx2w3e9itqus80a8u",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          }
+        );
 
         if (!response.ok) {
           console.error("Échec de l'envoi au webhook", await response.text());
+        }
+        if (!response2.ok) {
+          console.error("Échec de l'envoi au webhook", await response2.text());
         }
         updateFormData({ ...payload, isStepFiveChecked: true });
       } catch (error) {
