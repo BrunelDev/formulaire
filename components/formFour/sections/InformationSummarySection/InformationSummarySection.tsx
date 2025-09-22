@@ -352,7 +352,7 @@ export const InformationSummarySection = () => {
         updateFormData({ ...formData, isArchitectNeeded: value });
       },
       value: formData.isArchitectNeeded,
-      type: "default",
+      
     },
     {
       question: "Service livraison express ",
