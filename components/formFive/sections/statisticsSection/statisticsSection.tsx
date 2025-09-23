@@ -316,7 +316,7 @@ export const StatisticsSection = () => {
           src="/images/frame51.png"
         />
       </div>
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:400ms]  bg-white pt-10 pb-14 px-4 shadow-xl">
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:400ms]  bg-[#ffffffaa] pt-10 pb-14 px-4 shadow-xl backdrop-blur-lg">
         <BackButton
           //className="w-full sm:w-auto"
           handleClick={() => {

@@ -146,11 +146,18 @@ export function QuestionWithInput({
               id={question}
               checked={checked}
               onCheckedChange={() => {
-                setChecked(!checked);
-                handleChange(!checked);
-                if (!checked && !summary.includes(question)) {
+                const newChecked = !checked;
+                setChecked(newChecked);
+                handleChange(newChecked);
+
+                // Si décoché, définir la valeur de l'input à undefined
+                if (!newChecked) {
+                  handleInputChange(undefined as any);
+                }
+
+                if (newChecked && !summary.includes(question)) {
                   setSummary([...summary, question]);
-                } else if (checked && summary.includes(question)) {
+                } else if (!newChecked && summary.includes(question)) {
                   setSummary(summary.filter((item) => item !== question));
                 }
               }}

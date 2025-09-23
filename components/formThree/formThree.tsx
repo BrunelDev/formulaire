@@ -10,7 +10,7 @@ import BackButton from "../PrimaryButton/BackButton";
 import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
 
 export const FormThree = () => {
-  const { formData, updateFormData } = useFormState();
+  const { formData, updateFormData, resetStepThree } = useFormState();
 
   const projectOptions = [
     {
@@ -95,6 +95,7 @@ export const FormThree = () => {
                       : "bg-app-background hover:bg-gray-100"
                   }`}
                   onClick={() => {
+                    resetStepThree();
                     updateFormData({
                       ...formData,
                       option: option.id,
@@ -172,7 +173,7 @@ export const FormThree = () => {
           </div>
         </main>
       </div>
-      <div className="sm:hidden flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:600ms] fixed bottom-0 left-0 right-0 bg-white pt-10 pb-14 px-4 shadow-xl">
+      <div className="sm:hidden flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:600ms] fixed bottom-0 left-0 right-0 bg-[#ffffffaa] pt-10 pb-14 px-4 shadow-xl backdrop-blur-lg">
         <BackButton
           handleClick={() => {
             updateFormData({

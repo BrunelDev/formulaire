@@ -545,7 +545,7 @@ export const InformationSummarySection = () => {
       : [];
 
   return (
-    <div className="flex flex-col w-full pb-[150px] items-start gap-6 sm:gap-8 pt-0 sm:pb-8 px-0 animate-fade-in opacity-0">
+    <div className="flex flex-col w-full pb-[150px] items-start gap-6 sm:gap-8 pt-0 sm:pb-0 px-0">
       {formErrors["general"] && (
         <div
           className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full"
@@ -604,7 +604,7 @@ export const InformationSummarySection = () => {
           )
         )}
       </div>
-      <div className="flex flex-row sm:flex-row items-center justify-between gap-4 sm:gap-0 relative self-stretch w-full flex-[0_0_auto] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]">
+      <div className="hidden sm:flex flex-row sm:flex-row items-center justify-between gap-4 sm:gap-0 relative self-stretch w-full flex-[0_0_auto] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]">
         <BackButton
           handleClick={() => {
             setSummary([]);
@@ -630,7 +630,32 @@ export const InformationSummarySection = () => {
           }}
         />
       </div>
-      
+       <div className="sm:hidden flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:600ms] fixed bottom-0 left-0 right-0 bg-[#ffffffaa] pt-10 pb-14 px-4 shadow-xl backdrop-blur-lg">
+        <BackButton
+          handleClick={() => {
+            setSummary([]);
+            updateFormData({
+              ...formData,
+              isStepFourChecked: false,
+              isStepThreeChecked: false,
+            });
+          }}
+          disabled={!formData.isStepFourChecked}
+        />
+        <PrimaryButton
+          handleClick={() => {
+            if (validateForm()) {
+              setSummary([]);
+              updateFormData({
+                ...formData,
+                isStepFourChecked: true,
+              });
+            } else {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+        />
+      </div>
     </div>
   );
 };

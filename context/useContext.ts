@@ -62,7 +62,7 @@ interface FormData {
   render3D?: boolean;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any; 
+  [key: string]: any;
 
   // Step 4
   isStepFourChecked?: boolean;
@@ -82,7 +82,6 @@ interface FormData {
 
 interface FormState {
   formData: FormData;
-  
 
   // Actions to update form data
   updateFormData: (data: Partial<FormData>) => void;
@@ -132,6 +131,7 @@ interface FormState {
 
   // Utility actions
   resetForm: () => void;
+  resetStepThree: () => void;
   isStepValid: (step: number) => boolean;
 }
 
@@ -236,6 +236,37 @@ export const useFormState = create<FormState>()(
       resetForm: () =>
         set(() => ({
           formData: initialFormData,
+        })),
+
+      resetStepThree: () =>
+        set((state) => ({
+          formData: {
+            ...state.formData,
+            // Reset all Step 3 fields to their initial values
+            isStepThreeChecked: false,
+            isArchitectNeeded: undefined,
+            hasMultipleRealizationsOnSameConstructionPermit: undefined,
+            realizationsOnSameConstructionPermitNumber: undefined,
+            pluVerification: undefined,
+            rdcPlanVerification: undefined,
+            rdcPlanNumber: undefined,
+            bbioStudy: undefined,
+            seismicStudy: undefined,
+            expressDelivery: undefined,
+            displayPanel: undefined,
+            hasMultipleRealizationsOnSameDeclaration: undefined,
+            realizationsOnSameDeclarationNumber: undefined,
+            hasMultipleRealizationsOnSameUrbanismCertificate: undefined,
+            realizationsOnSameUrbanismCertificateNumber: undefined,
+            hasMultipleRealizationsOnSamePlanRequest: undefined,
+            realizationsOnSamePlanRequestNumber: undefined,
+            neededPlans: undefined,
+            shouldMakeRDCPlan: undefined,
+            rdcPlanCount: undefined,
+            shouldMake3dRender: undefined,
+            renderCount3d: undefined,
+            render3D: undefined,
+          },
         })),
 
       isStepValid: (step: number) => {
