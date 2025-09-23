@@ -28,7 +28,7 @@ const statistics = [
   },
   {
     number: "96%",
-    label: "Permis accepté",
+    label: "Permis acceptés",
   },
   {
     number: "70%",
@@ -44,7 +44,7 @@ export const ContentWrapperSection = () => {
       (formData.option === Option.PERMIS_CONSTRUIRE ||
         formData.option === Option.DOSSIER_ERP));
   return (
-    <section className="flex flex-col w-full max-w-[719px] items-start gap-4 sm:gap-3 pt-0 px-0 relative">
+    <section className="flex flex-col w-full items-start gap-4 sm:gap-3 pt-0 px-0 relative">
       {/* Header Section */}
       <header className="flex flex-col items-start w-full animate-fade-in opacity-0">
         <h1 className="w-full font-heading-h2 text-[#094d9a] tracking-[var(--heading-h2-letter-spacing)] leading-[var(--heading-h2-line-height)] font-medium text-lg sm:text-2xl">

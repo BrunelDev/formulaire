@@ -64,11 +64,11 @@ export function Question({
           <div className="inline-flex items-center justify-center gap-2 relative flex-[0_0_auto]">
             <RadioGroupItem
               value="oui"
-              id="oui"
+              id={question}
               className="w-5 h-5 sm:w-6 sm:h-6"
             />
             <Label
-              htmlFor="oui"
+              htmlFor={question}
               className="relative w-fit mt-[-1.00px] font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-[#021327] text-sm sm:text-[length:var(--heading-h5-font-size)] tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] whitespace-nowrap [font-style:var(--heading-h5-font-style)] cursor-pointer"
             >
               Oui
@@ -143,7 +143,7 @@ export function QuestionWithInput({
         <div className="flex flex-col items-start gap-2 relative self-stretch w-full flex-[0_0_auto]">
           <div className="flex items-start gap-2 relative self-stretch w-full flex-[0_0_auto]">
             <Checkbox
-              id="express-delivery"
+              id={question}
               checked={checked}
               onCheckedChange={() => {
                 setChecked(!checked);
@@ -161,7 +161,7 @@ export function QuestionWithInput({
 
             <div className="flex items-center gap-[4px_8px] ">
               <Label
-                htmlFor="express-delivery"
+                htmlFor={question}
                 className="relative self-stretch w-fit mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)] cursor-pointer text-wrap flex items-center"
               >
                 <h6 className="">
@@ -184,7 +184,7 @@ export function QuestionWithInput({
 
         {error && <div className="text-red-500 text-sm">{error}</div>}
 
-        {placeholder && checked && (
+        {placeholder && type !== "option" && checked && (
           <div className="w-full">
             <Input
               value={inputValue}
@@ -246,7 +246,7 @@ export function QuestionWithInput({
               <SelectTrigger
                 className={`w-full ${inputError ? "border-red-500" : ""}`}
               >
-                <SelectValue placeholder="Sélectionnez" />
+                <SelectValue placeholder={placeholder || "Sélectionnez"} />
               </SelectTrigger>
               <SelectContent className="w-full">
                 <SelectGroup>
@@ -258,6 +258,53 @@ export function QuestionWithInput({
                 </SelectGroup>
               </SelectContent>
             </Select>
+            {inputError && (
+              <div className="text-red-500 text-sm mt-1">{inputError}</div>
+            )}
+          </div>
+        )}
+
+        {type === "checkbox" && checked && (
+          <div className="pl-3 w-full">
+            <div className="sm:grid grid-cols-2 sm:gap-2 flex flex-col gap-3">
+              {options?.map((option, optionIndex) => (
+                <div key={option.value} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={`${question}-${optionIndex}`}
+                    checked={
+                      formData?.[`question_${index}_checkbox_${optionIndex}`] ||
+                      false
+                    }
+                    onCheckedChange={(isChecked) => {
+                      if (updateFormData) {
+                        updateFormData({
+                          ...formData,
+                          [`question_${index}_checkbox_${optionIndex}`]:
+                            isChecked,
+                        });
+                      }
+
+                      // Mise à jour du résumé
+                      const summaryKey = `${question} - ${option.label}`;
+                      if (isChecked && !summary.includes(summaryKey)) {
+                        setSummary([...summary, summaryKey]);
+                      } else if (!isChecked && summary.includes(summaryKey)) {
+                        setSummary(
+                          summary.filter((item) => item !== summaryKey)
+                        );
+                      }
+                    }}
+                    className="w-4 h-4"
+                  />
+                  <Label
+                    htmlFor={`${question}-${optionIndex}`}
+                    className="text-sm font-medium text-gray-700 cursor-pointer"
+                  >
+                    {option.label}
+                  </Label>
+                </div>
+              ))}
+            </div>
             {inputError && (
               <div className="text-red-500 text-sm mt-1">{inputError}</div>
             )}

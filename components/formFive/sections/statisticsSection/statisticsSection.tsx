@@ -138,8 +138,8 @@ export const StatisticsSection = () => {
     }
   };
 
-  return (
-    <section className="w-full">
+  return ( 
+    <section className="w-full pb-[150px]">
       <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-5 w-full justify-center px-4">
         <div className="flex flex-col w-full lg:w-[40%] items-start gap-6 lg:gap-7 animate-fade-in opacity-0 [--animation-delay:0ms]">
           <div className="flex flex-col items-end gap-4 sm:gap-5 w-full">
@@ -282,7 +282,7 @@ export const StatisticsSection = () => {
                 <Image
                   width={120}
                   height={100}
-                  className="w-[100px] h-[80px] sm:w-[120px] sm:h-[100px] object-cover flex-shrink-0"
+                  className="w-[100px] h-[80px] sm:w-[120px] sm:h-[100px] object-cover flex-shrink-0 sm:static absolute top-1/2 -translate-y-1/2"
                   alt="Urban building hero"
                   src="/images/Urban-building.png"
                 />
@@ -311,9 +311,9 @@ export const StatisticsSection = () => {
         <Image
           width={534}
           height={640}
-          className="w-full lg:w-[40%] h-auto lg:h-[640px] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms] object-contain"
+          className="w-full lg:w-[40%] h-auto lg:h-[640px] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms] object-contain hidden sm:block"
           alt="Frame"
-          src="https://c.animaapp.com/mf2gfnauygUKoU/img/frame-51.svg"
+          src="/images/frame51.png"
         />
       </div>
       <div className="sm:hidden fixed bottom-0 left-0 right-0 flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:400ms]  bg-white pt-10 pb-14 px-4 shadow-xl">

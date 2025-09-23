@@ -42,7 +42,7 @@ export const InformationSummarySection = () => {
     },
     {
       question:
-        "Votre projet comprend plusieurs réalisations sur une même permis de construire ?",
+        "Votre projet comprend plusieurs réalisations sur un même permis de construire ?",
       description:
         "Exemple: Création d'une extension et d'une clôture. Si c'est le cas, précisez le nombre de sous-projets à déclarer.",
       handleChange: (value: boolean) => {
@@ -54,10 +54,19 @@ export const InformationSummarySection = () => {
       value: formData.hasMultipleRealizationsOnSameConstructionPermit,
       placeholder: "Nombre de sous projets à déclarer",
       inputRequired: !!!formData.realizationsOnSameConstructionPermitNumber,
+      type: "option",
+      options: [
+        { label: "1", value: "1" },
+        { label: "2", value: "2" },
+        { label: "3", value: "3" },
+        { label: "4", value: "4" },
+        { label: "5 ou plus", value: "5" },
+      ],
       handleInputChange: (value: string) => {
         updateFormData({
           ...formData,
-          realizationsOnSameConstructionPermitNumber: parseInt(value) || 0,
+          realizationsOnSameConstructionPermitNumber:
+            value === "5" ? 5 : parseInt(value) || 0,
         });
       },
       inputValue: formData.realizationsOnSameConstructionPermitNumber || "",
@@ -83,6 +92,14 @@ export const InformationSummarySection = () => {
       placeholder: "Nombre de niveau à déssiner",
       price: "(125€ TTC / niveau)",
       inputRequired: !!!formData.rdcPlanNumber,
+      type: "option",
+      options: [
+        { label: "1", value: "1" },
+        { label: "2", value: "2" },
+        { label: "3", value: "3" },
+        { label: "4", value: "4" },
+        { label: "5 ou plus", value: "5" },
+      ],
       handleInputChange: (value: string) => {
         updateFormData({
           ...formData,
@@ -94,7 +111,7 @@ export const InformationSummarySection = () => {
     {
       question: "Étude BBIO RE2020",
       description:
-        "L'étude BBIO RE2020 évalue la performance énergétique d'un projet de construction neuve ou d'extension et est obligatoire pour tout bâtiment résidentiel neuf ou étendu soumis à la réglementation thermique RE2020.",
+        "L'étude BBIO RE2020 évalue la performance énergétique d'un projet de construction neuve ou d'extension et est obligatoire pour tout bâtiment résidentiel neuf ou étendu soumis à la réglementation thermique RE2020.\nPour l'élaboration de l'étude thermique, des plans de niveaux avec côtes sont nécessaires.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, bbioStudy: value });
       },
@@ -137,10 +154,19 @@ export const InformationSummarySection = () => {
       value: formData.hasMultipleRealizationsOnSameDeclaration,
       placeholder: "Nombre de sous-projets à déclarer",
       inputRequired: !!!formData.realizationsOnSameDeclarationNumber,
+      type: "option",
+      options: [
+        { label: "1", value: "1" },
+        { label: "2", value: "2" },
+        { label: "3", value: "3" },
+        { label: "4", value: "4" },
+        { label: "5 ou plus", value: "5" },
+      ],
       handleInputChange: (value: string) => {
         updateFormData({
           ...formData,
-          realizationsOnSameDeclarationNumber: parseInt(value) || 0,
+          realizationsOnSameDeclarationNumber:
+            value === "5" ? 5 : parseInt(value) || 0,
         });
       },
       inputValue: formData.realizationsOnSameDeclarationNumber || "",
@@ -166,10 +192,18 @@ export const InformationSummarySection = () => {
       placeholder: "Nombre de niveaux à déssiner",
       price: "(125€ TTC / niveau)",
       inputRequired: !!!formData.rdcPlanNumber,
+      type: "option",
+      options: [
+        { label: "1", value: "1" },
+        { label: "2", value: "2" },
+        { label: "3", value: "3" },
+        { label: "4", value: "4" },
+        { label: "5 ou plus", value: "5" },
+      ],
       handleInputChange: (value: string) => {
         updateFormData({
           ...formData,
-          rdcPlanNumber: parseInt(value) || 0,
+          rdcPlanNumber: value === "5" ? 5 : parseInt(value) || 0,
         });
       },
       inputValue: formData.rdcPlanNumber || "",
@@ -177,7 +211,7 @@ export const InformationSummarySection = () => {
     {
       question: "Service livraison express ",
       description:
-        "Envoi de votre A.P.S sous 48h pour un traitement rapide de votre projet.",
+        "Envoi de votre A.P.S sous 72h pour un traitement rapide de votre projet.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, expressDelivery: value });
       },
@@ -215,12 +249,7 @@ export const InformationSummarySection = () => {
         { label: "2 sous-projets", value: "2" },
         { label: "3 sous-projets", value: "3" },
         { label: "4 sous-projets", value: "4" },
-        { label: "5 sous-projets", value: "5" },
-        { label: "6 sous-projets", value: "6" },
-        { label: "7 sous-projets", value: "7" },
-        { label: "8 sous-projets", value: "8" },
-        { label: "9 sous-projets", value: "9" },
-        { label: "10 sous-projets", value: "10" },
+        { label: "5 sous-projets ou plus", value: "5" },
       ],
       inputRequired: !!!formData.realizationsOnSamePlanRequestNumber,
       handleInputChange: (value: string) => {
@@ -242,7 +271,7 @@ export const InformationSummarySection = () => {
         });
       },
       value: formData.doesNeedPlan ? true : false,
-      type: "option",
+      type: "checkbox",
       options: [
         {
           label: "Plans de situation et Vue aérienne",
@@ -282,12 +311,7 @@ export const InformationSummarySection = () => {
         { label: "2 niveaux", value: "2" },
         { label: "3 niveaux", value: "3" },
         { label: "4 niveaux", value: "4" },
-        { label: "5 niveaux", value: "5" },
-        { label: "6 niveaux", value: "6" },
-        { label: "7 niveaux", value: "7" },
-        { label: "8 niveaux", value: "8" },
-        { label: "9 niveaux", value: "9" },
-        { label: "10 niveaux", value: "10" },
+        { label: "5 niveaux ou plus", value: "5" },
       ],
       inputRequired:
         !!!formData.render3D &&
@@ -310,16 +334,11 @@ export const InformationSummarySection = () => {
       price: "(125€ TTC /niveau)",
       type: "option",
       options: [
-        { label: "1 rendu", value: "1" },
-        { label: "2 rendus", value: "2" },
-        { label: "3 rendus", value: "3" },
-        { label: "4 rendus", value: "4" },
-        { label: "5 rendus", value: "5" },
-        { label: "6 rendus", value: "6" },
-        { label: "7 rendus", value: "7" },
-        { label: "8 rendus", value: "8" },
-        { label: "9 rendus", value: "9" },
-        { label: "10 rendus", value: "10" },
+        { label: "1 niveau", value: "1" },
+        { label: "2 niveaux", value: "2" },
+        { label: "3 niveaux", value: "3" },
+        { label: "4 niveaux", value: "4" },
+        { label: "5 niveaux ou plus", value: "5" },
       ],
       inputRequired:
         !!!formData.render3D &&
@@ -352,12 +371,11 @@ export const InformationSummarySection = () => {
         updateFormData({ ...formData, isArchitectNeeded: value });
       },
       value: formData.isArchitectNeeded,
-      
     },
     {
       question: "Service livraison express ",
       description:
-        "Envoi de votre A.P.S sous 48h pour un traitement rapide de votre projet.",
+        "Envoi de votre A.P.S sous 72h pour un traitement rapide de votre projet.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, expressDelivery: value });
       },
@@ -379,12 +397,20 @@ export const InformationSummarySection = () => {
       },
       value: formData.hasMultipleRealizationsOnSameUrbanismCertificate,
       placeholder: "Nombre de sous-projets à déclarer",
-
       inputRequired: !!!formData.realizationsOnSameUrbanismCertificateNumber,
+      type: "option",
+      options: [
+        { label: "1", value: "1" },
+        { label: "2", value: "2" },
+        { label: "3", value: "3" },
+        { label: "4", value: "4" },
+        { label: "5 ou plus", value: "5" },
+      ],
       handleInputChange: (value: string) => {
         updateFormData({
           ...formData,
-          realizationsOnSameUrbanismCertificateNumber: parseInt(value) || 0,
+          realizationsOnSameUrbanismCertificateNumber:
+            value === "5" ? 5 : parseInt(value) || 0,
         });
       },
       inputValue: formData.realizationsOnSameUrbanismCertificateNumber || "",
@@ -402,7 +428,7 @@ export const InformationSummarySection = () => {
     {
       question: "Service livraison express (90€ TTC)",
       description:
-        "Envoi de votre A.P.S sous 48h pour un traitement rapide de votre projet.",
+        "Envoi de votre A.P.S sous 72h pour un traitement rapide de votre projet.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, expressDelivery: value });
       },
@@ -519,7 +545,7 @@ export const InformationSummarySection = () => {
       : [];
 
   return (
-    <div className="flex flex-col w-full items-start gap-6 sm:gap-8 pt-0 pb-6 sm:pb-8 px-0 animate-fade-in opacity-0">
+    <div className="flex flex-col w-full pb-[150px] items-start gap-6 sm:gap-8 pt-0 sm:pb-8 px-0 animate-fade-in opacity-0">
       {formErrors["general"] && (
         <div
           className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full"
@@ -604,6 +630,7 @@ export const InformationSummarySection = () => {
           }}
         />
       </div>
+      
     </div>
   );
 };

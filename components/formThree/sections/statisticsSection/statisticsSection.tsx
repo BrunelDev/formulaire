@@ -47,7 +47,7 @@ const statistics = [
   },
   {
     value: "96%",
-    label: "Permis accepté",
+    label: "Permis acceptés",
   },
   {
     value: "70%",
