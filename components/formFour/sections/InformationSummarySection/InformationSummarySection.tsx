@@ -26,7 +26,7 @@ export const InformationSummarySection = () => {
     options?: { label: string; value: string }[];
     required?: boolean;
     inputRequired?: boolean;
-    handleInputChange?: (value: string) => void;
+    handleInputChange?: (value: string | undefined) => void;
     inputValue?: string | number;
   };
 
@@ -62,14 +62,24 @@ export const InformationSummarySection = () => {
         { label: "4", value: "4" },
         { label: "5 ou plus", value: "5" },
       ],
-      handleInputChange: (value: string) => {
+      handleInputChange: (value: string | undefined) => {
         updateFormData({
           ...formData,
           realizationsOnSameConstructionPermitNumber:
-            value === "5" ? 5 : parseInt(value) || 0,
+            value === "5" ? 5 : parseInt(value || "0") || 0,
         });
       },
       inputValue: formData.realizationsOnSameConstructionPermitNumber || "",
+    },
+    {
+      question: "Remplissage CERFA & dépôt dématérialisé",
+      description:
+        "Le dépôt en mairie ne sera disponible que si le service urbanisme a un service de dépôt dématérialisé.",
+      handleChange: (value: boolean) => {
+        updateFormData({ ...formData, cerfaFilling: value });
+      },
+      value: formData.cerfaFilling,
+      price: "(80€ TTC)",
     },
     {
       question: "Vérification du PLU ",
@@ -100,10 +110,10 @@ export const InformationSummarySection = () => {
         { label: "4", value: "4" },
         { label: "5 ou plus", value: "5" },
       ],
-      handleInputChange: (value: string) => {
+      handleInputChange: (value: string | undefined) => {
         updateFormData({
           ...formData,
-          rdcPlanNumber: parseInt(value) || 0,
+          rdcPlanNumber: parseInt(value || "0") || 0,
         });
       },
       inputValue: formData.rdcPlanNumber || "",
@@ -121,7 +131,7 @@ export const InformationSummarySection = () => {
     {
       question: "Service livraison express",
       description:
-        "Envoi de votre A.P.S sous 48 h pour un traitement rapide de votre projet.",
+        "Envoi de votre A.P.S sous 72h pour un traitement rapide de votre projet.",
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, expressDelivery: value });
       },
@@ -162,14 +172,24 @@ export const InformationSummarySection = () => {
         { label: "4", value: "4" },
         { label: "5 ou plus", value: "5" },
       ],
-      handleInputChange: (value: string) => {
+      handleInputChange: (value: string | undefined) => {
         updateFormData({
           ...formData,
           realizationsOnSameDeclarationNumber:
-            value === "5" ? 5 : parseInt(value) || 0,
+            value === "5" ? 5 : parseInt(value || "0") || 0,
         });
       },
       inputValue: formData.realizationsOnSameDeclarationNumber || "",
+    },
+    {
+      question: "Remplissage CERFA & dépôt dématérialisé",
+      description:
+        "Le dépôt en mairie ne sera disponible que si le service urbanisme a un service de dépôt dématérialisé.",
+      handleChange: (value: boolean) => {
+        updateFormData({ ...formData, cerfaFilling: value });
+      },
+      value: formData.cerfaFilling,
+      price: "(80€ TTC)",
     },
     {
       question: "Vérification du P.L.U",
@@ -200,10 +220,10 @@ export const InformationSummarySection = () => {
         { label: "4", value: "4" },
         { label: "5 ou plus", value: "5" },
       ],
-      handleInputChange: (value: string) => {
+      handleInputChange: (value: string | undefined) => {
         updateFormData({
           ...formData,
-          rdcPlanNumber: value === "5" ? 5 : parseInt(value) || 0,
+          rdcPlanNumber: value === "5" ? 5 : parseInt(value || "0") || 0,
         });
       },
       inputValue: formData.rdcPlanNumber || "",
@@ -252,16 +272,16 @@ export const InformationSummarySection = () => {
         { label: "5 sous-projets ou plus", value: "5" },
       ],
       inputRequired: !!!formData.realizationsOnSamePlanRequestNumber,
-      handleInputChange: (value: string) => {
+      handleInputChange: (value: string | undefined) => {
         updateFormData({
           ...formData,
-          realizationsOnSamePlanRequestNumber: parseInt(value) || 0,
+          realizationsOnSamePlanRequestNumber: parseInt(value || "0") || 0,
         });
       },
       inputValue: formData.realizationsOnSamePlanRequestNumber || "",
     },
     {
-      question: "Sélectionnez les plans dont vous avez besoin:",
+      question: "Sélectionnez les plans dont vous avez besoin",
       description:
         "Au-delà de 4 plans à l'unité, le pack Permis de construire ou Déclaration préalable de travaux devient plus avantageux. Tarif à l'unité : 180 € TTC pour le premier plan, puis 50 € TTC par plan supplémentaire. ",
       handleChange: (value: boolean) => {
@@ -290,13 +310,20 @@ export const InformationSummarySection = () => {
         !!!formData.render3D &&
         !!!formData.doesNeedPlan &&
         !!!formData.rdcPlanVerification,
-      handleInputChange: (value: string) => {
-        updateFormData({
-          ...formData,
-          neededPlans: value,
-        });
+      handleInputChange: (value: string | undefined) => {
+        if (value === undefined || value === "") {
+          updateFormData({
+            ...formData,
+            neededPlans: [],
+          });
+        } else {
+          updateFormData({
+            ...formData,
+            neededPlans: JSON.parse(value),
+          });
+        }
       },
-      inputValue: formData.neededPlans || "",
+      inputValue: JSON.stringify(formData.neededPlans) || "",
     },
     {
       question: "Réalisation d'un plan de niveau RDC (plan intérieur)",
@@ -317,10 +344,10 @@ export const InformationSummarySection = () => {
         !!!formData.render3D &&
         !!!formData.doesNeedPlan &&
         !!!formData.rdcPlanVerification,
-      handleInputChange: (value: string) => {
+      handleInputChange: (value: string | undefined) => {
         updateFormData({
           ...formData,
-          rdcPlanCount: parseInt(value) || 0,
+          rdcPlanCount: parseInt(value || "0") || 0,
         });
       },
       inputValue: formData.rdcPlanCount || "",
@@ -344,10 +371,10 @@ export const InformationSummarySection = () => {
         !!!formData.render3D &&
         !!!formData.doesNeedPlan &&
         !!!formData.rdcPlanVerification,
-      handleInputChange: (value: string) => {
+      handleInputChange: (value: string | undefined) => {
         updateFormData({
           ...formData,
-          renderCount3d: parseInt(value) || 0,
+          renderCount3d: parseInt(value || "0") || 0,
         });
       },
       inputValue: formData.renderCount3d || "",
@@ -406,11 +433,11 @@ export const InformationSummarySection = () => {
         { label: "4", value: "4" },
         { label: "5 ou plus", value: "5" },
       ],
-      handleInputChange: (value: string) => {
+      handleInputChange: (value: string | undefined) => {
         updateFormData({
           ...formData,
           realizationsOnSameUrbanismCertificateNumber:
-            value === "5" ? 5 : parseInt(value) || 0,
+            value === "5" ? 5 : parseInt(value || "0") || 0,
         });
       },
       inputValue: formData.realizationsOnSameUrbanismCertificateNumber || "",
@@ -596,7 +623,6 @@ export const InformationSummarySection = () => {
               error={formErrors[`question_${index}`]}
               inputError={formErrors[`question_${index}_input`]}
               index={index}
-              updateFormData={updateFormData}
               formData={formData}
               handleInputChange={item.handleInputChange || (() => {})}
               inputValue={item.inputValue?.toString() || ""}
@@ -630,7 +656,7 @@ export const InformationSummarySection = () => {
           }}
         />
       </div>
-       <div className="sm:hidden flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:600ms] fixed bottom-0 left-0 right-0 bg-[#ffffffaa] pt-10 pb-14 px-4 shadow-xl backdrop-blur-lg">
+      <div className="sm:hidden flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:600ms] fixed bottom-0 left-0 right-0 bg-[#ffffffaa] pt-10 pb-14 px-4 shadow-xl backdrop-blur-lg">
         <BackButton
           handleClick={() => {
             setSummary([]);

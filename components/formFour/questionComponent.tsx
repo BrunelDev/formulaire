@@ -111,13 +111,12 @@ export function QuestionWithInput({
   error,
   inputError,
   index,
-  updateFormData,
   formData,
 }: {
   question: string;
   description?: string;
   handleChange: (value: boolean) => void;
-  handleInputChange: (value: string) => void;
+  handleInputChange: (value: string | undefined) => void;
   inputValue?: string;
   value?: boolean;
   placeholder?: string;
@@ -128,7 +127,6 @@ export function QuestionWithInput({
   error?: string;
   inputError?: string;
   index?: number;
-  updateFormData?: (data: any) => void;
   formData?: any;
 }) {
   const [checked, setChecked] = useState(value || false);
@@ -137,6 +135,51 @@ export function QuestionWithInput({
   );
   const { setSummary, summary } = useSummarySate();
   console.log(inputRequired);
+
+  // Fonction utilitaire pour mettre à jour le résumé de manière cohérente
+  const updateSummary = (
+    questionText: string,
+    inputValue?: string,
+    isChecked?: boolean
+  ) => {
+    const summaryKey = inputValue
+      ? `${questionText} - ${inputValue}`
+      : questionText;
+
+    if (isChecked === false) {
+      // Si décoché, supprimer toutes les entrées liées à cette question
+      setSummary(summary.filter((item) => !item.startsWith(questionText)));
+    } else if (isChecked === true) {
+      // Si coché sans valeur, ajouter juste la question
+      if (!inputValue && !summary.includes(questionText)) {
+        setSummary([...summary, questionText]);
+      }
+    } else if (inputValue) {
+      // Si on a une valeur, mettre à jour ou ajouter l'entrée
+      const existingIndex = summary.findIndex((item) =>
+        item.startsWith(questionText)
+      );
+      if (existingIndex !== -1) {
+        const updatedSummary = [...summary];
+        updatedSummary[existingIndex] = summaryKey;
+        setSummary(updatedSummary);
+      } else {
+        setSummary([...summary, summaryKey]);
+      }
+    } else if (!inputValue) {
+      // Si on supprime la valeur, garder juste la question
+      const existingIndex = summary.findIndex((item) =>
+        item.startsWith(questionText)
+      );
+      if (existingIndex !== -1) {
+        const updatedSummary = [...summary];
+        updatedSummary[existingIndex] = questionText;
+        setSummary(updatedSummary);
+      }
+    }
+  };
+  const [selectedBoxes, setSelectedBoxes] = useState<string[]>([]);
+
   return (
     <Card className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms] w-full">
       <CardContent className="flex flex-col items-start gap-3 p-4 sm:p-5">
@@ -153,13 +196,11 @@ export function QuestionWithInput({
                 // Si décoché, définir la valeur de l'input à undefined
                 if (!newChecked) {
                   handleInputChange(undefined as any);
+                  setSelectedOption("");
                 }
 
-                if (newChecked && !summary.includes(question)) {
-                  setSummary([...summary, question]);
-                } else if (!newChecked && summary.includes(question)) {
-                  setSummary(summary.filter((item) => item !== question));
-                }
+                // Mise à jour du résumé avec la nouvelle fonction
+                updateSummary(question, undefined, newChecked);
               }}
               className={`w-5 h-5 sm:w-6 sm:h-6 mt-0.5 ${
                 checked ? "bg-syracuse_red_orange" : ""
@@ -202,21 +243,10 @@ export function QuestionWithInput({
               required={inputRequired && checked}
               onChange={(e) => {
                 const inputValue = e.target.value;
-
                 handleInputChange(inputValue);
 
-                if (inputValue) {
-                  const exists = summary.findIndex((item) =>
-                    item.startsWith(question)
-                  );
-                  if (exists !== -1) {
-                    const updatedSummary = [...summary];
-                    updatedSummary[exists] = `${question} - ${inputValue}`;
-                    setSummary(updatedSummary);
-                  } else {
-                    setSummary([...summary, `${question} - ${inputValue}`]);
-                  }
-                }
+                // Mise à jour du résumé avec la nouvelle fonction
+                updateSummary(question, inputValue);
               }}
             />
             {inputError && (
@@ -233,18 +263,9 @@ export function QuestionWithInput({
               onValueChange={(value) => {
                 setSelectedOption(value);
                 handleInputChange(value);
-                if (value) {
-                  const exists = summary.findIndex((item) =>
-                    item.startsWith(question)
-                  );
-                  if (exists !== -1) {
-                    const updatedSummary = [...summary];
-                    updatedSummary[exists] = `${question} - ${value}`;
-                    setSummary(updatedSummary);
-                  } else {
-                    setSummary([...summary, `${question} - ${value}`]);
-                  }
-                }
+
+                // Mise à jour du résumé avec la nouvelle fonction
+                updateSummary(question, value);
               }}
               defaultValue={
                 options && options.length > 0 ? options[0].value : undefined
@@ -278,24 +299,24 @@ export function QuestionWithInput({
                 <div key={option.value} className="flex items-center space-x-2">
                   <Checkbox
                     id={`${question}-${optionIndex}`}
-                    checked={
-                      formData?.[`question_${index}_checkbox_${optionIndex}`] ||
-                      false
-                    }
+                    value={option.value}
+                    checked={selectedBoxes.includes(option.value)}
                     onCheckedChange={(isChecked) => {
-                      if (updateFormData) {
-                        updateFormData({
-                          ...formData,
-                          [`question_${index}_checkbox_${optionIndex}`]:
-                            isChecked,
-                        });
-                      }
-
-                      // Mise à jour du résumé
+                      // Mise à jour du résumé avec la nouvelle fonction
                       const summaryKey = `${question} - ${option.label}`;
-                      if (isChecked && !summary.includes(summaryKey)) {
-                        setSummary([...summary, summaryKey]);
-                      } else if (!isChecked && summary.includes(summaryKey)) {
+                      if (isChecked) {
+                        handleInputChange(
+                          JSON.stringify([...selectedBoxes, option.value])
+                        );
+                        setSelectedBoxes([...selectedBoxes, option.value]);
+                        if (!summary.includes(summaryKey)) {
+                          setSummary([...summary, summaryKey]);
+                        }
+                      } else {
+                        setSelectedBoxes(
+                          selectedBoxes.filter((item) => item !== option.value)
+                        );
+                        handleInputChange(JSON.stringify(selectedBoxes));
                         setSummary(
                           summary.filter((item) => item !== summaryKey)
                         );

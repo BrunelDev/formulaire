@@ -39,6 +39,7 @@ interface FormData {
   isArchitectNeeded?: boolean;
   hasMultipleRealizationsOnSameConstructionPermit?: boolean;
   realizationsOnSameConstructionPermitNumber?: number;
+  cerfaFilling?: boolean;
   pluVerification?: boolean;
   rdcPlanVerification?: boolean;
   rdcPlanNumber?: number;
@@ -54,7 +55,7 @@ interface FormData {
 
   realizationsOnSamePlanRequestNumber?: number;
   doesNeedPlan?: boolean;
-  neededPlans?: string;
+  neededPlans?: string[];
   shouldMakeRDCPlan?: boolean;
   rdcPlanCount?: number;
   shouldMake3dRender?: boolean;
@@ -163,7 +164,7 @@ const initialFormData: FormData = {
   realizationsOnSameUrbanismCertificateNumber: undefined,
   hasMultipleRealizationsOnSamePlanRequest: undefined,
   realizationsOnSamePlanRequestNumber: undefined,
-  neededPlans: undefined,
+  neededPlans: [],
   shouldMakeRDCPlan: undefined,
   rdcPlanCount: undefined,
   shouldMake3dRender: undefined,
@@ -260,7 +261,7 @@ export const useFormState = create<FormState>()(
             realizationsOnSameUrbanismCertificateNumber: undefined,
             hasMultipleRealizationsOnSamePlanRequest: undefined,
             realizationsOnSamePlanRequestNumber: undefined,
-            neededPlans: undefined,
+            neededPlans: [],
             shouldMakeRDCPlan: undefined,
             rdcPlanCount: undefined,
             shouldMake3dRender: undefined,
