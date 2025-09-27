@@ -196,6 +196,7 @@ export function QuestionWithInput({
                 // Si décoché, définir la valeur de l'input à undefined
                 if (!newChecked) {
                   handleInputChange(undefined as any);
+                  handleChange(false);
                   setSelectedOption("");
                 }
 

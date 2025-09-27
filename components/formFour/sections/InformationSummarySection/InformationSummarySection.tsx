@@ -56,7 +56,6 @@ export const InformationSummarySection = () => {
       inputRequired: !!!formData.realizationsOnSameConstructionPermitNumber,
       type: "option",
       options: [
-        { label: "1", value: "1" },
         { label: "2", value: "2" },
         { label: "3", value: "3" },
         { label: "4", value: "4" },
@@ -104,7 +103,6 @@ export const InformationSummarySection = () => {
       inputRequired: !!!formData.rdcPlanNumber,
       type: "option",
       options: [
-        { label: "1", value: "1" },
         { label: "2", value: "2" },
         { label: "3", value: "3" },
         { label: "4", value: "4" },
@@ -127,6 +125,16 @@ export const InformationSummarySection = () => {
       },
       value: formData.bbioStudy,
       price: "(300€ TTC)",
+    },
+    {
+      question: "Étude sismique",
+      description:
+        "Réalisation d’une étude sismique conforme aux normes en vigueur, demandée selon les régions et non obligatoire pour tous les permis de construire.",
+      handleChange: (value: boolean) => {
+        updateFormData({ ...formData, seismicStudy: value });
+      },
+      value: formData.seismicStudy,
+      price: "(400€ TTC)",
     },
     {
       question: "Service livraison express",
@@ -166,7 +174,6 @@ export const InformationSummarySection = () => {
       inputRequired: !!!formData.realizationsOnSameDeclarationNumber,
       type: "option",
       options: [
-        { label: "1", value: "1" },
         { label: "2", value: "2" },
         { label: "3", value: "3" },
         { label: "4", value: "4" },
@@ -214,7 +221,6 @@ export const InformationSummarySection = () => {
       inputRequired: !!!formData.rdcPlanNumber,
       type: "option",
       options: [
-        { label: "1", value: "1" },
         { label: "2", value: "2" },
         { label: "3", value: "3" },
         { label: "4", value: "4" },
@@ -427,7 +433,6 @@ export const InformationSummarySection = () => {
       inputRequired: !!!formData.realizationsOnSameUrbanismCertificateNumber,
       type: "option",
       options: [
-        { label: "1", value: "1" },
         { label: "2", value: "2" },
         { label: "3", value: "3" },
         { label: "4", value: "4" },
@@ -497,9 +502,10 @@ export const InformationSummarySection = () => {
         (typeof item.value === "boolean" &&
           item.value === true &&
           item.inputRequired === true) ||
-        (typeof item.value === "string" && item.value === "")
+        (typeof item.value === "string" && item.value !== "")
       ) {
         errors[`question_${index}`] = "Ce champ est obligatoire";
+        console.log(item);
         isValid = false;
       }
 
@@ -572,7 +578,7 @@ export const InformationSummarySection = () => {
       : [];
 
   return (
-    <div className="flex flex-col w-full pb-[150px] items-start gap-6 sm:gap-8 pt-0 sm:pb-0 px-0">
+    <div className="flex flex-col w-full items-start gap-6 sm:gap-8 pt-0 px-0">
       {formErrors["general"] && (
         <div
           className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative w-full"

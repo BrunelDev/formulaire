@@ -11,8 +11,8 @@ export const FormFour = () => {
   return (
     <div className="w-full  relative">
       <div className="bg-[#f7f7f8]">
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
-          <div className="w-full lg:w-[28%] animate-fade-in opacity-0 [--animation-delay:600ms]">
+        <div className="flex sm:flex-col flex-col-reverse lg:flex-row gap-4 lg:gap-6">
+          <div className="w-full lg:w-[28%] animate-fade-in opacity-0 [--animation-delay:600ms] pb-[150px] sm:pb-0">
             <ClientFeedbackSection />
           </div>
           <ScrollArea
