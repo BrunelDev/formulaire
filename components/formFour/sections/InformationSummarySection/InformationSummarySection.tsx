@@ -271,7 +271,6 @@ export const InformationSummarySection = () => {
       value: formData.hasMultipleRealizationsOnSamePlanRequest,
       type: "option",
       options: [
-        { label: "1 sous-projet", value: "1" },
         { label: "2 sous-projets", value: "2" },
         { label: "3 sous-projets", value: "3" },
         { label: "4 sous-projets", value: "4" },
@@ -340,7 +339,6 @@ export const InformationSummarySection = () => {
       price: "(125€ TTC /niveau)",
       type: "option",
       options: [
-        { label: "1 niveau", value: "1" },
         { label: "2 niveaux", value: "2" },
         { label: "3 niveaux", value: "3" },
         { label: "4 niveaux", value: "4" },
@@ -367,7 +365,6 @@ export const InformationSummarySection = () => {
       price: "(125€ TTC /niveau)",
       type: "option",
       options: [
-        { label: "1 niveau", value: "1" },
         { label: "2 niveaux", value: "2" },
         { label: "3 niveaux", value: "3" },
         { label: "4 niveaux", value: "4" },
