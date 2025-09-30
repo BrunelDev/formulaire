@@ -75,7 +75,7 @@ export const FormThree = () => {
                 </h2>
 
                 <p className="font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-xs sm:text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
-                  Adresse localisée, et le secteur est validé !<br />
+                  Adresse localisée et le secteur est validé !<br />
                   Dites-nous maintenant ce que vous souhaitez réaliser parmi les
                   options ci-dessous pour obtenir votre autorisation
                   d&apos;urbanisme, puis passez à l&apos;étape suivante.
