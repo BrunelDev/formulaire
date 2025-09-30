@@ -103,11 +103,11 @@ export const InformationSummarySection = () => {
       inputRequired: !!!formData.rdcPlanNumber,
       type: "option",
       options: [
-        { label: "1`niveau", value: "1" },
-        { label: "2`niveaux", value: "2" },
-        { label: "3`niveaux", value: "3" },
-        { label: "4`niveaux", value: "4" },
-        { label: "5`niveaux ou plus", value: "5" },
+        { label: "1 niveau", value: "1" },
+        { label: "2 niveaux", value: "2" },
+        { label: "3 niveaux", value: "3" },
+        { label: "4 niveaux", value: "4" },
+        { label: "5 niveaux ou plus", value: "5" },
       ],
       handleInputChange: (value: string | undefined) => {
         updateFormData({
