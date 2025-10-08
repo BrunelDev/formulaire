@@ -27,7 +27,7 @@ export const NavigationSection = () => {
 
         <NavigationMenu className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:400ms]">
           <NavigationMenuList className="flex items-center gap-10">
-            {navigationItems.map((item, index) => (
+            {navigationItems.map((item) => (
               <NavigationMenuItem key={item.label}>
                 <NavigationMenuLink
                   href={item.href}

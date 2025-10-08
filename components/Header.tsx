@@ -67,7 +67,7 @@ const Header = () => {
                     href="#service-unite"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
                   >
-                    Service à l'unité
+                    Service à l&apos;unité
                   </a>
                 </div>
               </div>
@@ -152,7 +152,7 @@ const Header = () => {
                   className="text-gray-600 hover:text-blue-600 block pl-4 py-1 rounded-md text-sm"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Service à l'unité
+                  Service à l&apos;unité
                 </a>
               </div>
               <a

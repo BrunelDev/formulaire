@@ -61,7 +61,10 @@ export default function Footer() {
     { label: "(+33) 6 56 74 54 70", href: "tel:+33656745470" },
   ];
   return (
-    <footer className="bg-white px-6 py-16 md:px-12 lg:px-24`h-[calc(100vh-172px)]">
+    <footer
+      className="bg-white px-6 py-16 md:px-12 lg:px-24`h-[calc(100vh-172px)] font-figtree"
+      style={{ fontFamily: "var(--font-figtree)" }}
+    >
       <div className="mx-auto max-w-7xl">
         {/* Main footer content */}
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
@@ -163,7 +166,7 @@ export default function Footer() {
                   ) : (
                     <Link
                       href={item.href}
-                      className="text-[18px] text-dim_gray font-[400] transition-colors duration-100 hover:text-syracuse_red_orange"
+                      className="text-[16px] text-dim_gray font-[400] transition-colors duration-100 hover:text-syracuse_red_orange"
                     >
                       {item.label}
                     </Link>

@@ -110,8 +110,6 @@ export function QuestionWithInput({
   inputRequired = false,
   error,
   inputError,
-  index,
-  formData,
 }: {
   question: string;
   description?: string;

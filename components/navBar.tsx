@@ -1,3 +1,13 @@
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -13,6 +23,20 @@ export default function NavBar() {
     { label: "Nos offres", href: "https://mesplansdepermis.fr/nos-offres/" },
     { label: "Contact", href: "https://mesplansdepermis.fr/devis/" },
   ];
+  const nosOffres = [
+    {
+      label: "Permis de construire",
+      href: "https://mesplansdepermis.fr/nos-offres/permis-construire/",
+    },
+    {
+      label: "Déclaration préalable",
+      href: "https://mesplansdepermis.fr/nos-offres/declaration-prealable/",
+    },
+    {
+      label: "Service à l'unité",
+      href: "https://mesplansdepermis.fr/nos-offres/service-unite/",
+    },
+  ];
 
   return (
     <div className="flex flex-col w-full items-start px-4 sm:px-8 lg:px-24 py-3 sm:py-4 absolute top-0 left-0 bg-background border-b [border-bottom-style:solid] border-[#f7f7f8]">
@@ -26,19 +50,44 @@ export default function NavBar() {
         />
 
         <div className="hidden md:inline-flex items-center gap-4 lg:gap-10 relative flex-[0_0_auto]">
-          {navigationItems.map((item) => (
-            <div
-              key={item.label}
-              className="inline-flex items-center justify-center gap-2.5 relative flex-[0_0_auto]"
-            >
-              <a
-                href={item.href}
-                className="relative w-fit mt-[-1.00px] font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm lg:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)] hover:text-button-color transition-colors duration-200"
-              >
-                {item.label}
-              </a>
-            </div>
-          ))}
+          <NavigationMenu>
+            <NavigationMenuList className="flex items-center gap-4 lg:gap-10">
+              {navigationItems.map((item) => (
+                <NavigationMenuItem key={item.label}>
+                  {item.label === "Nos offres" ? (
+                    <>
+                      <NavigationMenuTrigger className="relative w-fit mt-[-1.00px] font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm lg:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)] hover:text-button-color transition-colors duration-200">
+                        {item.label}
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent className="p-4">
+                        <div className="grid grid-cols-1 gap-2 w-[260px]">
+                          {nosOffres.map((service) => (
+                            <a
+                              key={service.label}
+                              href={service.href}
+                              className="block px-3 py-2 rounded-md text-sm text-text-color hover:bg-gray-50 hover:text-button-color transition-colors duration-200"
+                            >
+                              {service.label}
+                            </a>
+                          ))}
+                        </div>
+                      </NavigationMenuContent>
+                    </>
+                  ) : (
+                    <NavigationMenuLink
+                      href={item.href}
+                      className="relative w-fit mt-[-1.00px] font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm lg:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)] hover:text-button-color transition-colors duration-200"
+                    >
+                      {item.label}
+                    </NavigationMenuLink>
+                  )}
+                </NavigationMenuItem>
+              ))}
+
+              <NavigationMenuIndicator />
+            </NavigationMenuList>
+            <NavigationMenuViewport />
+          </NavigationMenu>
         </div>
 
         {/* Mobile menu button */}
