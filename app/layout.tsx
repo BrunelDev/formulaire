@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mon plan de permis",
+  title: "Vos plans de permis de construire pas chers à partir de 350€",
   description: "Obtenez votre plan de permis en ligne.",
 };
 

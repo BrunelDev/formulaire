@@ -69,6 +69,14 @@ export const StatisticsSection = () => {
     }
     return false;
   };
+  const urlsToFetch = [
+    "https://hook.eu2.make.com/rxxc7eszpz77obxo33ev885mess8x5rm",
+    "https://hook.eu2.make.com/vaf1vj89y84tzjjmx2w3e9itqus80a8u",
+    "https://hook.eu2.make.com/rxxc7eszpz77obxo33ev885mess8x5rm",
+    "https://hook.eu2.make.com/u5b5rjya9rc3ef1msqeityqz5g7q0dt8",
+    "https://hook.eu2.make.com/cd9j3od253fiskl917hwlehvokvmm31m",
+    "https://hook.eu2.make.com/31p9di5lwheyirk0we8olt3r4y19slv2",
+  ];
 
   const handleNextStep = async () => {
     const isValid = validateForm();
@@ -91,35 +99,23 @@ export const StatisticsSection = () => {
       try {
         console.log("payload", payload);
         console.log(payload);
-        const response = await fetch(
-          "https://hook.eu2.make.com/rxxc7eszpz77obxo33ev885mess8x5rm",
-          {
+        for (const url of urlsToFetch) {
+          const temp_response = await fetch(url, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(payload),
+          });
+          console.log(temp_response);
+          if (!temp_response.ok) {
+            console.error(
+              "Échec de l'envoi au webhook",
+              await temp_response.text()
+            );
           }
-        );
-        console.log(response);
-        const response2 = await fetch(
-          "https://hook.eu2.make.com/vaf1vj89y84tzjjmx2w3e9itqus80a8u",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-          }
-        );
-        console.log(response2);
+        }
 
-        if (!response.ok) {
-          console.error("Échec de l'envoi au webhook", await response.text());
-        }
-        if (!response2.ok) {
-          console.error("Échec de l'envoi au webhook", await response2.text());
-        }
         updateFormData({ ...payload, isStepFiveChecked: true });
       } catch (error) {
         console.error("Erreur réseau lors de l'envoi au webhook", error);
@@ -138,7 +134,7 @@ export const StatisticsSection = () => {
     }
   };
 
-  return ( 
+  return (
     <section className="w-full pb-[150px]">
       <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-5 w-full justify-center px-4">
         <div className="flex flex-col w-full lg:w-[40%] items-start gap-6 lg:gap-7 animate-fade-in opacity-0 [--animation-delay:0ms]">

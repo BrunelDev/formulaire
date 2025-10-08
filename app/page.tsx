@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 import { FormFive } from "@/components/formFive/formFive";
 import { FormFour } from "@/components/formFour/formFour";
 import { FormOne } from "@/components/formOne/formOne";
@@ -41,6 +42,7 @@ export default function Home() {
           <FormOne />
         )}
       </div>
+      <Footer />
     </div>
   );
 }

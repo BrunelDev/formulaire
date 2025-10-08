@@ -5,10 +5,13 @@ export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigationItems = [
-    { label: "Accueil", href: "#" },
-    { label: "Comment ça marche", href: "#" },
-    { label: "Nos offres", href: "#" },
-    { label: "Contact", href: "#" },
+    { label: "Accueil", href: "https://mesplansdepermis.fr/" },
+    {
+      label: "Comment ça marche",
+      href: "https://mesplansdepermis.fr/processus/",
+    },
+    { label: "Nos offres", href: "https://mesplansdepermis.fr/nos-offres/" },
+    { label: "Contact", href: "https://mesplansdepermis.fr/devis/" },
   ];
 
   return (
