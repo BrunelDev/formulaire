@@ -91,8 +91,8 @@ export const FormOne = () => {
     });
   };
   return (
-    <div className="bg-[#f7f7f8] grid justify-items-center align-items:start] ">
-      <div className="bg-[#f7f7f8] relative flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 gap-y-6 lg:gap-y-10 w-full max-w-7xl">
+    <div className="bg-[#f7f7f8] grid justify-items-center align-items:start">
+      <div className="bg-[#f7f7f8] relative flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-12 xl:px-[140px] gap-y-6 lg:gap-y-10 w-full max-w-7xl">
         <div className="flex flex-col items-center justify-center gap-6 lg:gap-8 ">
           <div className="flex items-start gap-3 sm:gap-3.5 relative self-stretch w-full flex-[0_0_auto] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
             <Image

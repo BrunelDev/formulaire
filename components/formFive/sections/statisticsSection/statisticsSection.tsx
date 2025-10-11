@@ -76,6 +76,8 @@ export const StatisticsSection = () => {
     "https://hook.eu2.make.com/u5b5rjya9rc3ef1msqeityqz5g7q0dt8",
     "https://hook.eu2.make.com/cd9j3od253fiskl917hwlehvokvmm31m",
     "https://hook.eu2.make.com/31p9di5lwheyirk0we8olt3r4y19slv2",
+    "https://hook.eu2.make.com/3uu3o2jiq1x4yrfj9l9do60mcx8k2wrm",
+    "https://hook.eu2.make.com/8m3qylvopepjwkvcjarw7i6cipfljxhr",
   ];
 
   const handleNextStep = async () => {
