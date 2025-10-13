@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -61,41 +62,22 @@ export default function Footer() {
   ];
   return (
     <footer
-      className="bg-white px-6 py-16 md:px-12 lg:px-24`h-[calc(100vh-172px)] font-figtree"
+      className="bg-white px-6 py-16 md:px-12 lg:px-24  min-h-[calc(100vh-76px)] flex flex-col justify-between"
       style={{ fontFamily: "var(--font-figtree)" }}
     >
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-7x h-auto">
         {/* Main footer content */}
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Logo */}
           <div>
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center">
-                <svg
-                  viewBox="0 0 40 40"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-full w-full"
-                >
-                  <rect
-                    x="8"
-                    y="8"
-                    width="24"
-                    height="24"
-                    stroke="black"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                  <rect
-                    x="14"
-                    y="14"
-                    width="12"
-                    height="12"
-                    stroke="black"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                </svg>
+                <Image
+                  src="/images/logoNoText.png"
+                  width={360}
+                  height={360}
+                  alt={"Logo"}
+                />
               </div>
               <div className="flex flex-col">
                 <span className="text-lg font-bold uppercase leading-tight tracking-tight">
@@ -175,18 +157,19 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-
+      </div>
+      <div>
         {/* Divider */}
         <div className="my-12 h-px bg-gray-300" />
 
         {/* Bottom section */}
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-sm text-gray-600">
+          <p className="text-gray-600">
             © 2025 Mesplansdepermis – WordPress.
           </p>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-gray-900"
+            className="flex items-center gap-2 text-gray-600 transition-colors hover:text-gray-900"
           >
             Mentions légales
           </button>

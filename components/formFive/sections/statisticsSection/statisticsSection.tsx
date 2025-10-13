@@ -72,7 +72,6 @@ export const StatisticsSection = () => {
   const urlsToFetch = [
     "https://hook.eu2.make.com/rxxc7eszpz77obxo33ev885mess8x5rm",
     "https://hook.eu2.make.com/vaf1vj89y84tzjjmx2w3e9itqus80a8u",
-    "https://hook.eu2.make.com/rxxc7eszpz77obxo33ev885mess8x5rm",
     "https://hook.eu2.make.com/u5b5rjya9rc3ef1msqeityqz5g7q0dt8",
     "https://hook.eu2.make.com/cd9j3od253fiskl917hwlehvokvmm31m",
     "https://hook.eu2.make.com/31p9di5lwheyirk0we8olt3r4y19slv2",
