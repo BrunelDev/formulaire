@@ -1,6 +1,5 @@
 "use client";
 
-import { ChevronUp } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
@@ -190,7 +189,6 @@ export default function Footer() {
             className="flex items-center gap-2 text-sm text-gray-600 transition-colors hover:text-gray-900"
           >
             Mentions légales
-            <ChevronUp className="h-4 w-4" />
           </button>
         </div>
       </div>

@@ -7,7 +7,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
-import { default as Link, default as NextLink } from "next/link";
+import { default as Link } from "next/link";
 import { useState } from "react";
 import { NavButton } from "./PrimaryButton/NavButton";
 
@@ -70,42 +70,34 @@ export default function NavBar() {
                 {navigationItems.map((component) =>
                   component.titre !== "Nos offres" ? (
                     <NavigationMenuItem key={component.titre}>
-                      <Link href={component.href}>{component.titre}</Link>
+                      <Link
+                        href={component.href}
+                        className="transition-colors duration-100 hover:text-syracuse_red_orange"
+                      >
+                        {component.titre}
+                      </Link>
                     </NavigationMenuItem>
                   ) : (
                     <NavigationMenuItem
                       key={component.titre}
                       className="relative"
                     >
-                      <NavigationMenuTrigger>Nos offres</NavigationMenuTrigger>
+                      <NavigationMenuTrigger>
+                        <h6 className="transition-colors duration-100 hover:text-syracuse_red_orange">
+                          Nos offres
+                        </h6>
+                      </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid w-[300px] gap-4">
-                          <li>
-                            <NavigationMenuLink asChild>
-                              <NextLink href="#">
-                                <div className="font-medium">Components</div>
-                                <div className="text-muted-foreground">
-                                  Browse all components in the library.
-                                </div>
-                              </NextLink>
-                            </NavigationMenuLink>
-                            <NavigationMenuLink asChild>
-                              <NextLink href="#">
-                                <div className="font-medium">Documentation</div>
-                                <div className="text-muted-foreground">
-                                  Learn how to use the library.
-                                </div>
-                              </NextLink>
-                            </NavigationMenuLink>
-                            <NavigationMenuLink asChild>
-                              <NextLink href="#">
-                                <div className="font-medium">Blog</div>
-                                <div className="text-muted-foreground">
-                                  Read our latest blog posts.
-                                </div>
-                              </NextLink>
-                            </NavigationMenuLink>
-                          </li>
+                        <ul className="grid w-[300px] gap-4 p-4">
+                          {nosOffres.map((offre) => (
+                            <li key={offre.label}>
+                              <NavigationMenuLink href={offre.href}>
+                                <h6 className="text-sm transition-colors duration-100 hover:text-syracuse_red_orange">
+                                  {offre.label}
+                                </h6>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
                         </ul>
                       </NavigationMenuContent>
                     </NavigationMenuItem>
