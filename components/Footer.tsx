@@ -66,18 +66,18 @@ export default function Footer() {
         className="px-6 py-16 md:px-12 lg:px-0 lg:w-[77%]  min-h-[calc(100vh-76px)] flex flex-col justify-between"
         style={{ fontFamily: "var(--font-figtree)" }}
       >
-        <div className="mx-auto max-w-7x h-auto">
+        <div className="h-auto lg:mx-0 mx-auto">
           {/* Main footer content */}
           <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
             {/* Logo */}
             <div>
               <div className="flex items-center gap-3">
-                <div className="flex items-center justify-center">
+                <div className="flex items-center">
                   <Image
                     src="/images/logo.jpg"
                     className=""
-                    width={360}
-                    height={360}
+                    width={130}
+                    height={130}
                     alt={"Logo"}
                   />
                 </div>
@@ -86,7 +86,7 @@ export default function Footer() {
 
             {/* Votre projet */}
             <div>
-              <h3 className="mb-6 text-base font-semibold text-[18px] text-oxford_blue text-center md:text-start">
+              <h3 className="mb-6 font-semibold text-[18px] text-oxford_blue text-center md:text-start">
                 Votre projet
               </h3>
               <ul className="space-y-4 text-center md:text-start">
@@ -124,7 +124,7 @@ export default function Footer() {
 
             {/* Contact */}
             <div>
-              <h3 className="mb-6 text-base font-semibold text-gray-900 text-center md:text-start">
+              <h3 className="mb-6 text-[18px] font-semibold text-gray-900 text-center md:text-start">
                 Contact
               </h3>
               <ul className="space-y-4 text-center md:text-start">

@@ -73,7 +73,7 @@ export default function NavBar() {
   return (
     <>
       <div className="w-full flex items-center justify-center bg-white [border-bottom-style:solid] h-[76px] relative z-50">
-        <div className="flex flex-col w-full lg:w-[77%] items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 px-4">
+        <div className="flex flex-col w-full lg:w-[77%] items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
           <div className="flex items-center justify-between relative w-full">
             <Image
               className="relative hidden lg:block w-[100px] sm:w-[120px] lg:w-[127px] h-7 sm:h-8 lg:h-[35px] object-cover"
