@@ -21,7 +21,7 @@ export default function NavBar() {
       description: "L'accueil est la page d'accueil de votre site web.",
     },
     {
-      titre: "Comment ça marche",
+      titre: "Comment ça marche ?",
       href: "https://mesplansdepermis.fr/processus/",
       description:
         "Comment ça marche est la page de comment ça marche de votre site web.",
@@ -50,14 +50,18 @@ export default function NavBar() {
       label: "Service à l'unité",
       href: "https://mesplansdepermis.fr/nos-offres/service-unite/",
     },
+    {
+      label: "Dossier E.R.P",
+      href: "https://mesplansdepermis.fr/nos-offres/erp/",
+    },
   ];
 
   return (
     <div className="w-full flex items-center justify-center bg-white [border-bottom-style:solid] h-[76px]">
-      <div className="flex flex-col w-full lg:w-[80%] items-center justify-center absolute top-1/2 -translate-1/2 left-1/2 -translate-x-1/2">
+      <div className="flex flex-col w-full lg:w-[77%] items-center justify-center absolute top-1/2 -translate-1/2 left-1/2 -translate-x-1/2">
         <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
           <Image
-            className="relative w-[100px] sm:w-[120px] lg:w-[129.73px] h-7 sm:h-8 lg:h-9 object-cover"
+            className="relative w-[100px] sm:w-[120px] lg:w-[126px] h-7 sm:h-8 lg:h-[35px] object-cover"
             width={129.73}
             height={36}
             alt="Logo image"
@@ -72,7 +76,7 @@ export default function NavBar() {
                     <NavigationMenuItem key={component.titre}>
                       <Link
                         href={component.href}
-                        className="transition-colors duration-100 hover:text-syracuse_red_orange"
+                        className="text-oxford_blue transition-colors duration-100 hover:text-syracuse_red_orange font-medium"
                       >
                         {component.titre}
                       </Link>
@@ -83,7 +87,7 @@ export default function NavBar() {
                       className="relative"
                     >
                       <NavigationMenuTrigger>
-                        <h6 className="transition-colors duration-100 hover:text-syracuse_red_orange">
+                        <h6 className="text-oxford_blue transition-colors duration-100 hover:text-syracuse_red_orange font-medium">
                           Nos offres
                         </h6>
                       </NavigationMenuTrigger>

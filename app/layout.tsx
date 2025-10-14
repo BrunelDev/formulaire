@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body
         className={`${figtree.variable} antialiased bg-[#f7f7f8] font-figtree`}
       >

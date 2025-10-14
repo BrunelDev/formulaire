@@ -12,28 +12,28 @@ const formFields = [
   {
     id: "nom",
     label: "Nom",
-    placeholder: "DOE",
+    placeholder: "Nom",
     defaultValue: "DUPONT",
     required: true,
   },
   {
     id: "prenom",
     label: "Prénom",
-    placeholder: "John",
+    placeholder: "Prénom",
     defaultValue: "Nicolas",
     required: true,
   },
   {
     id: "email",
     label: "Email",
-    placeholder: "johndoe@gmail.com",
+    placeholder: "Email",
     defaultValue: "nicolasdupont@gmail.com",
     required: true,
   },
   {
     id: "telephone",
     label: "Téléphone",
-    placeholder: "0101010101",
+    placeholder: "Téléphone",
     defaultValue: "0606060606",
     required: true,
   },
@@ -136,7 +136,7 @@ export const StatisticsSection = () => {
   };
 
   return (
-    <section className="w-full pb-[150px]">
+    <section className="w-full sm:pb-8 pb-[150px]">
       <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-5 w-full justify-center px-4">
         <div className="flex flex-col w-full lg:w-[40%] items-start gap-6 lg:gap-7 animate-fade-in opacity-0 [--animation-delay:0ms]">
           <div className="flex flex-col items-end gap-4 sm:gap-5 w-full">
@@ -190,12 +190,10 @@ export const StatisticsSection = () => {
                         <Input
                           id={field.id}
                           placeholder={field.placeholder}
-                          className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
+                          className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074]"
                           required={field.required}
                         />
-                        <div className="absolute w-[116px] top-[20px] sm:top-[23px] left-3 sm:left-4 opacity-0 font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
-                          {field.defaultValue}
-                        </div>
+                       
                       </div>
                     </div>
                   ))}
@@ -224,9 +222,6 @@ export const StatisticsSection = () => {
                           className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
                           required={field.required}
                         />
-                        <div className="absolute w-[116px] top-[20px] sm:top-[23px] left-3 sm:left-4 opacity-0 font-text-medium font-[number:var(--text-medium-font-weight)] text-text-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] whitespace-nowrap [font-style:var(--text-medium-font-style)]">
-                          {field.defaultValue}
-                        </div>
                       </div>
                     </div>
                   ))}
@@ -279,23 +274,23 @@ export const StatisticsSection = () => {
                 <Image
                   width={120}
                   height={100}
-                  className="w-[100px] h-[80px] sm:w-[120px] sm:h-[100px] object-cover flex-shrink-0 sm:static absolute top-1/2 -translate-y-1/2"
+                  className="w-[100px] h-[80px] sm:w-[120px] sm:h-[100px] object-cover flex-shrink-0"
                   alt="Urban building hero"
                   src="/images/Urban-building.png"
                 />
               </div>
 
-              <div className="grid grid-cols-2 sm:flex sm:h-16 items-center justify-center sm:justify-between gap-4 sm:gap-0 w-full">
+              <div className="grid grid-cols-2 sm:flex lg:grid lg:gap-4 lg:h-auto lg:mx-auto xl:flex sm:h-16 items-center lg:items-center lg:justify-center justify-center sm:justify-between gap-4 sm:gap-0 w-full">
                 {statistics.map((stat, index) => (
                   <div
                     key={index}
-                    className="flex flex-col w-full sm:w-[98px] items-center sm:items-start gap-1"
+                    className="flex flex-col w-full sm:w-[98px] lg:w-full xl:w-[98px] items-center lg:items-center sm:items-start xl:items-start gap-1"
                   >
-                    <div className="w-full font-heading-h1 font-[number:var(--heading-h1-font-weight)] text-white text-2xl sm:text-3xl lg:text-[length:var(--heading-h1-font-size)] text-center tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)] [font-style:var(--heading-h1-font-style)]">
+                    <div className="w-full  text-white text-2xl sm:text-3xl text-center">
                       {stat.value}
                     </div>
 
-                    <div className="w-full font-text-medium font-[number:var(--text-medium-font-weight)] text-white text-xs sm:text-sm lg:text-[length:var(--text-medium-font-size)] text-center tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)] text-nowrap">
+                    <div className="w-full font-text-medium text-white text-xs sm:text-sm text-center text-nowrap">
                       {stat.label}
                     </div>
                   </div>
@@ -310,7 +305,7 @@ export const StatisticsSection = () => {
           height={640}
           className="w-full lg:w-[40%] h-auto lg:h-[640px] translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:800ms] object-contain hidden sm:block"
           alt="Frame"
-          src="/images/frame51.png"
+          src="/images/frame51.svg"
         />
       </div>
       <div className="sm:hidden fixed bottom-0 left-0 right-0 flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:400ms]  bg-[#ffffffaa] pt-10 pb-14 px-4 shadow-xl backdrop-blur-lg">

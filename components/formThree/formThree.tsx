@@ -57,7 +57,7 @@ export const FormThree = () => {
 
   return (
     <div
-      className="bg-[#f7f7f8] w-full flex justify-center"
+      className="bg-[#f7f7f8] w-full flex justify-center py-8"
       data-model-id="55:360"
     >
       <div className="bg-[#f7f7f8] w-full relative sm:pb-0 pb-[150px]">
