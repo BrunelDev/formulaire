@@ -76,12 +76,12 @@ export default function NavBar() {
         <div className="flex flex-col w-full lg:w-[77%] items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 px-4">
           <div className="flex items-center justify-between relative w-full">
             <Image
-              className="relative hidden lg:block w-[100px] sm:w-[120px] lg:w-[126px] h-7 sm:h-8 lg:h-[35px] object-cover"
+              className="relative hidden lg:block w-[100px] sm:w-[120px] lg:w-[127px] h-7 sm:h-8 lg:h-[35px] object-cover"
               width={129.73}
               height={36}
               alt="Logo image"
               src={
-                "https://mesplansdepermis.fr/wp-content/uploads/2024/10/logo-mesplansdepermis-15.png"
+                "/images/logo.jpg"
               }
             />
             <Image

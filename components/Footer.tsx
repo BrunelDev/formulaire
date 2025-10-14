@@ -74,7 +74,7 @@ export default function Footer() {
               <div className="flex items-center gap-3">
                 <div className="flex items-center justify-center">
                   <Image
-                    src="https://mesplansdepermis.fr/wp-content/uploads/2024/10/logo-mesplansdepermis-15-1024x284.png"
+                    src="/images/logo.jpg"
                     className=""
                     width={360}
                     height={360}
