@@ -90,7 +90,7 @@ export default function NavBar() {
               height={35}
               alt="Logo image"
               src={
-                "https://mesplansdepermis.fr/wp-content/uploads/2024/10/logo-mesplansdepermis-20.png"
+                "/images/logoNoText.jpg"
               }
             />
 
@@ -182,7 +182,7 @@ export default function NavBar() {
               width={28.5}
               height={35}
               alt="Logo"
-              src="https://mesplansdepermis.fr/wp-content/uploads/2024/10/logo-mesplansdepermis-20.png"
+              src="/images/logoNoText.jpg"
             />
             <button
               onClick={() => setIsMobileMenuOpen(false)}
