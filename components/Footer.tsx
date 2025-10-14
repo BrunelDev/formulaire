@@ -71,7 +71,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
             {/* Logo */}
             <div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center lg:justify-normal justify-center gap-3">
                 <div className="flex items-center">
                   <Image
                     src="/images/logo.jpg"
