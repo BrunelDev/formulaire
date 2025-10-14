@@ -244,7 +244,6 @@ export const useFormState = create<FormState>()(
           formData: {
             ...state.formData,
             // Reset all Step 3 fields to their initial values
-            isStepThreeChecked: false,
             isArchitectNeeded: undefined,
             hasMultipleRealizationsOnSameConstructionPermit: undefined,
             realizationsOnSameConstructionPermitNumber: undefined,

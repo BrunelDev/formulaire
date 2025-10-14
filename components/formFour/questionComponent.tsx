@@ -31,7 +31,6 @@ export function Question({
   error?: string;
 }) {
   const { setSummary, summary } = useSummarySate();
-  const [selectedValue, setSelectedValue] = useState<string | null>(value!);
   return (
     <Card className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms]">
       <CardContent className="flex flex-col items-start gap-3 p-4 sm:p-5">
@@ -47,10 +46,8 @@ export function Question({
         </div>
 
         <RadioGroup
-          value={selectedValue}
+          value={value}
           onValueChange={(value: string) => {
-            setSelectedValue(value);
-
             handleChange(value === "oui" ? true : false);
             console.log(value);
             if (value === "oui" && !summary.includes(question)) {
@@ -132,7 +129,7 @@ export function QuestionWithInput({
     inputValue || undefined
   );
   const { setSummary, summary } = useSummarySate();
-  console.log(inputRequired);
+  console.log(question, value);
 
   // Fonction utilitaire pour mettre à jour le résumé de manière cohérente
   const updateSummary = (
@@ -266,9 +263,6 @@ export function QuestionWithInput({
                 // Mise à jour du résumé avec la nouvelle fonction
                 updateSummary(question, value);
               }}
-              defaultValue={
-                options && options.length > 0 ? options[0].value : undefined
-              }
             >
               <SelectTrigger
                 className={`w-full ${inputError ? "border-red-500" : ""}`}

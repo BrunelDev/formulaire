@@ -460,7 +460,7 @@ export const InformationSummarySection = () => {
       price: "(180€ TTC)",
     },
     {
-      question: "Service livraison express (90€ TTC)",
+      question: "Service livraison express",
       description:
         "Envoi de votre A.P.S sous 72h pour un traitement rapide de votre projet.",
       handleChange: (value: boolean) => {

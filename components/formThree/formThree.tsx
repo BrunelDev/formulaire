@@ -95,11 +95,11 @@ export const FormThree = () => {
                       : "bg-app-background hover:bg-gray-100"
                   }`}
                   onClick={() => {
-                    resetStepThree();
                     updateFormData({
                       ...formData,
                       option: option.id,
                     });
+                    resetStepThree();
                   }}
                 >
                   <CardContent className="flex flex-col items-center gap-2 p-1 pt-1 pb-2">
