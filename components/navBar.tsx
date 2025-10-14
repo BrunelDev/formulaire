@@ -10,9 +10,21 @@ import Image from "next/image";
 import { default as Link } from "next/link";
 import { useState } from "react";
 import { NavButton } from "./PrimaryButton/NavButton";
+import { Button } from "./ui/button";
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showOffres, setShowOffres] = useState(false);
+
+  const [animationClass, setAnimationClass] = useState("");
+
+  const handleMouseEnter = () => {
+    setAnimationClass("animate-hover-bounce");
+  };
+
+  const handleMouseLeave = () => {
+    setAnimationClass("animate-hover-bounce-reverse");
+  };
 
   const navigationItems = [
     {
@@ -30,6 +42,7 @@ export default function NavBar() {
       titre: "Nos offres",
       href: "https://mesplansdepermis.fr/nos-offres/",
       description: "Nos offres est la page de nos offres de votre site web.",
+      hasSubmenu: true,
     },
     {
       titre: "Contact",
@@ -37,6 +50,7 @@ export default function NavBar() {
       description: "Contact est la page de contact de votre site web.",
     },
   ];
+
   const nosOffres = [
     {
       label: "Permis de construire",
@@ -57,67 +71,123 @@ export default function NavBar() {
   ];
 
   return (
-    <div className="w-full flex items-center justify-center bg-white [border-bottom-style:solid] h-[76px]">
-      <div className="flex flex-col w-full lg:w-[77%] items-center justify-center absolute top-1/2 -translate-1/2 left-1/2 -translate-x-1/2">
-        <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
-          <Image
-            className="relative w-[100px] sm:w-[120px] lg:w-[126px] h-7 sm:h-8 lg:h-[35px] object-cover"
-            width={129.73}
-            height={36}
-            alt="Logo image"
-            src={"/images/logo.png"}
-          />
+    <>
+      <div className="w-full flex items-center justify-center bg-white [border-bottom-style:solid] h-[76px] relative z-50">
+        <div className="flex flex-col w-full lg:w-[77%] items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 px-4">
+          <div className="flex items-center justify-between relative w-full">
+            <Image
+              className="relative hidden lg:block w-[100px] sm:w-[120px] lg:w-[126px] h-7 sm:h-8 lg:h-[35px] object-cover"
+              width={129.73}
+              height={36}
+              alt="Logo image"
+              src={
+                "https://mesplansdepermis.fr/wp-content/uploads/2024/10/logo-mesplansdepermis-15.png"
+              }
+            />
+            <Image
+              className="lg:hidden object-cover"
+              width={28.5}
+              height={35}
+              alt="Logo image"
+              src={
+                "https://mesplansdepermis.fr/wp-content/uploads/2024/10/logo-mesplansdepermis-20.png"
+              }
+            />
 
-          <div className=" items-center gap-4 lg:gap-10 relative flex-[0_0_auto] hidden lg:inline-flex">
-            <NavigationMenu>
-              <NavigationMenuList className="flex flex-row gap-10">
-                {navigationItems.map((component) =>
-                  component.titre !== "Nos offres" ? (
-                    <NavigationMenuItem key={component.titre}>
-                      <Link
-                        href={component.href}
-                        className="text-oxford_blue transition-colors duration-100 hover:text-syracuse_red_orange font-medium"
+            <div className="items-center gap-4 lg:gap-10 relative flex-[0_0_auto] hidden lg:inline-flex">
+              <NavigationMenu>
+                <NavigationMenuList className="flex flex-row gap-10">
+                  {navigationItems.map((component) =>
+                    component.titre !== "Nos offres" ? (
+                      <NavigationMenuItem key={component.titre}>
+                        <Link
+                          href={component.href}
+                          className="text-oxford_blue transition-colors duration-100 hover:text-syracuse_red_orange font-medium"
+                        >
+                          {component.titre}
+                        </Link>
+                      </NavigationMenuItem>
+                    ) : (
+                      <NavigationMenuItem
+                        key={component.titre}
+                        className="relative"
                       >
-                        {component.titre}
-                      </Link>
-                    </NavigationMenuItem>
-                  ) : (
-                    <NavigationMenuItem
-                      key={component.titre}
-                      className="relative"
-                    >
-                      <NavigationMenuTrigger>
-                        <h6 className="text-oxford_blue transition-colors duration-100 hover:text-syracuse_red_orange font-medium">
-                          Nos offres
-                        </h6>
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <ul className="grid w-[300px] gap-4 p-4">
-                          {nosOffres.map((offre) => (
-                            <li key={offre.label}>
-                              <NavigationMenuLink href={offre.href}>
-                                <h6 className="text-sm transition-colors duration-100 hover:text-syracuse_red_orange">
-                                  {offre.label}
-                                </h6>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-                  )
-                )}
-              </NavigationMenuList>
-            </NavigationMenu>
-            <NavButton />
-          </div>
+                        <NavigationMenuTrigger>
+                          <h6 className="text-oxford_blue transition-colors duration-100 hover:text-syracuse_red_orange font-medium">
+                            Nos offres
+                          </h6>
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <ul className="grid w-[300px] gap-4 p-4">
+                            {nosOffres.map((offre) => (
+                              <li key={offre.label}>
+                                <NavigationMenuLink href={offre.href}>
+                                  <h6 className="text-sm transition-colors duration-100 hover:text-syracuse_red_orange">
+                                    {offre.label}
+                                  </h6>
+                                </NavigationMenuLink>
+                              </li>
+                            ))}
+                          </ul>
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+                    )
+                  )}
+                </NavigationMenuList>
+              </NavigationMenu>
+              <NavButton />
+            </div>
 
-          {/* Mobile menu button */}
-          <div className="lg:hidden w-full">
+            {/* Mobile menu button */}
+            <div className="lg:hidden ml-auto">
+              <button
+                className="p-2 text-gray-700 hover:text-gray-900 transition-colors duration-200"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle mobile menu"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d={
+                      isMobileMenuOpen
+                        ? "M6 18L18 6M6 6l12 12"
+                        : "M4 6h16M4 12h16M4 18h16"
+                    }
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu fullscreen */}
+      <div
+        className={`lg:hidden fixed top-0 left-0 h-full w-full bg-white z-50 transform transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        } px-8 pt-3`}
+      >
+        <div className="flex flex-col h-full">
+          {/* Header with logo and close button */}
+          <div className="flex items-center justify-between">
+            <Image
+              className="object-cover"
+              width={28.5}
+              height={35}
+              alt="Logo"
+              src="https://mesplansdepermis.fr/wp-content/uploads/2024/10/logo-mesplansdepermis-20.png"
+            />
             <button
-              className="p-2 text-text-color hover:text-button-color transition-colors duration-200"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle mobile menu"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="p-2 text-gray-700 hover:text-gray-900"
+              aria-label="Close menu"
             >
               <svg
                 className="w-6 h-6"
@@ -129,35 +199,88 @@ export default function NavBar() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d={
-                    isMobileMenuOpen
-                      ? "M6 18L18 6M6 6l12 12"
-                      : "M4 6h16M4 12h16M4 18h16"
-                  }
+                  d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
             </button>
           </div>
-        </div>
-      </div>
 
-      {/* Mobile menu */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden bg-background border-t border-[#f7f7f8] animate-in slide-in-from-bottom-4 duration-200 w-full">
-          <div className="px-4 py-3 space-y-2">
-            {navigationItems.map((item) => (
-              <a
-                key={item.titre}
-                href={item.href}
-                className="block px-3 py-2 text-text-color font-text-medium font-[number:var(--text-medium-font-weight)] text-sm tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)] hover:text-button-color hover:bg-gray-50 rounded-md transition-colors duration-200"
-                onClick={() => setIsMobileMenuOpen(false)}
+          {/* Menu items */}
+          <nav className="flex-1 overflow-y-auto py-8">
+            <div className="flex flex-col gap-6">
+              {navigationItems.map((item) => (
+                <div key={item.titre}>
+                  {item.hasSubmenu ? (
+                    <div>
+                      <button
+                        onClick={() => setShowOffres(!showOffres)}
+                        className="w-full flex items-center justify-between text-lg "
+                      >
+                        <span className="text-oxford_blue hover:text-syracuse_red_orange transition-colors duration-200 font-medium">
+                          {item.titre}
+                        </span>
+                        <svg
+                          className={`w-5 h-5 transform transition-transform duration-200 ${
+                            showOffres ? "rotate-90" : ""
+                          }`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </button>
+                      {showOffres && (
+                        <div className="bg-gray-50 py-2">
+                          {nosOffres.map((offre) => (
+                            <Link
+                              key={offre.label}
+                              href={offre.href}
+                              className="block px-10 py-3 text-base text-gray-700 hover:text-syracuse_red_orange transition-colors duration-200"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              {offre.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="block text-lg font-medium hover:text-syracuse_red_orange text-oxford_blue transition-colors duration-200"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.titre}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+          </nav>
+
+          {/* Bottom CTA button */}
+          <div className="w-full py-6 px-4 h-[47px] mb-18">
+            <Link href={"https://mesplansdepermis.fr/devis/"}>
+              {" "}
+              <Button
+                className={
+                  "min-h-[47px] h-full px-4 sm:px-5 py-2 sm:py-3 text-white font-label-medium font-[number:var(--label-medium-font-weight)] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] whitespace-nowrap [--animation-delay:0ms] cursor-pointer bg-oxford_blue  hover:bg-syracuse_red_orange w-full"
+                }
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               >
-                {item.titre}
-              </a>
-            ))}
+                <div className={animationClass}>J&apos;obtiens mon devis</div>
+              </Button>
+            </Link>
           </div>
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }

@@ -14,11 +14,11 @@ export const NavButton = () => {
   };
 
   return (
-    <Link href={"https://mesplansdepermis.fr/devis/"}>
+    <Link href={"https://mesplansdepermis.fr/devis/"} >
       {" "}
       <Button
         className={
-          "h-[38.4px] px-4 sm:px-5 py-2 sm:py-3 text-white font-label-medium font-[number:var(--label-medium-font-weight)] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] whitespace-nowrap [--animation-delay:0ms] cursor-pointer bg-oxford_blue  hover:bg-syracuse_red_orange"
+          "min-h-[38.4px] px-4 sm:px-5 py-2 sm:py-3 text-white font-label-medium font-[number:var(--label-medium-font-weight)] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] whitespace-nowrap [--animation-delay:0ms] cursor-pointer bg-oxford_blue  hover:bg-syracuse_red_orange w-full"
         }
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
