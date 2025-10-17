@@ -62,16 +62,18 @@ export async function POST(request: NextRequest) {
         "Content-Disposition": `attachment; filename="${filename}"`,
       },
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Erreur génération PDF:", {
-      message: error?.message || "Unknown error",
-      stack: error?.stack,
-      name: error?.name || "Error",
+      message: (error as Error)?.message || "Unknown error",
+      stack: (error as Error)?.stack,
+      name: (error as Error)?.name || "Error",
     });
     return NextResponse.json(
       {
-        error: error?.message || "An error occurred while generating the PDF",
-        name: error?.name || "Error",
+        error:
+          (error as Error)?.message ||
+          "An error occurred while generating the PDF",
+        name: (error as Error)?.name || "Error",
       },
       { status: 500 }
     );

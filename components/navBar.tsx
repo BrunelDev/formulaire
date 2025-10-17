@@ -69,7 +69,7 @@ export default function NavBar() {
       href: "https://mesplansdepermis.fr/nos-offres/erp/",
     },
   ];
-  const [isVisible, setIsVisible] = useState(true);
+  const [, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   useEffect(() => {
     const controlNavbar = () => {
