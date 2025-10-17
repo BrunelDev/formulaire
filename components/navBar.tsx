@@ -93,9 +93,7 @@ export default function NavBar() {
   return (
     <>
       <div
-        className={`w-full flex items-center justify-center bg-white [border-bottom-style:solid] h-[76px] relative z-50  ${
-          isVisible ? "translate-y-0" : "-translate-y-full"
-        }`}
+        className={`w-full flex items-center justify-center bg-white [border-bottom-style:solid] h-[76px] relative z-50`}
       >
         <div className="flex flex-col w-full lg:w-[77%] items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
           <div className="flex items-center justify-between relative w-full">
