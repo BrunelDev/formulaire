@@ -244,6 +244,7 @@ export const useFormState = create<FormState>()(
         set((state) => ({
           formData: {
             ...state.formData,
+            isArchitectNeeded : false,
             hasMultipleRealizationsOnSameConstructionPermit: undefined,
             realizationsOnSameConstructionPermitNumber: undefined,
             cerfaFilling: false,
