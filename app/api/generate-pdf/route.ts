@@ -1,4 +1,5 @@
 // app/api/generate-pdf/route.ts
+import chromium from "@sparticuz/chromium";
 import { NextRequest, NextResponse } from "next/server";
 import puppeteer from "puppeteer-core";
 
@@ -11,14 +12,13 @@ export async function POST(request: NextRequest) {
 
     if (isDev) {
       // En développement local
-      const puppeteerFull = await import("puppeteer");
+      const puppeteerFull = await import("puppeteer-core");
       browser = await puppeteerFull.default.launch({
         headless: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
       });
     } else {
       // En production (Vercel)
-      const chromium = (await import("@sparticuz/chromium")).default;
       const executablePath = await chromium.executablePath();
 
       browser = await puppeteer.launch({
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
 
     // Générer le PDF
     const pdf = await page.pdf({
-      format: "A4",
+      format: "a4",
       printBackground: true,
       margin: {
         top: "20px",
