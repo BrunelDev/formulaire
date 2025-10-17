@@ -197,11 +197,11 @@ export const StatisticsSection = () => {
         body: JSON.stringify(formData),
       });
 
-      // a.download = `devis-${devisData.NUM_DEVIS}.pdf`;
-      //document.body.appendChild(a);
-      // a.click();
+      a.download = `devis-${devisData.NUM_DEVIS}.pdf`;
+      document.body.appendChild(a);
+      a.click();
       window.URL.revokeObjectURL(url);
-      //document.body.removeChild(a);
+      document.body.removeChild(a);
     } catch (error) {
       console.error("Erreur:", error);
       alert("Erreur lors de la génération du PDF");

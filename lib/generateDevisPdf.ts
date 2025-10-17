@@ -270,19 +270,25 @@ export default function generateDevisPdf(
             </div>
             
             <div class="reference-box">
-                <div><strong>${refDevis}</strong></div>
-                <div><strong>N° ${devisNum}</strong></div>
-                <div>${dateDevis}</div>
-            </div>
-        </div>
-        
-        <!-- Informations client -->
+                
+
+                 <!-- Informations client -->
         <div class="client-info">
             <h3>Client</h3>
             <strong>${client.nom} ${client.prenom}</strong><br>
             Port. : ${client.tel}<br>
             Email : ${client.email}
         </div>
+            </div>
+        </div>
+        <div>
+        <div><strong>${refDevis}</strong></div>
+            <div><strong>N° ${devisNum}</strong></div>
+            <div>${dateDevis}</div>
+            </div>
+            
+        
+       
         
         <!-- Tableau des prestations -->
         <table>
