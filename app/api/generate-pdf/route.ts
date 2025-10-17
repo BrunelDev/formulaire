@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
 
     // Générer le PDF
     const pdf = await page.pdf({
-      format: "a4",
+      format: "A4",
       printBackground: true,
       margin: {
         top: "20px",
