@@ -175,8 +175,7 @@ export const StatisticsSection = () => {
         }),
       });
 
-      if (!response.ok) throw new Error("Erreur génération PDF");
-
+      console.log("response", response)
       // Télécharger le PDF
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
