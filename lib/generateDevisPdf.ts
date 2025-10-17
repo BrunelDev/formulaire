@@ -7,28 +7,22 @@ export default function generateDevisPdf(
   numDevis?: string,
   logoBase64?: string
 ) {
-  // Créer le data URI pour le logo si fourni
   const logoDataUri = logoBase64 ? `data:image/jpeg;base64,${logoBase64}` : "";
-  // Calculer les totaux
   const totalHT = devis.reduce((sum, item) => sum + (item.totalht || 0), 0);
   const totalTVA = totalHT * 0.2;
   const totalTTC = totalHT + totalTVA;
 
-  // Formatter les nombres
   const formatPrice = (price: number) => price.toFixed(2);
 
-  // Date du jour
   const dateDevis = new Date().toLocaleDateString("fr-FR", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
   });
 
-  // Générer le numéro de devis automatiquement si non fourni
   const devisNum = numDevis || `${Date.now()}`;
   const refDevis = reference || `DEVIS-${new Date().getFullYear()}`;
 
-  // Générer les lignes du tableau dynamiquement
   const devisRows = devis
     .map(
       (item) => `
@@ -38,8 +32,7 @@ export default function generateDevisPdf(
       <td class="text-right">${formatPrice(item.pu || 0)} €</td>
       <td class="text-center">${item.tva || 20}%</td>
       <td class="text-right">${formatPrice(item.totalht || 0)} €</td>
-    </tr>
-  `
+    </tr>`
     )
     .join("");
 
@@ -119,6 +112,16 @@ export default function generateDevisPdf(
             font-size: 12pt;
         }
         
+        .devis-info {
+            margin-bottom: 30px;
+            padding: 15px;
+        }
+        
+        .devis-info div {
+            margin-bottom: 5px;
+            font-size: 10pt;
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -165,11 +168,36 @@ export default function generateDevisPdf(
             text-align: center;
         }
         
+        .bottom-section {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .payment-terms {
+            flex: 1;
+        }
+        
+        .payment-terms h3 {
+            color: #333;
+            font-size: 11pt;
+            margin-bottom: 10px;
+        }
+        
+        .payment-terms p {
+            font-size: 10pt;
+            line-height: 1.5;
+        }
+        
         .total-section {
-            margin-left: auto;
-            width: 400px;
+            width: 350px;
             background: #f8f9fa;
             padding: 25px;
+            border-radius: 8px;
         }
         
         .total-row {
@@ -179,7 +207,6 @@ export default function generateDevisPdf(
             padding: 12px 0;
             font-size: 11pt;
             font-weight: 700;
-
         }
         
         .total-row:not(:last-child) {
@@ -213,17 +240,6 @@ export default function generateDevisPdf(
             color: #0066cc;
         }
         
-        .payment-terms {
-            margin-left: 12px;
-        }
-        
-       
-        
-        .payment-terms h3 {
-            color: #333;
-            font-size: 11pt;
-        }
-        
         .signature-section {
             margin-top: 40px;
             text-align: right;
@@ -248,11 +264,7 @@ export default function generateDevisPdf(
         <!-- En-tête -->
         <div class="header">
             <div class="company-info">
-                ${
-                  logoDataUri
-                    ? `<img src="${logoDataUri}" style="width:150px; height:150px; margin-bottom: 10px;" alt="logo">`
-                    : ""
-                }
+                ${logoDataUri ? `<img src="${logoDataUri}" style="width:150px; height:150px; margin-bottom: 10px;" alt="logo">` : ""}
                 <div class="company-name">MES PLANS DE PERMIS</div>
                 <div class="company-details">
                     34C RUE LATAPIE<br>
@@ -270,25 +282,22 @@ export default function generateDevisPdf(
             </div>
             
             <div class="reference-box">
-                
-
-                 <!-- Informations client -->
-        <div class="client-info">
-            <h3>Client</h3>
-            <strong>${client.nom} ${client.prenom}</strong><br>
-            Port. : ${client.tel}<br>
-            Email : ${client.email}
-        </div>
+                <!-- Informations client -->
+                <div class="client-info">
+                    <h3>Client</h3>
+                    <strong>${client.nom} ${client.prenom}</strong><br>
+                    Port. : ${client.tel}<br>
+                    Email : ${client.email}
+                </div>
             </div>
         </div>
-        <div>
-        <div><strong>${refDevis}</strong></div>
+        
+        <!-- Informations devis -->
+        <div class="devis-info">
+            <div><strong>${refDevis}</strong></div>
             <div><strong>N° ${devisNum}</strong></div>
             <div>${dateDevis}</div>
-            </div>
-            
-        
-       
+        </div>
         
         <!-- Tableau des prestations -->
         <table>
@@ -306,32 +315,30 @@ export default function generateDevisPdf(
             </tbody>
         </table>
         
-        <!-- Section totaux -->
-        <div style="border: 1px solid #e0e0e0; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
-         <!-- Conditions de paiement -->
-        <div class="payment-terms">
-            <h3>Conditions de paiement :</h3>
-            <p>• 100,00 % soit <strong>${formatPrice(
-              totalTTC
-            )} €</strong> : Paiement après réception de l'Avant-Projet Sommaire.</p>
-        </div>
-        <div class="total-section">
-            <div class="total-row">
-                <span>Total HT</span>
-                <span>${formatPrice(totalHT)} €</span>
+        <!-- Section totaux et paiement -->
+        <div class="bottom-section">
+            <!-- Conditions de paiement -->
+            <div class="payment-terms">
+                <h3>Conditions de paiement :</h3>
+                <p>• 100,00 % soit <strong>${formatPrice(totalTTC)} €</strong> : Paiement après réception de l'Avant-Projet Sommaire.</p>
             </div>
-            <div class="total-row">
-                <span>TVA (20%)</span>
-                <span>${formatPrice(totalTVA)} €</span>
-            </div>
-            <div class="total-row final">
-                <span>Total TTC</span>
-                <span>${formatPrice(totalTTC)} €</span>
+            
+            <!-- Totaux -->
+            <div class="total-section">
+                <div class="total-row">
+                    <span>Total HT</span>
+                    <span>${formatPrice(totalHT)} €</span>
+                </div>
+                <div class="total-row">
+                    <span>TVA (20%)</span>
+                    <span>${formatPrice(totalTVA)} €</span>
+                </div>
+                <div class="total-row final">
+                    <span>Total TTC</span>
+                    <span>${formatPrice(totalTTC)} €</span>
+                </div>
             </div>
         </div>
-        </div>
-        
-       
         
         <!-- Signature -->
         <div class="signature-section">
