@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import Image from "next/image";
 import { default as Link } from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavButton } from "./PrimaryButton/NavButton";
 import { Button } from "./ui/button";
 
@@ -69,10 +69,34 @@ export default function NavBar() {
       href: "https://mesplansdepermis.fr/nos-offres/erp/",
     },
   ];
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  useEffect(() => {
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scroll vers le bas - masquer
+        setIsVisible(false);
+      } else {
+        // Scroll vers le haut - afficher
+        setIsVisible(true);
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", controlNavbar);
+    return () => window.removeEventListener("scroll", controlNavbar);
+  }, [lastScrollY]);
 
   return (
     <>
-      <div className="w-full flex items-center justify-center bg-white [border-bottom-style:solid] h-[76px] relative z-50">
+      <div
+        className={`w-full flex items-center justify-center bg-white [border-bottom-style:solid] h-[76px] relative z-50  ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
         <div className="flex flex-col w-full lg:w-[77%] items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
           <div className="flex items-center justify-between relative w-full">
             <Image
@@ -80,18 +104,14 @@ export default function NavBar() {
               width={129.73}
               height={36}
               alt="Logo image"
-              src={
-                "/images/logo.jpg"
-              }
+              src={"/images/logo.jpg"}
             />
             <Image
-              className="lg:hidden object-cover"
-              width={28.5}
+              className="lg:hidden object-cover absolute left-1/2 -translate-x-1/2"
+              width={33}
               height={35}
               alt="Logo image"
-              src={
-                "/images/logoNoText.jpg"
-              }
+              src={"/images/logoNoText.jpg"}
             />
 
             <div className="items-center gap-4 lg:gap-10 relative flex-[0_0_auto] hidden lg:inline-flex">

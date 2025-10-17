@@ -52,7 +52,6 @@ interface FormData {
   hasMultipleRealizationsOnSameUrbanismCertificate?: boolean;
   realizationsOnSameUrbanismCertificateNumber?: number;
   hasMultipleRealizationsOnSamePlanRequest?: boolean;
-
   realizationsOnSamePlanRequestNumber?: number;
   doesNeedPlan?: boolean;
   neededPlans?: string[];
@@ -151,6 +150,7 @@ const initialFormData: FormData = {
   isArchitectNeeded: undefined,
   hasMultipleRealizationsOnSameConstructionPermit: undefined,
   realizationsOnSameConstructionPermitNumber: undefined,
+  cerfaFilling: false,
   pluVerification: undefined,
   rdcPlanVerification: undefined,
   rdcPlanNumber: undefined,
@@ -164,6 +164,7 @@ const initialFormData: FormData = {
   realizationsOnSameUrbanismCertificateNumber: undefined,
   hasMultipleRealizationsOnSamePlanRequest: undefined,
   realizationsOnSamePlanRequestNumber: undefined,
+  doesNeedPlan: undefined,
   neededPlans: [],
   shouldMakeRDCPlan: undefined,
   rdcPlanCount: undefined,
@@ -192,10 +193,10 @@ export const useFormState = create<FormState>()(
       formData: initialFormData,
 
       updateFormData: (data) => {
-        console.log("🔄 updateFormData called with:", data);
+        
         set((state) => {
           const newState = { ...state.formData, ...data };
-          console.log("📝 New context state:", newState);
+          
           return { formData: newState };
         });
       },
@@ -243,10 +244,9 @@ export const useFormState = create<FormState>()(
         set((state) => ({
           formData: {
             ...state.formData,
-            // Reset all Step 3 fields to their initial values
-            isArchitectNeeded: undefined,
             hasMultipleRealizationsOnSameConstructionPermit: undefined,
             realizationsOnSameConstructionPermitNumber: undefined,
+            cerfaFilling: false,
             pluVerification: undefined,
             rdcPlanVerification: undefined,
             rdcPlanNumber: undefined,
@@ -260,6 +260,7 @@ export const useFormState = create<FormState>()(
             realizationsOnSameUrbanismCertificateNumber: undefined,
             hasMultipleRealizationsOnSamePlanRequest: undefined,
             realizationsOnSamePlanRequestNumber: undefined,
+            doesNeedPlan: undefined,
             neededPlans: [],
             shouldMakeRDCPlan: undefined,
             rdcPlanCount: undefined,

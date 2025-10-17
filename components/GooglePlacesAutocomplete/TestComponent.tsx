@@ -13,7 +13,7 @@ export const GooglePlacesTestComponent: React.FC = () => {
   const [selectedDetails, setSelectedDetails] = useState<AddressDetails | null>(null);
 
   const handlePlaceSelect = (addressDetails: AddressDetails) => {
-    console.log("Adresse sélectionnée:", addressDetails);
+    
     setSelectedDetails(addressDetails);
   };
 

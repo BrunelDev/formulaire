@@ -271,7 +271,7 @@ export const GooglePlacesAutocomplete: React.FC<
                   key={prediction.place_id}
                   className="px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-100 border-b border-gray-100 last:border-b-0"
                   onClick={() => {
-                    console.log("Click !!!");
+                    
                     handlePlaceSelect(prediction)
                   }}
                 >
@@ -309,7 +309,7 @@ async function getCadastralInfo(coordinates: { lat: number; lng: number }) {
     }
 
     const data = await response.json();
-    console.log("🔍 Data:", data);
+    
 
     return {
       parcelNumber: data.parcelNumber,

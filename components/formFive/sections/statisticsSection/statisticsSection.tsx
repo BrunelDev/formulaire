@@ -4,40 +4,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useFormState } from "@/context/useContext";
+import { Option, useFormState } from "@/context/useContext";
+import {
+  DevisRecord,
+  generateDpDevis,
+  generateErpDevis,
+  generateUniteDevis,
+  generateUrbanismFormDevis,
+  genreratePermisDevis,
+} from "@/lib/calculator";
+import generateDevisPdf from "@/lib/generateDevisPdf";
 import Image from "next/image";
 import { useRef, useState } from "react";
-
-const formFields = [
-  {
-    id: "nom",
-    label: "Nom",
-    placeholder: "Nom",
-    defaultValue: "DUPONT",
-    required: true,
-  },
-  {
-    id: "prenom",
-    label: "Prénom",
-    placeholder: "Prénom",
-    defaultValue: "Nicolas",
-    required: true,
-  },
-  {
-    id: "email",
-    label: "Email",
-    placeholder: "Email",
-    defaultValue: "nicolasdupont@gmail.com",
-    required: true,
-  },
-  {
-    id: "telephone",
-    label: "Téléphone",
-    placeholder: "Téléphone",
-    defaultValue: "0606060606",
-    required: true,
-  },
-];
 
 const statistics = [
   {
@@ -63,6 +41,50 @@ export const StatisticsSection = () => {
   const [formErrors, setFormErrors] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
+  const [email, setEmail] = useState("");
+  const [telephone, setTelephone] = useState("");
+
+  const formFields = [
+    {
+      id: "nom",
+      label: "Nom",
+      placeholder: "Nom",
+      defaultValue: "DUPONT",
+      value: nom,
+      onChange: setNom,
+      required: true,
+    },
+    {
+      id: "prenom",
+      label: "Prénom",
+      placeholder: "Prénom",
+      defaultValue: "Nicolas",
+      value: prenom,
+      onChange: setPrenom,
+      required: true,
+    },
+    {
+      id: "email",
+      label: "Email",
+      placeholder: "Email",
+      defaultValue: "nicolasdupont@gmail.com",
+      value: email,
+      onChange: setEmail,
+      required: true,
+    },
+    {
+      id: "telephone",
+      label: "Téléphone",
+      placeholder: "Téléphone",
+      defaultValue: "0606060606",
+      value: telephone,
+      onChange: setTelephone,
+      required: true,
+    },
+  ];
+
   const validateForm = () => {
     if (formRef.current) {
       return formRef.current.checkValidity();
@@ -78,6 +100,115 @@ export const StatisticsSection = () => {
     "https://hook.eu2.make.com/3uu3o2jiq1x4yrfj9l9do60mcx8k2wrm",
     "https://hook.eu2.make.com/8m3qylvopepjwkvcjarw7i6cipfljxhr",
   ];
+  const urlToSendPdf =
+    "https://hook.eu2.make.com/w5ps2bie8tnxj252b5grhyufigalaohw";
+  const urlToSendData =
+    "https://hook.eu2.make.com/h8xmhq9ryu6sdfa0jp0uv8e6qx0kk2vr";
+
+  const handleGeneratePDF = async (client: {
+    nom: string;
+    prenom: string;
+    email: string;
+    tel: string;
+  }) => {
+    setLoading(true);
+
+    try {
+      // Vos données de devis
+      const devisData = {
+        REFERENCE_DEVIS: "DEVIS-2024-001",
+        NUM_DEVIS: "001",
+        DATE_DEVIS: new Date().toLocaleDateString("fr-FR"),
+        CLIENT_NAME: "Jean Dupont",
+        CLIENT_TEL: "06 12 34 56 78",
+        CLIENT_MAIL: "jean.dupont@email.com",
+
+        // Prestations
+        permis_Construire: "Permis de Construire",
+        PU_Permis: "1200.00",
+        TVA_Permis: "20%",
+        HT_Permis: "1200.00",
+        permis_Construire_class: "", // Laisser vide pour afficher
+
+        // Masquer les lignes non utilisées
+        plan_3D_class: "hidden-row",
+
+        // Totaux
+        total_HT: "1200.00",
+        total_TVA: "240.00",
+        total_TTC: "1440.00",
+      };
+
+      // Générer le HTML complet
+
+      let devis: DevisRecord[] = [];
+      switch (formData.option) {
+        case Option.DECLARATION_PREALABLE:
+          devis = generateDpDevis(formData);
+          break;
+        case Option.PLAN_UNITE:
+          devis = generateUniteDevis(formData);
+          break;
+        case Option.DOSSIER_ERP:
+          devis = generateErpDevis(formData);
+          break;
+        case Option.CERTIFICAT_URBANISME:
+          devis = generateUrbanismFormDevis(formData);
+          break;
+        case Option.PERMIS_CONSTRUIRE:
+          devis = genreratePermisDevis(formData);
+          break;
+        default:
+          devis = genreratePermisDevis(formData);
+      }
+      const htmlContent = generateDevisPdf(devis, client);
+
+      // Appeler l'API
+      const response = await fetch("/api/generate-pdf", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          htmlContent,
+          filename: `devis-${devisData.NUM_DEVIS}.pdf`,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Erreur génération PDF");
+
+      // Télécharger le PDF
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      await fetch(urlToSendPdf, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/pdf",
+        },
+        body: blob,
+      });
+      await fetch(urlToSendData, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      // a.download = `devis-${devisData.NUM_DEVIS}.pdf`;
+      //document.body.appendChild(a);
+      // a.click();
+      window.URL.revokeObjectURL(url);
+      //document.body.removeChild(a);
+    } catch (error) {
+      console.error("Erreur:", error);
+      alert("Erreur lors de la génération du PDF");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleNextStep = async () => {
     const isValid = validateForm();
@@ -98,9 +229,7 @@ export const StatisticsSection = () => {
       };
 
       try {
-        console.log("payload", payload);
-        console.log(payload);
-        for (const url of urlsToFetch) {
+        /*for (const url of urlsToFetch) {
           const temp_response = await fetch(url, {
             method: "POST",
             headers: {
@@ -108,14 +237,20 @@ export const StatisticsSection = () => {
             },
             body: JSON.stringify(payload),
           });
-          console.log(temp_response);
+          
           if (!temp_response.ok) {
             console.error(
               "Échec de l'envoi au webhook",
               await temp_response.text()
             );
           }
-        }
+        }*/
+        await handleGeneratePDF({
+          nom: nom.value,
+          prenom: prenom.value,
+          email: email.value,
+          tel: telephone.value,
+        });
 
         updateFormData({ ...payload, isStepFiveChecked: true });
       } catch (error) {
@@ -134,6 +269,10 @@ export const StatisticsSection = () => {
       }
     }
   };
+
+  //Calcul et génération de devis
+
+  const [loading, setLoading] = useState(false);
 
   return (
     <section className="w-full sm:pb-8 pb-[150px]">
@@ -190,10 +329,11 @@ export const StatisticsSection = () => {
                         <Input
                           id={field.id}
                           placeholder={field.placeholder}
+                          value={field.value}
+                          onChange={(e) => field.onChange(e.target.value)}
                           className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074]"
                           required={field.required}
                         />
-                       
                       </div>
                     </div>
                   ))}
@@ -220,6 +360,8 @@ export const StatisticsSection = () => {
                           id={field.id}
                           placeholder={field.placeholder}
                           className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
+                          value={field.value}
+                          onChange={(e) => field.onChange(e.target.value)}
                           required={field.required}
                         />
                       </div>
@@ -249,6 +391,8 @@ export const StatisticsSection = () => {
                 />
 
                 <PrimaryButton
+                  isLoading={loading}
+                  disabled={!nom || !prenom || !email || !telephone}
                   //className="w-full sm:w-auto"
                   handleClick={handleNextStep}
                 />

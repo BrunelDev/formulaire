@@ -34,7 +34,7 @@ export const FormOne = () => {
     addressDetails: AddressDetails
   ): number => {
     let difficulty = 3; // Base difficulty
-    console.log("🔍 Address details:", addressDetails);
+    
   
     // Ajustement selon la zone urbaine
     if (addressDetails.urbanZone) {
@@ -61,7 +61,7 @@ export const FormOne = () => {
     // Toujours borné entre 3 et 5
     difficulty = Math.min(5, Math.max(3, difficulty));
   
-    console.log("🎯 Final difficulty:", difficulty);
+    
     return difficulty;
   };
   
@@ -73,7 +73,7 @@ export const FormOne = () => {
 
   const handlePlaceSelect = (addressDetails: AddressDetails) => {
     const difficultyEstimation = calculateDifficultyEstimation(addressDetails);
-    console.log("🔍 Difficulty estimation:", difficultyEstimation);
+    
     const updatedAddressDetails = {
       ...addressDetails,
       difficultyEstimation,

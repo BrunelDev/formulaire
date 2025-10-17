@@ -12,7 +12,7 @@ export default function BackButton({
   className?: string;
 }) {
   const [animationClass, setAnimationClass] = useState("");
-  console.log(disabled);
+  
 
   const handleMouseEnter = () => {
     setAnimationClass("animate-hover-bounce");

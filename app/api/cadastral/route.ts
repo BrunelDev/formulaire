@@ -56,12 +56,12 @@ export async function GET(request: NextRequest) {
       lng: parseFloat(lng),
     };
 
-    console.log("📍 Coordonnées reçues:", coordinates);
+    
 
     // Récupérer les informations cadastrales
     const cadastralInfo = await getCadastralInfoFromAPIs(coordinates);
 
-    console.log("✅ Informations cadastrales récupérées:", cadastralInfo);
+    
 
     return NextResponse.json(cadastralInfo);
   } catch (error) {
@@ -90,7 +90,7 @@ async function getCadastralInfoFromAPIs(coordinates: {
 
     // Si l'API Carto IGN ne retourne pas de données, essayer l'API Carto IGN en fallback
     if (!cadastralData.parcelNumber) {
-      console.log("🔄 Fallback vers API Carto IGN...");
+      
       const parcelInfo = await getCadastralInfoFallback(coordinates);
 
       return {
@@ -107,11 +107,11 @@ async function getCadastralInfoFromAPIs(coordinates: {
       const urbanismData = await getUrbanismInfo(coordinates);
       urbanZone = urbanismData.urbanZone;
       zoneType = urbanismData.zoneLibelle;
-      console.log("🏘️ Récupération des informations d'urbanisme:", urbanismData);
+      
     }
 
     // Récupérer les informations administratives complémentaires
-    console.log("🏛️ Récupération des informations administratives...");
+    
     const adminData = await getAdministrativeInfo(coordinates);
 
     return {
@@ -158,7 +158,7 @@ async function getCadastralInfoFallback(coordinates: {
       geom: geom,
     });
 
-    console.log("🔄 Fallback API Carto IGN Cadastre:", `${url}?${params}`);
+    
 
     const response = await fetch(`${url}?${params}`, {
       headers: {
@@ -174,7 +174,7 @@ async function getCadastralInfoFallback(coordinates: {
     }
 
     const data = await response.json();
-    console.log("🔄 Réponse API Carto IGN Fallback:", data);
+    
 
     if (data.features && data.features.length > 0) {
       const feature = data.features[0];
@@ -221,7 +221,7 @@ async function getUrbanismInfoFromGeoportail(coordinates: {
       geom: geom,
     });
 
-    console.log("🔍 Requête API Carto IGN Cadastre:", `${url}?${params}`);
+    
 
     const response = await fetch(`${url}?${params}`, {
       headers: {
@@ -237,7 +237,7 @@ async function getUrbanismInfoFromGeoportail(coordinates: {
     }
 
     const data = await response.json();
-    console.log("📊 Réponse API Carto IGN Cadastre:", data);
+    
 
     if (data.features && data.features.length > 0) {
       const feature = data.features[0];
@@ -285,7 +285,7 @@ async function getUrbanismInfo(coordinates: { lat: number; lng: number }) {
     const response = await fetch(`${url}?${params}`, {
       headers: { Accept: "application/json" },
     });
-    console.log("------🔍 Requête API Carto IGN Urbanisme:", `${url}?${params}` , response);
+    
 
     if (!response.ok) {
       throw new Error(`Erreur API Carto IGN: ${response.status} ${response.statusText}`);
@@ -352,7 +352,7 @@ async function getAdministrativeInfo(coordinates: {
     }
 
     const data = await response.json();
-    console.log("🏛️ Réponse API Carto IGN Limites Administratives:", data);
+    
 
     if (data.features && data.features.length > 0) {
       const feature = data.features[0];

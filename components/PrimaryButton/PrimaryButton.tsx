@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../ui/button";
 
@@ -6,10 +7,12 @@ export const PrimaryButton = ({
   className,
   handleClick,
   disabled,
+  isLoading = false,
 }: {
   className?: string;
   handleClick?: () => void | Promise<void>;
   disabled?: boolean;
+  isLoading?: boolean;
 }) => {
   const [animationClass, setAnimationClass] = useState("");
 
@@ -34,11 +37,14 @@ export const PrimaryButton = ({
           } else handleClick();
         }
       }}
-      disabled={disabled}
+      disabled={disabled || isLoading}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={animationClass}>Étape suivante</div>
+      <div className={cn("flex items-center gap-2", animationClass)}>
+        {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+        Étape suivante
+      </div>
     </Button>
   );
 };

@@ -376,9 +376,9 @@ export const InformationSummarySection = () => {
         { label: "5 niveaux ou plus", value: "5" },
       ],
       inputRequired:
-        !!!formData.render3D &&
-        !!!formData.doesNeedPlan &&
-        !!!formData.rdcPlanVerification,
+        !!!formData.renderCount3d &&
+        !formData.doesNeedPlan &&
+        !formData.rdcPlanVerification,
       handleInputChange: (value: string | undefined) => {
         updateFormData({
           ...formData,
@@ -507,7 +507,7 @@ export const InformationSummarySection = () => {
         (typeof item.value === "string" && item.value !== "")
       ) {
         errors[`question_${index}`] = "Ce champ est obligatoire";
-        console.log(item);
+        
         isValid = false;
       }
 

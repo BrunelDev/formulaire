@@ -54,7 +54,7 @@ function MyComponent() {
   const [address, setAddress] = useState("");
 
   const handlePlaceSelect = (addressDetails: AddressDetails) => {
-    console.log("Adresse sélectionnée:", addressDetails);
+    
     // Utiliser les données récupérées
   };
 
