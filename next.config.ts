@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["mesplansdepermis.fr"],
   },
+  output: "standalone",
 };
 
 export default nextConfig;
