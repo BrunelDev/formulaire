@@ -22,8 +22,9 @@ export async function POST(request: NextRequest) {
     } else {
       // En production (Vercel), utilisez chromium
       const chromium = (await import("@sparticuz/chromium")).default;
+      console.log("Starting browser launch in production...");
       browser = await puppeteer.launch({
-        args: chromium.args,
+        args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
         defaultViewport: {
           width: 1920,
           height: 1080,
@@ -31,6 +32,7 @@ export async function POST(request: NextRequest) {
         executablePath: await chromium.executablePath(),
         headless: true,
       });
+      console.log("Browser launched successfully in production");
     }
 
     const page = await browser.newPage();
@@ -60,9 +62,19 @@ export async function POST(request: NextRequest) {
         "Content-Disposition": `attachment; filename="${filename}"`,
       },
     });
-  } catch (error) {
-    console.error("Erreur génération PDF:", error);
-    return NextResponse.json({ error: error }, { status: 500 });
+  } catch (error: any) {
+    console.error("Erreur génération PDF:", {
+      message: error?.message || "Unknown error",
+      stack: error?.stack,
+      name: error?.name || "Error",
+    });
+    return NextResponse.json(
+      {
+        error: error?.message || "An error occurred while generating the PDF",
+        name: error?.name || "Error",
+      },
+      { status: 500 }
+    );
   }
 }
 
