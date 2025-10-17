@@ -1,4 +1,4 @@
-import chromium from "@sparticuz/chromium"
+import chromium from "@sparticuz/chromium";
 import { NextRequest, NextResponse } from "next/server";
 import puppeteer from "puppeteer-core";
 
@@ -18,7 +18,10 @@ export async function POST(request: NextRequest) {
       });
     } else {
       // En production (Vercel)
-      const executablePath = await chromium.executablePath();
+
+      const executablePath = await chromium.executablePath(
+        "https://github.com/Sparticuz/chromium/releases/download/v121.0.0/chromium-v121.0.0-pack.tar"
+      );
 
       browser = await puppeteer.launch({
         args: chromium.args,
