@@ -6,29 +6,25 @@ export async function POST(request: NextRequest) {
   try {
     const { htmlContent, filename = "devis.pdf" } = await request.json();
 
-    // Détection de l'environnement
     const isDev = process.env.NODE_ENV === "development";
-    const isWindows = process.platform === "win32";
-
     let browser;
 
     if (isDev) {
-      // En développement local, utilisez puppeteer complet
+      // En développement local
       const puppeteerFull = await import("puppeteer");
       browser = await puppeteerFull.default.launch({
         headless: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
       });
     } else {
-      // En production (Vercel), utilisez chromium
+      // En production (Vercel)
       const chromium = (await import("@sparticuz/chromium")).default;
+      const executablePath = await chromium.executablePath();
+
       browser = await puppeteer.launch({
         args: chromium.args,
-        defaultViewport: {
-          width: 1920,
-          height: 1080,
-        },
-        executablePath: await chromium.executablePath(),
+        defaultViewport: null,
+        executablePath,
         headless: true,
       });
     }
@@ -39,6 +35,9 @@ export async function POST(request: NextRequest) {
     await page.setContent(htmlContent, {
       waitUntil: "networkidle0",
     });
+
+    // Attendre que les fonts soient chargées
+    await page.evaluateHandle("document.fonts.ready");
 
     // Générer le PDF
     const pdf = await page.pdf({
@@ -64,8 +63,7 @@ export async function POST(request: NextRequest) {
     console.error("Erreur génération PDF:", error);
     return NextResponse.json(
       {
-        error: "Erreur lors de la génération du PDF",
-        details: error instanceof Error ? error.message : String(error),
+        error: error instanceof Error ? error.message : "Erreur inconnue",
         stack: error instanceof Error ? error.stack : undefined,
       },
       { status: 500 }
@@ -73,11 +71,5 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "10mb",
-    },
-  },
-  maxDuration: 60,
-};
+// Important pour Vercel
+export const maxDuration = 60;
