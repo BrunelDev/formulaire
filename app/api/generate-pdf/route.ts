@@ -63,7 +63,11 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Erreur génération PDF:", error);
     return NextResponse.json(
-      { error: "Erreur lors de la génération du PDF" },
+      {
+        error: "Erreur lors de la génération du PDF",
+        details: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      },
       { status: 500 }
     );
   }
@@ -75,5 +79,5 @@ export const config = {
       sizeLimit: "10mb",
     },
   },
-  maxDuration: 10,
+  maxDuration: 60,
 };
