@@ -10,8 +10,8 @@ export async function POST(request: NextRequest) {
     let browser;
 
     if (isDev) {
-      // En développement local
-      const puppeteerFull = await import("puppeteer-core");
+      // En développement local, utilisez puppeteer complet
+      const puppeteerFull = await import("puppeteer");
       browser = await puppeteerFull.default.launch({
         headless: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"],

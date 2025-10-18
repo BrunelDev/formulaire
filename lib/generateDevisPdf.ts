@@ -7,7 +7,8 @@ export default function generateDevisPdf(
   numDevis?: string,
   logoBase64?: string
 ) {
-  const logoDataUri = logoBase64 ? `data:image/jpeg;base64,${logoBase64}` : "";
+  //const logoDataUri = logoBase64 ? `data:image/jpeg;base64,${logoBase64}` : "";
+  const logoDataUri = "https://formulaire.mesplansdepermis.fr/images/logo.jpg";
   const totalHT = devis.reduce((sum, item) => sum + (item.totalht || 0), 0);
   const totalTVA = totalHT * 0.2;
   const totalTTC = totalHT + totalTVA;
@@ -55,7 +56,7 @@ export default function generateDevisPdf(
         body {
             font-family: 'Figtree', Arial, sans-serif;
             font-size: 11pt;
-            color: #333;
+            color : #021327;
             padding: 40px;
             line-height: 1.4;
         }
@@ -70,7 +71,7 @@ export default function generateDevisPdf(
             justify-content: space-between;
             margin-bottom: 40px;
             padding-bottom: 20px;
-            border-bottom: 2px solid #0066cc;
+            border-bottom: 2px solid #042347;
         }
         
         .company-info {
@@ -80,7 +81,7 @@ export default function generateDevisPdf(
         .company-name {
             font-size: 16pt;
             font-weight: bold;
-            color: #0066cc;
+            color: #042347;
             margin-bottom: 10px;
         }
         
@@ -101,13 +102,10 @@ export default function generateDevisPdf(
         
         .client-info {
             margin-bottom: 30px;
-            padding: 15px;
-            background: #f9f9f9;
-            border-left: 3px solid #0066cc;
         }
         
         .client-info h3 {
-            color: #0066cc;
+            color: #042347;
             margin-bottom: 10px;
             font-size: 12pt;
         }
@@ -129,31 +127,34 @@ export default function generateDevisPdf(
         }
         
         thead {
-            background: #0066cc;
+            background: #042347;
             color: white;
         }
         
         th {
-            padding: 12px 8px;
+            padding: 0 8px;
             text-align: left;
             font-weight: bold;
             font-size: 10pt;
-            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            border-left: 1px solid #ddd;
+        }
+            
+    th:last-child {
+            border-right: 1px solid #ddd;
         }
         
-        th:last-child {
-            border-right: none;
-        }
         
         td {
             padding: 10px 8px;
             border-bottom: 1px solid #ddd;
             border-right: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+
             font-size: 10pt;
         }
         
         td:last-child {
-            border-right: none;
+            border-right: 1px solid #ddd;
         }
         
         tbody tr:hover {
@@ -170,16 +171,15 @@ export default function generateDevisPdf(
         
         .bottom-section {
             border: 1px solid #e0e0e0;
-            border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
             margin-bottom: 30px;
         }
         
         .payment-terms {
             flex: 1;
+            margin: 0 20px;
         }
         
         .payment-terms h3 {
@@ -197,7 +197,6 @@ export default function generateDevisPdf(
             width: 350px;
             background: #f8f9fa;
             padding: 25px;
-            border-radius: 8px;
         }
         
         .total-row {
@@ -231,13 +230,13 @@ export default function generateDevisPdf(
         .total-row.final span:first-child {
             font-size: 13pt;
             font-weight: 700;
-            color: #0066cc;
+            color: #042347;
         }
         
         .total-row.final span:last-child {
             font-size: 14pt;
             font-weight: 700;
-            color: #0066cc;
+            color: #042347;
         }
         
         .signature-section {
@@ -264,27 +263,32 @@ export default function generateDevisPdf(
         <!-- En-tête -->
         <div class="header">
             <div class="company-info">
-                ${logoDataUri ? `<img src="${logoDataUri}" style="width:150px; height:150px; margin-bottom: 10px;" alt="logo">` : ""}
-                <div class="company-name">MES PLANS DE PERMIS</div>
+                ${
+                  logoDataUri
+                    ? `<img src="${logoDataUri}" style="width:222px; height:61px; margin-bottom: 10px;" alt="logo">`
+                    : ""
+                }
                 <div class="company-details">
+                    <strong>MES PLANS DE PERMIS</strong><br>
                     34C RUE LATAPIE<br>
                     33650 LA BRÈDE<br>
-                    FRANCE<br><br>
+                    FRANCE<br>
                     Port. : +33 6 56 74 54 70<br>
-                    Email : contact@mesplansdepermis.fr<br>
-                    Web : www.mesplansdepermis.fr<br><br>
-                    N° TVA Intracommunautaire: FR01937970176<br>
-                    N° SIRET: 93797017600015<br>
-                    Code NAF: 71.12B<br>
-                    RCS: 937 970 176 R.C.S. Bordeaux<br>
-                    Capital: 500 €
+                    <span style="text-decoration: underline;">contact@mesplansdepermis.fr</span><br>
+                    <span style="text-decoration: underline;">www.mesplansdepermis.fr</span><br>
+                    <strong>N° TVA Intracommunautaire:</strong> FR01937970176<br>
+                    <strong>N° SIRET:</strong> 93797017600015<br>
+                    <strong>Code NAF:</strong> 71.12B<br>
+                    <strong>RCS:</strong> 937 970 176 R.C.S. Bordeaux<br>
+                    <strong>Capital:</strong> 500 €
                 </div>
             </div>
             
             <div class="reference-box">
+            <div style="margin-bottom:60px;"><strong >${refDevis}</strong></div>
+
                 <!-- Informations client -->
                 <div class="client-info">
-                    <h3>Client</h3>
                     <strong>${client.nom} ${client.prenom}</strong><br>
                     Port. : ${client.tel}<br>
                     Email : ${client.email}
@@ -294,7 +298,6 @@ export default function generateDevisPdf(
         
         <!-- Informations devis -->
         <div class="devis-info">
-            <div><strong>${refDevis}</strong></div>
             <div><strong>N° ${devisNum}</strong></div>
             <div>${dateDevis}</div>
         </div>
@@ -319,8 +322,12 @@ export default function generateDevisPdf(
         <div class="bottom-section">
             <!-- Conditions de paiement -->
             <div class="payment-terms">
+            <p><strong>Bon pour Accord</strong></p>
+
                 <h3>Conditions de paiement :</h3>
-                <p>• 100,00 % soit <strong>${formatPrice(totalTTC)} €</strong> : Paiement après réception de l'Avant-Projet Sommaire.</p>
+                <p>• 100,00 % soit <strong>${formatPrice(
+                  totalTTC
+                )} €</strong> : Paiement après réception de l'Avant-Projet Sommaire.</p>
             </div>
             
             <!-- Totaux -->
@@ -342,7 +349,6 @@ export default function generateDevisPdf(
         
         <!-- Signature -->
         <div class="signature-section">
-            <p><strong>Bon pour Accord</strong></p>
             <div class="signature-box">
                 Signature
             </div>

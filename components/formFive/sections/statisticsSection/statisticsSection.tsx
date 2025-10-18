@@ -9,6 +9,8 @@ import {
   DevisRecord,
   generateDpDevis,
   generateErpDevis,
+  generaterer2020Devis,
+  generateSismicDevis,
   generateUniteDevis,
   generateUrbanismFormDevis,
   genreratePermisDevis,
@@ -158,8 +160,10 @@ export const StatisticsSection = () => {
         case Option.PERMIS_CONSTRUIRE:
           devis = genreratePermisDevis(formData);
           break;
-        default:
-          devis = genreratePermisDevis(formData);
+        case Option.ETUDE_RE2020:
+          devis = generaterer2020Devis();
+        case Option.ETUDE_SISMIQUE:
+          devis = generateSismicDevis();
       }
       const htmlContent = generateDevisPdf(devis, client);
 
@@ -175,12 +179,12 @@ export const StatisticsSection = () => {
         }),
       });
 
-      console.log("response", response)
+      console.log("response", response);
       // Télécharger le PDF
       const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
+      //const url = window.URL.createObjectURL(blob);
+      //const a = document.createElement("a");
+      //a.href = url;
       await fetch(urlToSendPdf, {
         method: "POST",
         headers: {
@@ -199,7 +203,7 @@ export const StatisticsSection = () => {
       //a.download = `devis-${devisData.NUM_DEVIS}.pdf`;
       //document.body.appendChild(a);
       //a.click();
-      window.URL.revokeObjectURL(url);
+      //window.URL.revokeObjectURL(url);
       //document.body.removeChild(a);
     } catch (error) {
       console.error("Erreur:", error);
@@ -386,7 +390,7 @@ export const StatisticsSection = () => {
                       isStepFiveChecked: false,
                     });
                   }}
-                 // disabled={!formData.isStepFourChecked}
+                  // disabled={!formData.isStepFourChecked}
                 />
 
                 <PrimaryButton

@@ -35,8 +35,13 @@ export interface DevisRecord {
 
 const designations = {
   isArchitectNeeded: "Dossier de permis de construire",
-  hasMultipleRealizationsOnSameConstructionPermit:
-    "Réalisations multiples sur le même permis",
+  hasMultipleRealizationsOnSameConstructionPermit: `Plus-value pour modélisation et précisions<br>
+<br>
+La plus-value inclut :<br>
+<br>
+- La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br>
+<br>
+Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d’heures supplémentaires nécessaires à la réalisation de ce projet.`,
   cerfaFilling: `Remplissage Cerfa et dépôt en mairie. Le dépôt en mairie sera possible que si le service urbanisme a un service de dépôt dématerialisé. Le cas échéant, le client devra lui-même déposer son permis dans la mairie concernée.`,
   pluVerification: `Vérification PLU :<br>
 <br>
@@ -68,11 +73,29 @@ Note : Pour l'élaboration de l'étude thermique, des plans de niveaux avec côt
 Recevez votre A.P.S sous 5 jours ouvrés.`,
   displayPanel: `Fourniture d’un panneau d’affichage de permis de construire 80 x 120 cm`,
   hasMultipleRealizationsOnSameDeclaration:
-    "Réalisations multiples sur la même déclaration",
+    `Plus-value pour modélisation et précisions<br>
+<br>
+La plus-value inclut :<br>
+<br>
+- La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br>
+<br>
+Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d’heures supplémentaires nécessaires à la réalisation de ce projet.`,
   hasMultipleRealizationsOnSameUrbanismCertificate:
-    "Réalisations multiples sur le même certificat d'urbanisme",
+    `Plus-value pour modélisation et précisions<br>
+<br>
+La plus-value inclut :<br>
+<br>
+- La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br>
+<br>
+Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d’heures supplémentaires nécessaires à la réalisation de ce projet.`,
   hasMultipleRealizationsOnSamePlanRequest:
-    "Réalisations multiples sur la même demande de plan",
+    `Plus-value pour modélisation et précisions<br>
+<br>
+La plus-value inclut :<br>
+<br>
+- La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br>
+<br>
+Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d’heures supplémentaires nécessaires à la réalisation de ce projet.`,
   doesNeedPlan: `Forfait réalisation de plan à l'unité<br>
 Pièces envoyés:`,
   shouldMakeRDCPlan: `Réalisation d'un plan de niveau RDC (distribution des pièces) (125 € / niveau. Ex: pour un R+1 compter 250€)<br>
@@ -89,7 +112,13 @@ Conception non incluse.<br>
 Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br>
 <br>
 Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d’éviter la facturation de ce service.`,
-  render3D: "Rendu 3D",
+  render3D: `Réalisation d'un plan rendu 3D de l’aménagement intérieur (125 € / niveau. Ex: pour un R+1 compter 250€)<br>
+<br>
+Conception non incluse.<br>
+<br>
+Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br>
+<br>
+Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d’éviter la facturation de ce service.`,
 };
 
 export const genreratePermisDevis = (data: Data) => {
@@ -486,3 +515,29 @@ Plans envoyés:
 
   return payload;
 };
+
+export const generaterer2020Devis = () => {
+  const payload: DevisRecord[] = [
+    {
+      designation: designations.bbioStudy,
+      quantity: 1,
+      pu: 1000 / 1.2,
+      tva: 20,
+
+    }
+  ]
+  return payload
+}
+
+export const generateSismicDevis = () => {
+  const payload: DevisRecord[] = [
+    {
+      designation: designations.seismicStudy,
+      quantity: 1,
+      pu: 1000 / 1.2,
+      tva: 20,
+
+    }
+  ]
+  return payload
+}
