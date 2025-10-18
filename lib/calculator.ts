@@ -516,7 +516,7 @@ Plans envoyés:
   return payload;
 };
 
-export const generaterer2020Devis = () => {
+export const generateRe2020Devis = () => {
   const payload: DevisRecord[] = [
     {
       designation: designations.bbioStudy,

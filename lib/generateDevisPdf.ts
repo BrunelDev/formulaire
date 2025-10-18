@@ -7,8 +7,9 @@ export default function generateDevisPdf(
   numDevis?: string,
   logoBase64?: string
 ) {
-  //const logoDataUri = logoBase64 ? `data:image/jpeg;base64,${logoBase64}` : "";
-  const logoDataUri = "https://formulaire.mesplansdepermis.fr/images/logo.jpg";
+  const logoDataUri = logoBase64
+    ? `data:image/jpeg;base64,${logoBase64}`
+    : "https://formulaire.mesplansdepermis.fr/images/logo.jpg";
   const totalHT = devis.reduce((sum, item) => sum + (item.totalht || 0), 0);
   const totalTVA = totalHT * 0.2;
   const totalTTC = totalHT + totalTVA;

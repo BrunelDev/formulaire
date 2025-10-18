@@ -9,7 +9,7 @@ import {
   DevisRecord,
   generateDpDevis,
   generateErpDevis,
-  generaterer2020Devis,
+  generateRe2020Devis,
   generateSismicDevis,
   generateUniteDevis,
   generateUrbanismFormDevis,
@@ -161,9 +161,11 @@ export const StatisticsSection = () => {
           devis = genreratePermisDevis(formData);
           break;
         case Option.ETUDE_RE2020:
-          devis = generaterer2020Devis();
+          devis = generateRe2020Devis();
+          break;
         case Option.ETUDE_SISMIQUE:
           devis = generateSismicDevis();
+          break;
       }
       const htmlContent = generateDevisPdf(devis, client);
 
