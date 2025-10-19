@@ -170,30 +170,38 @@ export const StatisticsSection = () => {
       const htmlContent = generateDevisPdf(devis, client);
 
       // Appeler l'API
-      const response = await fetch("/api/generate-pdf", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          htmlContent,
-          filename: `devis-${devisData.NUM_DEVIS}.pdf`,
-        }),
-      });
+      if (devis.length > 0) {
+        const response = await fetch("/api/generate-pdf", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            htmlContent,
+            filename: `devis-${devisData.NUM_DEVIS}.pdf`,
+          }),
+        });
 
-      console.log("response", response);
-      // Télécharger le PDF
-      const blob = await response.blob();
-      //const url = window.URL.createObjectURL(blob);
-      //const a = document.createElement("a");
-      //a.href = url;
-      await fetch(urlToSendPdf, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/pdf",
-        },
-        body: blob,
-      });
+        console.log("response", response);
+        // Télécharger le PDF
+        // const blob = await response.blob();
+        // const url = window.URL.createObjectURL(blob);
+        // const a = document.createElement("a");
+        // a.href = url;
+        await fetch(urlToSendPdf, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/pdf",
+          },
+          body: blob,
+        });
+        // a.download = `devis-${devisData.NUM_DEVIS}.pdf`;
+        // document.body.appendChild(a);
+        // a.click();
+        // window.URL.revokeObjectURL(url);
+        // document.body.removeChild(a);
+      }
+
       await fetch(urlToSendData, {
         method: "POST",
         headers: {
@@ -201,12 +209,6 @@ export const StatisticsSection = () => {
         },
         body: JSON.stringify(formData),
       });
-
-      //a.download = `devis-${devisData.NUM_DEVIS}.pdf`;
-      //document.body.appendChild(a);
-      //a.click();
-      //window.URL.revokeObjectURL(url);
-      //document.body.removeChild(a);
     } catch (error) {
       console.error("Erreur:", error);
       alert("Erreur lors de la génération du PDF");

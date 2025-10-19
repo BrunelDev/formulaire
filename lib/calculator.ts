@@ -72,24 +72,21 @@ Note : Pour l'élaboration de l'étude thermique, des plans de niveaux avec côt
   expressDelivery: `Service livraison express :<br> 
 Recevez votre A.P.S sous 5 jours ouvrés.`,
   displayPanel: `Fourniture d’un panneau d’affichage de permis de construire 80 x 120 cm`,
-  hasMultipleRealizationsOnSameDeclaration:
-    `Plus-value pour modélisation et précisions<br>
+  hasMultipleRealizationsOnSameDeclaration: `Plus-value pour modélisation et précisions<br>
 <br>
 La plus-value inclut :<br>
 <br>
 - La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br>
 <br>
 Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d’heures supplémentaires nécessaires à la réalisation de ce projet.`,
-  hasMultipleRealizationsOnSameUrbanismCertificate:
-    `Plus-value pour modélisation et précisions<br>
+  hasMultipleRealizationsOnSameUrbanismCertificate: `Plus-value pour modélisation et précisions<br>
 <br>
 La plus-value inclut :<br>
 <br>
 - La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br>
 <br>
 Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d’heures supplémentaires nécessaires à la réalisation de ce projet.`,
-  hasMultipleRealizationsOnSamePlanRequest:
-    `Plus-value pour modélisation et précisions<br>
+  hasMultipleRealizationsOnSamePlanRequest: `Plus-value pour modélisation et précisions<br>
 <br>
 La plus-value inclut :<br>
 <br>
@@ -324,29 +321,7 @@ Les photos du terrain sont réalisées par le client. Le donneur d'ordre est ten
 };
 
 export const generateUniteDevis = (data: Data) => {
-  const payload: DevisRecord[] = [
-    {
-      designation: `Forfait réalisation des pièces pour déclaration préalable de travaux--.<br>
-
-Réalisation des plans à jour du projet en vue en plans, coupe et façades, implantation sur plan de masse. Perspectives filaires pour préciser les différents volumes. Perspectives couleur façade avant et arrière.<br>
-<br>
-Pièces envoyées:<br>
--DP1 (plan de situation)<br>
--DP2 (plan de masse)<br>
--DP3 (plan de coupe)<br>
--DP4 & DP5 (plan d'élévation)<br>
--DP6 (insertion graphique)<br>
--DP7 (vues rapprochées)<br>
--DP8 (vues éloignées)<br>
--DP11 (notice descriptive)<br>
-
-Les photos du terrain sont réalisées par le client. Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents<br>`,
-      quantity: 1,
-      pu: 1000 / 1.2,
-      tva: 20,
-      totalht: 1000,
-    },
-  ];
+  const payload: DevisRecord[] = [];
 
   if (data.hasMultipleRealizationsOnSamePlanRequest) {
     payload.push({
@@ -414,15 +389,15 @@ Les photos du terrain sont réalisées par le client. Le donneur d'ordre est ten
 export const generateErpDevis = (data: Data) => {
   const payload: DevisRecord[] = [
     {
-      designation: `Création d'un dossier ERP (-150m2)
-
-Nous réalisons votre dossier ERP au complet, avec :
-
-- La notice de sécurité
-- La notice d’accessibilité
-- Les plans sur 1 niveau (situation, cadastre, masse,…)
-- Remplissage CERFA ERP 13824*04
-
+      designation: `Création d'un dossier ERP (-150m2)<br>
+<br>
+Nous réalisons votre dossier ERP au complet, avec :<br>
+<br>
+- La notice de sécurité<br>
+- La notice d’accessibilité<br>
+- Les plans sur 1 niveau (situation, cadastre, masse,…)<br>
+- Remplissage CERFA ERP 13824*04<br>
+<br>
 Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents.
       `,
       quantity: 1,
@@ -463,13 +438,13 @@ Le donneur d'ordre est tenu de fournir toutes informations techniques permettant
 export const generateUrbanismFormDevis = (data: Data) => {
   const payload: DevisRecord[] = [
     {
-      designation: `Certificat d’Urbanisme opérationnel (CUb) – Réalisation des plans graphiques nécessaires à la demande (plan de situation, plan cadastral, plan sommaire du projet)
-
-Plans envoyés:
-- Plan de situation
--Plan de masse
--Plan de façades
-
+      designation: `Certificat d’Urbanisme opérationnel (CUb)<br> – Réalisation des plans graphiques nécessaires à la demande (plan de situation, plan cadastral, plan sommaire du projet)<br>
+<br>
+Plans envoyés:<br>
+- Plan de situation<br>
+-Plan de masse<br>
+-Plan de façades<br>
+<br>
 (les plans de niveaux seront intégrés au C.U)`,
       quantity: 1,
       pu: 1000 / 1.2,
@@ -523,11 +498,10 @@ export const generateRe2020Devis = () => {
       quantity: 1,
       pu: 1000 / 1.2,
       tva: 20,
-
-    }
-  ]
-  return payload
-}
+    },
+  ];
+  return payload;
+};
 
 export const generateSismicDevis = () => {
   const payload: DevisRecord[] = [
@@ -536,8 +510,7 @@ export const generateSismicDevis = () => {
       quantity: 1,
       pu: 1000 / 1.2,
       tva: 20,
-
-    }
-  ]
-  return payload
-}
+    },
+  ];
+  return payload;
+};
