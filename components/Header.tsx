@@ -1,6 +1,4 @@
 import { useState } from "react";
-import HamburgerMenu from "./hamburgerMenu";
-
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -83,7 +81,6 @@ const Header = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <HamburgerMenu />
             <button
               onClick={toggleMenu}
               className="text-gray-700 hover:text-blue-600 focus:outline-none focus:text-blue-600 p-2"
