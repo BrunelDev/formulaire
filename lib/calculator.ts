@@ -20,7 +20,6 @@ interface Data {
   neededPlans?: string[];
   shouldMakeRDCPlan?: boolean;
   rdcPlanCount?: number;
-  shouldMake3dRender?: boolean;
   renderCount3d?: number;
   render3D?: boolean;
 }
@@ -69,7 +68,7 @@ Note : Pour l'élaboration de l'étude thermique, des plans de niveaux avec côt
 - Prise en compte des normes des PPR<br>
 - Préconisation du type d'étude à réaliser<br>
 - Attestation du controleur technique : PCMI 13`,
-  expressDelivery: `Service livraison express :<br> 
+  expressDelivery: `Service livraison express :<br>
 Recevez votre A.P.S sous 5 jours ouvrés.`,
   displayPanel: `Fourniture d’un panneau d’affichage de permis de construire 80 x 120 cm`,
   hasMultipleRealizationsOnSameDeclaration: `Plus-value pour modélisation et précisions<br>
@@ -227,6 +226,85 @@ Remplissage Cerfa et prise de côte non compris.  Le donneur d'ordre est tenu de
       record.totalht = record.quantity * record.pu;
     }
   });
+
+  return payload;
+};
+
+export const generateResume = (data: Data): DevisRecord[] => {
+  const simpleDesignations = {
+    isArchitectNeeded: {
+      designation: "Dossier de permis de construire",
+      quantity: 1,
+    },
+    hasMultipleRealizationsOnSameConstructionPermit: {
+      designation: "Plus-value pour modélisation et précisions",
+      quantity: data.realizationsOnSameConstructionPermitNumber,
+    },
+    cerfaFilling: {
+      designation: "Remplissage Cerfa et dépôt en mairie.",
+      quantity: 1,
+    },
+    pluVerification: {
+      designation: "Vérification PLU.",
+      quantity: 1,
+    },
+    rdcPlanVerification: {
+      designation: "Réalisation d'un plan de niveau RDC",
+      quantity: 1,
+    },
+    bbioStudy: {
+      designation: "Étude BBIO",
+      quantity: 1,
+    },
+    seismicStudy: {
+      designation: "Étude sismique",
+      quantity: 1,
+    },
+    expressDelivery: {
+      designation: "Service livraison express.",
+      quantity: 1,
+    },
+    displayPanel: {
+      designation:
+        "Fourniture d’un panneau d’affichage de permis de construire 80 x 120 cm",
+      quantity: 1,
+    },
+    hasMultipleRealizationsOnSameDeclaration: {
+      designation: "Plus-value pour modélisation et précisions",
+      quantity: data.realizationsOnSameDeclarationNumber,
+    },
+    hasMultipleRealizationsOnSameUrbanismCertificate: {
+      designation: "Plus-value pour modélisation et précision",
+      quantity: data.realizationsOnSameUrbanismCertificateNumber,
+    },
+    hasMultipleRealizationsOnSamePlanRequest: {
+      designation: "Plus-value pour modélisation et précision",
+      quantity: data.realizationsOnSamePlanRequestNumber,
+    },
+    doesNeedPlan: {
+      designation:
+        "Forfait réalisation de plan à l'unité : " +
+        (data.neededPlans?.join(", ") || ""),
+      quantity: data.neededPlans?.length || 0,
+    },
+    shouldMakeRDCPlan: {
+      designation:
+        "Réalisation d'un plan de niveau RDC (distribution des pièces)",
+      quantity: data.rdcPlanCount,
+    },
+    render3D: {
+      designation: "Réalisation d'un plan rendu 3D de l’aménagement intérieur",
+      quantity: data.renderCount3d,
+    },
+  };
+
+  const payload: DevisRecord[] = [];
+
+  for (const [key, value] of Object.entries(simpleDesignations)) {
+    if (data[key as keyof Data] && value.quantity && value.quantity > 0) {
+      payload.push(value);
+    }
+  }
 
   return payload;
 };

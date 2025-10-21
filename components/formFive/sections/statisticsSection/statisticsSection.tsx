@@ -10,12 +10,14 @@ import {
   generateDpDevis,
   generateErpDevis,
   generateRe2020Devis,
+  generateResume,
   generateSismicDevis,
   generateUniteDevis,
   generateUrbanismFormDevis,
   genreratePermisDevis,
 } from "@/lib/calculator";
 import generateDevisPdf from "@/lib/generateDevisPdf";
+import generateResumePdf from "@/lib/generateResume";
 import Image from "next/image";
 import { useRef, useState } from "react";
 
@@ -144,30 +146,56 @@ export const StatisticsSection = () => {
       // Générer le HTML complet
 
       let devis: DevisRecord[] = [];
-      switch (formData.option) {
-        case Option.DECLARATION_PREALABLE:
-          devis = generateDpDevis(formData);
-          break;
-        case Option.PLAN_UNITE:
-          devis = generateUniteDevis(formData);
-          break;
-        case Option.DOSSIER_ERP:
-          devis = generateErpDevis(formData);
-          break;
-        case Option.CERTIFICAT_URBANISME:
-          devis = generateUrbanismFormDevis(formData);
-          break;
-        case Option.PERMIS_CONSTRUIRE:
-          devis = genreratePermisDevis(formData);
-          break;
-        case Option.ETUDE_RE2020:
-          devis = generateRe2020Devis();
-          break;
-        case Option.ETUDE_SISMIQUE:
-          devis = generateSismicDevis();
-          break;
+      let htmlContent;
+      if (formData.isArchitectNeeded) {
+        devis = generateResume(formData);
+        htmlContent = generateResumePdf(
+          devis,
+          { nom: formData.clientLastName, prenom: formData.clientFirstName },
+          formData.option === Option.PERMIS_CONSTRUIRE
+            ? "Permis de Construire"
+            : formData.option === Option.DECLARATION_PREALABLE
+              ? "Déclaration Préalable"
+              : formData.option === Option.DOSSIER_ERP
+                ? "Dossier ERP"
+                : formData.option === Option.CERTIFICAT_URBANISME
+                  ? "Certificat d’Urbanisme"
+                  : formData.option === Option.PLAN_UNITE
+                    ? "Plan à l’unité"
+                    : formData.option === Option.ETUDE_RE2020
+                      ? "Étude RE2020"
+                      : formData.option === Option.ETUDE_SISMIQUE
+                        ? "Étude Sismique"
+                        : formData.option === Option.AIDE_CONCEPTION
+                          ? "Aide à la Conception"
+                          : "",
+        );
+      } else {
+        switch (formData.option) {
+          case Option.DECLARATION_PREALABLE:
+            devis = generateDpDevis(formData);
+            break;
+          case Option.PLAN_UNITE:
+            devis = generateUniteDevis(formData);
+            break;
+          case Option.DOSSIER_ERP:
+            devis = generateErpDevis(formData);
+            break;
+          case Option.CERTIFICAT_URBANISME:
+            devis = generateUrbanismFormDevis(formData);
+            break;
+          case Option.PERMIS_CONSTRUIRE:
+            devis = genreratePermisDevis(formData);
+            break;
+          case Option.ETUDE_RE2020:
+            devis = generateRe2020Devis();
+            break;
+          case Option.ETUDE_SISMIQUE:
+            devis = generateSismicDevis();
+            break;
+        }
+        htmlContent = generateDevisPdf(devis, client);
       }
-      const htmlContent = generateDevisPdf(devis, client);
 
       // Appeler l'API
       if (devis.length > 0) {
@@ -224,7 +252,7 @@ export const StatisticsSection = () => {
       const prenom = document.getElementById("prenom") as HTMLInputElement;
       const email = document.getElementById("email") as HTMLInputElement;
       const telephone = document.getElementById(
-        "telephone"
+        "telephone",
       ) as HTMLInputElement;
 
       const payload = {
@@ -244,7 +272,7 @@ export const StatisticsSection = () => {
             },
             body: JSON.stringify(payload),
           });
-          
+
           if (!temp_response.ok) {
             console.error(
               "Échec de l'envoi au webhook",
