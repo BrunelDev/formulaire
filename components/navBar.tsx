@@ -11,6 +11,7 @@ import { default as Link } from "next/link";
 import { useEffect, useState } from "react";
 import { NavButton } from "./PrimaryButton/NavButton";
 import { Button } from "./ui/button";
+import HamburgerMenu from "./hamburgerMenu";
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -149,7 +150,7 @@ export default function NavBar() {
                           </ul>
                         </NavigationMenuContent>
                       </NavigationMenuItem>
-                    )
+                    ),
                   )}
                 </NavigationMenuList>
               </NavigationMenu>
@@ -158,29 +159,11 @@ export default function NavBar() {
 
             {/* Mobile menu button */}
             <div className="lg:hidden ml-auto">
-              <button
-                className="p-2 text-gray-700 hover:text-gray-900 transition-colors duration-200"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label="Toggle mobile menu"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d={
-                      isMobileMenuOpen
-                        ? "M6 18L18 6M6 6l12 12"
-                        : "M4 6h16M4 12h16M4 18h16"
-                    }
-                  />
-                </svg>
-              </button>
+              <HamburgerMenu
+                isOpen={isMobileMenuOpen}
+                setIsOpenAction={setIsMobileMenuOpen}
+                action={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              />
             </div>
           </div>
         </div>
@@ -188,7 +171,7 @@ export default function NavBar() {
 
       {/* Mobile menu fullscreen */}
       <div
-        className={`lg:hidden fixed top-0 left-0 h-full w-full bg-white z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`lg:hidden fixed top-0 left-0 h-full w-full bg-white z-0 transform transition-transform duration-300 ease-in-out ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         } px-8 pt-3`}
       >
