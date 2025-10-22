@@ -27,7 +27,7 @@ export default function generateDevisPdf(
     client.nom.substring(0, 1) +
     client.prenom.substring(0, 1) +
     "#" +
-    dateDevis.replace("/", "");
+    dateDevis.replaceAll("/", "");
 
   const devisRows = devis
     .map(
