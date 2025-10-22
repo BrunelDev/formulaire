@@ -63,7 +63,7 @@ export default function Footer() {
   return (
     <footer className="bg-white flex items-center justify-center w-full">
       <div
-        className="px-6 py-16 md:px-12 lg:px-0 lg:w-[77%]  min-h-[calc(100vh-76px)] flex flex-col justify-between"
+        className="px-6 pt-24 pb-6 md:px-12 lg:px-0 lg:w-[79%]  min-h-[calc(100vh-76px)] flex flex-col justify-between"
         style={{ fontFamily: "var(--font-figtree)" }}
       >
         <div className="h-auto lg:mx-0 mx-auto">
@@ -72,12 +72,12 @@ export default function Footer() {
             {/* Logo */}
             <div>
               <div className="flex items-center lg:justify-normal justify-center gap-3">
-                <div className="flex items-center">
+                <div className="">
                   <Image
                     src="/images/logo.jpg"
                     className=""
-                    width={130}
-                    height={130}
+                    width={180}
+                    height={47}
                     alt={"Logo"}
                   />
                 </div>
@@ -85,7 +85,7 @@ export default function Footer() {
             </div>
 
             {/* Votre projet */}
-            <div>
+            <div className="lg:ml-auto">
               <h3 className="mb-6 font-semibold text-[18px] text-oxford_blue text-center md:text-start">
                 Votre projet
               </h3>
@@ -104,7 +104,7 @@ export default function Footer() {
             </div>
 
             {/* En savoir plus */}
-            <div>
+            <div className="lg:ml-4">
               <h3 className="mb-6 text-[18px] font-semibold text-oxford_blue text-center md:text-start">
                 En savoir plus
               </h3>
@@ -123,7 +123,7 @@ export default function Footer() {
             </div>
 
             {/* Contact */}
-            <div>
+            <div className="lg:ml-4">
               <h3 className="mb-6 text-[18px] font-semibold text-gray-900 text-center md:text-start">
                 Contact
               </h3>
@@ -158,11 +158,11 @@ export default function Footer() {
 
           {/* Bottom section */}
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-gray-600">
+            <p className="text-[#667085]">
               © 2025 Mesplansdepermis – WordPress.
             </p>
             <Link href="https://mesplansdepermis.fr/mentions-legales/">
-              <button className="flex items-center gap-2 text-gray-600 transition-colors hover:text-gray-900">
+              <button className="flex items-center gap-2 text-[#6D7074] transition-colors hover:text-gray-900 font-medium">
                 Mentions légales
               </button>
             </Link>

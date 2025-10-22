@@ -155,20 +155,20 @@ export const StatisticsSection = () => {
           formData.option === Option.PERMIS_CONSTRUIRE
             ? "Permis de Construire"
             : formData.option === Option.DECLARATION_PREALABLE
-              ? "Déclaration Préalable"
-              : formData.option === Option.DOSSIER_ERP
-                ? "Dossier ERP"
-                : formData.option === Option.CERTIFICAT_URBANISME
-                  ? "Certificat d’Urbanisme"
-                  : formData.option === Option.PLAN_UNITE
-                    ? "Plan à l’unité"
-                    : formData.option === Option.ETUDE_RE2020
-                      ? "Étude RE2020"
-                      : formData.option === Option.ETUDE_SISMIQUE
-                        ? "Étude Sismique"
-                        : formData.option === Option.AIDE_CONCEPTION
-                          ? "Aide à la Conception"
-                          : "",
+            ? "Déclaration Préalable"
+            : formData.option === Option.DOSSIER_ERP
+            ? "Dossier ERP"
+            : formData.option === Option.CERTIFICAT_URBANISME
+            ? "Certificat d’Urbanisme"
+            : formData.option === Option.PLAN_UNITE
+            ? "Plan à l’unité"
+            : formData.option === Option.ETUDE_RE2020
+            ? "Étude RE2020"
+            : formData.option === Option.ETUDE_SISMIQUE
+            ? "Étude Sismique"
+            : formData.option === Option.AIDE_CONCEPTION
+            ? "Aide à la Conception"
+            : ""
         );
       } else {
         switch (formData.option) {
@@ -252,7 +252,7 @@ export const StatisticsSection = () => {
       const prenom = document.getElementById("prenom") as HTMLInputElement;
       const email = document.getElementById("email") as HTMLInputElement;
       const telephone = document.getElementById(
-        "telephone",
+        "telephone"
       ) as HTMLInputElement;
 
       const payload = {

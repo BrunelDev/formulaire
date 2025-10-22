@@ -27,7 +27,7 @@ export default function generateDevisPdf(
     client.nom.substring(0, 1) +
     client.prenom.substring(0, 1) +
     "#" +
-    dateDevis;
+    dateDevis.replace("/", "");
 
   const devisRows = devis
     .map(
@@ -144,7 +144,27 @@ export default function generateDevisPdf(
             border-left: 1px solid #ddd;
         }
             
-    th:last-child {
+        th:first-child {
+            width: 40%;
+        }
+        
+        th:nth-child(2) {
+            width: 12%;
+        }
+        
+        th:nth-child(3) {
+            width: 18%;
+        }
+        
+        th:nth-child(4) {
+            width: 12%;
+        }
+        
+        th:nth-child(5) {
+            width: 18%;
+        }
+            
+        th:last-child {
             border-right: 1px solid #ddd;
         }
         
@@ -257,34 +277,38 @@ export default function generateDevisPdf(
         }
             .conditions-generales {
     page-break-before: always;
-    margin-top: 60px;
-    font-size: 10pt;
-    line-height: 1.6;
+    margin-top: 40px;
+    font-size: 8pt;
+    line-height: 1.3;
   }
 
   .conditions-generales h2 {
     text-align: center;
     color: #d95200;
     text-transform: uppercase;
-    font-size: 14pt;
-    margin-bottom: 20px;
+    font-size: 11pt;
+    margin-bottom: 12px;
   }
 
   .conditions-generales h3 {
     color: #d95200;
-    font-size: 11pt;
-    margin-top: 15px;
-    margin-bottom: 8px;
+    font-size: 9pt;
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
 
   .conditions-generales p, .conditions-generales ul {
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
     text-align: justify;
   }
 
   .conditions-generales ul {
-    margin-left: 20px;
+    margin-left: 15px;
+  }
+  
+  .conditions-generales ul li {
+    margin-bottom: 3px;
   }
         
         @media print {
@@ -396,39 +420,39 @@ export default function generateDevisPdf(
       <p>Les présentes conditions générales ont pour objet de définir les droits et obligations de Mes Plans de Permis et de ses clients dans le cadre de la réalisation de prestations de conception de plans nécessaires aux demandes de permis de construire ou déclarations préalables.</p>
 
       <h3>Acceptation du devis</h3>
-      <p>La signature du devis vaut bon de commande ferme et définitif. Toute demande supplémentaire ou modification hors du cadre prévu au devis initial fera l’objet d’une facturation complémentaire. En signant un devis émis par Mes Plans de Permis, le client reconnaît avoir pris connaissance des présentes Conditions Générales de Vente et les accepter sans réserve.</p>
+      <p>La signature du devis vaut bon de commande ferme et définitif. Toute demande supplémentaire ou modification hors du cadre prévu au devis initial fera l'objet d'une facturation complémentaire. En signant un devis émis par Mes Plans de Permis, le client reconnaît avoir pris connaissance des présentes Conditions Générales de Vente et les accepter sans réserve.</p>
 
       <h3>Paiement</h3>
-      <p>Aucun acompte n’est demandé. En conséquence, le client s’engage à régler l’intégralité du montant indiqué sur le devis après réception de l’Avant-Projet Sommaire (APS). L’APS transmis au client sera protégé par un filigrane de sécurité. Les plans définitifs, sans filigrane, seront envoyés uniquement après règlement complet du montant prévu au devis.</p>
+      <p>Aucun acompte n'est demandé. En conséquence, le client s'engage à régler l'intégralité du montant indiqué sur le devis après réception de l'Avant-Projet Sommaire (APS). L'APS transmis au client sera protégé par un filigrane de sécurité. Les plans définitifs, sans filigrane, seront envoyés uniquement après règlement complet du montant prévu au devis.</p>
 
       <h3>Responsabilités</h3>
       <p>Mes Plans de Permis fournit une assistance et un accompagnement dans la conception de plans et de dossiers graphiques. La société ne peut en aucun cas être tenue responsable :</p>
       <ul>
-        <li>du refus ou de l’invalidation d’un dossier par l’administration compétente (Mairie, DDT, etc.),</li>
-        <li>des évolutions réglementaires ou contraintes liées au Plan Local d’Urbanisme (PLU) ou autres règles d’urbanisme,</li>
-        <li>de l’abandon, de la modification ou de la non-réalisation des travaux par le client.</li>
+        <li>du refus ou de l'invalidation d'un dossier par l'administration compétente (Mairie, DDT, etc.),</li>
+        <li>des évolutions réglementaires ou contraintes liées au Plan Local d'Urbanisme (PLU) ou autres règles d'urbanisme,</li>
+        <li>de l'abandon, de la modification ou de la non-réalisation des travaux par le client.</li>
       </ul>
 
       <h3>Responsabilité et Vérification du P.L.U.</h3>
       <p>Lors de la commande, le client peut choisir entre deux formules :</p>
 
-      <p><strong>1. Sans option “Vérification du P.L.U.”</strong></p>
-      <p>Dans ce cas, Mes Plans de Permis ne pourra en aucun cas être tenu responsable en cas de refus du permis de construire ou de la déclaration préalable de travaux par la mairie ou tout autre organisme compétent. Le client reste seul responsable de la conformité de son projet avec les règles d’urbanisme locales, notamment celles définies par le Plan Local d’Urbanisme (P.L.U.). Toute modification nécessaire suite à un refus, dès lors qu’elle ne résulte pas d’une erreur imputable à Mes Plans de Permis, sera facturée en supplément.</p>
+      <p><strong>1. Sans option "Vérification du P.L.U."</strong></p>
+      <p>Dans ce cas, Mes Plans de Permis ne pourra en aucun cas être tenu responsable en cas de refus du permis de construire ou de la déclaration préalable de travaux par la mairie ou tout autre organisme compétent. Le client reste seul responsable de la conformité de son projet avec les règles d'urbanisme locales, notamment celles définies par le Plan Local d'Urbanisme (P.L.U.). Toute modification nécessaire suite à un refus, dès lors qu'elle ne résulte pas d'une erreur imputable à Mes Plans de Permis, sera facturée en supplément.</p>
 
-      <p><strong>2. Avec option “Vérification du P.L.U.”</strong></p>
-      <p>En souscrivant à cette prestation, Mes Plans de Permis vérifie la conformité du projet avec le P.L.U. en vigueur et garantit l’acceptation du permis de construire ou de la déclaration préalable de travaux. Dans ce cadre, toutes les modifications demandées par la mairie seront réalisées gratuitement. En revanche, toute modification sollicitée par le client pour modifier l’aspect ou la conception initiale du projet restera facturée en supplément.</p>
+      <p><strong>2. Avec option "Vérification du P.L.U."</strong></p>
+      <p>En souscrivant à cette prestation, Mes Plans de Permis vérifie la conformité du projet avec le P.L.U. en vigueur et garantit l'acceptation du permis de construire ou de la déclaration préalable de travaux. Dans ce cadre, toutes les modifications demandées par la mairie seront réalisées gratuitement. En revanche, toute modification sollicitée par le client pour modifier l'aspect ou la conception initiale du projet restera facturée en supplément.</p>
 
       <h3>Modifications indépendantes</h3>
-      <p>Toute demande de modification qui diffère du projet validé lors de la commande sera facturée en supplément, qu’il y ait ou non souscription à l’option “Vérification du P.L.U.”.</p>
+      <p>Toute demande de modification qui diffère du projet validé lors de la commande sera facturée en supplément, qu'il y ait ou non souscription à l'option "Vérification du P.L.U.".</p>
 
       <h3>Limites de prestation</h3>
-      <p>Mes Plans de Permis réalise des plans destinés aux demandes administratives. Ces documents ne constituent pas des plans d’exécution. L’exécution des travaux doit impérativement être confiée à un maître d’œuvre, un architecte ou une entreprise compétente.</p>
+      <p>Mes Plans de Permis réalise des plans destinés aux demandes administratives. Ces documents ne constituent pas des plans d'exécution. L'exécution des travaux doit impérativement être confiée à un maître d'œuvre, un architecte ou une entreprise compétente.</p>
 
       <h3>Modifications de projet</h3>
       <p>Toute modification de programme ou de conception après validation du devis et réalisation des premières esquisses pourra entraîner des frais supplémentaires.</p>
 
       <h3>Propriété intellectuelle</h3>
-      <p>Les plans réalisés par Mes Plans de Permis restent la propriété intellectuelle du prestataire jusqu’au paiement intégral de la prestation.</p>
+      <p>Les plans réalisés par Mes Plans de Permis restent la propriété intellectuelle du prestataire jusqu'au paiement intégral de la prestation.</p>
 
       <h3>Loi applicable et litiges</h3>
       <p>Les présentes conditions générales sont soumises au droit français. Tout litige sera porté devant les tribunaux compétents.</p>
