@@ -59,17 +59,12 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     pu: 291.67,
     tva: 20,
   },
-  isArchitectNeededErp: {
-    designation: "Dossier de permis de construire",
-    pu: 1666.67,
-    tva: 20,
-  },
   hasMultipleRealizationsOnSameConstructionPermit: {
     designation: `Plus-value pour modélisation et précisions<br><br>
     La plus-value inclut :<br><br>
     - La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br><br>
     Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d'heures supplémentaires nécessaires à la réalisation de ce projet.`,
-    pu: 666.67,
+    pu: 66.67,
     tva: 20,
   },
   cerfaFilling: {
@@ -150,7 +145,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
   doesNeedPlan: {
     designation: `Forfait réalisation de plan à l'unité<br>
     Pièces envoyés:`,
-    pu: 125,
+    pu: 50,
     tva: 20,
   },
   shouldMakeRDCPlan: {
@@ -208,8 +203,8 @@ Plans envoyés:<br>
     pu: 241.67,
     tva: 20,
   },
-  erpDevis : {
-    designation :  `Création d'un dossier ERP (-150m2)<br>
+  erpDevis: {
+    designation: `Création d'un dossier ERP (-150m2)<br>
 <br>
 Nous réalisons votre dossier ERP au complet, avec :<br>
 <br>
@@ -219,9 +214,9 @@ Nous réalisons votre dossier ERP au complet, avec :<br>
 - Remplissage CERFA ERP 13824*04<br>
 <br>
 Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents.`,
-    pu : 375,
-    tva : 20
-  }
+    pu: 375,
+    tva: 20,
+  },
 };
 
 export const genreratePermisDevis = (data: Data) => {
@@ -343,7 +338,7 @@ export const genreratePermisDevis = (data: Data) => {
 export const generateResume = (data: Data): DevisRecord[] => {
   const simpleDesignations = {
     isArchitectNeeded: {
-      designation: "Dossier de permis de construire",
+      designation: "Services d'architecte",
       quantity: 1,
     },
     hasMultipleRealizationsOnSameConstructionPermit: {
@@ -533,7 +528,7 @@ export const generateUniteDevis = (data: Data) => {
       quantity: quantity,
       pu: mapping.pu,
       tva: mapping.tva,
-      totalht: quantity * mapping.pu!,
+      totalht: quantity * mapping.pu! + 130,
     });
   }
 
@@ -587,7 +582,7 @@ export const generateErpDevis = (data: Data) => {
   ];
 
   if (data.isArchitectNeeded) {
-    const mapping = designationsMapping.isArchitectNeededErp;
+    const mapping = designationsMapping.isArchitectNeeded;
     payload.push({
       designation: mapping.designation,
       quantity: 1,
