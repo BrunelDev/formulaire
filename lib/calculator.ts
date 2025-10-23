@@ -421,7 +421,7 @@ export const generateDpDevis = (data: Data) => {
       quantity: 1,
       pu: designationsMapping.dpDevis.pu,
       tva: designationsMapping.dpDevis.tva,
-      totalht: 1000 / 1.2,
+      totalht: designationsMapping.dpDevis.pu,
     },
   ];
 
@@ -613,7 +613,7 @@ export const generateUrbanismFormDevis = (data: Data) => {
       quantity: 1,
       pu: designationsMapping.urbanismDevis.pu,
       tva: designationsMapping.urbanismDevis.tva,
-      totalht: 1000 / 1.2,
+      totalht: designationsMapping.dpDevis.pu,
     },
   ];
 
