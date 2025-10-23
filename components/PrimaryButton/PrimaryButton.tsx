@@ -8,11 +8,13 @@ export const PrimaryButton = ({
   handleClick,
   disabled,
   isLoading = false,
+  type,
 }: {
   className?: string;
   handleClick?: () => void | Promise<void>;
   disabled?: boolean;
   isLoading?: boolean;
+  type?: "button" | "submit" | "reset";
 }) => {
   const [animationClass, setAnimationClass] = useState("");
 
@@ -40,6 +42,7 @@ export const PrimaryButton = ({
       disabled={disabled || isLoading}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      type={type || "button"}
     >
       <div className={cn("flex items-center gap-2", animationClass)}>
         {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}

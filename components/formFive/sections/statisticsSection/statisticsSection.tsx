@@ -40,9 +40,27 @@ const statistics = [
   },
 ];
 
+// Fonctions de validation
+const validateEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+// const validatePhone = (phone: string): boolean => {
+//   // Accepte les formats français: 06/07 + 8 chiffres ou 01-05/09 + 8 chiffres
+//   // Avec ou sans espaces/tirets
+//   const phoneRegex = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
+//   return phoneRegex.test(phone.replace(/\s/g, ""));
+// };
+
 export const StatisticsSection = () => {
   const { formData, updateFormData } = useFormState();
-  const [formErrors, setFormErrors] = useState(false);
+  const [formErrors, setFormErrors] = useState<{
+    nom?: string;
+    prenom?: string;
+    email?: string;
+    telephone?: string;
+  }>({});
   const formRef = useRef<HTMLFormElement>(null);
 
   const [nom, setNom] = useState("");
@@ -55,25 +73,25 @@ export const StatisticsSection = () => {
       id: "nom",
       label: "Nom",
       placeholder: "Nom",
-      defaultValue: "DUPONT",
       value: nom,
       onChange: setNom,
       required: true,
+      type: "text",
     },
     {
       id: "prenom",
       label: "Prénom",
       placeholder: "Prénom",
-      defaultValue: "Nicolas",
       value: prenom,
       onChange: setPrenom,
       required: true,
+      type: "text",
     },
     {
       id: "email",
       label: "Email",
-      placeholder: "Email",
-      defaultValue: "nicolasdupont@gmail.com",
+      placeholder: "exemple@email.com",
+      type: "email",
       value: email,
       onChange: setEmail,
       required: true,
@@ -81,29 +99,50 @@ export const StatisticsSection = () => {
     {
       id: "telephone",
       label: "Téléphone",
-      placeholder: "Téléphone",
-      defaultValue: "0606060606",
+      placeholder: "06 12 34 56 78",
       value: telephone,
       onChange: setTelephone,
       required: true,
+      type: "tel",
     },
   ];
 
   const validateForm = () => {
-    if (formRef.current) {
-      return formRef.current.checkValidity();
+    const errors: {
+      nom?: string;
+      prenom?: string;
+      email?: string;
+      telephone?: string;
+    } = {};
+
+    // Validation des champs requis
+    if (!nom.trim()) {
+      errors.nom = "Le nom est requis";
     }
-    return false;
+
+    if (!prenom.trim()) {
+      errors.prenom = "Le prénom est requis";
+    }
+
+    // Validation de l'email
+    if (!email.trim()) {
+      errors.email = "L'email est requis";
+    } else if (!validateEmail(email)) {
+      errors.email = "Format d'email invalide";
+    }
+
+    // Validation du téléphone
+    if (!telephone.trim()) {
+      errors.telephone = "Le téléphone est requis";
+    }
+    // else if (!validatePhone(telephone)) {
+    //   errors.telephone = "Format de téléphone invalide (ex: 06 12 34 56 78)";
+    // }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
-  /*const urlsToFetch = [
-    "https://hook.eu2.make.com/rxxc7eszpz77obxo33ev885mess8x5rm",
-    "https://hook.eu2.make.com/vaf1vj89y84tzjjmx2w3e9itqus80a8u",
-    "https://hook.eu2.make.com/u5b5rjya9rc3ef1msqeityqz5g7q0dt8",
-    "https://hook.eu2.make.com/cd9j3od253fiskl917hwlehvokvmm31m",
-    "https://hook.eu2.make.com/31p9di5lwheyirk0we8olt3r4y19slv2",
-    "https://hook.eu2.make.com/3uu3o2jiq1x4yrfj9l9do60mcx8k2wrm",
-    "https://hook.eu2.make.com/8m3qylvopepjwkvcjarw7i6cipfljxhr",
-  ];*/
+
   const urlToSendPdf =
     "https://hook.eu2.make.com/w5ps2bie8tnxj252b5grhyufigalaohw";
   const urlToSendData =
@@ -118,7 +157,6 @@ export const StatisticsSection = () => {
     setLoading(true);
 
     try {
-      // Vos données de devis
       const devisData = {
         REFERENCE_DEVIS: "DEVIS-2024-001",
         NUM_DEVIS: "001",
@@ -126,24 +164,16 @@ export const StatisticsSection = () => {
         CLIENT_NAME: "Jean Dupont",
         CLIENT_TEL: "06 12 34 56 78",
         CLIENT_MAIL: "jean.dupont@email.com",
-
-        // Prestations
         permis_Construire: "Permis de Construire",
         PU_Permis: "1200.00",
         TVA_Permis: "20%",
         HT_Permis: "1200.00",
-        permis_Construire_class: "", // Laisser vide pour afficher
-
-        // Masquer les lignes non utilisées
+        permis_Construire_class: "",
         plan_3D_class: "hidden-row",
-
-        // Totaux
         total_HT: "1200.00",
         total_TVA: "240.00",
         total_TTC: "1440.00",
       };
-
-      // Générer le HTML complet
 
       let devis: DevisRecord[] = [];
       let htmlContent;
@@ -159,9 +189,9 @@ export const StatisticsSection = () => {
             : formData.option === Option.DOSSIER_ERP
             ? "Dossier ERP"
             : formData.option === Option.CERTIFICAT_URBANISME
-            ? "Certificat d’Urbanisme"
+            ? "Certificat d'Urbanisme"
             : formData.option === Option.PLAN_UNITE
-            ? "Plan à l’unité"
+            ? "Plan à l'unité"
             : formData.option === Option.ETUDE_RE2020
             ? "Étude RE2020"
             : formData.option === Option.ETUDE_SISMIQUE
@@ -197,7 +227,6 @@ export const StatisticsSection = () => {
         htmlContent = generateDevisPdf(devis, client);
       }
 
-      // Appeler l'API
       if (devis.length > 0) {
         const response = await fetch("/api/generate-pdf", {
           method: "POST",
@@ -211,11 +240,7 @@ export const StatisticsSection = () => {
         });
 
         console.log("response", response);
-        // Télécharger le PDF
         const blob = await response.blob();
-        // const url = window.URL.createObjectURL(blob);
-        // const a = document.createElement("a");
-        // a.href = url;
         await fetch(urlToSendPdf, {
           method: "POST",
           headers: {
@@ -223,11 +248,6 @@ export const StatisticsSection = () => {
           },
           body: blob,
         });
-        // a.download = `devis-${devisData.NUM_DEVIS}.pdf`;
-        // document.body.appendChild(a);
-        // a.click();
-        // window.URL.revokeObjectURL(url);
-        // document.body.removeChild(a);
       }
 
       await fetch(urlToSendData, {
@@ -246,66 +266,34 @@ export const StatisticsSection = () => {
   };
 
   const handleNextStep = async () => {
+    // Valider le formulaire avant de continuer
     const isValid = validateForm();
-    if (isValid) {
-      const nom = document.getElementById("nom") as HTMLInputElement;
-      const prenom = document.getElementById("prenom") as HTMLInputElement;
-      const email = document.getElementById("email") as HTMLInputElement;
-      const telephone = document.getElementById(
-        "telephone"
-      ) as HTMLInputElement;
 
-      const payload = {
-        ...formData,
-        clientLastName: nom?.value || formData.clientLastName,
-        clientFirstName: prenom?.value || formData.clientFirstName,
-        clientEmail: email?.value || formData.clientEmail,
-        clientPhone: telephone?.value || formData.clientPhone,
-      };
+    if (!isValid) {
+      return;
+    }
 
-      try {
-        /*for (const url of urlsToFetch) {
-          const temp_response = await fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-          });
+    const payload = {
+      ...formData,
+      clientLastName: nom,
+      clientFirstName: prenom,
+      clientEmail: email,
+      clientPhone: telephone,
+    };
 
-          if (!temp_response.ok) {
-            console.error(
-              "Échec de l'envoi au webhook",
-              await temp_response.text()
-            );
-          }
-        }*/
-        await handleGeneratePDF({
-          nom: nom.value,
-          prenom: prenom.value,
-          email: email.value,
-          tel: telephone.value,
-        });
+    try {
+      await handleGeneratePDF({
+        nom: nom,
+        prenom: prenom,
+        email: email,
+        tel: telephone,
+      });
 
-        updateFormData({ ...payload, isStepFiveChecked: true });
-      } catch (error) {
-        console.error("Erreur réseau lors de l'envoi au webhook", error);
-      }
-    } else {
-      setFormErrors(true);
-      const form = formRef.current;
-      if (form) {
-        const inputs = form.querySelectorAll("input");
-        inputs.forEach((input: HTMLInputElement) => {
-          if (!input.validity.valid) {
-            input.reportValidity();
-          }
-        });
-      }
+      updateFormData({ ...payload, isStepFiveChecked: true });
+    } catch (error) {
+      console.error("Erreur réseau lors de l'envoi au webhook", error);
     }
   };
-
-  //Calcul et génération de devis
 
   const [loading, setLoading] = useState(false);
 
@@ -342,7 +330,9 @@ export const StatisticsSection = () => {
                 ref={formRef}
                 className="flex flex-col items-start gap-4 w-full"
                 noValidate
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
               >
                 <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5 w-full">
                   {formFields.slice(0, 2).map((field) => (
@@ -365,10 +355,30 @@ export const StatisticsSection = () => {
                           id={field.id}
                           placeholder={field.placeholder}
                           value={field.value}
-                          onChange={(e) => field.onChange(e.target.value)}
-                          className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074]"
+                          onChange={(e) => {
+                            field.onChange(e.target.value);
+                            // Clear error when user types
+                            if (
+                              formErrors[field.id as keyof typeof formErrors]
+                            ) {
+                              setFormErrors((prev) => ({
+                                ...prev,
+                                [field.id]: undefined,
+                              }));
+                            }
+                          }}
+                          className={`px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border ${
+                            formErrors[field.id as keyof typeof formErrors]
+                              ? "border-red-500"
+                              : "border-[#6d7074]"
+                          }`}
                           required={field.required}
                         />
+                        {formErrors[field.id as keyof typeof formErrors] && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {formErrors[field.id as keyof typeof formErrors]}
+                          </p>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -394,27 +404,40 @@ export const StatisticsSection = () => {
                         <Input
                           id={field.id}
                           placeholder={field.placeholder}
-                          className="px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border border-[#6d7074] font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]"
+                          className={`px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border ${
+                            formErrors[field.id as keyof typeof formErrors]
+                              ? "border-red-500"
+                              : "border-[#6d7074]"
+                          } font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]`}
                           value={field.value}
-                          onChange={(e) => field.onChange(e.target.value)}
+                          onChange={(e) => {
+                            field.onChange(e.target.value);
+                            // Clear error when user types
+                            if (
+                              formErrors[field.id as keyof typeof formErrors]
+                            ) {
+                              setFormErrors((prev) => ({
+                                ...prev,
+                                [field.id]: undefined,
+                              }));
+                            }
+                          }}
                           required={field.required}
+                          type={field.type}
                         />
+                        {formErrors[field.id as keyof typeof formErrors] && (
+                          <p className="text-red-500 text-xs mt-1">
+                            {formErrors[field.id as keyof typeof formErrors]}
+                          </p>
+                        )}
                       </div>
                     </div>
                   ))}
                 </div>
               </form>
 
-              {formErrors && (
-                <div className="text-red-500 text-sm w-full font-medium mt-2">
-                  Veuillez remplir tous les champs obligatoires avant de
-                  continuer.
-                </div>
-              )}
-
               <div className="hidden sm:flex flex-row sm:flex-row items-center justify-between gap-4 sm:gap-0 w-full">
                 <BackButton
-                  //className="w-full sm:w-auto"
                   handleClick={() => {
                     updateFormData({
                       ...formData,
@@ -422,13 +445,12 @@ export const StatisticsSection = () => {
                       isStepFiveChecked: false,
                     });
                   }}
-                  // disabled={!formData.isStepFourChecked}
                 />
 
                 <PrimaryButton
                   isLoading={loading}
                   disabled={!nom || !prenom || !email || !telephone}
-                  //className="w-full sm:w-auto"
+                  type="submit"
                   handleClick={handleNextStep}
                 />
               </div>
@@ -489,7 +511,6 @@ export const StatisticsSection = () => {
       </div>
       <div className="sm:hidden fixed bottom-0 left-0 right-0 flex items-center justify-between animate-fade-in opacity-0 [--animation-delay:400ms]  bg-[#ffffffaa] pt-10 pb-14 px-4 shadow-xl backdrop-blur-lg">
         <BackButton
-          //className="w-full sm:w-auto"
           handleClick={() => {
             updateFormData({
               ...formData,
@@ -497,11 +518,12 @@ export const StatisticsSection = () => {
               isStepFiveChecked: false,
             });
           }}
-          //disabled={!formData.isStepFourChecked}
         />
 
         <PrimaryButton
-          //className="w-full sm:w-auto"
+          isLoading={loading}
+          disabled={!nom || !prenom || !email || !telephone}
+          type="submit"
           handleClick={handleNextStep}
         />
       </div>
