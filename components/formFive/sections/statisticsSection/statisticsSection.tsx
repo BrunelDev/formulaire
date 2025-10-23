@@ -270,6 +270,17 @@ export const StatisticsSection = () => {
     const isValid = validateForm();
 
     if (!isValid) {
+      // Si le formulaire n'est pas valide, s'assurer que le message d'erreur de l'email est visible
+      if (formErrors.email) {
+        alert(formErrors.email);
+      }
+      return;
+    }
+
+    // Vérification spécifique de l'email avant soumission
+    if (!validateEmail(email)) {
+      setFormErrors({ ...formErrors, email: "Format d'email invalide" });
+      alert("L'adresse email que vous avez saisie n'est pas valide.");
       return;
     }
 

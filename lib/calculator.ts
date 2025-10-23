@@ -166,7 +166,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     Conception non incluse.<br><br>
     Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br><br>
     Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
-    pu: 166.67,
+    pu: 104.17,
     tva: 20,
   },
   render3D: {
@@ -174,33 +174,64 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     Conception non incluse.<br><br>
     Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br><br>
     Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
-    pu: 166.67,
+    pu: 104.17,
     tva: 20,
   },
+  dpDevis: {
+    designation: `Forfait réalisation des pièces pour déclaration préalable de travaux.<br>
+<br>
+Réalisation des plans à jour du projet en vue en plans, coupe et façades, implantation sur plan de masse. Perspectives filaires pour préciser les différents volumes. Perspectives couleur façade avant et arrière.<br>
+<br>
+Pièces envoyées:<br>
+-DP1 (plan de situation)<br>
+-DP2 (plan de masse)<br>
+-DP3 (plan de coupe)<br>
+-DP4 & DP5 (plan d'élévation)<br>
+-DP6 (insertion graphique)<br>
+-DP7 (vues rapprochées)<br>
+-DP8 (vues éloignées)<br>
+-DP11 (notice descriptive)<br>
+<br>
+Les photos du terrain sont réalisées par le client. Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents`,
+    pu: 291.67,
+    tva: 20,
+  },
+  urbanismDevis: {
+    designation: `Certificat d’Urbanisme opérationnel (CUb) – Réalisation des plans graphiques nécessaires à la demande (plan de situation, plan cadastral, plan sommaire du projet)<br>
+<br>
+Plans envoyés:<br>
+- Plan de situation<br>
+-Plan de masse<br>
+-Plan de façades<br>
+<br>
+(les plans de niveaux seront intégrés au C.U)`,
+    pu: 241.67,
+    tva: 20,
+  },
+  erpDevis : {
+    designation :  `Création d'un dossier ERP (-150m2)<br>
+<br>
+Nous réalisons votre dossier ERP au complet, avec :<br>
+<br>
+- La notice de sécurité<br>
+- La notice d'accessibilité<br>
+- Les plans sur 1 niveau (situation, cadastre, masse,…)<br>
+- Remplissage CERFA ERP 13824*04<br>
+<br>
+Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents.`,
+    pu : 375,
+    tva : 20
+  }
 };
 
 export const genreratePermisDevis = (data: Data) => {
   const payload: DevisRecord[] = [
     {
-      designation: `Forfait réalisation des pièces pour permis de construire (-150m2).<br>
-<br>
-Réalisation des plans à jour du projet en vue en plans, coupe et façades, implantation sur plan de masse. Perspectives filaires pour préciser les différents volumes. Perspectives couleur façade avant et arrière. Livraison du dossiers de permis de construire. prêts à dé poser en mairie. Les photos du terrain sont réalisées par le client.<br>
-<br>
-Plans envoyés:<br>
--PC 1 (plan de situation)<br>
--PC 2 (plan de masse)<br>
--PC 3 ( plan de coupe)<br>
--PC 4 (notice descriptive)<br>
--PC 5 (plan de façades)<br>
--PC 6 (document graphique 3D)<br>
--PC 7 (photographie situant le terrain dans son environnement proche)<br>
--PC 8 (photographie situant le terrain dans l'environnement lointain)<br>
-<br>
-Remplissage Cerfa et prise de côte non compris.  Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents.`,
+      designation: designationsMapping.isArchitectNeeded.designation,
       quantity: 1,
-      pu: 1000 / 1.2,
-      tva: 20,
-      totalht: 1000 / 1.2,
+      pu: designationsMapping.isArchitectNeeded.pu,
+      tva: designationsMapping.isArchitectNeeded.tva,
+      totalht: designationsMapping.isArchitectNeeded.pu,
     },
   ];
 
@@ -391,24 +422,10 @@ export const generateResume = (data: Data): DevisRecord[] => {
 export const generateDpDevis = (data: Data) => {
   const payload: DevisRecord[] = [
     {
-      designation: `Forfait réalisation des pièces pour déclaration préalable de travaux.
-
-Réalisation des plans à jour du projet en vue en plans, coupe et façades, implantation sur plan de masse. Perspectives filaires pour préciser les différents volumes. Perspectives couleur façade avant et arrière.<br>
-<br>
-Pièces envoyées:<br>
--DP1 (plan de situation)<br>
--DP2 (plan de masse)<br>
--DP3 (plan de coupe)<br>
--DP4 & DP5 (plan d'élévation)<br>
--DP6 (insertion graphique)<br>
--DP7 (vues rapprochées)<br>
--DP8 (vues éloignées)<br>
--DP11 (notice descriptive)<br>
-<br>
-Les photos du terrain sont réalisées par le client. Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents`,
+      designation: designationsMapping.dpDevis.designation,
       quantity: 1,
-      pu: 1000 / 1.2,
-      tva: 20,
+      pu: designationsMapping.dpDevis.pu,
+      tva: designationsMapping.dpDevis.tva,
       totalht: 1000 / 1.2,
     },
   ];
@@ -561,20 +578,11 @@ export const generateUniteDevis = (data: Data) => {
 export const generateErpDevis = (data: Data) => {
   const payload: DevisRecord[] = [
     {
-      designation: `Création d'un dossier ERP (-150m2)<br>
-<br>
-Nous réalisons votre dossier ERP au complet, avec :<br>
-<br>
-- La notice de sécurité<br>
-- La notice d'accessibilité<br>
-- Les plans sur 1 niveau (situation, cadastre, masse,…)<br>
-- Remplissage CERFA ERP 13824*04<br>
-<br>
-Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents.`,
+      designation: designationsMapping.erpDevis.designation,
       quantity: 1,
-      pu: 1000 / 1.2,
-      tva: 20,
-      totalht: 1000 / 1.2,
+      pu: designationsMapping.erpDevis.pu,
+      tva: designationsMapping.erpDevis.tva,
+      totalht: designationsMapping.erpDevis.pu,
     },
   ];
 
@@ -606,17 +614,10 @@ Le donneur d'ordre est tenu de fournir toutes informations techniques permettant
 export const generateUrbanismFormDevis = (data: Data) => {
   const payload: DevisRecord[] = [
     {
-      designation: `Certificat d'Urbanisme opérationnel (CUb)<br> – Réalisation des plans graphiques nécessaires à la demande (plan de situation, plan cadastral, plan sommaire du projet)<br>
-<br>
-Plans envoyés:<br>
-- Plan de situation<br>
--Plan de masse<br>
--Plan de façades<br>
-<br>
-(les plans de niveaux seront intégrés au C.U)`,
+      designation: designationsMapping.urbanismDevis.designation,
       quantity: 1,
-      pu: 1000 / 1.2,
-      tva: 20,
+      pu: designationsMapping.urbanismDevis.pu,
+      tva: designationsMapping.urbanismDevis.tva,
       totalht: 1000 / 1.2,
     },
   ];
