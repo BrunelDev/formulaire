@@ -32,89 +32,151 @@ export interface DevisRecord {
   totalht?: number;
 }
 
-const designations = {
-  isArchitectNeeded: "Dossier de permis de construire",
-  hasMultipleRealizationsOnSameConstructionPermit: `Plus-value pour modélisation et précisions<br>
+const designationsMapping: Record<
+  string,
+  {
+    designation: string;
+    pu?: number;
+    tva?: number;
+  }
+> = {
+  isArchitectNeeded: {
+    designation: `Forfait réalisation des pièces pour permis de construire (-150m2).<br>
 <br>
-La plus-value inclut :<br>
+Réalisation des plans à jour du projet en vue en plans, coupe et façades, implantation sur plan de masse. Perspectives filaires pour préciser les différents volumes. Perspectives couleur façade avant et arrière. Livraison du dossiers de permis de construire. prêts à dé poser en mairie. Les photos du terrain sont réalisées par le client.<br> 
 <br>
-- La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br>
+Plans envoyés:<br>
+-PC 1 (plan de situation)<br>
+-PC 2 (plan de masse)<br>
+-PC 3 ( plan de coupe)<br>
+-PC 4 (notice descriptive)<br>
+-PC 5 (plan de façades)<br>
+-PC 6 (document graphique 3D)<br>
+-PC 7 (photographie situant le terrain dans son environnement proche)<br>
+-PC 8 (photographie situant le terrain dans l’environnement lointain)<br>
 <br>
-Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d’heures supplémentaires nécessaires à la réalisation de ce projet.`,
-  cerfaFilling: `Remplissage Cerfa et dépôt en mairie. Le dépôt en mairie sera possible que si le service urbanisme a un service de dépôt dématerialisé. Le cas échéant, le client devra lui-même déposer son permis dans la mairie concernée.`,
-  pluVerification: `Vérification PLU :<br>
-<br>
-Mes Plans de Permis vérifie la conformité de votre projet au Plan Local d'Urbanisme afin d'assurer qu'il respecte les règles d'urbanisme en vigueur.`,
-  rdcPlanVerification: `Réalisation d'un plan de niveau RDC (distribution des pièces) (125 € / niveau. Ex: pour un R+1 compter 250€)<br>
-<br>
-Conception non incluse.<br>
-<br>
-Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation et leur intégration dans le dossier de déclaration préalable.<br>
-<br>
-Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d’éviter la facturation de ce service.`,
-  bbioStudy: `Étude BBIO:<br>
-<br>
-Fourniture de l’attestation RE2020 permis de construire du projet. Ce forfait permet de valider uniquement le permis de construire.<br>
-<br>
-Les livrables:<br>
--Rapport thermique des préconisations<br>
-- Attestation Bbio, DH<br>
-<br>
-Note : Pour l'élaboration de l'étude thermique, des plans de niveaux avec côtes sont nécessaires.`,
-  seismicStudy: `Étude sismique:<br>
-<br>
-- Vérification de la conformité des plans aux règles sismiques<br>
-- Vérification de la conformité en fonction de la typologie de la Zone<br>
-- Prise en compte des normes des PPR<br>
-- Préconisation du type d'étude à réaliser<br>
-- Attestation du controleur technique : PCMI 13`,
-  expressDelivery: `Service livraison express :<br>
-Recevez votre A.P.S sous 5 jours ouvrés.`,
-  displayPanel: `Fourniture d’un panneau d’affichage de permis de construire 80 x 120 cm`,
-  hasMultipleRealizationsOnSameDeclaration: `Plus-value pour modélisation et précisions<br>
-<br>
-La plus-value inclut :<br>
-<br>
-- La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br>
-<br>
-Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d’heures supplémentaires nécessaires à la réalisation de ce projet.`,
-  hasMultipleRealizationsOnSameUrbanismCertificate: `Plus-value pour modélisation et précisions<br>
-<br>
-La plus-value inclut :<br>
-<br>
-- La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br>
-<br>
-Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d’heures supplémentaires nécessaires à la réalisation de ce projet.`,
-  hasMultipleRealizationsOnSamePlanRequest: `Plus-value pour modélisation et précisions<br>
-<br>
-La plus-value inclut :<br>
-<br>
-- La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br>
-<br>
-Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d’heures supplémentaires nécessaires à la réalisation de ce projet.`,
-  doesNeedPlan: `Forfait réalisation de plan à l'unité<br>
-Pièces envoyés:`,
-  shouldMakeRDCPlan: `Réalisation d'un plan de niveau RDC (distribution des pièces) (125 € / niveau. Ex: pour un R+1 compter 250€)<br>
-<br>
-Conception non incluse.<br>
-<br>
-Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation et leur intégration dans le dossier de déclaration préalable.<br>
-<br>
-Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d’éviter la facturation de ce service.`,
-  shouldMake3dRender: `Réalisation d'un plan rendu 3D de l’aménagement intérieur (125 € / niveau. Ex: pour un R+1 compter 250€)<br>
-<br>
-Conception non incluse.<br>
-<br>
-Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br>
-<br>
-Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d’éviter la facturation de ce service.`,
-  render3D: `Réalisation d'un plan rendu 3D de l’aménagement intérieur (125 € / niveau. Ex: pour un R+1 compter 250€)<br>
-<br>
-Conception non incluse.<br>
-<br>
-Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br>
-<br>
-Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d’éviter la facturation de ce service.`,
+Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents.`,
+    pu: 291.67,
+    tva: 20,
+  },
+  isArchitectNeededErp: {
+    designation: "Dossier de permis de construire",
+    pu: 1666.67,
+    tva: 20,
+  },
+  hasMultipleRealizationsOnSameConstructionPermit: {
+    designation: `Plus-value pour modélisation et précisions<br><br>
+    La plus-value inclut :<br><br>
+    - La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br><br>
+    Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d'heures supplémentaires nécessaires à la réalisation de ce projet.`,
+    pu: 666.67,
+    tva: 20,
+  },
+  cerfaFilling: {
+    designation: `Remplissage Cerfa et dépôt en mairie. Le dépôt en mairie sera possible que si le service urbanisme a un service de dépôt dématerialisé. Le cas échéant, le client devra lui-même déposer son permis dans la mairie concernée.`,
+    pu: 66.67,
+    tva: 20,
+  },
+  pluVerification: {
+    designation: `Vérification PLU :<br><br>
+    Mes Plans de Permis vérifie la conformité de votre projet au Plan Local d'Urbanisme afin d'assurer qu'il respecte les règles d'urbanisme en vigueur.`,
+    pu: 150,
+    tva: 20,
+  },
+  rdcPlanVerification: {
+    designation: `Réalisation d'un plan de niveau RDC (distribution des pièces) (125 € / niveau. Ex: pour un R+1 compter 250€)<br><br>
+    Conception non incluse.<br><br>
+    Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation et leur intégration dans le dossier de déclaration préalable.<br><br>
+    Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
+    pu: 104.17,
+    tva: 20,
+  },
+  bbioStudy: {
+    designation: `Étude BBIO:<br><br>
+    Fourniture de l'attestation RE2020 permis de construire du projet. Ce forfait permet de valider uniquement le permis de construire.<br><br>
+    Les livrables:<br>
+    - Rapport thermique des préconisations<br>
+    - Attestation Bbio, DH<br><br>
+    Note : Pour l'élaboration de l'étude thermique, des plans de niveaux avec côtes sont nécessaires.`,
+    pu: 250,
+    tva: 20,
+  },
+
+  seismicStudy: {
+    designation: `Étude sismique:<br><br>
+    - Vérification de la conformité des plans aux règles sismiques<br>
+    - Vérification de la conformité en fonction de la typologie de la Zone<br>
+    - Prise en compte des normes des PPR<br>
+    - Préconisation du type d'étude à réaliser<br>
+    - Attestation du controleur technique : PCMI 13`,
+    pu: 333.33,
+    tva: 20,
+  },
+  expressDelivery: {
+    designation: `Service livraison express :<br>
+    Recevez votre A.P.S sous 5 jours ouvrés.`,
+    pu: 75,
+    tva: 20,
+  },
+  displayPanel: {
+    designation: `Fourniture d'un panneau d'affichage de permis de construire 80 x 120 cm`,
+    pu: 20.83,
+    tva: 20,
+  },
+  hasMultipleRealizationsOnSameDeclaration: {
+    designation: `Plus-value pour modélisation et précisions<br><br>
+    La plus-value inclut :<br><br>
+    - La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br><br>
+    Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d'heures supplémentaires nécessaires à la réalisation de ce projet.`,
+    pu: 66.67,
+    tva: 20,
+  },
+  hasMultipleRealizationsOnSameUrbanismCertificate: {
+    designation: `Plus-value pour modélisation et précisions<br><br>
+    La plus-value inclut :<br><br>
+    - La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br><br>
+    Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d'heures supplémentaires nécessaires à la réalisation de ce projet.`,
+    pu: 66.67,
+    tva: 20,
+  },
+  hasMultipleRealizationsOnSamePlanRequest: {
+    designation: `Plus-value pour modélisation et précisions<br><br>
+    La plus-value inclut :<br><br>
+    - La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br><br>
+    Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d'heures supplémentaires nécessaires à la réalisation de ce projet.`,
+    pu: 66.67,
+    tva: 20,
+  },
+  doesNeedPlan: {
+    designation: `Forfait réalisation de plan à l'unité<br>
+    Pièces envoyés:`,
+    pu: 125,
+    tva: 20,
+  },
+  shouldMakeRDCPlan: {
+    designation: `Réalisation d'un plan de niveau RDC (distribution des pièces) (125 € / niveau. Ex: pour un R+1 compter 250€)<br><br>
+    Conception non incluse.<br><br>
+    Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation et leur intégration dans le dossier de déclaration préalable.<br><br>
+    Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
+    pu: 104.17,
+    tva: 20,
+  },
+  shouldMake3dRender: {
+    designation: `Réalisation d'un plan rendu 3D de l'aménagement intérieur (125 € / niveau. Ex: pour un R+1 compter 250€)<br><br>
+    Conception non incluse.<br><br>
+    Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br><br>
+    Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
+    pu: 166.67,
+    tva: 20,
+  },
+  render3D: {
+    designation: `Réalisation d'un plan rendu 3D de l'aménagement intérieur (125 € / niveau. Ex: pour un R+1 compter 250€)<br><br>
+    Conception non incluse.<br><br>
+    Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br><br>
+    Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
+    pu: 166.67,
+    tva: 20,
+  },
 };
 
 export const genreratePermisDevis = (data: Data) => {
@@ -132,7 +194,7 @@ Plans envoyés:<br>
 -PC 5 (plan de façades)<br>
 -PC 6 (document graphique 3D)<br>
 -PC 7 (photographie situant le terrain dans son environnement proche)<br>
--PC 8 (photographie situant le terrain dans l’environnement lointain)<br>
+-PC 8 (photographie situant le terrain dans l'environnement lointain)<br>
 <br>
 Remplissage Cerfa et prise de côte non compris.  Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents.`,
       quantity: 1,
@@ -143,89 +205,106 @@ Remplissage Cerfa et prise de côte non compris.  Le donneur d'ordre est tenu de
   ];
 
   if (data.isArchitectNeeded) {
+    const mapping = designationsMapping.isArchitectNeeded;
     payload.push({
-      designation: designations.isArchitectNeeded,
+      designation: mapping.designation,
+      quantity: 1,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
 
   if (data.hasMultipleRealizationsOnSameConstructionPermit) {
+    const mapping =
+      designationsMapping.hasMultipleRealizationsOnSameConstructionPermit;
+    const quantity = data.realizationsOnSameConstructionPermitNumber || 0;
     payload.push({
-      designation: designations.hasMultipleRealizationsOnSameConstructionPermit,
-      quantity: data.realizationsOnSameConstructionPermitNumber,
-      pu: 800 / 1.2,
-      tva: 20,
+      designation: mapping.designation,
+      quantity: quantity,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: quantity * mapping.pu!,
     });
   }
 
   if (data.cerfaFilling) {
+    const mapping = designationsMapping.cerfaFilling;
     payload.push({
-      designation: designations.cerfaFilling,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 80 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
 
   if (data.pluVerification) {
+    const mapping = designationsMapping.pluVerification;
     payload.push({
-      designation: designations.pluVerification,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 180 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
 
   if (data.rdcPlanVerification) {
+    const mapping = designationsMapping.rdcPlanVerification;
+    const quantity = data.rdcPlanNumber || 0;
     payload.push({
-      designation: designations.rdcPlanVerification,
-      quantity: data.rdcPlanNumber,
-      pu: 125 / 1.2,
-      tva: 20,
+      designation: mapping.designation,
+      quantity: quantity,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: quantity * mapping.pu!,
     });
   }
 
   if (data.bbioStudy) {
+    const mapping = designationsMapping.bbioStudy;
     payload.push({
-      designation: designations.bbioStudy,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 300 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
 
   if (data.seismicStudy) {
+    const mapping = designationsMapping.seismicStudy;
     payload.push({
-      designation: designations.seismicStudy,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 400 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
 
   if (data.expressDelivery) {
+    const mapping = designationsMapping.expressDelivery;
     payload.push({
-      designation: designations.expressDelivery,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 90 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
 
   if (data.displayPanel) {
+    const mapping = designationsMapping.displayPanel;
     payload.push({
-      designation: designations.displayPanel,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 25,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
-
-  // Calculate totalht for each record
-  payload.forEach((record) => {
-    if (record.quantity && record.pu) {
-      record.totalht = record.quantity * record.pu;
-    }
-  });
 
   return payload;
 };
@@ -266,7 +345,7 @@ export const generateResume = (data: Data): DevisRecord[] => {
     },
     displayPanel: {
       designation:
-        "Fourniture d’un panneau d’affichage de permis de construire 80 x 120 cm",
+        "Fourniture d'un panneau d'affichage de permis de construire 80 x 120 cm",
       quantity: 1,
     },
     hasMultipleRealizationsOnSameDeclaration: {
@@ -293,7 +372,7 @@ export const generateResume = (data: Data): DevisRecord[] => {
       quantity: data.rdcPlanCount,
     },
     render3D: {
-      designation: "Réalisation d'un plan rendu 3D de l’aménagement intérieur",
+      designation: "Réalisation d'un plan rendu 3D de l'aménagement intérieur",
       quantity: data.renderCount3d,
     },
   };
@@ -330,70 +409,78 @@ Les photos du terrain sont réalisées par le client. Le donneur d'ordre est ten
       quantity: 1,
       pu: 1000 / 1.2,
       tva: 20,
-      totalht: 1000,
+      totalht: 1000 / 1.2,
     },
   ];
 
   if (data.hasMultipleRealizationsOnSameDeclaration) {
+    const mapping =
+      designationsMapping.hasMultipleRealizationsOnSameDeclaration;
+    const quantity = data.realizationsOnSameDeclarationNumber || 0;
     payload.push({
-      designation: designations.hasMultipleRealizationsOnSameDeclaration,
-      quantity: data.realizationsOnSameDeclarationNumber,
-      pu: 400 / 1.2,
-      tva: 20,
+      designation: mapping.designation,
+      quantity: quantity,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: quantity * mapping.pu!,
     });
   }
 
   if (data.cerfaFilling) {
+    const mapping = designationsMapping.cerfaFilling;
     payload.push({
-      designation: designations.cerfaFilling,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 80 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
 
   if (data.pluVerification) {
+    const mapping = designationsMapping.pluVerification;
     payload.push({
-      designation: designations.pluVerification,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 180 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
 
   if (data.rdcPlanVerification) {
+    const mapping = designationsMapping.rdcPlanVerification;
+    const quantity = data.rdcPlanNumber || 0;
     payload.push({
-      designation: designations.rdcPlanVerification,
-      quantity: data.rdcPlanNumber,
-      pu: 125 / 1.2,
-      tva: 20,
+      designation: mapping.designation,
+      quantity: quantity,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: quantity * mapping.pu!,
     });
   }
 
   if (data.expressDelivery) {
+    const mapping = designationsMapping.expressDelivery;
     payload.push({
-      designation: designations.expressDelivery,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 90 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
 
   if (data.displayPanel) {
+    const mapping = designationsMapping.displayPanel;
     payload.push({
-      designation: designations.displayPanel,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 25 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
-
-  // Calculate totalht for each record
-  payload.forEach((record) => {
-    if (record.quantity && record.pu) {
-      record.totalht = record.quantity * record.pu;
-    }
-  });
 
   return payload;
 };
@@ -402,64 +489,71 @@ export const generateUniteDevis = (data: Data) => {
   const payload: DevisRecord[] = [];
 
   if (data.hasMultipleRealizationsOnSamePlanRequest) {
+    const mapping =
+      designationsMapping.hasMultipleRealizationsOnSamePlanRequest;
+    const quantity = data.realizationsOnSamePlanRequestNumber || 0;
     payload.push({
-      designation: designations.hasMultipleRealizationsOnSamePlanRequest,
-      quantity: data.realizationsOnSamePlanRequestNumber,
-      pu: 250 / 1.2,
-      tva: 20,
+      designation: mapping.designation,
+      quantity: quantity,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: quantity * mapping.pu!,
     });
   }
 
   if (data.doesNeedPlan && data.neededPlans) {
-    let temp_designation = designations.doesNeedPlan;
-    if (data.neededPlans.length >= 1) {
-      for (let i = 1; i < data.neededPlans.length; i++) {
-        temp_designation += "<br>" + data.neededPlans[i];
-      }
-    }
-    temp_designation +=
+    const mapping = designationsMapping.doesNeedPlan;
+    let tempDesignation = mapping.designation;
+    data.neededPlans.forEach((plan) => {
+      tempDesignation += "<br>" + plan;
+    });
+    tempDesignation +=
       "<br>Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents.";
+
+    const quantity = data.neededPlans.length;
     payload.push({
-      designation: temp_designation,
-      quantity: data.neededPlans.length,
-      pu: 150 / 1.2,
-      tva: 20,
+      designation: tempDesignation,
+      quantity: quantity,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: quantity * mapping.pu!,
     });
   }
 
   if (data.rdcPlanVerification) {
+    const mapping = designationsMapping.rdcPlanVerification;
+    const quantity = data.rdcPlanCount || 0;
     payload.push({
-      designation: designations.rdcPlanVerification,
-      quantity: data.rdcPlanCount,
-      pu: 125 / 1.2,
-      tva: 20,
+      designation: mapping.designation,
+      quantity: quantity,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: quantity * mapping.pu!,
     });
   }
 
   if (data.render3D) {
+    const mapping = designationsMapping.render3D;
+    const quantity = data.renderCount3d || 0;
     payload.push({
-      designation: designations.render3D,
-      quantity: data.renderCount3d,
-      pu: 200 / 1.2,
-      tva: 20,
+      designation: mapping.designation,
+      quantity: quantity,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: quantity * mapping.pu!,
     });
   }
 
   if (data.expressDelivery) {
+    const mapping = designationsMapping.expressDelivery;
     payload.push({
-      designation: designations.expressDelivery,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 90 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
-
-  // Calculate totalht for each record
-  payload.forEach((record) => {
-    if (record.quantity && record.pu) {
-      record.totalht = record.quantity * record.pu;
-    }
-  });
 
   return payload;
 };
@@ -472,43 +566,39 @@ export const generateErpDevis = (data: Data) => {
 Nous réalisons votre dossier ERP au complet, avec :<br>
 <br>
 - La notice de sécurité<br>
-- La notice d’accessibilité<br>
+- La notice d'accessibilité<br>
 - Les plans sur 1 niveau (situation, cadastre, masse,…)<br>
 - Remplissage CERFA ERP 13824*04<br>
 <br>
-Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents.
-      `,
+Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents.`,
       quantity: 1,
       pu: 1000 / 1.2,
       tva: 20,
-      totalht: 1000,
+      totalht: 1000 / 1.2,
     },
   ];
 
   if (data.isArchitectNeeded) {
+    const mapping = designationsMapping.isArchitectNeededErp;
     payload.push({
-      designation: designations.isArchitectNeeded,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 2000 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
 
   if (data.expressDelivery) {
+    const mapping = designationsMapping.expressDelivery;
     payload.push({
-      designation: designations.expressDelivery,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 90 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
-
-  // Calculate totalht for each record
-  payload.forEach((record) => {
-    if (record.quantity && record.pu) {
-      record.totalht = record.quantity * record.pu;
-    }
-  });
 
   return payload;
 };
@@ -516,7 +606,7 @@ Le donneur d'ordre est tenu de fournir toutes informations techniques permettant
 export const generateUrbanismFormDevis = (data: Data) => {
   const payload: DevisRecord[] = [
     {
-      designation: `Certificat d’Urbanisme opérationnel (CUb)<br> – Réalisation des plans graphiques nécessaires à la demande (plan de situation, plan cadastral, plan sommaire du projet)<br>
+      designation: `Certificat d'Urbanisme opérationnel (CUb)<br> – Réalisation des plans graphiques nécessaires à la demande (plan de situation, plan cadastral, plan sommaire du projet)<br>
 <br>
 Plans envoyés:<br>
 - Plan de situation<br>
@@ -527,67 +617,71 @@ Plans envoyés:<br>
       quantity: 1,
       pu: 1000 / 1.2,
       tva: 20,
-      totalht: 1000,
+      totalht: 1000 / 1.2,
     },
   ];
 
   if (data.hasMultipleRealizationsOnSameUrbanismCertificate) {
+    const mapping =
+      designationsMapping.hasMultipleRealizationsOnSameUrbanismCertificate;
+    const quantity = data.realizationsOnSameUrbanismCertificateNumber || 0;
     payload.push({
-      designation:
-        designations.hasMultipleRealizationsOnSameUrbanismCertificate,
-      quantity: data.realizationsOnSameUrbanismCertificateNumber,
-      pu: 300 / 1.2,
-      tva: 20,
+      designation: mapping.designation,
+      quantity: quantity,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: quantity * mapping.pu!,
     });
   }
 
   if (data.pluVerification) {
+    const mapping = designationsMapping.pluVerification;
     payload.push({
-      designation: designations.pluVerification,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 180 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
 
   if (data.expressDelivery) {
+    const mapping = designationsMapping.expressDelivery;
     payload.push({
-      designation: designations.expressDelivery,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 90 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     });
   }
-
-  // Calculate totalht for each record
-  payload.forEach((record) => {
-    if (record.quantity && record.pu) {
-      record.totalht = record.quantity * record.pu;
-    }
-  });
 
   return payload;
 };
 
 export const generateRe2020Devis = () => {
+  const mapping = designationsMapping.bbioStudy;
   const payload: DevisRecord[] = [
     {
-      designation: designations.bbioStudy,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 1000 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     },
   ];
   return payload;
 };
 
 export const generateSismicDevis = () => {
+  const mapping = designationsMapping.seismicStudy;
   const payload: DevisRecord[] = [
     {
-      designation: designations.seismicStudy,
+      designation: mapping.designation,
       quantity: 1,
-      pu: 1000 / 1.2,
-      tva: 20,
+      pu: mapping.pu,
+      tva: mapping.tva,
+      totalht: mapping.pu!,
     },
   ];
   return payload;
