@@ -161,7 +161,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     Conception non incluse.<br><br>
     Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br><br>
     Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
-    pu: 125 / 1.2,
+    pu: 50,
     tva: 20,
   },
   render3D: {
@@ -169,7 +169,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     Conception non incluse.<br><br>
     Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br><br>
     Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
-    pu: 125 / 1.2,
+    pu: 50,
     tva: 20,
   },
   dpDevis: {
@@ -526,7 +526,7 @@ export const generateUniteDevis = (data: Data) => {
     payload.push({
       designation: tempDesignation,
       quantity: quantity,
-      pu: mapping.pu,
+      pu: quantity * mapping.pu! + 130,
       tva: mapping.tva,
       totalht: quantity * mapping.pu! + 130,
     });
@@ -550,9 +550,9 @@ export const generateUniteDevis = (data: Data) => {
     payload.push({
       designation: mapping.designation,
       quantity: quantity,
-      pu: mapping.pu,
+      pu: quantity * mapping.pu! + 130,
       tva: mapping.tva,
-      totalht: quantity * mapping.pu!,
+      totalht: quantity * mapping.pu! + 130,
     });
   }
 

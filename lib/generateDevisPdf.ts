@@ -35,14 +35,13 @@ export default function generateDevisPdf(
         item.designation.includes(
           `Forfait réalisation de plan à l'unité<br>
     Pièces envoyés:`
-        ) &&
-        item.quantity! > 1
+        )
       ) {
         return `
     <tr>
       <td>${item.designation}</td>
-      <td class="text-center">${item.quantity || 1}fts</td>
-      <td class="text-right">${formatPrice(item.pu || 0)} €</td>
+      <td class="text-center">1${item.quantity! > 1 ? "ft" : ""}</td>
+      <td class="text-right">${formatPrice(item.totalht || 0)} €</td>
       <td class="text-center">${item.tva || 20}%</td>
       <td class="text-right">${formatPrice(item.totalht || 0)} €</td>
     </tr>`;
