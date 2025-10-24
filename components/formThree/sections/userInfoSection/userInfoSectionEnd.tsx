@@ -176,7 +176,7 @@ export const UserInfoSection = () => {
 
             <div
               className={`absolute top-[28px] sm:top-[35px] left-1/2 transform -translate-x-1/2 ${
-                step.isCurrent
+                step.label === "Finalisation"
                   ? "font-[number:var(--label-smaller-font-weight)] font-label-smaller text-[#021327] text-xs sm:text-[length:var(--label-smaller-font-size)] text-center tracking-[var(--label-smaller-letter-spacing)] leading-[var(--label-smaller-line-height)] [font-style:var(--label-smaller-font-style)]"
                   : step.isCompleted
                   ? "opacity-80 font-[number:var(--text-smaller-font-weight)] font-text-smaller text-[#021327] text-xs sm:text-[length:var(--text-smaller-font-size)] text-center tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)]"
