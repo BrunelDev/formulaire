@@ -5,7 +5,7 @@ export interface DevisRecord {
 
 export default function generateResumePdf(
   devis: DevisRecord[],
-  client: { nom: string; prenom: string },
+  client: { nom: string; prenom: string, email : string, tel : string },
   serviceTitle: string
 ) {
   const devisRows = devis
@@ -64,12 +64,34 @@ export default function generateResumePdf(
         .client-info {
             text-align: center;
             margin-bottom: 40px;
-            font-size: 14pt;
         }
         
         .client-name {
             font-weight: 600;
             color: #042347;
+            font-size: 14pt;
+            margin-bottom: 10px;
+        }
+        
+        .client-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        
+        .contact-item {
+            color: #555;
+            font-size: 11pt;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .contact-icon {
+            color: #042347;
+            font-weight: 600;
         }
         
         table {
@@ -121,7 +143,15 @@ export default function generateResumePdf(
         
         <!-- Informations client -->
         <div class="client-info">
-            <span class="client-name">${client.nom} ${client.prenom}</span>
+            <div class="client-name">${client.nom} ${client.prenom}</div>
+            <div class="client-contacts">
+                <span class="contact-item">
+                    <span class="contact-icon">✉</span> ${client.email}
+                </span>
+                <span class="contact-item">
+                    <span class="contact-icon">☎</span> ${client.tel}
+                </span>
+            </div>
         </div>
         
         <!-- Tableau des prestations -->

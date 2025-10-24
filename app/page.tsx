@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import { FormFive } from "@/components/formFive/formFive";
 import { FormFour } from "@/components/formFour/formFour";
 import { FormOne } from "@/components/formOne/formOne";
-import { FormSix } from "@/components/formSix/formSix";
 import { FormThree } from "@/components/formThree/formThree";
 import { UserInfoSection } from "@/components/formThree/sections/userInfoSection/userInfoSection";
 import { FormTwo } from "@/components/formTwo/formTwo";
@@ -28,9 +27,7 @@ export default function Home() {
         <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms] mb-[20px]">
           <UserInfoSection />
         </div>
-        {isStepFiveChecked ? (
-          <FormSix />
-        ) : isStepFourChecked ? (
+        {isStepFourChecked ? (
           <FormFive />
         ) : isStepThreeChecked ? (
           <FormFour />

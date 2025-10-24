@@ -19,6 +19,7 @@ import {
 import generateDevisPdf from "@/lib/generateDevisPdf";
 import generateResumePdf from "@/lib/generateResume";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
 const statistics = [
@@ -54,6 +55,7 @@ const validateEmail = (email: string): boolean => {
 // };
 
 export const StatisticsSection = () => {
+  const router = useRouter();
   const { formData, updateFormData } = useFormState();
   const [formErrors, setFormErrors] = useState<{
     nom?: string;
@@ -181,7 +183,12 @@ export const StatisticsSection = () => {
         devis = generateResume(formData);
         htmlContent = generateResumePdf(
           devis,
-          { nom: formData.clientLastName, prenom: formData.clientFirstName },
+          {
+            nom: formData.clientLastName,
+            prenom: formData.clientFirstName,
+            email: formData.clientEmail,
+            tel: formData.clientPhone,
+          },
           formData.option === Option.PERMIS_CONSTRUIRE
             ? "Permis de Construire"
             : formData.option === Option.DECLARATION_PREALABLE
@@ -239,7 +246,6 @@ export const StatisticsSection = () => {
           }),
         });
 
-        console.log("response", response);
         // Télécharger le PDF
         const blob = await response.blob();
         // const url = window.URL.createObjectURL(blob);
@@ -310,6 +316,7 @@ export const StatisticsSection = () => {
       });
 
       updateFormData({ ...payload, isStepFiveChecked: true });
+      router.push("/finalisation");
     } catch (error) {
       console.error("Erreur réseau lors de l'envoi au webhook", error);
     }
