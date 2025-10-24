@@ -254,9 +254,9 @@ export const StatisticsSection = () => {
 
         // Télécharger le PDF
         const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
+        // const url = window.URL.createObjectURL(blob);
+        // const a = document.createElement("a");
+        // a.href = url;
         await fetch(urlToSendPdf, {
           method: "POST",
           headers: {
@@ -264,11 +264,11 @@ export const StatisticsSection = () => {
           },
           body: blob,
         });
-        a.download = `devis-${devisData.NUM_DEVIS}.pdf`;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
+        // a.download = `devis-${devisData.NUM_DEVIS}.pdf`;
+        // document.body.appendChild(a);
+        // a.click();
+        // window.URL.revokeObjectURL(url);
+        // document.body.removeChild(a);
       }
 
       await fetch(urlToSendData, {
