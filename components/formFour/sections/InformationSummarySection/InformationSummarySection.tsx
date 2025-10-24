@@ -98,7 +98,7 @@ export const InformationSummarySection = () => {
         updateFormData({ ...formData, rdcPlanVerification: value });
       },
       value: formData.rdcPlanVerification,
-      placeholder: "Nombre de niveau à déssiner",
+      placeholder: "Nombre de niveau à dessiner",
       price: "(125€ TTC / niveau)",
       inputRequired: !!!formData.rdcPlanNumber,
       type: "option",
@@ -217,7 +217,7 @@ export const InformationSummarySection = () => {
         updateFormData({ ...formData, rdcPlanVerification: value });
       },
       value: formData.rdcPlanVerification,
-      placeholder: "Nombre de niveaux à déssiner",
+      placeholder: "Nombre de niveaux à dessiner",
       price: "(125€ TTC / niveau)",
       inputRequired: !!!formData.rdcPlanNumber,
       type: "option",
