@@ -276,7 +276,13 @@ export const StatisticsSection = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          clientLastName: nom,
+          clientFirstName: prenom,
+          clientEmail: email,
+          clientPhone: nom,
+        }),
       });
     } catch (error) {
       console.error("Erreur:", error);
