@@ -56,7 +56,7 @@ Plans envoyés:<br>
 -PC 8 (photographie situant le terrain dans l’environnement lointain)<br>
 <br>
 Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents.`,
-    pu: 291.67,
+    pu: 350 / 1.2,
     tva: 20,
   },
   hasMultipleRealizationsOnSameConstructionPermit: {
@@ -64,18 +64,18 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     La plus-value inclut :<br><br>
     - La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br><br>
     Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d'heures supplémentaires nécessaires à la réalisation de ce projet.`,
-    pu: 66.67,
+    pu: 80 / 1.2,
     tva: 20,
   },
   cerfaFilling: {
     designation: `Remplissage Cerfa et dépôt en mairie. Le dépôt en mairie sera possible que si le service urbanisme a un service de dépôt dématerialisé. Le cas échéant, le client devra lui-même déposer son permis dans la mairie concernée.`,
-    pu: 66.67,
+    pu: 80 / 1.2,
     tva: 20,
   },
   pluVerification: {
     designation: `Vérification PLU :<br><br>
     Mes Plans de Permis vérifie la conformité de votre projet au Plan Local d'Urbanisme afin d'assurer qu'il respecte les règles d'urbanisme en vigueur.`,
-    pu: 150,
+    pu: 180 / 1.2,
     tva: 20,
   },
   rdcPlanVerification: {
@@ -83,7 +83,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     Conception non incluse.<br><br>
     Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation et leur intégration dans le dossier de déclaration préalable.<br><br>
     Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
-    pu: 104.17,
+    pu: 125 / 1.2,
     tva: 20,
   },
   bbioStudy: {
@@ -93,7 +93,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     - Rapport thermique des préconisations<br>
     - Attestation Bbio, DH<br><br>
     Note : Pour l'élaboration de l'étude thermique, des plans de niveaux avec côtes sont nécessaires.`,
-    pu: 250,
+    pu: 300 / 1.2,
     tva: 20,
   },
 
@@ -104,18 +104,18 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     - Prise en compte des normes des PPR<br>
     - Préconisation du type d'étude à réaliser<br>
     - Attestation du controleur technique : PCMI 13`,
-    pu: 333.33,
+    pu: 400 / 1.2,
     tva: 20,
   },
   expressDelivery: {
     designation: `Service livraison express :<br>
     Recevez votre A.P.S sous 5 jours ouvrés.`,
-    pu: 75,
+    pu: 90 / 1.2,
     tva: 20,
   },
   displayPanel: {
     designation: `Fourniture d'un panneau d'affichage de permis de construire 80 x 120 cm`,
-    pu: 20.83,
+    pu: 25 / 1.2,
     tva: 20,
   },
   hasMultipleRealizationsOnSameDeclaration: {
@@ -123,7 +123,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     La plus-value inclut :<br><br>
     - La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br><br>
     Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d'heures supplémentaires nécessaires à la réalisation de ce projet.`,
-    pu: 66.67,
+    pu: 80 / 1.2,
     tva: 20,
   },
   hasMultipleRealizationsOnSameUrbanismCertificate: {
@@ -131,7 +131,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     La plus-value inclut :<br><br>
     - La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br><br>
     Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d'heures supplémentaires nécessaires à la réalisation de ce projet.`,
-    pu: 66.67,
+    pu: 80 / 1.2,
     tva: 20,
   },
   hasMultipleRealizationsOnSamePlanRequest: {
@@ -139,7 +139,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     La plus-value inclut :<br><br>
     - La modélisation et la précision d'un bâtiment supplémentaire à modéliser<br><br>
     Le projet comprend plusieurs volets. Par conséquent, une plus-value sera appliquée en fonction du nombre d'heures supplémentaires nécessaires à la réalisation de ce projet.`,
-    pu: 66.67,
+    pu: 80 / 1.2,
     tva: 20,
   },
   doesNeedPlan: {
@@ -153,7 +153,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     Conception non incluse.<br><br>
     Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation et leur intégration dans le dossier de déclaration préalable.<br><br>
     Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
-    pu: 104.17,
+    pu: 125 / 1.2,
     tva: 20,
   },
   shouldMake3dRender: {
@@ -161,7 +161,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     Conception non incluse.<br><br>
     Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br><br>
     Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
-    pu: 104.17,
+    pu: 125 / 1.2,
     tva: 20,
   },
   render3D: {
@@ -169,7 +169,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     Conception non incluse.<br><br>
     Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br><br>
     Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
-    pu: 104.17,
+    pu: 125 / 1.2,
     tva: 20,
   },
   dpDevis: {
@@ -188,7 +188,7 @@ Pièces envoyées:<br>
 -DP11 (notice descriptive)<br>
 <br>
 Les photos du terrain sont réalisées par le client. Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents`,
-    pu: 291.67,
+    pu: 350 / 1.2,
     tva: 20,
   },
   urbanismDevis: {
@@ -200,7 +200,7 @@ Plans envoyés:<br>
 -Plan de façades<br>
 <br>
 (les plans de niveaux seront intégrés au C.U)`,
-    pu: 241.67,
+    pu: 290 / 1.2,
     tva: 20,
   },
   erpDevis: {
@@ -214,7 +214,7 @@ Nous réalisons votre dossier ERP au complet, avec :<br>
 - Remplissage CERFA ERP 13824*04<br>
 <br>
 Le donneur d'ordre est tenu de fournir toutes informations techniques permettant d'établir les documents.`,
-    pu: 375,
+    pu: 450 / 1.2,
     tva: 20,
   },
 };

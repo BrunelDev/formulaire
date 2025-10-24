@@ -30,16 +30,33 @@ export default function generateDevisPdf(
     dateDevis.replaceAll("/", "");
 
   const devisRows = devis
-    .map(
-      (item) => `
+    .map((item) => {
+      if (
+        item.designation.includes(
+          `Forfait réalisation de plan à l'unité<br>
+    Pièces envoyés:`
+        ) &&
+        item.quantity! > 1
+      ) {
+        return `
+    <tr>
+      <td>${item.designation}</td>
+      <td class="text-center">${item.quantity || 1}fts</td>
+      <td class="text-right">${formatPrice(item.pu || 0)} €</td>
+      <td class="text-center">${item.tva || 20}%</td>
+      <td class="text-right">${formatPrice(item.totalht || 0)} €</td>
+    </tr>`;
+      } else {
+        return `
     <tr>
       <td>${item.designation}</td>
       <td class="text-center">${item.quantity || 1}</td>
       <td class="text-right">${formatPrice(item.pu || 0)} €</td>
       <td class="text-center">${item.tva || 20}%</td>
       <td class="text-right">${formatPrice(item.totalht || 0)} €</td>
-    </tr>`
-    )
+    </tr>`;
+      }
+    })
     .join("");
 
   return `<!DOCTYPE html>
@@ -385,8 +402,10 @@ export default function generateDevisPdf(
             <p><strong>Bon pour Accord</strong></p>
 
                 <h3>Conditions de paiement :</h3>
-                <p>• 100,00 % soit <strong>${formatPrice(
-                  totalTTC
+                <p>• 100,00 % soit <strong>${parseFloat(
+                  formatPrice(totalTTC)
+                ).toFixed(
+                  0
                 )} €</strong> : Paiement après réception de l'Avant-Projet Sommaire.</p>
             </div>
             
@@ -402,7 +421,9 @@ export default function generateDevisPdf(
                 </div>
                 <div class="total-row final">
                     <span>Total TTC</span>
-                    <span>${formatPrice(totalTTC)} €</span>
+                    <span>${parseFloat(formatPrice(totalTTC)).toFixed(
+                      0
+                    )} €</span>
                 </div>
             </div>
         </div>

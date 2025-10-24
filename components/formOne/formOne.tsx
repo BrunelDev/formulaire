@@ -1,6 +1,6 @@
 import { useFormState } from "@/context/useContext";
 import Image from "next/image";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { GooglePlacesWrapper } from "../GooglePlacesAutocomplete/GooglePlacesWrapper";
 import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
 
@@ -16,7 +16,6 @@ interface AddressDetails {
   city?: string;
   placeId?: string;
   difficultyEstimation?: number;
-
 }
 
 export const FormOne = () => {
@@ -25,46 +24,47 @@ export const FormOne = () => {
   const [error, setError] = useState("");
 
   // Sync local address state with context
-  React.useEffect(() => {
+  useEffect(() => {
     setAddress(formData.address || "");
   }, [formData]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
 
   // Function to calculate difficulty estimation based on address details
   const calculateDifficultyEstimation = (
     addressDetails: AddressDetails
   ): number => {
     let difficulty = 3; // Base difficulty
-    
-  
+
     // Ajustement selon la zone urbaine
     if (addressDetails.urbanZone) {
       const zone = addressDetails.urbanZone.toUpperCase();
-  
-      if (["UA", "UB"].some(z => zone.includes(z))) {
+
+      if (["UA", "UB"].some((z) => zone.includes(z))) {
         // aléatoire entre 3 et 5 inclus
         difficulty = Math.floor(Math.random() * 3) + 3;
-      } else if (["UC", "UD"].some(z => zone.includes(z))) {
+      } else if (["UC", "UD"].some((z) => zone.includes(z))) {
         difficulty = 4;
-      } else if (["AU", "A", "N", "AK"].some(z => zone.includes(z))) {
+      } else if (["AU", "A", "N", "AK"].some((z) => zone.includes(z))) {
         difficulty = 5;
       }
     }
-  
+
     // Ajustement selon la ville
     if (addressDetails.city) {
       const city = addressDetails.city.toLowerCase();
-      if (["paris", "lyon", "marseille"].some(c => city.includes(c))) {
+      if (["paris", "lyon", "marseille"].some((c) => city.includes(c))) {
         difficulty = Math.min(5, difficulty + 1); // +1 mais borné à 5
       }
     }
-  
+
     // Toujours borné entre 3 et 5
     difficulty = Math.min(5, Math.max(3, difficulty));
-  
-    
+
     return difficulty;
   };
-  
 
   const handleAddressChange = (newAddress: string) => {
     setAddress(newAddress);
@@ -73,7 +73,7 @@ export const FormOne = () => {
 
   const handlePlaceSelect = (addressDetails: AddressDetails) => {
     const difficultyEstimation = calculateDifficultyEstimation(addressDetails);
-    
+
     const updatedAddressDetails = {
       ...addressDetails,
       difficultyEstimation,

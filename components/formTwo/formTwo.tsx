@@ -1,11 +1,15 @@
 import { useFormState } from "@/context/useContext";
 import Image from "next/image";
+import { useEffect } from "react";
 import Mapbox from "../mapbox";
 import BackButton from "../PrimaryButton/BackButton";
 import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
 
 export function FormTwo() {
   const { formData, updateFormData } = useFormState();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
 
   return (
     <div className="bg-[#f7f7f8]">
@@ -36,7 +40,8 @@ export function FormTwo() {
                       Votre adresse se situe dans une zone{" "}
                       <span className="text-[#094d9a] font-medium">
                         {formData.addressDetails?.urbanZone || "Non disponible"}
-                        {formData.addressDetails?.urbanZone && " (" + formData.addressDetails?.zoneType + ")"}
+                        {formData.addressDetails?.urbanZone &&
+                          " (" + formData.addressDetails?.zoneType + ")"}
                       </span>{" "}
                       du Plan Local d&apos;Urbanisme (PLU) de la commune de{" "}
                       <span className="text-[#094d9a] font-medium">

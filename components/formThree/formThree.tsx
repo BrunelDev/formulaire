@@ -1,4 +1,5 @@
 import { Option, useFormState } from "@/context/useContext";
+import { useEffect } from "react";
 import {
   Avatar,
   AvatarFallback,
@@ -11,6 +12,9 @@ import { PrimaryButton } from "../PrimaryButton/PrimaryButton";
 
 export const FormThree = () => {
   const { formData, updateFormData, resetStepThree } = useFormState();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
 
   const projectOptions = [
     {
