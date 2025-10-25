@@ -281,7 +281,7 @@ export const StatisticsSection = () => {
           clientLastName: nom,
           clientFirstName: prenom,
           clientEmail: email,
-          clientPhone: nom,
+          clientPhone: telephone,
         }),
       });
     } catch (error) {
