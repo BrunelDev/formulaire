@@ -21,6 +21,8 @@ import generateResumePdf from "@/lib/generateResume";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const statistics = [
   {
@@ -281,7 +283,7 @@ export const StatisticsSection = () => {
           clientLastName: nom,
           clientFirstName: prenom,
           clientEmail: email,
-          clientPhone: nom,
+          clientPhone: telephone,
         }),
       });
     } catch (error) {
@@ -424,54 +426,126 @@ export const StatisticsSection = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5 w-full">
-                  {formFields.slice(2, 4).map((field) => (
-                    <div
-                      key={field.id}
-                      className="flex flex-col items-stretch gap-2 flex-1 w-full"
-                    >
-                      <Label
-                        htmlFor={field.id}
-                        className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
-                      >
-                        {field.label}
-                        {field.required && (
-                          <span className="text-red-500 ml-1">*</span>
-                        )}
-                      </Label>
+                  {formFields.slice(2, 4).map((field) => {
+                    if (field.label === "Téléphone") {
+                      return (
+                        <div
+                          className="flex flex-col gap-2 flex-1 w-full"
+                          key={field.id}
+                        >
+                          <Label
+                            htmlFor="telephone"
+                            className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
+                          >
+                            Téléphone
+                            <span className="text-red-500 ml-1">*</span>
+                          </Label>
 
-                      <div className="relative w-full">
-                        <Input
-                          id={field.id}
-                          placeholder={field.placeholder}
-                          className={`px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border ${
-                            formErrors[field.id as keyof typeof formErrors]
-                              ? "border-red-500"
-                              : "border-[#6d7074]"
-                          } font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]`}
-                          value={field.value}
-                          onChange={(e) => {
-                            field.onChange(e.target.value);
-                            // Clear error when user types
-                            if (
+                          <PhoneInput
+                            value={telephone}
+                            onChange={(phone) => {
+                              setTelephone(phone);
+                              if (formErrors.telephone) {
+                                setFormErrors((prev) => ({
+                                  ...prev,
+                                  telephone: undefined,
+                                }));
+                              }
+                            }}
+                            country={"fr"}
+                            inputProps={{
+                              name: "telephone",
+                              required: true,
+                            }}
+                            containerStyle={{
+                              width: "100%",
+                            }}
+                            buttonStyle={{
+                              border: "1px solid #6d7074",
+                              borderRight: "none",
+                              borderRadius: "6px 0 0 6px",
+                              backgroundColor: "transparent",
+                              padding: "0 12px",
+                              height: "48px",
+                            }}
+                            inputStyle={{
+                              width: "100%",
+                              height: "48px",
+                              border: `1px solid ${
+                                formErrors.telephone ? "#ef4444" : "#6d7074"
+                              }`,
+                              borderRadius: "6px",
+                              backgroundColor: "transparent",
+                              paddingLeft: "60px",
+                              fontSize: "14px",
+                              fontFamily: "inherit",
+                              outline: "none",
+                              boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+                              transition:
+                                "color 0.2s, box-shadow 0.2s, border-color 0.2s",
+                            }}
+                            dropdownStyle={{
+                              borderRadius: "6px",
+                              boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+                            }}
+                          />
+                          {formErrors.telephone && (
+                            <p className="text-red-500 text-xs mt-1">
+                              {formErrors.telephone}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    }
+                    return (
+                      <div
+                        key={field.id}
+                        className="flex flex-col items-stretch gap-2 flex-1 w-full"
+                      >
+                        <Label
+                          htmlFor={field.id}
+                          className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
+                        >
+                          {field.label}
+                          {field.required && (
+                            <span className="text-red-500 ml-1">*</span>
+                          )}
+                        </Label>
+
+                        <div className="relative w-full">
+                          <Input
+                            id={field.id}
+                            placeholder={field.placeholder}
+                            className={`px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border ${
                               formErrors[field.id as keyof typeof formErrors]
-                            ) {
-                              setFormErrors((prev) => ({
-                                ...prev,
-                                [field.id]: undefined,
-                              }));
-                            }
-                          }}
-                          required={field.required}
-                          type={field.type}
-                        />
-                        {formErrors[field.id as keyof typeof formErrors] && (
-                          <p className="text-red-500 text-xs mt-1">
-                            {formErrors[field.id as keyof typeof formErrors]}
-                          </p>
-                        )}
+                                ? "border-red-500"
+                                : "border-[#6d7074]"
+                            } font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]`}
+                            value={field.value}
+                            onChange={(e) => {
+                              field.onChange(e.target.value);
+                              // Clear error when user types
+                              if (
+                                formErrors[field.id as keyof typeof formErrors]
+                              ) {
+                                setFormErrors((prev) => ({
+                                  ...prev,
+                                  [field.id]: undefined,
+                                }));
+                              }
+                            }}
+                            required={field.required}
+                            type={field.type}
+                          />
+                          {formErrors[field.id as keyof typeof formErrors] && (
+                            <p className="text-red-500 text-xs mt-1">
+                              {formErrors[field.id as keyof typeof formErrors]}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </form>
 
