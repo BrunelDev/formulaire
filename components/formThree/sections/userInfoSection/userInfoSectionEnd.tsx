@@ -189,11 +189,9 @@ export const UserInfoSection = () => {
 
           {index < steps.length - 1 && (
             <div
-              className={`w-4 sm:w-8 h-[1px] border ${
-                step.isCompleted
-                  ? "border-syracuse_red_orange"
-                  : "border-gray-300"
-              } object-cover flex-shrink-0`}
+              className={
+                "w-4 sm:w-8 h-[1px] border border-syracuse_red_orange object-cover flex-shrink-0"
+              }
             ></div>
           )}
         </React.Fragment>

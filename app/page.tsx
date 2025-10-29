@@ -16,7 +16,6 @@ export default function Home() {
     isStepTwoChecked,
     isStepThreeChecked,
     isStepFourChecked,
-    isStepFiveChecked,
   } = formData;
   return (
     <div className="relative">

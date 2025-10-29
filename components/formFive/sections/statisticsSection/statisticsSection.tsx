@@ -488,6 +488,7 @@ export const StatisticsSection = () => {
                               borderRadius: "6px",
                               boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                             }}
+                            autoFormat={true}
                           />
                           {formErrors.telephone && (
                             <p className="text-red-500 text-xs mt-1">
