@@ -145,7 +145,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
   doesNeedPlan: {
     designation: `Forfait réalisation de plan à l'unité<br>
     Pièces envoyés:`,
-    pu: 50,
+    pu: 50 / 1.2,
     tva: 20,
   },
   shouldMakeRDCPlan: {
@@ -157,19 +157,19 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     tva: 20,
   },
   shouldMake3dRender: {
-    designation: `Réalisation d'un plan rendu 3D de l'aménagement intérieur (125 € / niveau. Ex: pour un R+1 compter 250€)<br><br>
+    designation: `Réalisation d'un plan rendu 3D de l'aménagement intérieur.<br><br>
     Conception non incluse.<br><br>
     Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br><br>
     Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
-    pu: 50,
+    pu: 150 / 1.2,
     tva: 20,
   },
   render3D: {
-    designation: `Réalisation d'un plan rendu 3D de l'aménagement intérieur (125 € / niveau. Ex: pour un R+1 compter 250€)<br><br>
+    designation: `Réalisation d'un plan rendu 3D de l'aménagement intérieur.<br><br>
     Conception non incluse.<br><br>
     Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation.<br><br>
     Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
-    pu: 50,
+    pu: 150 / 1.2,
     tva: 20,
   },
   dpDevis: {
@@ -526,9 +526,9 @@ export const generateUniteDevis = (data: Data) => {
     payload.push({
       designation: tempDesignation,
       quantity: quantity,
-      pu: quantity * mapping.pu! + 130,
+      pu: quantity * mapping.pu! + 130 / 1.2,
       tva: mapping.tva,
-      totalht: quantity * mapping.pu! + 130,
+      totalht: quantity * mapping.pu! + 130 / 1.2,
     });
   }
 
@@ -550,9 +550,9 @@ export const generateUniteDevis = (data: Data) => {
     payload.push({
       designation: mapping.designation,
       quantity: quantity,
-      pu: quantity * mapping.pu! + 130,
+      pu: mapping.pu!,
       tva: mapping.tva,
-      totalht: quantity * mapping.pu! + 130,
+      totalht: quantity * mapping.pu!,
     });
   }
 
@@ -613,7 +613,7 @@ export const generateUrbanismFormDevis = (data: Data) => {
       quantity: 1,
       pu: designationsMapping.urbanismDevis.pu,
       tva: designationsMapping.urbanismDevis.tva,
-      totalht: designationsMapping.dpDevis.pu,
+      totalht: designationsMapping.urbanismDevis.pu,
     },
   ];
 
