@@ -9,9 +9,9 @@ import {
 import Image from "next/image";
 import { default as Link } from "next/link";
 import { useEffect, useState } from "react";
+import HamburgerMenu from "./hamburgerMenu";
 import { NavButton } from "./PrimaryButton/NavButton";
 import { Button } from "./ui/button";
-import HamburgerMenu from "./hamburgerMenu";
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -150,7 +150,7 @@ export default function NavBar() {
                           </ul>
                         </NavigationMenuContent>
                       </NavigationMenuItem>
-                    ),
+                    )
                   )}
                 </NavigationMenuList>
               </NavigationMenu>
@@ -267,7 +267,7 @@ export default function NavBar() {
 
           {/* Bottom CTA button */}
           <div className="w-full py-6 px-4 h-[47px] mb-18">
-            <Link href={"https://mesplansdepermis.fr/devis/"}>
+            <Link href={"https://formulaire.mesplansdepermis.fr/"}>
               {" "}
               <Button
                 className={
