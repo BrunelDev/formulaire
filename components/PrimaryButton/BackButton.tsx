@@ -21,7 +21,7 @@ export default function BackButton({
   const handleMouseLeave = () => {
     setAnimationClass("animate-hover-bounce-reverse");
   };
-  console.log(disabled)
+
   return (
     <Button
       variant="outline"

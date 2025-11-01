@@ -183,12 +183,7 @@ export const StatisticsSection = () => {
       let htmlContent;
       if (formData.isArchitectNeeded) {
         devis = generateResume(formData);
-        console.log({
-          nom: nom,
-          prenom: prenom,
-          email: email,
-          tel: telephone,
-        });
+
         htmlContent = generateResumePdf(
           devis,
           {

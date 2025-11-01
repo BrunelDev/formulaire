@@ -49,7 +49,7 @@ export function Question({
           value={value}
           onValueChange={(value: string) => {
             handleChange(value === "oui" ? true : false);
-            
+
             if (value === "oui" && !summary.includes(question)) {
               setSummary([...summary, question]);
             } else if (value === "non" && summary.includes(question)) {
@@ -129,7 +129,6 @@ export function QuestionWithInput({
     inputValue || undefined
   );
   const { setSummary, summary } = useSummarySate();
-  
 
   // Fonction utilitaire pour mettre à jour le résumé de manière cohérente
   const updateSummary = (
@@ -191,7 +190,7 @@ export function QuestionWithInput({
                 // Si décoché, définir la valeur de l'input à undefined
                 if (!newChecked) {
                   handleInputChange(undefined);
-                  
+
                   handleChange(false);
                   setSelectedOption("");
                 }
@@ -258,10 +257,6 @@ export function QuestionWithInput({
               required={inputRequired && checked}
               value={selectedOption}
               onValueChange={(value) => {
-                console.log(
-                  "Selected option:---------------------------------",
-                  value
-                );
                 setSelectedOption(value);
                 handleInputChange(value);
                 // Mise à jour du résumé avec la nouvelle fonction

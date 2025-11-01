@@ -186,10 +186,7 @@ export const GooglePlacesAutocomplete: React.FC<
               }
             }
 
-            console.log(
-              "🚀 GooglePlacesAutocomplete calling onPlaceSelect with:",
-              addressDetails
-            );
+           
             onPlaceSelect(addressDetails);
             setIsLoadingDetails(false);
           } else {

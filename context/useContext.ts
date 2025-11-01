@@ -131,6 +131,7 @@ interface FormState {
 
   // Utility actions
   resetForm: () => void;
+  resetFormExceptOption : () => void;
   resetStepThree: () => void;
   isStepValid: (step: number) => boolean;
 }
@@ -193,10 +194,9 @@ export const useFormState = create<FormState>()(
       formData: initialFormData,
 
       updateFormData: (data) => {
-        
         set((state) => {
           const newState = { ...state.formData, ...data };
-          
+
           return { formData: newState };
         });
       },
@@ -235,16 +235,24 @@ export const useFormState = create<FormState>()(
           formData: { ...state.formData, ...data },
         })),
 
-      resetForm: () =>
-        set(() => ({
+      resetForm: () => {
+        return set(() => ({
           formData: initialFormData,
-        })),
+        }));
+      },
+      resetFormExceptOption: () => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { option, ...targetState } = initialFormData;
+        return set((state) => ({
+          formData: { ...targetState, option: state.formData.option },
+        }));
+      },
 
       resetStepThree: () =>
         set((state) => ({
           formData: {
             ...state.formData,
-            isArchitectNeeded : false,
+            isArchitectNeeded: false,
             hasMultipleRealizationsOnSameConstructionPermit: undefined,
             realizationsOnSameConstructionPermitNumber: undefined,
             cerfaFilling: false,

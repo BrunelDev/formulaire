@@ -7,12 +7,12 @@ import { useFormState } from "@/context/useContext";
 import { useEffect } from "react";
 
 export default function Home() {
-  const { resetForm } = useFormState();
+  const { resetFormExceptOption } = useFormState();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
-    resetForm();
-  }, [resetForm]);
+    resetFormExceptOption();
+  }, [resetFormExceptOption]);
   return (
     <div className="relative">
       <div className="fixed top-0 z-50 left-0 right-0">

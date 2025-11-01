@@ -19,7 +19,7 @@ interface AddressDetails {
 }
 
 export const FormOne = () => {
-  const { formData, updateFormData } = useFormState();
+  const { formData, updateFormData, resetForm } = useFormState();
   const [address, setAddress] = useState(formData.address || "");
   const [error, setError] = useState("");
 
@@ -30,7 +30,7 @@ export const FormOne = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
-  }, []);
+  }, [resetForm]);
 
   // Function to calculate difficulty estimation based on address details
   const calculateDifficultyEstimation = (
@@ -81,11 +81,6 @@ export const FormOne = () => {
 
     setAddress(addressDetails.formattedAddress || "");
     updateFormData({
-      address: addressDetails.formattedAddress || "",
-      addressDetails: updatedAddressDetails,
-    });
-
-    console.log("---✅ Context updated with:", {
       address: addressDetails.formattedAddress || "",
       addressDetails: updatedAddressDetails,
     });
