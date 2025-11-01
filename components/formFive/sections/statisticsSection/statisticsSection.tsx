@@ -147,8 +147,8 @@ export const StatisticsSection = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const urlToSendPdf =
-    "https://hook.eu2.make.com/w5ps2bie8tnxj252b5grhyufigalaohw";
+  // const urlToSendPdf =
+  //   "https://hook.eu2.make.com/w5ps2bie8tnxj252b5grhyufigalaohw";
   const urlToSendData =
     "https://hook.eu2.make.com/h8xmhq9ryu6sdfa0jp0uv8e6qx0kk2vr";
 
@@ -259,13 +259,30 @@ export const StatisticsSection = () => {
         // const url = window.URL.createObjectURL(blob);
         // const a = document.createElement("a");
         // a.href = url;
-        await fetch(urlToSendPdf, {
+        const dataToSend = new FormData();
+        dataToSend.append("pdf", blob, `devis-${devisData.NUM_DEVIS}.pdf`);
+        dataToSend.append(
+          "data",
+          JSON.stringify({
+            ...formData,
+            clientLastName: nom,
+            clientFirstName: prenom,
+            clientEmail: email,
+            clientPhone: telephone,
+          })
+        );
+        await fetch(urlToSendData, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/pdf",
-          },
-          body: blob,
+          body: dataToSend,
         });
+        // await fetch(urlToSendPdf, {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/pdf",
+        //   },
+        //   body: blob,
+        // });
+
         // a.download = `devis-${devisData.NUM_DEVIS}.pdf`;
         // document.body.appendChild(a);
         // a.click();
@@ -273,19 +290,19 @@ export const StatisticsSection = () => {
         // document.body.removeChild(a);
       }
 
-      await fetch(urlToSendData, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-          clientLastName: nom,
-          clientFirstName: prenom,
-          clientEmail: email,
-          clientPhone: telephone,
-        }),
-      });
+      // await fetch(urlToSendData, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     ...formData,
+      //     clientLastName: nom,
+      //     clientFirstName: prenom,
+      //     clientEmail: email,
+      //     clientPhone: telephone,
+      //   }),
+      // });
     } catch (error) {
       console.error("Erreur:", error);
       alert("Erreur lors de la génération du PDF");
