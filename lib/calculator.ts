@@ -79,7 +79,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     tva: 20,
   },
   rdcPlanVerification: {
-    designation: `Réalisation d'un plan de niveau RDC (distribution des pièces) (125 € / niveau. Ex: pour un R+1 compter 250€)<br><br>
+    designation: `Réalisation d'un plan de niveau RDC (distribution des pièces) (125 € TTC / niveau. Ex: pour un R+1 compter 250€ TTC)<br><br>
     Conception non incluse.<br><br>
     Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation et leur intégration dans le dossier de déclaration préalable.<br><br>
     Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,
@@ -149,7 +149,7 @@ Remplissage Cerfa et prise de côte non compris. Le donneur d'ordre est tenu de 
     tva: 20,
   },
   shouldMakeRDCPlan: {
-    designation: `Réalisation d'un plan de niveau RDC (distribution des pièces) (125 € / niveau. Ex: pour un R+1 compter 250€)<br><br>
+    designation: `Réalisation d'un plan de niveau RDC (distribution des pièces) (125 € TTC/ niveau. Ex: pour un R+1 compter 250€ TTC)<br><br>
     Conception non incluse.<br><br>
     Des croquis des plans de niveaux seront à fournir afin de permettre leur réalisation et leur intégration dans le dossier de déclaration préalable.<br><br>
     Si des plans ont déjà été réalisés par un architecte, un géomètre ou un dessinateur, ils pourront être utilisés et intégrés au dossier, permettant ainsi d'éviter la facturation de ce service.`,

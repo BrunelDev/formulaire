@@ -4,10 +4,7 @@ import { FormSix } from "@/components/formSix/formSix";
 import { UserInfoSection } from "@/components/formThree/sections/userInfoSection/userInfoSectionEnd";
 import NavBar from "@/components/navBar";
 import { useFormState } from "@/context/useContext";
-import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-
-
 export default function Home() {
   const { resetFormExceptOption } = useFormState();
 
@@ -22,7 +19,7 @@ export default function Home() {
       </div>
       <div className="mt-[120px] h-fit">
         <div className="translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:200ms] mb-[20px]">
-          <UserInfoSection  />
+          <UserInfoSection />
         </div>
         <FormSix />
       </div>

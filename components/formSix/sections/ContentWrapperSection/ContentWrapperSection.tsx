@@ -39,8 +39,6 @@ const statistics = [
 export const ContentWrapperSection = () => {
   const searchParams = useParams();
   const isPersonnalized = searchParams.devis === "personnel";
-  console.log(isPersonnalized, searchParams);
-
   return (
     <section className="flex flex-col w-full items-start gap-4 sm:gap-3 pt-0 px-0 relative">
       {/* Header Section */}
