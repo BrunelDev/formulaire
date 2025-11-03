@@ -6,12 +6,12 @@ import NavBar from "@/components/navBar";
 import { useFormState } from "@/context/useContext";
 import { useEffect } from "react";
 export default function Home() {
-  const { resetFormExceptOption } = useFormState();
+  const { resetForm } = useFormState();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
-    resetFormExceptOption();
-  }, [resetFormExceptOption]);
+    resetForm();
+  }, [resetForm]);
   return (
     <div className="relative">
       <div className="fixed top-0 z-50 left-0 right-0">

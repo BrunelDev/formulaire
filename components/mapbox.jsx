@@ -13,8 +13,7 @@ const Mapbox = ({ coordinates, zoom = 16 }) => {
   useEffect(() => {
     if (!mapContainerRef.current) return;
 
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoiYnJ1bmVsZGV2IiwiYSI6ImNtYXhyaDl3aDAxNWwybHNjZ3MyM2JnNXoifQ.7aMayv740vLKIK_ix0efLQ";
+    mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY;
 
     // Default coordinates (France center) if none provided
     const defaultCenter = [2.3522, 48.8566]; // Paris coordinates
@@ -29,11 +28,11 @@ const Mapbox = ({ coordinates, zoom = 16 }) => {
         center: center,
         zoom: zoom,
         projection: "mercator",
-        dragPan: false,     
+        dragPan: false,
         touchZoomRotate: false,
-        scrollZoom: false,  
-        doubleClickZoom: false, 
-        interactive: false, 
+        scrollZoom: false,
+        doubleClickZoom: false,
+        interactive: false,
       });
 
       // Set loading to false when map is loaded
@@ -90,7 +89,7 @@ const Mapbox = ({ coordinates, zoom = 16 }) => {
           </div>
         </div>
       )}
-      <div ref={mapContainerRef} style={{ height: "100%", width: "100%" }}/>
+      <div ref={mapContainerRef} style={{ height: "100%", width: "100%" }} />
     </div>
   );
 };

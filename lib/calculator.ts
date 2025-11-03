@@ -39,7 +39,8 @@ const designationsMapping: Record<
     pu?: number;
     tva?: number;
   }
-> = {
+  > =
+{
   isArchitectNeeded: {
     designation: `Forfait réalisation des pièces pour permis de construire (-150m2).<br>
 <br>
