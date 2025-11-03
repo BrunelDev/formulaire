@@ -1,6 +1,6 @@
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { Card, CardContent } from "../../../../components/ui/card";
-import { Option, useFormState } from "../../../../context/useContext";
 
 const contactInfo = [
   {
@@ -37,12 +37,10 @@ const statistics = [
 ];
 
 export const ContentWrapperSection = () => {
-  const { formData } = useFormState();
-  const isPersonnalized =
-    formData.option === Option.AIDE_CONCEPTION ||
-    (formData.isArchitectNeeded &&
-      (formData.option === Option.PERMIS_CONSTRUIRE ||
-        formData.option === Option.DOSSIER_ERP));
+  const searchParams = useParams();
+  const isPersonnalized = searchParams.devis === "personnel";
+  console.log(isPersonnalized, searchParams);
+
   return (
     <section className="flex flex-col w-full items-start gap-4 sm:gap-3 pt-0 px-0 relative">
       {/* Header Section */}

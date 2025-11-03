@@ -266,6 +266,7 @@ export const StatisticsSection = () => {
             clientPhone: telephone,
           })
         );
+
         await fetch(urlToSendData, {
           method: "POST",
           body: dataToSend,
@@ -283,21 +284,21 @@ export const StatisticsSection = () => {
         // a.click();
         // window.URL.revokeObjectURL(url);
         // document.body.removeChild(a);
+      } else {
+        await fetch(urlToSendData, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...formData,
+            clientLastName: nom,
+            clientFirstName: prenom,
+            clientEmail: email,
+            clientPhone: telephone,
+          }),
+        });
       }
-
-      // await fetch(urlToSendData, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     ...formData,
-      //     clientLastName: nom,
-      //     clientFirstName: prenom,
-      //     clientEmail: email,
-      //     clientPhone: telephone,
-      //   }),
-      // });
     } catch (error) {
       console.error("Erreur:", error);
       alert("Erreur lors de la génération du PDF");
@@ -342,7 +343,16 @@ export const StatisticsSection = () => {
       });
 
       updateFormData({ ...payload, isStepFiveChecked: true });
-      router.push("/finalisation");
+      if (
+        formData.option === Option.AIDE_CONCEPTION ||
+        (formData.isArchitectNeeded &&
+          (formData.option === Option.PERMIS_CONSTRUIRE ||
+            formData.option === Option.DOSSIER_ERP))
+      ) {
+        router.push("/finalisation/personnel");
+      } else {
+        router.push("/finalisation/devis");
+      }
     } catch (error) {
       console.error("Erreur réseau lors de l'envoi au webhook", error);
     }
