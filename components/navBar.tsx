@@ -138,9 +138,12 @@ export default function NavBar() {
                         className="relative"
                       >
                         <NavigationMenuTrigger>
-                          <h6 className="text-oxford_blue transition-colors duration-100 hover:text-syracuse_red_orange font-medium">
+                          <Link
+                            href={"https://mesplansdepermis.fr/nos-offres/"}
+                            className="text-oxford_blue transition-colors duration-100 hover:text-syracuse_red_orange font-medium"
+                          >
                             Nos offres
-                          </h6>
+                          </Link>
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
                           <ul className="grid w-[300px] gap-4 p-4">
@@ -223,9 +226,12 @@ export default function NavBar() {
                         onClick={() => setShowOffres(!showOffres)}
                         className="w-full flex items-center justify-between text-lg "
                       >
-                        <span className="text-oxford_blue hover:text-syracuse_red_orange transition-colors duration-200 font-medium">
+                        <Link
+                          href={"https://mesplansdepermis.fr/nos-offres/"}
+                          className="text-oxford_blue hover:text-syracuse_red_orange transition-colors duration-200 font-medium"
+                        >
                           {item.titre}
-                        </span>
+                        </Link>
                         <svg
                           className={`w-5 h-5 transform transition-transform duration-200 ${
                             showOffres ? "rotate-90" : ""
