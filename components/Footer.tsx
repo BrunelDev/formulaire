@@ -72,7 +72,7 @@ export default function Footer() {
             {/* Logo */}
             <div>
               <div className="flex items-center lg:justify-normal justify-center gap-3">
-                <div className="">
+                <Link href={"https://mesplansdepermis.fr/"} className="">
                   <Image
                     src="/images/logo.jpg"
                     className=""
@@ -80,7 +80,7 @@ export default function Footer() {
                     height={47}
                     alt={"Logo"}
                   />
-                </div>
+                </Link>
               </div>
             </div>
 
