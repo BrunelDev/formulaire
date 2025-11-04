@@ -18,11 +18,13 @@ import {
 } from "@/lib/calculator";
 import generateDevisPdf from "@/lib/generateDevisPdf";
 import generateResumePdf from "@/lib/generateResume";
+import { isValidPhoneNumber } from "libphonenumber-js";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { toast } from "sonner";
 
 const statistics = [
   {
@@ -49,12 +51,25 @@ const validateEmail = (email: string): boolean => {
   return emailRegex.test(email);
 };
 
-// const validatePhone = (phone: string): boolean => {
-//   // Accepte les formats français: 06/07 + 8 chiffres ou 01-05/09 + 8 chiffres
-//   // Avec ou sans espaces/tirets
-//   const phoneRegex = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
-//   return phoneRegex.test(phone.replace(/\s/g, ""));
-// };
+const validatePhone = (phone: string): boolean => {
+  try {
+    // Vérifie si le numéro est vide
+    if (!phone || phone.length < 5) {
+      return false;
+    }
+
+    // Vérifie que le numéro ne commence pas par +0
+    if (phone.startsWith("+0") || phone.startsWith("0")) {
+      return false;
+    }
+
+    // Utilise libphonenumber-js pour valider
+    const fullPhone = phone.startsWith("+") ? phone : `+${phone}`;
+    return isValidPhoneNumber(fullPhone);
+  } catch (error) {
+    return false;
+  }
+};
 
 export const StatisticsSection = () => {
   const router = useRouter();
@@ -138,10 +153,9 @@ export const StatisticsSection = () => {
     // Validation du téléphone
     if (!telephone.trim()) {
       errors.telephone = "Le téléphone est requis";
+    } else if (!validatePhone(telephone)) {
+      errors.telephone = "Numéro de téléphone invalide";
     }
-    // else if (!validatePhone(telephone)) {
-    //   errors.telephone = "Format de téléphone invalide (ex: 06 12 34 56 78)";
-    // }
 
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
@@ -312,9 +326,12 @@ export const StatisticsSection = () => {
     const isValid = validateForm();
 
     if (!isValid) {
-      // Si le formulaire n'est pas valide, s'assurer que le message d'erreur de l'email est visible
       if (formErrors.email) {
-        alert(formErrors.email);
+        toast.error(formErrors.email);
+      }
+
+      if (formErrors.telephone) {
+        toast.error(formErrors.telephone);
       }
       return;
     }
@@ -323,6 +340,15 @@ export const StatisticsSection = () => {
     if (!validateEmail(email)) {
       setFormErrors({ ...formErrors, email: "Format d'email invalide" });
       alert("L'adresse email que vous avez saisie n'est pas valide.");
+      return;
+    }
+
+    if (!validatePhone(telephone)) {
+      setFormErrors({
+        ...formErrors,
+        telephone: "Numéro de téléphone invalide",
+      });
+      alert("Le numéro de téléphone que vous avez saisi n'est pas valide.");
       return;
     }
 
@@ -481,6 +507,7 @@ export const StatisticsSection = () => {
                             }}
                             containerStyle={{
                               width: "100%",
+                              
                             }}
                             buttonStyle={{
                               border: "1px solid #6d7074",
@@ -493,9 +520,7 @@ export const StatisticsSection = () => {
                             inputStyle={{
                               width: "100%",
                               height: "48px",
-                              border: `1px solid ${
-                                formErrors.telephone ? "#ef4444" : "#6d7074"
-                              }`,
+                              border: "1px solid  #6d7074",
                               borderRadius: "6px",
                               backgroundColor: "transparent",
                               paddingLeft: "60px",
@@ -511,6 +536,14 @@ export const StatisticsSection = () => {
                               boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                             }}
                             autoFormat={true}
+                            isValid={(value) => {
+                              if (!value) return true; // Permet le champ vide pendant la saisie
+                              if (value.startsWith("0")) return false;
+                              const fullPhone = value.startsWith("+")
+                                ? value
+                                : `+${value}`;
+                              return isValidPhoneNumber(fullPhone);
+                            }}
                           />
                           {formErrors.telephone && (
                             <p className="text-red-500 text-xs mt-1">

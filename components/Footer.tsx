@@ -55,6 +55,10 @@ export default function Footer() {
       href: "https://mesplansdepermis.fr/devis/",
     },
     {
+      label: "Votre devis en ligne",
+      href: "https://formulaire.mesplansdepermis.fr/",
+    },
+    {
       label: "contact@mesplansdepermis.fr",
       href: "mailto:contact@mesplansdepermis.fr",
     },
