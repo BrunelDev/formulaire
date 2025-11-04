@@ -14,7 +14,7 @@ export const NavButton = () => {
   };
 
   return (
-    <Link href={"https://mesplansdepermis.fr/devis/"} >
+    <Link href={"https://formulaire.mesplansdepermis.fr/"}>
       {" "}
       <Button
         className={

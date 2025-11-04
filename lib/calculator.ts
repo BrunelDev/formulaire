@@ -29,7 +29,7 @@ export interface DevisRecord {
   quantity?: number;
   pu?: number;
   tva?: number;
-  totalht?: number;
+  totalht?: number
 }
 
 const designationsMapping: Record<

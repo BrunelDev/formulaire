@@ -55,19 +55,19 @@ export default function NavBar() {
   const nosOffres = [
     {
       label: "Permis de construire",
-      href: "https://mesplansdepermis.fr/nos-offres/permis-construire/",
+      href: "https://mesplansdepermis.fr/permisdeconstruire/",
     },
     {
       label: "Déclaration préalable",
-      href: "https://mesplansdepermis.fr/nos-offres/declaration-prealable/",
+      href: "https://mesplansdepermis.fr/declaration-prealable-de-travaux/",
     },
     {
       label: "Service à l'unité",
-      href: "https://mesplansdepermis.fr/nos-offres/service-unite/",
+      href: "https://mesplansdepermis.fr/service/",
     },
     {
       label: "Dossier E.R.P",
-      href: "https://mesplansdepermis.fr/nos-offres/erp/",
+      href: "https://mesplansdepermis.fr/erp/",
     },
   ];
   const [, setIsVisible] = useState(true);
@@ -98,18 +98,24 @@ export default function NavBar() {
       >
         <div className="flex flex-col w-full lg:w-[77%] items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
           <div className="flex items-center justify-between relative w-full">
-            <Image
-              className="relative hidden lg:block w-[100px] sm:w-[120px] lg:w-[127px] h-7 sm:h-8 lg:h-[35px] object-cover"
-              width={129.73}
-              height={36}
-              alt="Logo image"
-              src={"/images/logo.jpg"}
-            />
+            <Link href={" https://mesplansdepermis.fr/nos-offres/ "}>
+              <Image
+                className="relative hidden lg:block w-[100px] sm:w-[120px] lg:w-[127px] h-7 sm:h-8 lg:h-[35px] object-cover"
+                width={129.73}
+                height={36}
+                alt="Logo image"
+                src={"/images/logo.jpg"}
+              />
+            </Link>
             <Image
               className="lg:hidden object-cover absolute left-1/2 -translate-x-1/2"
               width={33}
               height={35}
               alt="Logo image"
+              onClick={() => {
+                window.location.href =
+                  "https://mesplansdepermis.fr/nos-offres/";
+              }}
               src={"/images/logoNoText.jpg"}
             />
 
@@ -268,7 +274,6 @@ export default function NavBar() {
           {/* Bottom CTA button */}
           <div className="w-full py-6 px-4 h-[47px] mb-18">
             <Link href={"https://formulaire.mesplansdepermis.fr/"}>
-              {" "}
               <Button
                 className={
                   "min-h-[47px] h-full px-4 sm:px-5 py-2 sm:py-3 text-white font-label-medium font-[number:var(--label-medium-font-weight)] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] whitespace-nowrap [--animation-delay:0ms] cursor-pointer bg-oxford_blue  hover:bg-syracuse_red_orange w-full"
@@ -276,7 +281,7 @@ export default function NavBar() {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
-                <div className={animationClass}>J&apos;obtiens mon devis</div>
+                <div className={animationClass}>J&apos;obtiens mon devis--</div>
               </Button>
             </Link>
           </div>
