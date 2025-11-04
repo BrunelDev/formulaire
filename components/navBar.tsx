@@ -281,7 +281,7 @@ export default function NavBar() {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
-                <div className={animationClass}>J&apos;obtiens mon devis--</div>
+                <div className={animationClass}>J&apos;obtiens mon devis</div>
               </Button>
             </Link>
           </div>
