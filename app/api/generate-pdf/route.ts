@@ -2,7 +2,30 @@ import chromium from "@sparticuz/chromium";
 import { NextRequest, NextResponse } from "next/server";
 import puppeteer from "puppeteer-core";
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://formulaire.mesplansdepermis.fr",
+];
+
+export async function OPTIONS(request: NextRequest) {
+  const origin = request.headers.get("origin") || "";
+  if (allowedOrigins.includes(origin)) {
+    return new NextResponse(null, {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin": origin,
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    });
+  }
+  return new NextResponse(null, { status: 403 });
+}
+
 export async function POST(request: NextRequest) {
+  const origin = request.headers.get("origin") || "";
+  const isAllowedOrigin = allowedOrigins.includes(origin);
+
   try {
     const { htmlContent, filename = "devis.pdf" } = await request.json();
 
@@ -10,15 +33,12 @@ export async function POST(request: NextRequest) {
     let browser;
 
     if (isDev) {
-      // En développement local, utilisez puppeteer complet
       const puppeteerFull = await import("puppeteer");
       browser = await puppeteerFull.default.launch({
         headless: true,
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
       });
     } else {
-      // En production (Vercel)
-
       const executablePath = await chromium.executablePath(
         "https://github.com/Sparticuz/chromium/releases/download/v121.0.0/chromium-v121.0.0-pack.tar"
       );
@@ -33,24 +53,13 @@ export async function POST(request: NextRequest) {
 
     const page = await browser.newPage();
 
-    // Charger le HTML
-    await page.setContent(htmlContent, {
-      waitUntil: "networkidle0",
-    });
-
-    // Attendre que les fonts soient chargées
+    await page.setContent(htmlContent, { waitUntil: "networkidle0" });
     await page.evaluateHandle("document.fonts.ready");
 
-    // Générer le PDF
     const pdf = await page.pdf({
       format: "A4",
       printBackground: true,
-      margin: {
-        top: "20px",
-        bottom: "20px",
-        left: "20px",
-        right: "20px",
-      },
+      margin: { top: "20px", bottom: "20px", left: "20px", right: "20px" },
     });
 
     await browser.close();
@@ -59,6 +68,9 @@ export async function POST(request: NextRequest) {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename="${filename}"`,
+        ...(isAllowedOrigin
+          ? { "Access-Control-Allow-Origin": origin }
+          : {}),
       },
     });
   } catch (error) {
@@ -68,10 +80,14 @@ export async function POST(request: NextRequest) {
         error: error instanceof Error ? error.message : "Erreur inconnue",
         stack: error instanceof Error ? error.stack : undefined,
       },
-      { status: 500 }
+      {
+        status: 500,
+        headers: isAllowedOrigin
+          ? { "Access-Control-Allow-Origin": origin }
+          : {},
+      }
     );
   }
 }
 
-// Important pour Vercel
 export const maxDuration = 60;

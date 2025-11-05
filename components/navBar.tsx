@@ -98,7 +98,7 @@ export default function NavBar() {
       >
         <div className="flex flex-col w-full lg:w-[77%] items-center justify-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
           <div className="flex items-center justify-between relative w-full">
-            <Link href={" https://mesplansdepermis.fr"}>
+            <Link href="https://mesplansdepermis.fr">
               <Image
                 className="relative hidden lg:block w-[100px] sm:w-[120px] lg:w-[127px] h-7 sm:h-8 lg:h-[35px] object-cover"
                 width={129.73}
@@ -113,8 +113,7 @@ export default function NavBar() {
               height={35}
               alt="Logo image"
               onClick={() => {
-                window.location.href =
-                  "https://mesplansdepermis.fr";
+                window.location.href = "https://mesplansdepermis.fr";
               }}
               src={"/images/logoNoText.jpg"}
             />
