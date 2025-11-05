@@ -507,7 +507,7 @@ export const InformationSummarySection = () => {
         (typeof item.value === "string" && item.value !== "")
       ) {
         errors[`question_${index}`] = "Ce champ est obligatoire";
-        
+
         isValid = false;
       }
 
@@ -578,6 +578,27 @@ export const InformationSummarySection = () => {
       : formData.option === Option.PLAN_UNITE
       ? uniteForm
       : [];
+
+  function checkIfAnyBooleanIsTrue(): boolean {
+    return (
+      formData.isArchitectNeeded === true ||
+      formData.hasMultipleRealizationsOnSameConstructionPermit === true ||
+      formData.cerfaFilling === true ||
+      formData.pluVerification === true ||
+      formData.rdcPlanVerification === true ||
+      formData.bbioStudy === true ||
+      formData.seismicStudy === true ||
+      formData.expressDelivery === true ||
+      formData.displayPanel === true ||
+      formData.hasMultipleRealizationsOnSameDeclaration === true ||
+      formData.hasMultipleRealizationsOnSameUrbanismCertificate === true ||
+      formData.hasMultipleRealizationsOnSamePlanRequest === true ||
+      formData.doesNeedPlan === true ||
+      formData.shouldMakeRDCPlan === true ||
+      formData.shouldMake3dRender === true ||
+      formData.render3D === true
+    );
+  }
 
   return (
     <div className="flex flex-col w-full items-start gap-6 sm:gap-8 pt-0 px-0">
@@ -651,6 +672,7 @@ export const InformationSummarySection = () => {
           disabled={!formData.isStepFourChecked}
         />
         <PrimaryButton
+          disabled={!checkIfAnyBooleanIsTrue()}
           handleClick={() => {
             if (validateForm()) {
               setSummary([]);
@@ -677,6 +699,7 @@ export const InformationSummarySection = () => {
           disabled={!formData.isStepFourChecked}
         />
         <PrimaryButton
+          disabled={!checkIfAnyBooleanIsTrue()}
           handleClick={() => {
             if (validateForm()) {
               setSummary([]);
