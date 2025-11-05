@@ -626,7 +626,7 @@ export const StatisticsSection = () => {
             </div>
           </div>
 
-          <Card className="w-full bg-[#042347] border-0 translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms]">
+          <Card className="w-full bg-[#042347] border-0 translate-y-[-1rem] animate-fade-in opacity-0 [--animation-delay:600ms] -z-10">
             <CardContent className="flex flex-col items-center justify-center gap-5 sm:gap-7 p-4 sm:p-5">
               <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center gap-4 sm:gap-8 w-full">
                 <div className="flex flex-col items-center sm:items-start gap-2 sm:gap-3 flex-1 text-center sm:text-left">
