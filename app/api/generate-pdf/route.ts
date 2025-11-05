@@ -5,6 +5,7 @@ import puppeteer from "puppeteer-core";
 const allowedOrigins = [
   "http://localhost:5173",
   "https://formulaire.mesplansdepermis.fr",
+  "https://eurekaingenierie.com",
 ];
 
 export async function OPTIONS(request: NextRequest) {
@@ -68,9 +69,7 @@ export async function POST(request: NextRequest) {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename="${filename}"`,
-        ...(isAllowedOrigin
-          ? { "Access-Control-Allow-Origin": origin }
-          : {}),
+        ...(isAllowedOrigin ? { "Access-Control-Allow-Origin": origin } : {}),
       },
     });
   } catch (error) {
