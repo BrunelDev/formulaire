@@ -6,7 +6,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://formulaire.mesplansdepermis.fr",
   "https://eurekaingenierie.com",
-  "https://www.eurekaingenierie.com/formulaire"
+  "https://www.eurekaingenierie.com",
 ];
 
 export async function OPTIONS(request: NextRequest) {
