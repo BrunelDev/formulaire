@@ -196,7 +196,7 @@ export const StatisticsSection = () => {
       let devis: DevisRecord[] = [];
       let htmlContent;
       if (formData.isArchitectNeeded) {
-        devis = generateResume(formData);
+        devis = await generateResume(formData);
 
         htmlContent = generateResumePdf(
           devis,
@@ -227,25 +227,25 @@ export const StatisticsSection = () => {
       } else {
         switch (formData.option) {
           case Option.DECLARATION_PREALABLE:
-            devis = generateDpDevis(formData);
+            devis = await generateDpDevis(formData);
             break;
           case Option.PLAN_UNITE:
-            devis = generateUniteDevis(formData);
+            devis = await generateUniteDevis(formData);
             break;
           case Option.DOSSIER_ERP:
-            devis = generateErpDevis(formData);
+            devis = await generateErpDevis(formData);
             break;
           case Option.CERTIFICAT_URBANISME:
-            devis = generateUrbanismFormDevis(formData);
+            devis = await generateUrbanismFormDevis(formData);
             break;
           case Option.PERMIS_CONSTRUIRE:
-            devis = genreratePermisDevis(formData);
+            devis = await genreratePermisDevis(formData);
             break;
           case Option.ETUDE_RE2020:
-            devis = generateRe2020Devis();
+            devis = await generateRe2020Devis();
             break;
           case Option.ETUDE_SISMIQUE:
-            devis = generateSismicDevis();
+            devis = await generateSismicDevis();
             break;
         }
         htmlContent = generateDevisPdf(devis, client);
