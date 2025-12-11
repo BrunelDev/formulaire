@@ -209,20 +209,20 @@ export const StatisticsSection = () => {
           formData.option === Option.PERMIS_CONSTRUIRE
             ? "Permis de Construire"
             : formData.option === Option.DECLARATION_PREALABLE
-            ? "Déclaration Préalable"
-            : formData.option === Option.DOSSIER_ERP
-            ? "Dossier ERP"
-            : formData.option === Option.CERTIFICAT_URBANISME
-            ? "Certificat d'Urbanisme"
-            : formData.option === Option.PLAN_UNITE
-            ? "Plan à l'unité"
-            : formData.option === Option.ETUDE_RE2020
-            ? "Étude RE2020"
-            : formData.option === Option.ETUDE_SISMIQUE
-            ? "Étude Sismique"
-            : formData.option === Option.AIDE_CONCEPTION
-            ? "Aide à la Conception"
-            : ""
+              ? "Déclaration Préalable"
+              : formData.option === Option.DOSSIER_ERP
+                ? "Dossier ERP"
+                : formData.option === Option.CERTIFICAT_URBANISME
+                  ? "Certificat d'Urbanisme"
+                  : formData.option === Option.PLAN_UNITE
+                    ? "Plan à l'unité"
+                    : formData.option === Option.ETUDE_RE2020
+                      ? "Étude RE2020"
+                      : formData.option === Option.ETUDE_SISMIQUE
+                        ? "Étude Sismique"
+                        : formData.option === Option.AIDE_CONCEPTION
+                          ? "Aide à la Conception"
+                          : "",
         );
       } else {
         switch (formData.option) {
@@ -265,9 +265,9 @@ export const StatisticsSection = () => {
 
         // Télécharger le PDF
         const blob = await response.blob();
-        // const url = window.URL.createObjectURL(blob);
-        // const a = document.createElement("a");
-        // a.href = url;
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
         const dataToSend = new FormData();
         dataToSend.append("pdf", blob, `devis-${devisData.NUM_DEVIS}.pdf`);
         dataToSend.append(
@@ -278,7 +278,7 @@ export const StatisticsSection = () => {
             clientFirstName: prenom,
             clientEmail: email,
             clientPhone: telephone,
-          })
+          }),
         );
 
         await fetch(urlToSendData, {
@@ -293,11 +293,11 @@ export const StatisticsSection = () => {
         //   body: blob,
         // });
 
-        // a.download = `devis-${devisData.NUM_DEVIS}.pdf`;
-        // document.body.appendChild(a);
-        // a.click();
-        // window.URL.revokeObjectURL(url);
-        // document.body.removeChild(a);
+        a.download = `devis-${devisData.NUM_DEVIS}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
       } else {
         await fetch(urlToSendData, {
           method: "POST",
@@ -507,7 +507,6 @@ export const StatisticsSection = () => {
                             }}
                             containerStyle={{
                               width: "100%",
-                              
                             }}
                             buttonStyle={{
                               border: "1px solid #6d7074",
