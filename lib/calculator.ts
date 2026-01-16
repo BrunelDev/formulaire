@@ -283,12 +283,12 @@ export const genreratePermisDevis = async (data: Data) => {
   const designationsMapping = await fetchDesignation();
   console.log("===designation====", designationsMapping);
   const payload: DevisRecord[]  = [
-     {
-      designation: designationsMapping.isArchitectNeeded.designation,
+      {
+      designation: designationsMapping.permitDevis.designation,
       quantity: 1,
-      pu: designationsMapping.isArchitectNeeded.pu,
-      tva: designationsMapping.isArchitectNeeded.tva,
-      totalht: designationsMapping.isArchitectNeeded.pu,
+      pu: designationsMapping.permitDevis.pu,
+      tva: designationsMapping.permitDevis.tva,
+      totalht: designationsMapping.permitDevis.pu!,
     },
   ]
 
