@@ -672,7 +672,7 @@ export const InformationSummarySection = () => {
           disabled={!formData.isStepFourChecked}
         />
         <PrimaryButton
-          disabled={!checkIfAnyBooleanIsTrue()}
+          disabled={!checkIfAnyBooleanIsTrue() && formData.option !== Option.PERMIS_CONSTRUIRE && formData.option !== Option.DECLARATION_PREALABLE && formData.option !== Option.DOSSIER_ERP && formData.option !== Option.CERTIFICAT_URBANISME}
           handleClick={() => {
             if (validateForm()) {
               setSummary([]);
