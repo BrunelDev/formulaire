@@ -276,6 +276,7 @@ export const InformationSummarySection = () => {
       value: formData.hasMultipleRealizationsOnSamePlanRequest,
       type: "option",
       options: [
+        { label: "1 sous-projet", value: "1" },
         { label: "2 sous-projets", value: "2" },
         { label: "3 sous-projets", value: "3" },
         { label: "4 sous-projets", value: "4" },
